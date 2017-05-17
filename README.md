@@ -1,12 +1,27 @@
-# Prothesis v2
+# prosthesis-2
 
-Please see the [wiki](https://github.com/egeldenhuys/prothesis-2/wiki) for documentation and other links.
+> An electron-vue project
 
-## Dependancies
+## Build Setup
 
-* npm
+``` bash
+# install dependencies
+npm install
 
-## Quick Start
+# serve with hot reload at localhost:9080
+npm run dev
 
-Use ./start.sh; If you get some obscure error remove the node_modules
-directory and run npm start ( omitting npm install for the time being )
+# build electron app for production
+npm run build
+
+# lint all JS/Vue component files in `app/src`
+npm run lint
+
+# run webpack in production
+npm run pack
+```
+More information can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/en/npm_scripts.html).
+
+---
+
+This project was generated from [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about this project can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
