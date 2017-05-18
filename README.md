@@ -5,9 +5,19 @@
 
 ## Build Setup
 ``` bash
+# clone the repository
+git clone git@github.com:egeldenhuys/prothesis-2.git
+
+# cd
+cd prothesis-2
+
+# make sure npm is up-to-date!
+sudo npm install -g npm
+
 # install dependencies
 npm install
 
+# this is how you use it in development
 # server with hot reload at localhost:9080
 npm run dev
 
