@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>prothesis-2</title>
+    <title>Prothesis-2</title>
     <% if (htmlWebpackPlugin.options.appModules) { %>
       <!-- Add `app/node_modules` to global paths so `require` works properly in development -->
       <script>
@@ -12,10 +12,11 @@
   </head>
 
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+    </div>
     <!-- webpack builds are automatically injected -->
   </body>
   <!-- Insert this line above script imports  -->
@@ -27,5 +28,5 @@
   <!-- Insert this line after script imports -->
   <script>if (window.module) module = window.module;</script>
   <!-- Latest compiled and minified JavaScript -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="js/materialize.min.js"></script>
 </html>

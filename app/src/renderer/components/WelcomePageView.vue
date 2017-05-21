@@ -1,19 +1,50 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4">
-        <h1>Welcome {{ name }}!</h1>
+  <div>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Prothesis</a>
+       </div>
+       <div class="nav-content">
+        <ul class="tabs">
+          <li class="tab"><a class="active" href="#test1">Details</a></li>
+          <li class="tab"><a href="#test2">Assessments</a></li>
+          <li class="tab"><a href="#test4">Themes Analysis</a></li>
+          <li class="tab"><a href="#test4">Career guidance</a></li>
+          <li class="tab"><a href="#test4">Mission statement</a></li>
+        </ul>
       </div>
+      </nav>
     </div>
-    <div class = "row">
-      <div class="col-md-4">
-        <form>
-          <input id="enterName" v-model="name" class="form-control" placeholder="Enter your full name">
-          <button id="nextButton" class="btn btn-primary" style="margin-top: 15px" disabled="true">Next</button>
-        </form>
-      </div>
-    </div>
+    <div id="thePage" class="container">
+      <div id="test1">
+        <div class="row">
 
+         <form class="col s12">
+           <div class="row">
+             <div class="input-field col s6">
+               <input id="first_name" type="text" class="validate">
+               <label for="first_name">First Name</label>
+             </div>
+             <div class="input-field col s6">
+               <input id="last_name" type="text" class="validate">
+               <label for="last_name">Last Name</label>
+             </div>
+           </div>
+           <div class="row">
+             <div class="input-field col s6">
+               <input id="email" type="email" class="validate">
+               <label for="email">Email</label>
+             </div>
+             <div class="input-field col s6">
+               <input id="age" type="number" class="validate">
+               <label for="number">Age</label>
+             </div>
+           </div>
+         </form>
+       </div>
+     </div>
+   </div>
   </div>
 </template>
 
@@ -40,4 +71,7 @@ export default {
 </script>
 
 <style>
+#thePage {
+  margin-top: 60px;
+}
 </style>
