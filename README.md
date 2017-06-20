@@ -46,3 +46,6 @@ At this point things should successfully install, but if not then you will need 
 
 ---
 Documentation about electron-vue project can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+
+## Stop molesting disks
+To clean setup files and packages downloaded by npm run ./clean.sh; This will require you to rebuild the project as it removes dependancies as well as builds.
