@@ -58,7 +58,7 @@ export default {
   watch: {
     // Whenever question changes, this function will run.
     name: function () {
-      // Mathes atleast 2 words. (FirstName, LastName)
+      // Matches atleast 2 words. (FirstName, LastName)
       var re = /^[a-z ,.'-]+(?:\s[a-z ,.'-]+)$/i
       if (this.name !== '' && re.test(this.name)) {
         document.getElementById('nextButton').disabled = false
