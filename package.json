@@ -1,0 +1,15 @@
+{
+  "name": "Prothesis",
+  "version": "2.0.0",
+  "description": "Target Life Career Guidance Software",
+  "main": "main.js",
+  "private": true,
+  "homepage": "https://prothesis-software.github.io/",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Prothesis Software Group",
+  "devDependencies": {
+    "electron": "~1.6.2"
+  }
+}
