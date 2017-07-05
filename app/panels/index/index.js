@@ -21,4 +21,8 @@ var dreams = require(path.join(ROOT, 'app/panels/assessments/dreams/dreams.js'))
 dreams.load()
 dataManager.addPanel(dreams.name, dreams)
 
+var people = require(path.join(ROOT, 'app/panels/assessments/people_id/people_id.js'))
+people.load()
+dataManager.addPanel(people.name, people)
+
 dataManager.load()
