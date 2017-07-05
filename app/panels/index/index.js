@@ -38,4 +38,8 @@ var people_orientation = require(path.join(ROOT, 'app/panels/assessments/people_
 people_orientation.load()
 dataManager.addPanel(people_orientation.name, people_orientation)
 
+var spoken_words = require(path.join(ROOT, 'app/panels/assessments/spoken_words/spoken_words.js'))
+spoken_words.load()
+dataManager.addPanel(spoken_words.name, spoken_words)
+
 dataManager.load()
