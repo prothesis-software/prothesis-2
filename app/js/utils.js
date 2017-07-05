@@ -99,7 +99,7 @@ var AssocArray = function() {
    * @todo Handle index out of bounds
    */
   this.getByIndex = function(index) {
-    return this.items[index].data
+    return this._items[index].data
   }
 
   /**
@@ -111,7 +111,7 @@ var AssocArray = function() {
    */
   this.push = function(name, data) {
     var newItem = new AssocItem(name, data)
-    this.items.push(newItem)
+    this._items.push(newItem)
   }
 
   /**
@@ -120,7 +120,7 @@ var AssocArray = function() {
    * @return {int} Number of items in array
    */
   this.getLength = function() {
-    return this.items.length
+    return this._items.length
   }
 
 }

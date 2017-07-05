@@ -62,7 +62,7 @@ var DataManager = function(dataFilePath) {
     Get all states as markdown and write to file
   */
   this.save = function() {
-    console.log("SAVE")
+    //console.log("SAVE")
     var data = this.getAllStateAsMarkdown()
 
     utils.write(this.dataFilePath, data)
@@ -82,6 +82,7 @@ var DataManager = function(dataFilePath) {
       var panelName = panelObject.getName()
       var panelData = data.getByName(panelName)
 
+      //console.log(panelData)
       panelObject.setStateFromMarkdown(panelData)
     }
   }
@@ -110,7 +111,7 @@ var DataManager = function(dataFilePath) {
     var currentData = ''
 
     for (var i = 0; i < lines.length; i++) {
-      console.log(lines[i])
+      //console.log(lines[i])
       var lineParts = lines[i].split(' ')
       if (lineParts[0] == '#') {
 
@@ -123,7 +124,7 @@ var DataManager = function(dataFilePath) {
 
         currentTitle = tmpTitle
 
-      } else if (lineParts[0] == '-') {
+      } else {
         currentData += lineParts.join(' ') + '\n'
       }
     }

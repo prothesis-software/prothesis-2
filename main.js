@@ -60,7 +60,7 @@ app.on('before-quit', () => {
 
   // TODO: Wait for renderer process to finish saving
   var j = 0
-  while (j < 100000000) {
+  while (j < 200000000) {
     var pleaseFixThis = 'AAAAAAAA'
     j = j * 2
     pleaseFixThis = j

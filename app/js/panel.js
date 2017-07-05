@@ -54,6 +54,10 @@ var Panel = function(panelName) {
     console.log('Panel.inject() Has not been implemented!')
   }
 
+  this.getStateAsMarkdown = function(markdown) {
+    console.log('Panel.getStateAsMarkdown() Has not been implemented!')
+  }
+
 }
 
 /**
@@ -96,7 +100,7 @@ var PanelCheckBoxes = function(panelName, panelRootID, markdownPath, htmlPath, c
    * @memberof panel.PanelCheckBoxes
    */
   this.load = function() {
-    console.log('Loading')
+    //console.log('Loading')
     gui.injectPage(this.rootElementID, htmlPath)
 
     this.itemsFromMarkdown = guiLoader.loadItemCollection(this.markdownPath)
@@ -136,6 +140,7 @@ var PanelCheckBoxes = function(panelName, panelRootID, markdownPath, htmlPath, c
   * @memberof panel.PanelCheckBoxes
   */
   this.inject = function() {
+    //console.log(this.checkBoxContainerID)
     document.getElementById(this.checkBoxContainerID).appendChild(this.checkBoxContainer.rootElement)
   }
 
@@ -211,5 +216,98 @@ var PanelCheckBoxes = function(panelName, panelRootID, markdownPath, htmlPath, c
   }
 }
 
+var PanelQuestions = function(panelName, panelRootID, markdownPath, htmlPath, questionContainerID) {
+  Panel.call(this, panelName)
+
+  this.rootElementID = panelRootID
+  this.rootElement = null
+
+
+  this.questionContainerID = questionContainerID
+  this.markdownPath = markdownPath
+  this.htmlPath = htmlPath
+
+  this.questionContainer = null
+
+  this.questionsFromMarkdown = []
+
+  this.load = function() {
+    gui.injectPage(this.rootElementID, this.htmlPath)
+    this.rootElement = document.getElementById(this.rootElementID).firstElementChild
+
+    var data = guiLoader.loadItemCollection(this.markdownPath)
+
+    this.questionContainer = new gui.QuestionContainer()
+
+    for (var i = 0; i < data[0].items.length; i++) {
+      this.questionsFromMarkdown.push(data[0].items[i])
+      this.questionContainer.addQuestion(data[0].items[i])
+    }
+
+    this.inject()
+  }
+
+  this.inject = function() {
+    this.rootElement.appendChild(this.questionContainer.rootElement)
+  }
+
+  this.getQuestions = function() {
+    return this.questionContainer.questions
+  }
+
+  /*
+    ### Question Title
+    - Line A
+    - Line B
+    - Line C
+  */
+
+  this.getStateAsMarkdown = function() {
+    var markdown = '# ' + this.name + '\n'
+
+    var qs = this.questionContainer.questions
+    for (var i = 0; i < qs.length; i++) {
+      markdown += '### ' + qs[i].title + '\n'
+
+      var tmpVal = qs[i].getAnswer().split('\n')
+
+      for (var j = 0; j < tmpVal.length; j++) {
+        markdown += '- ' + tmpVal[j] + '\n'
+      }
+
+    }
+
+    return markdown
+  }
+
+  /*
+  ### title
+  - Line A
+  - Line B
+   */
+  this.setStateFromMarkdown = function(markdown) {
+    var itemCollection = guiLoader.loadItemCollectionMarkdown(markdown)
+
+    //console.log(itemCollection)
+    if (itemCollection == null) {
+      return null
+    }
+
+    for (var i = 0; i < itemCollection.length; i++) {
+
+      var ans = ''
+
+      if (itemCollection[i] != null) {
+        var ans = itemCollection[i].items.join('\n')
+
+      }
+
+      this.questionContainer.setAnswerForTitle(itemCollection[i].title, ans)
+    }
+  }
+
+}
+
 module.exports.Panel = Panel
 module.exports.PanelCheckBoxes = PanelCheckBoxes
+module.exports.PanelQuestions = PanelQuestions

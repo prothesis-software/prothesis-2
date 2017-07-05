@@ -297,7 +297,92 @@ var CheckBoxContainerWithTitle = function(title) {
 
 }
 
+var Question = function(title) {
+  Component.call(this)
+
+  var QUESTION_PREFIX = 'gui_question_'
+  var TEXT_BOX_PREFIX = 'gui_textbox_'
+
+  this.title = title
+
+  // Elements
+  this.textAreaElement = null
+  this.labelElement = null
+  this.inputContainerElement = null
+  this.textAreaElementID = null
+
+      /*
+        <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Textarea</label>
+        </div>
+
+        */
+  this.createElements = function() {
+
+    // Containing DIV
+    this.inputContainerElement = document.createElement('div')
+    this.inputContainerElement.setAttribute('class', 'input-field col s12')
+
+    this.textAreaElementID = QUESTION_PREFIX + this.id
+
+    this.textAreaElement = document.createElement('textarea')
+    this.textAreaElement.setAttribute('id', this.textAreaElementID)
+    this.textAreaElement.setAttribute('class', 'materialize-textarea')
+
+    this.labelElement = document.createElement('label')
+    this.labelElement.setAttribute('for', QUESTION_PREFIX + this.id)
+    this.labelElement.innerHTML = this.title
+
+    this.inputContainerElement.appendChild(this.textAreaElement)
+    this.inputContainerElement.appendChild(this.labelElement)
+
+    this.rootElement.appendChild(this.inputContainerElement)
+  }
+
+  this.createElements()
+
+  this.getAnswer = function() {
+    return this.textAreaElement.value
+  }
+
+  this.setAnswer = function(answer) {
+    this.textAreaElement.value = answer
+  }
+
+}
+
+var QuestionContainer = function() {
+  Component.call(this)
+
+  this.questions = []
+
+  this.addQuestion = function(title) {
+    var tmpQuestion = new Question(title)
+    this.questions.push(tmpQuestion)
+    this.rootElement.appendChild(tmpQuestion.rootElement)
+  }
+
+  this.setAnswerForTitle = function(title, answer) {
+
+    //console.log(title)
+    for (var i = 0; i < this.questions.length; i++) {
+      if (this.questions[i].title == title) {
+          this.questions[i].setAnswer(answer)
+          return true
+      }
+    }
+
+    return false
+  }
+
+}
+
+
 module.exports.CheckBox = CheckBox
 module.exports.CheckBoxContainer = CheckBoxContainer
 module.exports.CheckBoxContainerWithTitle = CheckBoxContainerWithTitle
+module.exports.Question = Question
+module.exports.QuestionContainer = QuestionContainer
+
 module.exports.injectPage = injectPage

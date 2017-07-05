@@ -65,16 +65,13 @@ var ItemCollection = function() {
     ```
 */
 
-/**
- * Parse markdown and return an array of ItemCollection
- * @memberof guiLoader
- * @param  {String} filePath markdown path
- * @returns {ItemCollection[]}
- */
-function loadItemCollection(filePath) {
+function loadItemCollectionMarkdown(markdown) {
 
-  var data = utils.read(filePath)
-  var lines = data.split('\n')
+  if (markdown == null) {
+    return null
+  }
+
+  var lines = markdown.split('\n')
 
   var itemCollections = []
   var currentItemCollection = null
@@ -96,6 +93,11 @@ function loadItemCollection(filePath) {
 
     } else if (lineParts[0] == '-') {
       var itemText = lineParts.slice(1, lineParts.length).join(' ')
+
+      if (currentItemCollection == null) {
+        currentItemCollection = new ItemCollection()
+      }
+      
       currentItemCollection.addItem(itemText)
 
       if (i == lines.length - 1) {
@@ -109,6 +111,20 @@ function loadItemCollection(filePath) {
 
   return itemCollections
 }
+/**
+ * Parse markdown and return an array of ItemCollection
+ * @memberof guiLoader
+ * @param  {String} filePath markdown path
+ * @returns {ItemCollection[]}
+ */
+function loadItemCollection(filePath) {
+
+  var data = utils.read(filePath)
+
+  return loadItemCollectionMarkdown(data)
+
+}
 
 
 module.exports.loadItemCollection = loadItemCollection
+module.exports.loadItemCollectionMarkdown = loadItemCollectionMarkdown
