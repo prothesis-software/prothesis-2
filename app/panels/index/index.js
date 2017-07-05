@@ -5,6 +5,11 @@
 */
 var path = require('path')
 
+/*
+  Copy and paste!
+  Can most likely make this even more generic
+*/
+
 var roles = require(path.join(ROOT, 'app/panels/assessments/roles/roles.js'))
 roles.load()
 dataManager.addPanel(roles.name, roles)
@@ -28,5 +33,9 @@ dataManager.addPanel(people.name, people)
 var values = require(path.join(ROOT, 'app/panels/assessments/values/values.js'))
 values.load()
 dataManager.addPanel(values.name, values)
+
+var people_orientation = require(path.join(ROOT, 'app/panels/assessments/people_orientation/people_orientation.js'))
+people_orientation.load()
+dataManager.addPanel(people_orientation.name, people_orientation)
 
 dataManager.load()
