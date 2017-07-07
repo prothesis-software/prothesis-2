@@ -7,6 +7,8 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
+global.appRoot = path.resolve(__dirname);
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -14,11 +16,11 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
-  mainWindow.setMenu(null);
+  //mainWindow.setMenu(null);
   mainWindow.webContents.openDevTools()
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'app/html/index.html'),
+    pathname: path.join(__dirname, 'app/panels/index/index.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -33,6 +35,7 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
 }
 
 // This method will be called when Electron has finished
@@ -46,6 +49,26 @@ app.on('window-all-closed', function () {
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit()
+  }
+})
+
+// Register the auto save event
+app.on('before-quit', () => {
+  console.log('Saving userData...')
+
+  mainWindow.webContents.send('quit' , {msg:'DIE'})
+
+  // TODO: Wait for renderer process to finish saving
+  var j = 0
+  while (j < 200000000) {
+    var pleaseFixThis = 'AAAAAAAA'
+    j = j * 2
+    pleaseFixThis = j
+    j = j / 2
+    pleaseFixThis = j
+    j = j + j - j + j - j + 1
+
+    pleaseFixThis = j
   }
 })
 
