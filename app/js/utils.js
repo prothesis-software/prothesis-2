@@ -2,7 +2,7 @@
 
 
 var _fs = require('fs');
-
+const NEW_LINE = "\r\n";
 /*
      A syncronous function to
      read from a file; Returns
@@ -22,7 +22,7 @@ var _fs = require('fs');
  */
 function read(filePath){
      var path = require('path')
-     return String(_fs.readFileSync(filePath));
+     return clean_newlines(String(_fs.readFileSync(filePath)));
 }
 
 /*
@@ -46,7 +46,7 @@ function strjson(str){
  * @memberof utils
  */
 function write(filename, buffer){
-     return _fs.writeFileSync(filename, buffer);
+     return _fs.writeFileSync(filename, clean_newlines(buffer));
 }
 
 var AssocItem = function(name, data) {
@@ -125,7 +125,89 @@ var AssocArray = function() {
 
 }
 
+
+
+/**
+ * clean_newlines
+ * @param {String} buffer
+ * @return {String}
+ * @memberof utils
+ */
+ function clean_newlines(buffer){
+     return _universify(buffer);
+}
+
+/**
+ * _universify
+ * @param {String} buffer
+ * @return {String}
+ * @memberof utils
+ */
+function _universify(buffer){ // honestly this could be much cleaner.
+     for (var i = 0; i < buffer.length; i++) {              //Pass one checking for new lines without carriage returns
+          if(buffer[i] === '\n' && buffer[i-1] !== '\r'){
+               buffer = strinsert(buffer,i,"\r");
+               i++;
+               continue;
+          }
+     }
+
+     for (var i = 0; i < buffer.length; i++) {              //Pass two checking for carriage returns without new lines.
+          if(buffer[i] === '\r' && buffer[i+1] !== '\n'){
+               buffer = strinsert(buffer,i+1,"\n");
+               i+=2;
+               continue;
+          }
+     }
+     return buffer;
+}
+
+
+/**
+ * strinsert
+ * @param {String} buffer
+ * @param {Integer} index
+ * @param {String} val
+ * @return {String}
+ * @memberof utils
+ */
+ function strinsert(buffer, index, val) {
+     return buffer.substr(0, index) + val + buffer.substr(index);
+ }
+
+
+ /**
+  * Read contents of file (raw)
+  * @param  {String} filePath Path of filePath
+  * @return {String}          Contents of file
+  * @memberof utils
+  */
+ function _read(filePath){
+      var path = require('path')
+      return String(_fs.readFileSync(filePath));
+ }
+
+ /*
+      A function which uses this
+      silly retarded JSON.parse()
+      method.
+ */
+
+ /**
+  * Write data to a file (raw)
+  * @param  {String} filename filePath
+  * @param  {*} buffer   Data to write
+  * @memberof utils
+  */
+ function _write(filename, buffer){
+      return _fs.writeFileSync(filename, buffer);
+ }
+
 module.exports.read = read;
+module.exports._read = _read;
 module.exports.strjson = strjson;
+module.exports._write = _write;
 module.exports.write = write;
 module.exports.AssocArray = AssocArray
+module.exports.NEW_LINE = NEW_LINE;
+module.exports.clean_newlines = clean_newlines;

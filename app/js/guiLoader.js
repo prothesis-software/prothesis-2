@@ -71,7 +71,7 @@ function loadItemCollectionMarkdown(markdown) {
     return null
   }
 
-  var lines = markdown.split('\n')
+  var lines = markdown.split(utils.NEW_LINE)
 
   var itemCollections = []
   var currentItemCollection = null
@@ -97,7 +97,7 @@ function loadItemCollectionMarkdown(markdown) {
       if (currentItemCollection == null) {
         currentItemCollection = new ItemCollection()
       }
-      
+
       currentItemCollection.addItem(itemText)
 
       if (i == lines.length - 1) {
