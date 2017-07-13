@@ -139,8 +139,12 @@ var CheckBox = function(text, checked) {
   this.createCheckBoxElement = function(id, checked) {
     var chkElem = document.createElement('input')
     chkElem.setAttribute('id', CHECKBOX_PREFIX + id)
-
     chkElem.setAttribute('type', 'checkbox')
+    chkElem.setAttribute('class', 'cbx filled-in')
+    /*
+        NOTE: do not remove, possibly required for other platforms or versions
+        chkElem.setAttribute('id', 'filled-in-box')
+    */
     chkElem.checked = checked
 
     return chkElem
@@ -150,17 +154,28 @@ var CheckBox = function(text, checked) {
     var lbl = document.createElement('label')
     lbl.setAttribute('id', LABEL_PREFIX + id)
     lbl.setAttribute('for', CHECKBOX_PREFIX + id)
-    lbl.innerHTML = String(text)
 
     return lbl
+  }
+
+  this.createSpanElement = function(text){
+    var span = document.createElement('span')
+    span.setAttribute('class', 'lbl-span')
+    span.innerHTML = String(text)
+
+    return span
   }
 
   // Create elements and attach to root
   this.labelElement = this.createLabelElement(this.id, text)
   this.checkBoxElement = this.createCheckBoxElement(this.id, checked)
+  this.spanElement = this.createSpanElement(text)
 
+  this.labelElement.appendChild(this.spanElement)
   this.rootElement.appendChild(this.checkBoxElement)
   this.rootElement.appendChild(this.labelElement)
+
+  this.rootElement.setAttribute('class', 'col-sm-4 panel-div')
 
   // Register event handler to update our internal state
   this.checkBoxElement.addEventListener('change', this.onChangeHandler)
