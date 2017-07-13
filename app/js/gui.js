@@ -175,6 +175,8 @@ var CheckBox = function(text, checked) {
   this.rootElement.appendChild(this.checkBoxElement)
   this.rootElement.appendChild(this.labelElement)
 
+  this.rootElement.setAttribute('class', 'col-sm-4 panel-div')
+
   // Register event handler to update our internal state
   this.checkBoxElement.addEventListener('change', this.onChangeHandler)
 }
