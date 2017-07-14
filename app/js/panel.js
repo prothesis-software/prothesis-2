@@ -120,7 +120,7 @@ var PanelCheckBoxes = function(panelName, panelRootID, markdownPath, htmlPath, c
   this.applyStyle = function() {
 
     // Apply background to checkBoxContainer
-    this.checkBoxContainer.rootElement.setAttribute('class', 'card-panel teal lighten-2')
+    this.checkBoxContainer.rootElement.setAttribute('class', 'row card-panel teal lighten-2')
 
     // Apply Tool Tips
     for (var i = 0; i < this.checkBoxContainer.items.length; i++) {
