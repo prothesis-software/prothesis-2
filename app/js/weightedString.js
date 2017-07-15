@@ -20,6 +20,19 @@ module.exports = class weightedString {
           };
      }
 
+     setWeight(index, weight){
+          if(index <= this.weights.length){
+               this.weights[index] = weight;
+               this._order();
+          }
+     }
+
+     setValue(index, value){
+          if(index <= this.weights.length){
+               this.values[index] = values;
+          }
+     }
+
      _order() {
           var size = this.values.length;
           for (var i = 0; i < size - 1; i++) {
