@@ -33,6 +33,15 @@ module.exports = class weightedString {
           }
      }
 
+     find(value){
+          for (var i = 0; i < size; i++) {
+               if(this.values[i] === value)
+                    return i;
+          }
+
+          return undefined;
+     }
+
      _order() {
           var size = this.values.length;
           for (var i = 0; i < size - 1; i++) {
