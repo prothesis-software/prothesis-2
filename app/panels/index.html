@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Prothesis v2</title>
+    <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="../frameworks/css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="../css/app.css" />
+
+  </head>
+  <body>
+
+    <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#details">Details</a></li>
+        <li class="tab col s3"><a href="#assessments">Assessments</a></li>
+      </ul>
+    </div>
+
+    <div id="details" class="col s12">
+        <p>details...</p>
+
+    </div>
+
+    <div id="assessments" class="col s12">
+
+      <div class="row">
+          <div class="col s12">
+            <ul class="tabs z-depth-1">
+              <li class="tab"><a class="active" href="#external">External</a></li>
+              <li class="tab"><a href="#tab_roles">Roles</a></li>
+              <li class="tab"><a href="#tab_skills">Skills</a></li>
+              <li class="tab"><a href="#tab_passions">Passions</a></li>
+              <li class="tab"><a href="#tab_dreams">Dreams</a></li>
+              <li class="tab"><a href="#tab_people_id">People ID</a></li>
+              <li class="tab"><a href="#tab_values">Values</a></li>
+              <li class="tab"><a href="#tab_people_orientation">People Orientation</a></li>
+              <li class="tab"><a href="#tab_spoken_words">Spoken Words</a></li>
+            </ul>
+          </div>
+
+          <div id="external" class="col s12"></div>
+          <div id="tab_roles" class="col s12 card"></div>
+          <div id="tab_skills" class="col s12 card"></div>
+          <div id="tab_passions" class="col s12"></div>
+          <div id="tab_dreams" class="col s12"></div>
+          <div id="tab_people_id" class="col s12"></div>
+          <div id="tab_values" class="col s12"></div>
+          <div id="tab_people_orientation" class="col s12 card"></div>
+          <div id="tab_spoken_words" class="col s12"></div>
+
+    </div>
+
+    </div>
+  </div>
+
+    <!--Import jQuery before materialize.js-->
+    <!-- https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined -->
+    <!-- Insert this line above script imports  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+    <script type="text/javascript" src="../frameworks/js/jquery-3.2.1.min.js"></script>
+
+    <!-- Insert this line after script imports -->
+  <script>if (window.module) module = window.module;</script>
+
+    <script type="text/javascript" src="../frameworks/js/materialize.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+  </body>
+
+</html>
