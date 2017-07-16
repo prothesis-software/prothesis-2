@@ -1,3 +1,7 @@
+/**
+ * The base object for GUI elements that have a HTML component
+ * @type {Component}
+ */
 module.exports = class Component {
 
     constructor() {
@@ -21,11 +25,20 @@ module.exports = class Component {
         this._rootElement.setAttribute('id', 'root_' + this._id);
     }
 
+    /**
+     * Returns the id of the component
+     * @return {int}
+     */
     getId() {
         'use strict';
         return this._id;
     }
 
+    /**
+     * Returns the component with the given id
+     * @param  {int} id ID of the component to find
+     * @return {component}
+     */
     static getComponentById(id) {
         'use strict';
         for (let i = 0; i < this._componentList.length; i++) {
@@ -37,6 +50,10 @@ module.exports = class Component {
         return null;
     }
 
+    /**
+     * Returns the root element of the component
+     * @return {Element} HTML element
+     */
     getRootElement() {
         'use strict';
         return this._rootElement;
@@ -57,12 +74,22 @@ module.exports = class Component {
         return result;
     }
 
+    /**
+     * Sets the state according the the given JSON object
+     * @param {Object} state JSON Object
+     * @example
+     * myComp.setState({ Roles: ["Manager", "Leader"] } );
+     */
     setState(state) {
         'use strict';
         console.error(`Not implemented in ${this.constructor.name}`);
     }
 
-    getState(state) {
+    /**
+     * Returns the state of the object in JSON
+     * @return {Object}      
+     */
+    getState() {
         'use strict';
         console.error(`Not implemented in ${this.constructor.name}`);
     }

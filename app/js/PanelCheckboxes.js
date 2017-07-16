@@ -1,8 +1,17 @@
 const Panel = require(path.join(ROOT, 'app/js/Panel.js'));
 const CheckboxContainer = require(path.join(ROOT, 'app/js/CheckboxContainer.js'));
 
+/**
+ * Panel with a {CheckboxContainer}
+ * @type {PanelCheckboxes}
+ */
 module.exports = class PanelCheckboxes extends Panel {
 
+    /**
+     * Create a new {PanelCheckboxes} that reads and write to the guiKey in the JSON
+     * @param  {string} guiKey The key to read and write from in state operations
+     * @return {PanelCheckboxes}
+     */
     constructor(guiKey) {
         'use strict';
         super();

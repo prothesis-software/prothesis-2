@@ -1,11 +1,25 @@
+/**
+ * DataManager object for getting and setting panel states
+ * @type {DataManager}
+ */
 module.exports = class DataManager {
 
+    /**
+     * Create a new {DataManager}
+     * @param  {string} guiFolder    path of the gui folder containing the .json files
+     * @param  {string} userDataFile path of the userData.json file
+     * @return {DataManager}
+     */
     constructor(guiFolder, userDataFile) {
         this._guiFolder = guiFolder;
         this._userDataFile = userDataFile;
         this._panels = [];
     }
 
+    /**
+     * Load the GUI elements from JSON and init the registered panels
+     * @return {undefined}
+     */
     loadGUI() {
         const FileSystem = require('fs');
         const Path = require('path');
@@ -36,7 +50,10 @@ module.exports = class DataManager {
         }
     }
 
-
+    /**
+     * Load the user data from the file and initialise the registered panels
+     * @return {undefined}
+     */
     loadUserData() {
         'use strict';
 
@@ -52,6 +69,10 @@ module.exports = class DataManager {
 
     }
 
+    /**
+     * Request the state from all registered panels and save to user data file
+     * @return {undefined}
+     */
     saveUserData() {
         let data = {};
 
@@ -68,6 +89,10 @@ module.exports = class DataManager {
         utils.write(this._userDataFile, JSON.stringify(data, null, 2));
     }
 
+    /**
+     * Add a panel to the list
+     * @param {Panel} panel
+     */
     addPanel(panel) {
         this._panels.push(panel);
     }

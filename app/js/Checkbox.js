@@ -1,7 +1,18 @@
 const Component = require(path.join(ROOT, 'app/js/Component.js'));
 
+/**
+ * Checkbox GUI Component
+ * @type {Checkbox}
+ */
 module.exports = class Checkbox extends Component {
 
+    /**
+     * Creates a new Checkbox
+     * @param  {string} description
+     * @param  {string} tooltip
+     * @param  {boolean} checked
+     * @return {Checkbox}
+     */
     constructor(description, tooltip, checked) {
         'use strict';
         super();
@@ -37,6 +48,10 @@ module.exports = class Checkbox extends Component {
         Component.getComponentById(id).setCheckState(this.checked);
     }
 
+    /**
+     * Set the state of the checkbox
+     * @param {boolean} checked
+     */
     setCheckState(checked) {
         'use strict';
         this._checked = checked;
@@ -44,11 +59,19 @@ module.exports = class Checkbox extends Component {
 
     }
 
+    /**
+     * Get the check state of the box
+     * @return {boolean}
+     */
     getCheckState() {
         'use strict';
         return this._checked;
     }
 
+    /**
+     * Get the description of the box
+     * @return {string}
+     */
     getDescription() {
         'use strict';
         return this._description;
