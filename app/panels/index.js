@@ -17,17 +17,6 @@ let path = require('path');
     ipcRenderer.on('quit', function(event , data){ dataManager.saveUserData(); });
 }
 
-function injectPage(hostElementID, HTMLFilePath) {
-    let path = require('path');
-
-    let utils = require(path.join(ROOT, 'app/js/utils.js'));
-
-    let element = document.getElementById(hostElementID);
-    let data = utils.read(HTMLFilePath);
-
-    element.innerHTML = data;
-}
-
 
 function injectPanel(panelJsPath, hostElementID, guiKey) {
     // Create the panel
@@ -36,18 +25,25 @@ function injectPanel(panelJsPath, hostElementID, guiKey) {
 
     let MasterPanel = require(path.join(ROOT, panelJsPath));
     let panel = new MasterPanel(guiKey);
-    //injectPage(hostElementID, path.join(ROOT, htmlPath));
     document.getElementById(hostElementID).appendChild(panel.getRootElement());
     dataManager.addPanel(panel);
 
 }
 
+const PANEL_PATH = 'app/panels';
 const ASS_PATH = 'app/panels/assessments';
 const JS_PATH = 'app/js';
 
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_roles', 'Roles');
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_skills', 'Skills');
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_people_orientation', 'People_Orientation');
+injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_dreams', 'Dreams');
+injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_passions', 'Passions');
+injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_people_id', 'People_ID');
+injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_values', 'Values');
+injectPanel(PANEL_PATH + '/PanelSpokenWords.js', 'tab_spoken_words', 'Spoken_Words');
 
 dataManager.loadGUI();
 dataManager.loadUserData();
+
+require(path.join(ROOT, 'app/js/test.js'));
