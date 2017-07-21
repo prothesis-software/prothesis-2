@@ -1,0 +1,68 @@
+{
+    "People_Orientation": [
+        {
+            "Description": "Babies",
+            "Tooltip": "You like to interact with babies between the newborn stage and the age of 2."
+        },
+        {
+            "Description": "Toddlers",
+            "Tooltip": "You like to interact with children between the ages of 2 and 5."
+        },
+        {
+            "Description": "Primary school children",
+            "Tooltip": "You like to interact with children between the ages of 6 and 13."
+        },
+        {
+            "Description": "High school children",
+            "Tooltip": "You like to interact with children between the ages of 13 and 19."
+        },
+        {
+            "Description": "Students",
+            "Tooltip": "You like to interact young adults that are between the ages of 19 and 24."
+        },
+        {
+            "Description": "Teenagers",
+            "Tooltip": "You like to interact with children between the ages of 13 and 19."
+        },
+        {
+            "Description": "People in need",
+            "Tooltip": "You like to interact with people who have some or other need."
+        },
+        {
+            "Description": "Working people",
+            "Tooltip": "You like to interact with people who are currently in a career."
+        },
+        {
+            "Description": "Married people",
+            "Tooltip": "You like to interact with people who are currently married."
+        },
+        {
+            "Description": "Older people",
+            "Tooltip": "You like to interact with senior citizens."
+        },
+        {
+            "Description": "The handicapped",
+            "Tooltip": "You like to interact with people who are physically and/or mentally handicapped."
+        },
+        {
+            "Description": "Addicted people",
+            "Tooltip": "You like to interact with people who are addicted to a substance."
+        },
+        {
+            "Description": "The homeless",
+            "Tooltip": "You like to interact with people who have no refuge."
+        },
+        {
+            "Description": "Men",
+            "Tooltip": "You like to interact with males."
+        },
+        {
+            "Description": "Women",
+            "Tooltip": "You like to interact with females."
+        },
+        {
+            "Description": "To be on my own",
+            "Tooltip": "You do not like to interact with people in general."
+        }
+    ]
+}

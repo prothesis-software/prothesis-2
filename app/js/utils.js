@@ -203,11 +203,22 @@ function _universify(buffer){ // honestly this could be much cleaner.
       return _fs.writeFileSync(filename, buffer);
  }
 
+ function injectPage(hostElementID, HTMLFilePath) {
+     let path = require('path');
+
+     let utils = require(path.join(ROOT, 'app/js/utils.js'));
+
+     let element = document.getElementById(hostElementID);
+     let data = utils.read(HTMLFilePath);
+
+     element.innerHTML = data;
+ }
+
+module.exports.injectPage = injectPage;
 module.exports.read = read;
 module.exports._read = _read;
 module.exports.strjson = strjson;
 module.exports._write = _write;
 module.exports.write = write;
-module.exports.AssocArray = AssocArray
 module.exports.NEW_LINE = NEW_LINE;
 module.exports.clean_newlines = clean_newlines;

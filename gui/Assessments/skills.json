@@ -1,0 +1,124 @@
+{
+    "Skills": [
+        {
+            "Description": "Administration",
+            "Tooltip": "...managing a (big) task, usually involves paperwork and sorting things out."
+        },
+        {
+            "Description": "Analyse",
+            "Tooltip": "...examining methodically by separating into parts and studying their interrelations."
+        },
+        {
+            "Description": "Artistic",
+            "Tooltip": "...showing imagination and skill in the arts. You are sensitive to arts or appreciate art."
+        },
+        {
+            "Description": "Communicate",
+            "Tooltip": "...carrying the message across effectively. Explaining anything with ease."
+        },
+        {
+            "Description": "Computers",
+            "Tooltip": "You find it easy to learn how to use new computer programs and are not afraid of trying out new technology."
+        },
+        {
+            "Description": "Control",
+            "Tooltip": "...taking control of any situation. In other words, you easily manage any situation."
+        },
+        {
+            "Description": "Counselling",
+            "Tooltip": "...giving and taking advice. You like to offer advice or guidance."
+        },
+        {
+            "Description": "Creative",
+            "Tooltip": "...being imaginative. You have the ability or power to create.  You are characterized by originality and expressiveness."
+        },
+        {
+            "Description": "Decision making",
+            "Tooltip": "...making decisions easily and stick to it."
+        },
+        {
+            "Description": "Empathy",
+            "Tooltip": "...identifying with and understanding another person's situation, feelings and motives."
+        },
+        {
+            "Description": "Entertaining",
+            "Tooltip": "...To hold the attention of with something amusing or diverting."
+        },
+        {
+            "Description": "Handwork",
+            "Tooltip": "...doing things with your hands, building things, creating, being creative."
+        },
+        {
+            "Description": "Marketing",
+            "Tooltip": "...portraying ideas in such a matter to others so that they are persuaded to \ufffdbuy what you are selling\ufffd. You are good at convincing people"
+        },
+        {
+            "Description": "Negotiate",
+            "Tooltip": "...conferring with others in order to come to terms or reach an agreement."
+        },
+        {
+            "Description": "Numeracy",
+            "Tooltip": "...expressing yourself effectively in quantitative terms. You also like working with numbers, and maths."
+        },
+        {
+            "Description": "Objectivity",
+            "Tooltip": "...seeing a situation from an external the point of view even if you are not an outsider, you wont let your emotions or beliefs influence your perception of a situation."
+        },
+        {
+            "Description": "Organize",
+            "Tooltip": "...putting things together into an orderly, functional, structured whole."
+        },
+        {
+            "Description": "Planning",
+            "Tooltip": "...formulating a scheme or program for the accomplishment a goal.  You like to have something as a specific aim or purpose."
+        },
+        {
+            "Description": "Playing music instrument",
+            "Tooltip": "You have the ability to use a musical instrument to its full potential, have the talent of making music. \t"
+        },
+        {
+            "Description": "Practical",
+            "Tooltip": "...doing things in a practical, executable manner. You like finding the easiest, cheapest and most effective way of doing things."
+        },
+        {
+            "Description": "Public speaking",
+            "Tooltip": "...speaking in front of people, you like entertaining, motivating, teaching and inspiring any group of people."
+        },
+        {
+            "Description": "Reading",
+            "Tooltip": "...collecting information by reading, you like to read about things that interest you. You love to spend time in the library or on the Internet doing research or reading up on something."
+        },
+        {
+            "Description": "Receptive for people",
+            "Tooltip": "understanding other people's needs. You are sensitive to their emotions and they feel welcome in your company."
+        },
+        {
+            "Description": "Sharing",
+            "Tooltip": "You like to make your resources available to other people to use to their advantage."
+        },
+        {
+            "Description": "Sport",
+            "Tooltip": "...mostly physical activities you take on. You probably have a good ball sense and love to be active."
+        },
+        {
+            "Description": "Strategic planning",
+            "Tooltip": "...preparing for something specific focusing on the bigger picture taking into account the small things that needs to be done to achieve the bigger picture."
+        },
+        {
+            "Description": "Study",
+            "Tooltip": "You like to learn about something and usually remember it very well. \t"
+        },
+        {
+            "Description": "Taking the lead",
+            "Tooltip": "...taking hold of a situation and people find it natural to follow your lead."
+        },
+        {
+            "Description": "Teaching",
+            "Tooltip": "To provide knowledge; instruct in.\t\t"
+        },
+        {
+            "Description": "Writing",
+            "Tooltip": "...expressing yourself in writing. You'd rather write than speak."
+        }
+    ]
+}
