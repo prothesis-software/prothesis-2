@@ -4,11 +4,11 @@ function reportHtmlGenerator(userdata) {
     this._path = require('path');
     this._utils = require('./utils.js'); //TODO: Fix me!
     this._buffer = this._utils.read('../resources/styling.html');
-    this._userdata = this._utils.read(userdata);
-    let md = require('marked');
+    this._userdata = this._utils.strjson(this._utils.read(userdata));
+    this._md = require('marked');
 
-    md.setOptions({
-        renderer: new md.Renderer(),
+    this._md.setOptions({
+        renderer: new this._md.Renderer(),
         gfm: true,
         tables: true,
         breaks: false,
@@ -27,38 +27,25 @@ reportHtmlGenerator.prototype._finalise = function() {
 }
 
 reportHtmlGenerator.prototype.load = function() {
-    var json_buffer = this._utils.strjson(this._userdata);
-
-    this._loadDreams(json_buffer['Dreams']);
-    console.log(json_buffer['Dreams']);
-
-    this._finalise();
+	// this._userdata is a json object.
+	let size = this._userdata['Dreams'].length;
+	for(i = 0; i < size ; i++){
+		let str = this._md('# ' + this._userdata['Dreams'][i]['Title']);
+		str += this._userdata['Dreams'][i]['Answer'];
+		this._buffer += str;
+	}
 }
 
 reportHtmlGenerator.prototype._loadDreams = function(dreams) {
-
-
-
+		
 }
 
 reportHtmlGenerator.prototype.save = function(filename) {
-    this._utils.write(filename + ".html", this._buffer);
+	this._finalise();
 
-    var fs = require('fs');
-    var pdf = require('html-pdf');
-    var options = {
-        "base": `file:///home/evert/github/prothesis-2/app/frameworks/css`
-    };
-
-    pdf.create(this._buffer, options).toFile(filename, function(err, res) {
-        if (err) return console.log(err);
-        console.log(res); // { filename: '/app/businesscard.pdf' }
-    });
-
+	this._utils.write(filename, this._buffer);
 }
 
-
 var re = new reportHtmlGenerator('../../userData.json');
-
 re.load();
-re.save("report.pdf");
+re.save('./report.pdf.html');
