@@ -27,23 +27,23 @@ reportHtmlGenerator.prototype._finalise = function() {
 }
 
 reportHtmlGenerator.prototype.load = function() {
-	// this._userdata is a json object.
-	let size = this._userdata['Dreams'].length;
-	for(i = 0; i < size ; i++){
-		let str = this._md('# ' + this._userdata['Dreams'][i]['Title']);
-		str += this._userdata['Dreams'][i]['Answer'];
-		this._buffer += str;
-	}
+    // this._userdata is a json object.
+    let size = this._userdata['Dreams'].length;
+    for (i = 0; i < size; i++) {
+        let str = this._md('# ' + this._userdata['Dreams'][i]['Title']);
+        str += this._userdata['Dreams'][i]['Answer'];
+        this._buffer += str;
+    }
 }
 
 reportHtmlGenerator.prototype._loadDreams = function(dreams) {
-		
+
 }
 
 reportHtmlGenerator.prototype.save = function(filename) {
-	this._finalise();
+    this._finalise();
 
-	this._utils.write(filename, this._buffer);
+    this._utils.write(filename, this._buffer);
 }
 
 var re = new reportHtmlGenerator('../../userData.json');
