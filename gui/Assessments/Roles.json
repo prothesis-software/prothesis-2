@@ -1,0 +1,140 @@
+{
+    "Roles": [
+        {
+            "Description": "Analyzer",
+            "Tooltip": "You are good at resolving anything complex and like to pull it apart to make it simple. Concentrate on the detail."
+        },
+        {
+            "Description": "Artist",
+            "Tooltip": "You are good at expressing yourself in one of the art forms, fine arts, literature, music, performing arts, etc"
+        },
+        {
+            "Description": "Clarifier",
+            "Tooltip": "Someone who has an easy explanation for things. Wants everyone to understand."
+        },
+        {
+            "Description": "Collector",
+            "Tooltip": "Someone who loves to collect things, information, memories, etc."
+        },
+        {
+            "Description": "Competitor",
+            "Tooltip": "Someone who is positively stimulated by competition. Thrives on challenges."
+        },
+        {
+            "Description": "Creator of order",
+            "Tooltip": "You like to invent systems to establish order out of chaos or disorder."
+        },
+        {
+            "Description": "Decision maker",
+            "Tooltip": "You are a person with great assertiveness, you are willing to make decisions and bear the consequences. <br />If you make a decision you easily stick to it."
+        },
+        {
+            "Description": "Diplomat",
+            "Tooltip": "You have a special skill to handle a situation in such a way that no one is offended, you are tactful."
+        },
+        {
+            "Description": "Encourager",
+            "Tooltip": "You find it easy to support your friends in any difficult situation adding positive energy to complete the task."
+        },
+        {
+            "Description": "Entrepreneur",
+            "Tooltip": "You see the business potential in any situation."
+        },
+        {
+            "Description": "Facilitator",
+            "Tooltip": "You create a situation or environment where things can happen, you make progress easier. Launch pad."
+        },
+        {
+            "Description": "Follower/Supporter",
+            "Tooltip": "You are an enthusiast. Backer, ally, loyal"
+        },
+        {
+            "Description": "Friend",
+            "Tooltip": "You are extremely loyal, trustworthy and committed."
+        },
+        {
+            "Description": "Giver",
+            "Tooltip": "You are fond of sharing your resources (money, time, etc)"
+        },
+        {
+            "Description": "Harmoniser",
+            "Tooltip": "You like to see that things and people are working or blending together. You are a mediator who brings one thing into harmonious agreement with another."
+        },
+        {
+            "Description": "Influencer/Inspire",
+            "Tooltip": "You have an inner drive to challenge people. You easily affect other people by what you say."
+        },
+        {
+            "Description": "Inventor",
+            "Tooltip": "You like to think about new ideas, you are innovative."
+        },
+        {
+            "Description": "Investigator",
+            "Tooltip": "You always want to know the truth behind every situation."
+        },
+        {
+            "Description": "Leader",
+            "Tooltip": "People find it easy to follow your lead."
+        },
+        {
+            "Description": "Listener",
+            "Tooltip": "You find it easy to be focused on what people say when they talk to you. Soundboard."
+        },
+        {
+            "Description": "Marketer",
+            "Tooltip": "You know how to persuade people to believe in anything that you’re selling: products, ideas etc."
+        },
+        {
+            "Description": "Mentor",
+            "Tooltip": "You like coaching people in one on one relationships. You are considered a wise and trusted counsellor or teacher."
+        },
+        {
+            "Description": "Negotiator",
+            "Tooltip": "You like to bargain, like to find a common ground. You are good at arranging or settling a matter by discussion and mutual agreement."
+        },
+        {
+            "Description": "Organizer",
+            "Tooltip": "You are good at bringing together all the components."
+        },
+        {
+            "Description": "Peacemaker",
+            "Tooltip": "You like to see that conflict situations are resolved."
+        },
+        {
+            "Description": "Pioneer",
+            "Tooltip": "You are not afraid to start something new. You plant the seed."
+        },
+        {
+            "Description": "Protector",
+            "Tooltip": "You tend fight for the underdog. You are considered a guardian, place of safety or a defender."
+        },
+        {
+            "Description": "Reality Tester",
+            "Tooltip": "You always think about the practical workability of a task. Ask daring but necessary questions."
+        },
+        {
+            "Description": "Standard Setter",
+            "Tooltip": "You will always challenge a group to excellence."
+        },
+        {
+            "Description": "Student",
+            "Tooltip": "Lifelong self learner, you enjoy to learn new things, read up."
+        },
+        {
+            "Description": "Teacher",
+            "Tooltip": "You have the ability to explain something."
+        },
+        {
+            "Description": "Team Builder",
+            "Tooltip": "You bring a team together to accomplish a goal and motivate them."
+        },
+        {
+            "Description": "Trend setter",
+            "Tooltip": "You like to start something new (like a pioneer) but people tend to follow you."
+        },
+        {
+            "Description": "Worker",
+            "Tooltip": "You like get do the things done. You like working hard to achieve your goals."
+        }
+    ]
+}
