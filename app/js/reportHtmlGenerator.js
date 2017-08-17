@@ -38,7 +38,8 @@ module.exports = class reportHtmlGenerator {
 
     handle_questions(panel) {
         let data = panel.getState();
-        this._buffer += this._md("### " + panel._guiKey);
+        let name = panel._guiKey.replace("_", " ");
+        this._buffer += this._md("### " + name);
 
         for (let i = 0; i < data[panel._guiKey].length; i++) {
             this._buffer += this._md("##### " + data[panel._guiKey][i]['Title']);
@@ -48,6 +49,11 @@ module.exports = class reportHtmlGenerator {
 
     handle_checkboxes(panel) {
         let data = panel.getState();
+        let name = panel._guiKey.replace("_", " ");
+        this._buffer += this._md("### " + name);
+	
+	for(let i = 0; i < data[panel._guiKey].length; i++)	
+	    this._buffer += this._md("- " + data[panel._guiKey][i]);	
     }
 
     handle(panel) {
