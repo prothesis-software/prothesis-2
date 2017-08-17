@@ -15,17 +15,17 @@ module.exports = class PanelQuestions extends Panel {
     loadGUI(state) {
         'use strict';
 
-         if (!state.hasOwnProperty(this._guiKey)) {
-             console.error(`Could not find ${this._guiKey} in ${state}`);
-         } else {
+        if (!state.hasOwnProperty(this._guiKey)) {
+            console.error(`Could not find ${this._guiKey} in ${state}`);
+        } else {
 
-             let items = state[this._guiKey];
+            let items = state[this._guiKey];
 
-             for (let i = 0; i < items.length; i++) {
+            for (let i = 0; i < items.length; i++) {
 
-                 this._questionsContainer.addItem(items[i]);
-             }
-         }
+                this._questionsContainer.addItem(items[i]);
+            }
+        }
     }
 
     getState() {

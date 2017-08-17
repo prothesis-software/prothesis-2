@@ -2,7 +2,7 @@
  * DataManager object for getting and setting panel states
  * @type {DataManager}
  */
-class DataManager {
+module.exports = class DataManager {
 
     /**
      * Create a new {DataManager}
