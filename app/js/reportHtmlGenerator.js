@@ -27,25 +27,18 @@ reportHtmlGenerator.prototype._finalise = function() {
 }
 
 reportHtmlGenerator.prototype.load = function() {
-    // this._userdata is a json object.
-    let size = this._userdata['Dreams'].length;
-    for (i = 0; i < size; i++) {
-        let str = this._md('# ' + this._userdata['Dreams'][i]['Title']);
-        str += this._userdata['Dreams'][i]['Answer'];
-        this._buffer += str;
-    }
+	// Get the data manager
+	let dm = dataManager;
+	console.log(dm);		
 }
 
-reportHtmlGenerator.prototype._loadDreams = function(dreams) {
-
+reportHtmlGenerator.prototype.interpet_path_to_type = function(path){
+							
 }
 
-reportHtmlGenerator.prototype.save = function(filename) {
+
+rtHtmlGenerator.prototype.save = function(filename) {
     this._finalise();
 
     this._utils.write(filename, this._buffer);
 }
-
-var re = new reportHtmlGenerator('../../userData.json');
-re.load();
-re.save('./report.pdf.html');
