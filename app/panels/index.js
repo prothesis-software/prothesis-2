@@ -45,5 +45,3 @@ injectPanel(PANEL_PATH + '/PanelSpokenWords.js', 'tab_spoken_words', 'Spoken_Wor
 
 dataManager.loadGUI();
 dataManager.loadUserData();
-
-require(path.join(ROOT, 'app/js/test.js'));
