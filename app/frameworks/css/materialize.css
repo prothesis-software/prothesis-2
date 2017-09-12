@@ -9284,3 +9284,16 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   stroke-linecap: round;
   /*shape-rendering: crispEdges;*/
 }
+
+.material-icons.md-12 {
+    font-size: 12px;
+    line-height: 12px;
+    display: inline;
+}
+
+.btn-small {
+    height: 24px;
+    line-height: 27px;
+    width: 24px;
+    padding: 0 0.5rem;
+}
