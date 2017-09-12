@@ -87,11 +87,20 @@ module.exports = class Component {
 
     /**
      * Returns the state of the object in JSON
-     * @return {Object}      
+     * @return {Object}
      */
     getState() {
         'use strict';
         console.error(`Not implemented in ${this.constructor.name}`);
+    }
+
+    static getComponentByElement(elem) {
+        'use strict';
+        let tmpId = elem.id.split('_');
+        let id = tmpId[tmpId.length - 1];
+        let comp = Component.getComponentById(id)
+
+        return comp;
     }
 
 };

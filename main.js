@@ -59,16 +59,16 @@ app.on('before-quit', () => {
   mainWindow.webContents.send('quit' , {msg:'DIE'})
 
   // TODO: Wait for renderer process to finish saving
-  var j = 0
+  let j = 0;
   while (j < 200000000) {
-    var pleaseFixThis = 'AAAAAAAA'
-    j = j * 2
-    pleaseFixThis = j
-    j = j / 2
-    pleaseFixThis = j
-    j = j + j - j + j - j + 1
+    let pleaseFixThis = 'AAAAAAAA';
+    j = j * 2;
+    pleaseFixThis = j;
+    j = j / 2;
+    pleaseFixThis = j;
+    j = j + j - j + j - j + 1;
 
-    pleaseFixThis = j
+    pleaseFixThis = j;
   }
 })
 
