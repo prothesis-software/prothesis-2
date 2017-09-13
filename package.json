@@ -6,7 +6,7 @@
   "private": true,
   "homepage": "https://prothesis-software.github.io/",
   "scripts": {
-    "start": "electron ."
+    "start": "./node_modules/electron/dist/electron ."
   },
   "author": "Prothesis Software Group",
   "devDependencies": {

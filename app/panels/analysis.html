@@ -1,0 +1,29 @@
+<div>
+    <h2 id='woo_flashing_html'>Analysis page</h2>
+</div>
+
+<script>
+    // This code does not get executed when injected.
+    // Would need some hacks.
+    // Instead implement panel specific features in PanelAnalysis.js
+    // jQuery also does not seem to work by default
+    
+    var someGlobal = 1;
+
+    function doSpecialStuff() {
+
+        if (someGlobal) {
+            document.getElementById('woo_flashing_html').style.backgroundColor = "red";
+        } else {
+            document.getElementById('woo_flashing_html').style.backgroundColor = "red";
+        }
+
+        console.log('tick');
+        someGlobal = !someGlobal;
+
+        setInterval(doSpecialStuff, 500);
+    }
+    console.log('tick2');
+    doSpecialStuff();
+
+</script>
