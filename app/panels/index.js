@@ -46,3 +46,9 @@ injectPanel(PANEL_PATH + '/PanelAnalysis.js', 'analysis', 'Analysis');
 
 dataManager.loadGUI();
 dataManager.loadUserData();
+
+let rep = require(path.join(ROOT, 'app/js/reportHtmlGenerator.js'));
+let re = new rep(path.join(ROOT, "userData.json"));
+re.load();
+re.save(path.join(ROOT, "test.pdf"));
+require(path.join(ROOT, 'app/js/test.js'));
