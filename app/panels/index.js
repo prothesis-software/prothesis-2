@@ -34,6 +34,7 @@ const PANEL_PATH = 'app/panels';
 const ASS_PATH = 'app/panels/assessments';
 const JS_PATH = 'app/js';
 
+injectPanel(JS_PATH + '/PanelDetails.js', 'details', 'Details');
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_roles', 'Roles');
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_skills', 'Skills');
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_people_orientation', 'People_Orientation');
