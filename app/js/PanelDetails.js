@@ -1,5 +1,5 @@
 const Panel = require(path.join(ROOT, 'app/js/Panel.js'));
-const QuestionContainer = require(path.join(ROOT, 'app/js/QuestionContainer.js'));
+const BasicQuestionContainer = require(path.join(ROOT, 'app/js/Containers/BasicQuestionContainer.js'));
 const NumericalQuestionsContainer = require(path.join(ROOT, 'app/js/Containers/NumericalQuestionsContainer.js'));
 const EmailQuestionsContainer = require(path.join(ROOT, 'app/js/Containers/EmailQuestionsContainer.js'));
 
@@ -8,7 +8,7 @@ module.exports = class PanelDetails extends Panel {
     constructor(guiKey) {
         super();
 
-        this._questionsContainer = new QuestionContainer();
+        this._questionsContainer = new BasicQuestionContainer();
         this._numericalQuestionsContainer = new NumericalQuestionsContainer();
         this._emailquestionsContainer = new EmailQuestionsContainer();
 

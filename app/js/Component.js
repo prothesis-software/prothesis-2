@@ -23,6 +23,8 @@ module.exports = class Component {
 
         this._rootElement = document.createElement('div');
         this._rootElement.setAttribute('id', 'root_' + this._id);
+        this._rootElement.setAttribute('style', 'padding: 5px');
+
     }
 
     /**
@@ -87,7 +89,7 @@ module.exports = class Component {
 
     /**
      * Returns the state of the object in JSON
-     * @return {Object}      
+     * @return {Object}
      */
     getState() {
         'use strict';
