@@ -1,0 +1,23 @@
+{
+  "External":[
+          {"MBTI": [
+            {
+              "Name":"Combination1",
+              "Values":["I", "E"]
+            },
+            {
+              "Name":"Combination2",
+              "Values":["S", "N"]
+            },
+            {
+              "Name":"Combination3",
+              "Values":["T", "F"]
+            },
+            {
+              "Name":"Combination4",
+              "Values":["J", "P"]
+            }
+          ]},
+          {"BasicQuestions":["Life Key 1", "Life Key 2", "Life Key 3"]}
+  ]
+}

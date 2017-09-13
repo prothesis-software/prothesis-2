@@ -24,7 +24,6 @@ module.exports = class Component {
         this._rootElement = document.createElement('div');
         this._rootElement.setAttribute('id', 'root_' + this._id);
         this._rootElement.setAttribute('style', 'padding: 5px');
-
     }
 
     /**
