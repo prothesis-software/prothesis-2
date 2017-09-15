@@ -24,8 +24,9 @@ module.exports = class DropDownQuestion extends Component {
         <label>Materialize Select</label>
         */
 
+        // class="browser-default" does not appear to work with dynamically added select elements
         this._html = `  <div class="row"><div class="input-field col s12 m6 l3">
-        <select class="browser-default" name="select_${title}" id="select_${this._id}"><option value="" disabled selected>Choose</option>`;
+        <select name="select_${title}" id="select_${this._id}"><option value="" disabled selected>Choose</option>`;
 
         for (var i = 0; i < this._options.length; i++) {
           this._html += '<option style="color:black" value="' + this._options[i] + '">' + this._options[i] + '</option>';
@@ -41,6 +42,21 @@ module.exports = class DropDownQuestion extends Component {
         this._selectElement = this.getRootElement().querySelector(`#select_${this._id}`);
 
         this._selectElement.addEventListener('change', this._onChangeHandler);
+
+        this._initSelect();
+    }
+
+    // This function will be executed every x time units untill
+    // we successfully fixed the materializecss
+    // Repeat until element has been added to the DOM
+    _initSelect() {
+        let elem = document.getElementById(`select_${this._id}`);
+
+        if (elem != null) {
+            $(elem).material_select();
+        } else {
+            setTimeout(this._initSelect.bind(this), 500);
+        }
     }
 
     // Attached to the checkbox!
