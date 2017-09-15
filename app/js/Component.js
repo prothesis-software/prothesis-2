@@ -67,7 +67,7 @@ module.exports = class Component {
             if (typeof values[i] !== types[i]) {
                 console.error(`Invalid arguments passed to ${this.constructor.name} in position ${i}
     Expected ${types[i]}, receieved ${typeof values[i]} (${values[i]})`);
-                result =  false;
+                result = false;
             }
         }
 

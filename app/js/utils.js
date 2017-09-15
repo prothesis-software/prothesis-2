@@ -20,9 +20,9 @@ const NEW_LINE = "\r\n";
  * @return {String}          Contents of file
  * @memberof utils
  */
-function read(filePath){
-     var path = require('path')
-     return clean_newlines(String(_fs.readFileSync(filePath)));
+function read(filePath) {
+    var path = require('path')
+    return clean_newlines(String(_fs.readFileSync(filePath)));
 }
 
 /*
@@ -30,8 +30,8 @@ function read(filePath){
      silly retarded JSON.parse()
      method.
 */
-function strjson(str){
-     return JSON.parse(str);
+function strjson(str) {
+    return JSON.parse(str);
 }
 
 /*
@@ -45,13 +45,13 @@ function strjson(str){
  * @param  {*} buffer   Data to write
  * @memberof utils
  */
-function write(filename, buffer){
-     return _fs.writeFileSync(filename, clean_newlines(buffer));
+function write(filename, buffer) {
+    return _fs.writeFileSync(filename, clean_newlines(buffer));
 }
 
 var AssocItem = function(name, data) {
-  this.name = name
-  this.data = data
+    this.name = name
+    this.data = data
 }
 
 /*
@@ -67,61 +67,61 @@ var AssocItem = function(name, data) {
  */
 var AssocArray = function() {
 
-  /**
-   * Array for storing {@link AssocItem}
-   * @member {Array}
-   * @private
-   */
-  this._items = []
+    /**
+     * Array for storing {@link AssocItem}
+     * @member {Array}
+     * @private
+     */
+    this._items = []
 
-  /**
-   * Return element by name
-   * @memberof utils.AssocArray
-   * @param  {String} name Key of element
-   * @returns {*|Null}      The original data If it exists, otherwise Null
-   */
-  this.getByName = function(name) {
+    /**
+     * Return element by name
+     * @memberof utils.AssocArray
+     * @param  {String} name Key of element
+     * @returns {*|Null}      The original data If it exists, otherwise Null
+     */
+    this.getByName = function(name) {
 
-    for (var i = 0; i < this._items.length; i++) {
-      if (this._items[i].name == name) {
-        return this._items[i].data
-      }
+        for (var i = 0; i < this._items.length; i++) {
+            if (this._items[i].name == name) {
+                return this._items[i].data
+            }
+        }
+
+        return null
     }
 
-    return null
-  }
+    /**
+     * Get element given its index
+     * @memberof utils.AssocArray
+     * @param  {int} index The index of the element
+     * @return {*}       Original data
+     * @todo Handle index out of bounds
+     */
+    this.getByIndex = function(index) {
+        return this._items[index].data
+    }
 
-  /**
-   * Get element given its index
-   * @memberof utils.AssocArray
-   * @param  {int} index The index of the element
-   * @return {*}       Original data
-   * @todo Handle index out of bounds
-   */
-  this.getByIndex = function(index) {
-    return this._items[index].data
-  }
+    /**
+     * Add an element to the Associative AssocArray
+     * @memberof utils.AssocArray
+     * @param  {String} name The key of the data
+     * @param  {*} data Data to store
+     * @return {undefined}
+     */
+    this.push = function(name, data) {
+        var newItem = new AssocItem(name, data)
+        this._items.push(newItem)
+    }
 
-  /**
-   * Add an element to the Associative AssocArray
-   * @memberof utils.AssocArray
-   * @param  {String} name The key of the data
-   * @param  {*} data Data to store
-   * @return {undefined}
-   */
-  this.push = function(name, data) {
-    var newItem = new AssocItem(name, data)
-    this._items.push(newItem)
-  }
-
-  /**
-   * Returns the count of items stored
-   * @memberof utils.AssocArray
-   * @return {int} Number of items in array
-   */
-  this.getLength = function() {
-    return this._items.length
-  }
+    /**
+     * Returns the count of items stored
+     * @memberof utils.AssocArray
+     * @return {int} Number of items in array
+     */
+    this.getLength = function() {
+        return this._items.length
+    }
 
 }
 
@@ -133,8 +133,8 @@ var AssocArray = function() {
  * @return {String}
  * @memberof utils
  */
- function clean_newlines(buffer){
-     return _universify(buffer);
+function clean_newlines(buffer) {
+    return _universify(buffer);
 }
 
 /**
@@ -143,23 +143,23 @@ var AssocArray = function() {
  * @return {String}
  * @memberof utils
  */
-function _universify(buffer){ // honestly this could be much cleaner.
-     for (var i = 0; i < buffer.length; i++) {              //Pass one checking for new lines without carriage returns
-          if(buffer[i] === '\n' && buffer[i-1] !== '\r'){
-               buffer = strinsert(buffer,i,"\r");
-               i++;
-               continue;
-          }
-     }
+function _universify(buffer) { // honestly this could be much cleaner.
+    for (var i = 0; i < buffer.length; i++) { //Pass one checking for new lines without carriage returns
+        if (buffer[i] === '\n' && buffer[i - 1] !== '\r') {
+            buffer = strinsert(buffer, i, "\r");
+            i++;
+            continue;
+        }
+    }
 
-     for (var i = 0; i < buffer.length; i++) {              //Pass two checking for carriage returns without new lines.
-          if(buffer[i] === '\r' && buffer[i+1] !== '\n'){
-               buffer = strinsert(buffer,i+1,"\n");
-               i+=2;
-               continue;
-          }
-     }
-     return buffer;
+    for (var i = 0; i < buffer.length; i++) { //Pass two checking for carriage returns without new lines.
+        if (buffer[i] === '\r' && buffer[i + 1] !== '\n') {
+            buffer = strinsert(buffer, i + 1, "\n");
+            i += 2;
+            continue;
+        }
+    }
+    return buffer;
 }
 
 
@@ -171,48 +171,48 @@ function _universify(buffer){ // honestly this could be much cleaner.
  * @return {String}
  * @memberof utils
  */
- function strinsert(buffer, index, val) {
-     return buffer.substr(0, index) + val + buffer.substr(index);
- }
+function strinsert(buffer, index, val) {
+    return buffer.substr(0, index) + val + buffer.substr(index);
+}
 
 
- /**
-  * Read contents of file (raw)
-  * @param  {String} filePath Path of filePath
-  * @return {String}          Contents of file
-  * @memberof utils
-  */
- function _read(filePath){
-      var path = require('path')
-      return String(_fs.readFileSync(filePath));
- }
-
- /*
-      A function which uses this
-      silly retarded JSON.parse()
-      method.
+/**
+ * Read contents of file (raw)
+ * @param  {String} filePath Path of filePath
+ * @return {String}          Contents of file
+ * @memberof utils
  */
+function _read(filePath) {
+    var path = require('path')
+    return String(_fs.readFileSync(filePath));
+}
 
- /**
-  * Write data to a file (raw)
-  * @param  {String} filename filePath
-  * @param  {*} buffer   Data to write
-  * @memberof utils
-  */
- function _write(filename, buffer){
-      return _fs.writeFileSync(filename, buffer);
- }
+/*
+     A function which uses this
+     silly retarded JSON.parse()
+     method.
+*/
 
- function injectPage(hostElementID, HTMLFilePath) {
-     let path = require('path');
+/**
+ * Write data to a file (raw)
+ * @param  {String} filename filePath
+ * @param  {*} buffer   Data to write
+ * @memberof utils
+ */
+function _write(filename, buffer) {
+    return _fs.writeFileSync(filename, buffer);
+}
 
-     let utils = require(path.join(ROOT, 'app/js/utils.js'));
+function injectPage(hostElementID, HTMLFilePath) {
+    let path = require('path');
 
-     let element = document.getElementById(hostElementID);
-     let data = utils.read(HTMLFilePath);
+    let utils = require(path.join(ROOT, 'app/js/utils.js'));
 
-     element.innerHTML = data;
- }
+    let element = document.getElementById(hostElementID);
+    let data = utils.read(HTMLFilePath);
+
+    element.innerHTML = data;
+}
 
 module.exports.injectPage = injectPage;
 module.exports.read = read;
