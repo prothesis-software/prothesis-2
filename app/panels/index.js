@@ -14,6 +14,7 @@ let path = require('path');
 
     // https://discuss.atom.io/t/ipc-send-from-main-process-to-renderer/16046/3
     const {ipcRenderer} = require('electron');
+
     ipcRenderer.on('quit', function(event , data){ dataManager.saveUserData(); });
 }
 
@@ -34,6 +35,8 @@ const PANEL_PATH = 'app/panels';
 const ASS_PATH = 'app/panels/assessments';
 const JS_PATH = 'app/js';
 
+injectPanel(JS_PATH + '/PanelExternal.js', 'external', 'External');
+injectPanel(JS_PATH + '/PanelDetails.js', 'details', 'Details');
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_roles', 'Roles');
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_skills', 'Skills');
 injectPanel(JS_PATH + '/PanelCheckboxes.js', 'tab_people_orientation', 'People_Orientation');
@@ -43,7 +46,7 @@ injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_people_id', 'People_ID');
 injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_values', 'Values');
 injectPanel(PANEL_PATH + '/PanelSpokenWords.js', 'tab_spoken_words', 'Spoken_Words');
 injectPanel(PANEL_PATH + '/PanelPriorities.js', 'tab_priorities', 'Priorities');
-injectPanel(PANEL_PATH + '/PanelAnalysis.js', 'analysis', 'Analysis');
+//injectPanel(PANEL_PATH + '/PanelAnalysis.js', 'analysis', 'Analysis');
 
 dataManager.loadGUI();
 dataManager.loadUserData();

@@ -9,16 +9,29 @@
       <link type="text/css" rel="stylesheet" href="../frameworks/css/icons.css" />
 
   </head>
-  <body>
 
-    <div class="row">
-    <div class="col s12">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Prothesis 2</a>
+    </div>
+    <div class="nav-content">
       <ul class="tabs">
-          <li class="tab col s3"><a class="active" href="#debug">Debug</a></li>
+        <li class="tab col s3"><a class="active" href="#debug">Debug</a></li>
         <li class="tab col s3"><a href="#details">Details</a></li>
         <li class="tab col s3"><a href="#assessments">Assessments</a></li>
         <li class="tab col s3"><a href="#analysis">Analysis</a></li>
       </ul>
+    </div>
+  </nav>
+  <body>
+
+    <div class="col s12">
+      <br />
+      <br />
+      <br />
+      <div class="container">
+        <div id="details" class="col s12 z-depth-2"></div>
+      </div>
     </div>
 
     <div id="debug" class="col s12">
@@ -28,13 +41,7 @@
         Electron <script>document.write(process.versions.electron)</script><br />
     </div>
 
-    <div id="details" class="col s12">
-        <p>details...</p>
-        <div id='test_inject'></div>
-
-    </div>
-
-    <div id="assessments" class="col s12" style="display: none">
+    <div id="assessments" class="col s12" >
 
       <div class="row">
           <div class="col s12">
@@ -50,40 +57,34 @@
               <li class="tab"><a href="#tab_people_orientation">People Orientation</a></li>
               <li class="tab"><a href="#tab_spoken_words">Spoken Words</a></li>
             </ul>
+
+            <div id="external" class="col s12 card"></div>
+            <div id="tab_roles" class="col s12 card"></div>
+            <div id="tab_skills" class="col s12 card"></div>
+            <div id="tab_priorities" class="col s12"></div>
+            <div id="tab_passions" class="col s12 card"></div>
+            <div id="tab_dreams" class="col s12 card"></div>
+            <div id="tab_people_id" class="col s12 card"></div>
+            <div id="tab_values" class="col s12 card"></div>
+            <div id="tab_people_orientation" class="col s12 card"></div>
+            <div id="tab_spoken_words" class="col s12 card"></div>
           </div>
-
-          <div id="external" class="col s12"></div>
-          <div id="tab_roles" class="col s12 card"></div>
-          <div id="tab_skills" class="col s12 card"></div>
-          <div id="tab_priorities" class="col s12"></div>
-          <div id="tab_passions" class="col s12"></div>
-          <div id="tab_dreams" class="col s12"></div>
-          <div id="tab_people_id" class="col s12"></div>
-          <div id="tab_values" class="col s12"></div>
-          <div id="tab_people_orientation" class="col s12 card"></div>
-          <div id="tab_spoken_words" class="col s12"></div>
-
+        </div>
       </div>
     </div>
+  </body>
 
-    <div id="analysis" class="col s12" style="display: none"></div>
+  <!--Import jQuery before materialize.js-->
+  <!-- https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined -->
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 
-    </div>
-  </div>
+  <script type="text/javascript" src="../frameworks/js/jquery-3.2.1.min.js"></script>
 
-    <!--Import jQuery before materialize.js-->
-    <!-- https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined -->
-    <!-- Insert this line above script imports  -->
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-
-    <script type="text/javascript" src="../frameworks/js/jquery-3.2.1.min.js"></script>
-
-    <!-- Insert this line after script imports -->
+  <!-- Insert this line after script imports -->
   <script>if (window.module) module = window.module;</script>
 
-    <script type="text/javascript" src="../frameworks/js/materialize.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-
-  </body>
+  <script type="text/javascript" src="../frameworks/js/materialize.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
 
 </html>

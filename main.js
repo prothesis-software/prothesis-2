@@ -14,8 +14,11 @@ global.appRoot = path.resolve(__dirname);
 let mainWindow
 
 function createWindow () {
+  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    width: 900,
+    height: 700})
   //mainWindow.setMenu(null);
   mainWindow.webContents.openDevTools()
   // and load the index.html of the app.
