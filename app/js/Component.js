@@ -68,7 +68,7 @@ module.exports = class Component {
             if (typeof values[i] !== types[i]) {
                 console.error(`Invalid arguments passed to ${this.constructor.name} in position ${i}
     Expected ${types[i]}, receieved ${typeof values[i]} (${values[i]})`);
-                result =  false;
+                result = false;
             }
         }
 
@@ -93,6 +93,15 @@ module.exports = class Component {
     getState() {
         'use strict';
         console.error(`Not implemented in ${this.constructor.name}`);
+    }
+
+    static getComponentByElement(elem) {
+        'use strict';
+        let tmpId = elem.id.split('_');
+        let id = tmpId[tmpId.length - 1];
+        let comp = Component.getComponentById(id)
+
+        return comp;
     }
 
 };

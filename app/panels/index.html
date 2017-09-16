@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Prothesis v2</title>
     <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="../frameworks/css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="../frameworks/css/materialize.css"/>
       <link type="text/css" rel="stylesheet" href="../css/app.css" />
+      <link type="text/css" rel="stylesheet" href="../frameworks/css/icons.css" />
 
   </head>
 
@@ -15,12 +16,13 @@
     </div>
     <div class="nav-content">
       <ul class="tabs">
-        <li class="tab col s3"><a class="active" href="#details">Details</a></li>
+          <li class="tab col s3"><a class="active" href="#debug">Debug</a></li>
+        <li class="tab col s3"><a href="#details">Details</a></li>
         <li class="tab col s3"><a href="#assessments">Assessments</a></li>
+        <li class="tab col s3"><a href="#analysis">Analysis</a></li>
       </ul>
     </div>
   </nav>
-
   <body>
 
     <div class="col s12">
@@ -30,6 +32,12 @@
       <div class="container">
         <div id="details" class="col s12 z-depth-2"></div>
       </div>
+      
+    <div id="debug" class="col s12">
+        <!-- All of the Node.js APIs are available in this renderer process. -->
+        Node.js <script>document.write(process.versions.node)</script><br />
+        Chromium <script>document.write(process.versions.chrome)</script><br />
+        Electron <script>document.write(process.versions.electron)</script><br />
     </div>
 
     <div id="assessments" class="col s12" >
@@ -40,6 +48,7 @@
               <li class="tab"><a class="active" href="#external">External</a></li>
               <li class="tab"><a href="#tab_roles">Roles</a></li>
               <li class="tab"><a href="#tab_skills">Skills</a></li>
+              <li class="tab"><a href="#tab_priorities">Priorities</a></li>
               <li class="tab"><a href="#tab_passions">Passions</a></li>
               <li class="tab"><a href="#tab_dreams">Dreams</a></li>
               <li class="tab"><a href="#tab_people_id">People ID</a></li>
@@ -51,6 +60,7 @@
             <div id="external" class="col s12 card"></div>
             <div id="tab_roles" class="col s12 card"></div>
             <div id="tab_skills" class="col s12 card"></div>
+            <div id="tab_priorities" class="col s12"></div>
             <div id="tab_passions" class="col s12 card"></div>
             <div id="tab_dreams" class="col s12 card"></div>
             <div id="tab_people_id" class="col s12 card"></div>

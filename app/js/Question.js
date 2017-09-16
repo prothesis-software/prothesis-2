@@ -16,28 +16,28 @@ module.exports = class Question extends Component {
                           </div>
                         </form>`;
 
-          this.getRootElement().innerHTML = this._html;
-          this._textareaElement = this.getRootElement().querySelector(`#textarea_${this.getId()}`);
-      }
+        this.getRootElement().innerHTML = this._html;
+        this._textareaElement = this.getRootElement().querySelector(`#textarea_${this.getId()}`);
+    }
 
-      getTitle() {
-          return this._title;
-      }
+    getTitle() {
+        return this._title;
+    }
 
-      getAnswer() {
-          return this._textareaElement.value;
-      }
+    getAnswer() {
+        return this._textareaElement.value;
+    }
 
-      setAnswer(str) {
-          this._textareaElement.value = str;
+    setAnswer(str) {
+        this._textareaElement.value = str;
 
-          // https://github.com/Dogfalo/materialize/issues/180#issuecomment-256384139
-          //Materialize.updateTextFields();
+        // https://github.com/Dogfalo/materialize/issues/180#issuecomment-256384139
+        //Materialize.updateTextFields();
 
-          // http://materializecss.com/forms.html
-          $(`#${this._textareaElement.id}`).trigger('autoresize');
+        // http://materializecss.com/forms.html
+        $(`#${this._textareaElement.id}`).trigger('autoresize');
 
 
-      }
+    }
 
 };

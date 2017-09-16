@@ -45,8 +45,14 @@ injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_passions', 'Passions');
 injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_people_id', 'People_ID');
 injectPanel(JS_PATH + '/PanelQuestions.js', 'tab_values', 'Values');
 injectPanel(PANEL_PATH + '/PanelSpokenWords.js', 'tab_spoken_words', 'Spoken_Words');
+injectPanel(PANEL_PATH + '/PanelPriorities.js', 'tab_priorities', 'Priorities');
+injectPanel(PANEL_PATH + '/PanelAnalysis.js', 'analysis', 'Analysis');
 
 dataManager.loadGUI();
 dataManager.loadUserData();
 
-//require(path.join(ROOT, 'app/js/test.js'));
+let rep = require(path.join(ROOT, 'app/js/reportHtmlGenerator.js'));
+let re = new rep(path.join(ROOT, "userData.json"));
+re.load();
+re.save(path.join(ROOT, "test.pdf"));
+require(path.join(ROOT, 'app/js/test.js'));
