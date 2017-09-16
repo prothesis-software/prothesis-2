@@ -26,7 +26,7 @@ module.exports = class DropDownQuestion extends Component {
         */
 
         // class="browser-default" does not appear to work with dynamically added select elements
-        this._html = `  <div class="row"><div class="input-field col s12 m6 l3">
+        this._html = `<div class="row"><div class="input-field col s12 m6 l3">
         <select id="select_${this._id}"><option value="" disabled selected>Choose</option>`;
 
         for (var i = 0; i < this._options.length; i++) {
