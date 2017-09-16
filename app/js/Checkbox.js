@@ -44,7 +44,6 @@ module.exports = class Checkbox extends Component {
         'use strict';
         let tmpId = this.id.split('_');
         let id = tmpId[tmpId.length - 1];
-
         Component.getComponentById(id).setCheckState(this.checked);
     }
 

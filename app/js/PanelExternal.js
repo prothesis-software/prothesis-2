@@ -46,9 +46,9 @@ module.exports = class PanelExternal extends Panel {
                        this._questionsContainer.addItem(items[i].BasicQuestions[x]);
                      }
                  }
-                 if (items[i].hasOwnProperty('MBTI')) {
-                     for (let x = 0; x < items[i].MBTI.length; x++) {
-                         this._MBTIContainer.addItem(items[i].MBTI[x].Name, items[i].MBTI[x].Values);
+                 if (items[i].hasOwnProperty('MBTIQuestions')) {
+                     for (let x = 0; x < items[i].MBTIQuestions.length; x++) {
+                         this._MBTIContainer.addItem(items[i].MBTIQuestions[x].Name, items[i].MBTIQuestions[x].Values);
                       }
                  }
              }
@@ -60,7 +60,7 @@ module.exports = class PanelExternal extends Panel {
 
         data[this._guiKey] = [
           {BasicQuestions: this._questionsContainer.getState()},
-          {MBTI: this._MBTIContainer.getState()}
+          {MBTIQuestions: this._MBTIContainer.getState()}
         ];
 
         console.log(data);
@@ -82,6 +82,11 @@ module.exports = class PanelExternal extends Panel {
           if (items[i].hasOwnProperty('BasicQuestions')) {
               for (let x = 0; x < items[i].BasicQuestions.length; x++) {
                 this._questionsContainer.setAnswerByTitle(items[i].BasicQuestions[x].Title, items[i].BasicQuestions[x].Answer);
+              }
+          }
+          if (items[i].hasOwnProperty('MBTIQuestions')) {
+              for (let x = 0; x < items[i].MBTIQuestions.length; x++) {
+                this._MBTIContainer.setAnswerByTitle(items[i].MBTIQuestions[x].Title, items[i].MBTIQuestions[x].Answer);
               }
           }
         }

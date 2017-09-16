@@ -39,7 +39,7 @@ module.exports = class MBTIContainer extends Component {
         for (let i = 0; i < this._items.length; i++) {
             let tmpObj = {};
             tmpObj.Title = this._items[i].getTitle();
-            tmpObj.Answer = this._items[i].getCheckState();
+            tmpObj.Answer = this._items[i].getSelected();
 
             data.push(tmpObj);
         }

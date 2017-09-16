@@ -1,6 +1,6 @@
 {
   "External":[
-          {"MBTI": [
+          {"MBTIQuestions": [
             {
               "Name":"Combination1",
               "Values":["I", "E"]

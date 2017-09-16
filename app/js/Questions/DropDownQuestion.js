@@ -13,6 +13,7 @@ module.exports = class DropDownQuestion extends Component {
 
         this._title = title;
         this._options = options;
+        this._selected = "";
 
         /*
         <select>
@@ -26,10 +27,10 @@ module.exports = class DropDownQuestion extends Component {
 
         // class="browser-default" does not appear to work with dynamically added select elements
         this._html = `  <div class="row"><div class="input-field col s12 m6 l3">
-        <select name="select_${title}" id="select_${this._id}"><option value="" disabled selected>Choose</option>`;
+        <select id="select_${this._id}"><option value="" disabled selected>Choose</option>`;
 
         for (var i = 0; i < this._options.length; i++) {
-          this._html += '<option style="color:black" value="' + this._options[i] + '">' + this._options[i] + '</option>';
+          this._html += '<option value="' + this._options[i] + '">' + this._options[i] + '</option>';
         }
 
         this._html += '</select></div></div>';
@@ -37,8 +38,6 @@ module.exports = class DropDownQuestion extends Component {
         this.getRootElement().innerHTML = this._html;
 
         this._selectElement = this.getRootElement().querySelector(`#select_${this._id}`);
-
-        this._selectElement.addEventListener('change', this._onChangeHandler);
 
         this._initSelect();
     }
@@ -50,8 +49,11 @@ module.exports = class DropDownQuestion extends Component {
         let elem = document.getElementById(`select_${this._id}`);
 
         if (elem != null) {
+
             $(elem).material_select();
-        } else {
+            $(elem).on('change', this._onChangeHandler);
+
+       } else {
             setTimeout(this._initSelect.bind(this), 500);
         }
     }
@@ -59,10 +61,13 @@ module.exports = class DropDownQuestion extends Component {
     // Attached to the checkbox!
     _onChangeHandler(e) {
         'use strict';
+
+        console.log($('#'+ this.id).val());
+
         let tmpId = this.id.split('_');
         let id = tmpId[tmpId.length - 1];
-        console.log("changed!");
-        Component.getComponentById(id).setValueState(this.selected);
+        Component.getComponentById(id).setValueState($('#'+ this.id).val());
+
     }
 
     /**
@@ -71,16 +76,16 @@ module.exports = class DropDownQuestion extends Component {
      */
     setValueState(sel) {
         'use strict';
+
         this._selected = sel;
         this._selectElement.value = sel;
-
     }
 
     /**
      * Get the check state of the box
      * @return {string}
      */
-    getCheckState() {
+    getSelected() {
         'use strict';
         return this._selected;
     }
@@ -92,6 +97,10 @@ module.exports = class DropDownQuestion extends Component {
     getOptions() {
         'use strict';
         return this._options;
+    }
+
+    getTitle() {
+        return this._title;
     }
 
 };
