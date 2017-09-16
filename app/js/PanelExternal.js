@@ -8,7 +8,7 @@ module.exports = class PanelExternal extends Panel {
         super();
 
         this._questionsContainer = new BasicQuestionContainer();
-        this._questionsContainer.getRootElement().innerHTML += "Life Keys";
+        this._questionsContainer.getRootElement().innerHTML += '<p class="flow-text">Enter your Life Keys</p>';
         this._MBTIContainer = new MBTIContainer();
 
         this._guiKey = guiKey;
@@ -38,7 +38,6 @@ module.exports = class PanelExternal extends Panel {
          if (!state.hasOwnProperty(this._guiKey)) {
              console.error(`Could not find ${this._guiKey} in ${state}`);
          } else {
-
              let items = state[this._guiKey];
 
              for (let i = 0; i < items.length; i++) {
@@ -49,7 +48,6 @@ module.exports = class PanelExternal extends Panel {
                  }
                  if (items[i].hasOwnProperty('MBTI')) {
                      for (let x = 0; x < items[i].MBTI.length; x++) {
-                         //console.log(items[i].MBTI[x].Values);
                          this._MBTIContainer.addItem(items[i].MBTI[x].Name, items[i].MBTI[x].Values);
                       }
                  }
@@ -61,9 +59,8 @@ module.exports = class PanelExternal extends Panel {
         let data = {};
 
         data[this._guiKey] = [
-          {Questions: this._questionsContainer.getState()},
-          {NumericalQuestions: this._numericalQuestionsContainer.getState()},
-          {EmailQuestions: this._emailquestionsContainer.getState()}
+          {BasicQuestions: this._questionsContainer.getState()},
+          {MBTI: this._MBTIContainer.getState()}
         ];
 
         console.log(data);
@@ -82,32 +79,11 @@ module.exports = class PanelExternal extends Panel {
 
         for (let i = 0; i < items.length; i++) {
 
-          if (items[i].hasOwnProperty('Questions')) {
-              for (let x = 0; x < items[i].Questions.length; x++) {
-                this._questionsContainer.setAnswerByTitle(items[i].Questions[x].Title, items[i].Questions[x].Answer);
+          if (items[i].hasOwnProperty('BasicQuestions')) {
+              for (let x = 0; x < items[i].BasicQuestions.length; x++) {
+                this._questionsContainer.setAnswerByTitle(items[i].BasicQuestions[x].Title, items[i].BasicQuestions[x].Answer);
               }
           }
-
-
-          if (items[i].hasOwnProperty('NumericalQuestions')) {
-            for (let x = 0; x < items[i].NumericalQuestions.length; x++) {
-              this._numericalQuestionsContainer.setAnswerByTitle(items[i].NumericalQuestions[x].Title, items[i].NumericalQuestions[x].Answer);
-            }
-          }
-
-          if (items[i].hasOwnProperty('EmailQuestions')) {
-            for (let x = 0; x < items[i].EmailQuestions.length; x++) {
-              this._emailquestionsContainer.setAnswerByTitle(items[i].EmailQuestions[x].Title, items[i].EmailQuestions[x].Answer);
-            }
-          }
-
-            /*if (items[i].hasOwnProperty('Title') && items[i].hasOwnProperty('Answer')) {
-                this._questionsContainer.setAnswerByTitle(items[i].Title, items[i].Answer);
-            } else {
-                console.error('Invalid object! ');
-                console.error(items[i]);
-                return false;
-            }*/
         }
     }
 

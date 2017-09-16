@@ -5,7 +5,7 @@ module.exports = class MBTIContainer extends Component {
 
     constructor() {
         super();
-        this.getRootElement().innerHTML += 'MBTI';
+        this.getRootElement().innerHTML += '<p class="flow-text">MBTI Selection</p>';
         this._items = [];
     }
 

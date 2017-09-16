@@ -10,6 +10,6 @@
   },
   "author": "Prothesis Software Group",
   "devDependencies": {
-    "electron": "~1.6.2"
+    "electron": "~1.7.6"
   }
 }

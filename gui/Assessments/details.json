@@ -1,6 +1,6 @@
 {
   "Details":[
-          {"Questions":["Name", "Surname"]},
+          {"BasicQuestions":["Name", "Surname"]},
           {"NumericalQuestions": ["Age"]},
           {"EmailQuestions": ["Email"]}
   ]

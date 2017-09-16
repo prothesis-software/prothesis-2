@@ -14,6 +14,7 @@ let path = require('path');
 
     // https://discuss.atom.io/t/ipc-send-from-main-process-to-renderer/16046/3
     const {ipcRenderer} = require('electron');
+
     ipcRenderer.on('quit', function(event , data){ dataManager.saveUserData(); });
 }
 

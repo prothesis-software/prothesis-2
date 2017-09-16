@@ -34,9 +34,6 @@ module.exports = class DropDownQuestion extends Component {
 
         this._html += '</select></div></div>';
 
-        console.log(this._html);
-
-
         this.getRootElement().innerHTML = this._html;
 
         this._selectElement = this.getRootElement().querySelector(`#select_${this._id}`);
@@ -64,7 +61,7 @@ module.exports = class DropDownQuestion extends Component {
         'use strict';
         let tmpId = this.id.split('_');
         let id = tmpId[tmpId.length - 1];
-
+        console.log("changed!");
         Component.getComponentById(id).setValueState(this.selected);
     }
 

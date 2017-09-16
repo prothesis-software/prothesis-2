@@ -9,6 +9,8 @@ module.exports = class PanelDetails extends Panel {
         super();
 
         this._questionsContainer = new BasicQuestionContainer();
+        this._questionsContainer.getRootElement().innerHTML += '<p class="flow-text">Complete your details</p>';
+
         this._numericalQuestionsContainer = new NumericalQuestionsContainer();
         this._emailquestionsContainer = new EmailQuestionsContainer();
 
@@ -42,9 +44,9 @@ module.exports = class PanelDetails extends Panel {
              let items = state[this._guiKey];
 
              for (let i = 0; i < items.length; i++) {
-                 if (items[i].hasOwnProperty('Questions')) {
-                     for (let x = 0; x < items[i].Questions.length; x++) {
-                       this._questionsContainer.addItem(items[i].Questions[x]);
+                 if (items[i].hasOwnProperty('BasicQuestions')) {
+                     for (let x = 0; x < items[i].BasicQuestions.length; x++) {
+                       this._questionsContainer.addItem(items[i].BasicQuestions[x]);
                      }
 
                  }
@@ -68,7 +70,7 @@ module.exports = class PanelDetails extends Panel {
         let data = {};
 
         data[this._guiKey] = [
-          {Questions: this._questionsContainer.getState()},
+          {BasicQuestions: this._questionsContainer.getState()},
           {NumericalQuestions: this._numericalQuestionsContainer.getState()},
           {EmailQuestions: this._emailquestionsContainer.getState()}
         ];
@@ -80,7 +82,6 @@ module.exports = class PanelDetails extends Panel {
 
     setState(state) {
         if (!state.hasOwnProperty(this._guiKey)) {
-            console.error(`Could not find "${this._guiKey}" in ${state}`);
             return false;
         }
 
@@ -89,9 +90,9 @@ module.exports = class PanelDetails extends Panel {
 
         for (let i = 0; i < items.length; i++) {
 
-          if (items[i].hasOwnProperty('Questions')) {
-              for (let x = 0; x < items[i].Questions.length; x++) {
-                this._questionsContainer.setAnswerByTitle(items[i].Questions[x].Title, items[i].Questions[x].Answer);
+          if (items[i].hasOwnProperty('BasicQuestions')) {
+              for (let x = 0; x < items[i].BasicQuestions.length; x++) {
+                this._questionsContainer.setAnswerByTitle(items[i].BasicQuestions[x].Title, items[i].BasicQuestions[x].Answer);
               }
           }
 
