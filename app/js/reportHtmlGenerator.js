@@ -51,9 +51,9 @@ module.exports = class reportHtmlGenerator {
         let data = panel.getState();
         let name = panel._guiKey.replace("_", " ");
         this._buffer += this._md("### " + name);
-	
-	for(let i = 0; i < data[panel._guiKey].length; i++)	
-	    this._buffer += this._md("- " + data[panel._guiKey][i]);	
+
+	for(let i = 0; i < data[panel._guiKey].length; i++)
+	    this._buffer += this._md("- " + data[panel._guiKey][i]);
     }
 
     handle(panel) {
@@ -63,8 +63,6 @@ module.exports = class reportHtmlGenerator {
         if (name === "Questions" || name === "SpokenWords")
             this.handle_questions(panel);
     }
-
-
 
     save(filename) {
         this._finalise();

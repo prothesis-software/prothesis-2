@@ -11,7 +11,18 @@
   "author": "Prothesis Software Group",
   "dependencies": {
     "highlight.js": "^9.12.0",
-    "html-pdf": "^2.1.0",
-    "electron": "~1.7.6"
+    "html-pdf": "^2.1.0"
+  },
+  "devDependencies": {
+    "electron": "~1.7.9",
+    "electron-builder": "^19.36.0",
+    "electron-packager": "^9.1.0"
+  },
+  "build": {
+    "extraResources": ["app/"],
+    "appId": "io.github.prothesis-software",
+    "win": {
+            "icon":"build/icons/icon.ico"
+    }
   }
 }
