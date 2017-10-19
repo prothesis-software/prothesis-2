@@ -1,0 +1,7 @@
+{
+  "Details":[
+          {"BasicQuestions":["Name", "Surname"]},
+          {"NumericalQuestions": ["Age"]},
+          {"EmailQuestions": ["Email"]}
+  ]
+}

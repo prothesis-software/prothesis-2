@@ -22,3 +22,14 @@ npm start
 
 # TODO: package app
 ```
+
+## Package
+```
+#Install yarn
+sudo pacman -S yarn
+
+yarn install
+# This should install all required packages
+
+npx electron-builder --win
+```

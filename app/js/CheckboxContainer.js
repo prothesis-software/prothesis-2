@@ -41,7 +41,7 @@ module.exports = class CheckboxContainer extends Component {
 
         for (let i = 0; i < this._items.length; i++) {
             if (this._items[i].getCheckState()) {
-                    result.push(this._items[i].getDescription());
+                result.push(this._items[i].getDescription());
             }
         }
 

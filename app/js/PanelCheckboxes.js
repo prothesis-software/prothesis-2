@@ -28,25 +28,25 @@ module.exports = class PanelCheckboxes extends Panel {
                     "Tooltip": "B"}]
          */
 
-         if (!state.hasOwnProperty(this._guiKey)) {
-             console.error(`Could not find ${this._guiKey} in ${state}`);
-         } else {
+        if (!state.hasOwnProperty(this._guiKey)) {
+            console.error(`Could not find ${this._guiKey} in ${state}`);
+        } else {
 
-             let items = state[this._guiKey];
+            let items = state[this._guiKey];
 
-             for (let i = 0; i < items.length; i++) {
+            for (let i = 0; i < items.length; i++) {
 
-                 if (!items[i].hasOwnProperty('Description')) {
-                     console.error(`Could not find "Description" in ${items[i]}`);
-                 }
+                if (!items[i].hasOwnProperty('Description')) {
+                    console.error(`Could not find "Description" in ${items[i]}`);
+                }
 
-                 if (!items[i].hasOwnProperty('Tooltip')) {
-                     console.error(`Could not find "Tooltip" in ${items[i]}`);
-                 }
+                if (!items[i].hasOwnProperty('Tooltip')) {
+                    console.error(`Could not find "Tooltip" in ${items[i]}`);
+                }
 
-                 this._checkboxContainer.addItem(items[i].Description, items[i].Tooltip, false);
-             }
-         }
+                this._checkboxContainer.addItem(items[i].Description, items[i].Tooltip, false);
+            }
+        }
     }
 
     setState(state) {
@@ -55,12 +55,12 @@ module.exports = class PanelCheckboxes extends Panel {
             {Roles: ["A", "B"]}
          */
 
-         if (!state.hasOwnProperty(this._guiKey)) {
-             console.error(`Could not find "${this._guiKey}" in ${state}`);
-         }
+        if (!state.hasOwnProperty(this._guiKey)) {
+            console.error(`Could not find "${this._guiKey}" in ${state}`);
+        }
 
-         let items = state[this._guiKey];
-         this._checkboxContainer.setCheckedItems(items);
+        let items = state[this._guiKey];
+        this._checkboxContainer.setCheckedItems(items);
 
     }
 

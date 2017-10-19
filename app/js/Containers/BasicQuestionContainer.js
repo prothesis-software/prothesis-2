@@ -1,7 +1,7 @@
 const Component = require(path.join(ROOT, 'app/js/Component.js'));
-const Question = require(path.join(ROOT, 'app/js/Question.js'));
+const BasicQuestion = require(path.join(ROOT, 'app/js/Questions/BasicQuestion.js'));
 
-module.exports = class QuestionContainer extends Component {
+module.exports = class BasicQuestionContainer extends Component {
 
     constructor() {
         super();
@@ -12,7 +12,7 @@ module.exports = class QuestionContainer extends Component {
     addItem(title) {
         'use strict';
 
-        let tmpQuestion = new Question(title);
+        let tmpQuestion = new BasicQuestion(title);
         this._items.push(tmpQuestion);
         this.getRootElement().appendChild(tmpQuestion.getRootElement());
     }
