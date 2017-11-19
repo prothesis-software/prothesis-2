@@ -34,6 +34,3 @@ class pdf {
      _setOptions(opt){
           this._options = opt;
      }
-
-
-   // Use reportHtmlGenerator.js -> html -> pdf.js -> pdf
