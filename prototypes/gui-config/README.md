@@ -9,14 +9,32 @@
 - Build a GUI based on the GUI config
 
 ## Development Environment
-### [Meson](http://mesonbuild.com/index.html)
-- Follow the Quick Guide
+### Base
+```
+sudo pacman -S gcc pkg-config gtk2 make
+```
 
-### [wxWidgets]()
-- Get wxWidgets:
-  - [Compile from source](https://wiki.wxwidgets.org/Compiling_and_getting_started)
-  - Download binary somewhere?
-  - `pacman -S wxgtk3` or wxgtk2
+### [Meson](http://mesonbuild.com/index.html)
+```
+sudo pacman -S ninja
+sudo pacman -S python-pip
+sudo pip install meson
+```
+
+
+### [wxWidgets](https://www.wxwidgets.org/)
+- [Compiling and Getting Started - Wiki](https://wiki.wxwidgets.org/Compiling_and_getting_started)
+- Download [wxWidgets-3.0.3.tar.bz2](https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2)
+
+```
+tar -xf wxWidgets-3.0.3.tar.bz2
+cd wxWidgets-3.0.3
+mkdir gtk-build
+cd gtk-build
+../configure --enable-unicode
+make -j4 # use 4 cores
+```
+
 ## Compiling
 ```
 meson build
