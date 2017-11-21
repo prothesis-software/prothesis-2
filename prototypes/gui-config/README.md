@@ -1,5 +1,7 @@
 # GUI Config Prototype
 
+- [Hello World source](https://wiki.wxwidgets.org/Hello_World)
+
 ## Goals
 - GUI config in TOML
 - TOML parser
@@ -14,7 +16,7 @@
 - Get wxWidgets:
   - [Compile from source](https://wiki.wxwidgets.org/Compiling_and_getting_started)
   - Download binary somewhere?
-
+  - `pacman -S wxgtk3` or wxgtk2
 ## Compiling
 ```
 meson build
