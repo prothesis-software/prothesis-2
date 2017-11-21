@@ -36,9 +36,22 @@ make -j4 # use 4 cores
 ```
 
 ## Compiling
+### Meson
+#### Linux Shared
 ```
 meson build
 cd build/
 ninja
 ./main
+```
+
+### Make
+#### Linux Shared
+```
+make linux-shared
+```
+
+#### Windows Static
+```
+make windows-static
 ```
