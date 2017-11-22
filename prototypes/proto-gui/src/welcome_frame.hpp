@@ -11,7 +11,8 @@ class WelcomeFrame: public wxFrame {
 public:
   WelcomeFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
   wxButton *btnClose;
-
+  wxBoxSizer *sizerA;
+  
   void OnExit( wxCommandEvent& event );
 
   DECLARE_EVENT_TABLE()
@@ -22,3 +23,5 @@ enum {
 };
 
 #endif
+
+  
