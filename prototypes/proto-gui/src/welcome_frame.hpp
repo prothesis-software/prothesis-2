@@ -1,7 +1,8 @@
-#ifndef WELCOME_FRAME
-#define WELCOME_FRAME
+#ifndef WELCOME_FRAME_H
+#define WELCOME_FRAME_H
 
 #include <wx/wxprec.h>
+#include "proto_gui_app.hpp"
 
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -12,14 +13,13 @@ public:
   WelcomeFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
   wxButton *btnClose;
   wxBoxSizer *sizerA;
-  
+  wxBoxSizer *sizerB;
   void OnExit( wxCommandEvent& event );
 
-  DECLARE_EVENT_TABLE()
-};
-
-enum {
-  btnCloseId = wxID_ANY // declares an id which will be used to call our button
+  enum {
+    btnCloseId = -1 // Starting id
+  };
+  
 };
 
 #endif
