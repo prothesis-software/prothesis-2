@@ -16,3 +16,4 @@ bool ProtoGuiApp::OnInit()
 ProtoGuiApp::~ProtoGuiApp() {
   // void
 }
+
