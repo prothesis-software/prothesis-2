@@ -1,35 +1,39 @@
-# Prothesis v2.x.x
+# Prothesis v2
 
-## Build Setup
-
+## Building
 ```
-# clone the repository
-git clone https://github.com/egeldenhuys/prothesis-2.git
+make linux
 
-# cd
-cd prothesis-2
-
-# make sure npm is up-to-date!
-sudo npm install -g npm
-
-# install dependencies
-npm install
-
-# run the app
-npm start
-
-# After making changes to the source, reload the app with CTRL + R in the app window
-
-# TODO: package app
+# Set config used in makefile
+echo "path/to/static/msw-wxwidgets" > .win_wx_static_config
+make windows
 ```
 
-## Package
+## Linter
 ```
-#Install yarn
-sudo pacman -S yarn
-
-yarn install
-# This should install all required packages
-
-npx electron-builder --win
+./get-cpplint.sh
+./lint.sh
 ```
+
+## Development
+### Dependencies
+- [wxWidgets 3.0.3](https://github.com/prothesis-software/prothesis-2/wiki/Compiling-wxWidgets)
+  - `gtk3`
+  - `make`
+  - `gcc`
+  - `pkg-config`
+  - `mingw-w64-gcc`
+  - Shared gtk3 build of wxWidgets for Linux
+  - Static msw build of wxWidgets for Windows cross compilation
+- `python2` (for linting)
+- `wget` (downloading dependencies)
+- `cpplint.py` (run `get-cpplint.sh`)
+- `cpptoml.h` (run `get-cpptoml.sh`)
+
+## Deploying
+### Linux
+#### Dependencies
+- `wxgtk3`
+### Windows
+#### Dependencies
+- None!
