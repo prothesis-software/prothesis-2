@@ -14,12 +14,12 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
                                   wxSP_VERTICAL | wxSP_ARROW_KEYS,
                                   0, 100, 18);
 
-  wxDateTime *date_time = new wxDateTime;
-  // TODO(egeldenhuys): Handle invalid date + Date format
-  datepicker_ctrl_ = new wxDatePickerCtrl(this, wxID_ANY, *date_time,
+  // TODO(egeldenhuys):
+  // - Handle Invalid date exception when text is deleted
+  // - Use dd/mm/yyyy date format
+  datepicker_ctrl_ = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime,
                                           wxDefaultPosition, wxDefaultSize,
                                           wxDP_DEFAULT | wxDP_SHOWCENTURY);
-  delete date_time;
   button_next_ = new wxButton(this, kButtonNextId, _("Next"));
 
   SetProperties();
@@ -32,27 +32,30 @@ void DetailsPanel::SetProperties() {
 }
 
 void DetailsPanel::DoLayout() {
+  const int kPanelBorderSize = 10;
+
   wxFlexGridSizer *details_grid_sizer = new wxFlexGridSizer(5, 2, 7, 25);
   wxStaticText *label_name = new wxStaticText(this, wxID_ANY, _("Name"));
-  // Add (wxWindow *window, int proportion=0, int flag=0, int border=0
-  details_grid_sizer->Add(label_name, 0, 0, 0);
-
+  details_grid_sizer->Add(label_name, 0, wxTOP | wxLEFT, kPanelBorderSize);
   wxStaticText* label_surname = new wxStaticText(this, wxID_ANY, _("Surname"));
-  details_grid_sizer->Add(label_surname, 0, 0, 0);
+  details_grid_sizer->Add(label_surname, 0, wxTOP | wxRIGHT, kPanelBorderSize);
 
-  details_grid_sizer->Add(text_ctrl_name_, 0, 0, 0);
-  details_grid_sizer->Add(text_ctrl_surname_, 0, 0, 0);
+  details_grid_sizer->Add(text_ctrl_name_, 0, wxLEFT, kPanelBorderSize);
+  details_grid_sizer->Add(text_ctrl_surname_, 0, wxRIGHT, kPanelBorderSize);
 
   wxStaticText* label_age = new wxStaticText(this, wxID_ANY, _("Age"));
-  details_grid_sizer->Add(label_age, 0, 0, 0);
+  details_grid_sizer->Add(label_age, 0, wxLEFT, kPanelBorderSize);
 
   wxStaticText* label_date = new wxStaticText(this, wxID_ANY, _("Date"));
-  details_grid_sizer->Add(label_date, 0, 0, 0);
+  details_grid_sizer->Add(label_date, 0, wxRIGHT, kPanelBorderSize);
 
-  details_grid_sizer->Add(spin_ctrl_age_, 0, 0, 0);
-  details_grid_sizer->Add(datepicker_ctrl_, 0, 0, 0);
+  details_grid_sizer->Add(spin_ctrl_age_, 0, wxLEFT,
+                          kPanelBorderSize);
+  details_grid_sizer->Add(datepicker_ctrl_, 0, wxRIGHT,
+                          kPanelBorderSize);
   details_grid_sizer->Add(0, 0, 0, 0, 0);
-  details_grid_sizer->Add(button_next_, 0, wxALIGN_RIGHT, 0);
+  details_grid_sizer->Add(button_next_, 0, wxRIGHT | wxBOTTOM | wxALIGN_RIGHT,
+                          kPanelBorderSize);
   this->SetSizer(details_grid_sizer);
   details_grid_sizer->Fit(this);
 }
