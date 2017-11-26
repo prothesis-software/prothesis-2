@@ -1,30 +1,27 @@
 #include "main_frame.hpp"
 
-MainFrame::MainFrame(const wxString& title,
-                     const wxPoint& pos,
-                     const wxSize& size)
-  : wxFrame(reinterpret_cast<wxFrame*>(NULL), -1, title, pos, size) {
-  // begin wxGlade: MainFrame::MainFrame
-  details_panel = new DetailsPanel(this, wxID_ANY);
-
-  set_properties();
-  do_layout();
-  // end wxGlade
+MainFrame::MainFrame(wxWindow *parent,
+                     wxWindowID id,
+                     const wxString &title,
+                     const wxPoint &pos,
+                     const wxSize &size,
+                     int64_t style,
+                     const wxString name)
+  : wxFrame(parent, id, title, pos, size, style, name) {
+  details_panel_ = new DetailsPanel(this, wxID_ANY);
+  DoLayout();
 }
 
-void MainFrame::set_properties() {
-  // begin wxGlade: MainFrame::set_properties
-  SetTitle(_("frame"));
-  // end wxGlade
-}
+void MainFrame::DoLayout() {
+  wxBoxSizer *main_frame_sizer = new wxBoxSizer(wxVERTICAL);
+  // wxSizerItem* wxSizer::Add (wxWindow *window,
+  //                            int proportion = 0,
+  //                            int flag = 0,
+  //                            int border = 0,
+  //                            wxObject *userData = NULL);
 
-
-void MainFrame::do_layout() {
-  // begin wxGlade: MainFrame::do_layout
-  wxBoxSizer* main_frame_sizer = new wxBoxSizer(wxVERTICAL);
-  main_frame_sizer->Add(details_panel, 1, wxEXPAND, 0);
-  SetSizer(main_frame_sizer);
+  main_frame_sizer->Add(details_panel_, 1, wxEXPAND, 0);
+  this->SetSizer(main_frame_sizer);
   main_frame_sizer->Fit(this);
-  Layout();
-  // end wxGlade
+  this->Layout();
 }

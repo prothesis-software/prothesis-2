@@ -7,67 +7,75 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
                            const wxSize &size,
                            int64_t style)
   : DataPanel(parent, id, pos, size, style) {
-  // begin wxGlade: DetailsPanel::DetailsPanel
-  text_ctrl_name = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-  text_ctrl_surname = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-  spin_ctrl_age = new wxSpinCtrl(this, wxID_ANY, wxT("18"), wxDefaultPosition,
-                                 wxDefaultSize, wxSP_ARROW_KEYS, 0, 100);
-  datepicker_ctrl_1 = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime,
-                                           wxDefaultPosition, wxDefaultSize,
-                                           wxDP_DEFAULT|wxDP_SHOWCENTURY);
-  button_next = new wxButton(this, wxID_ANY, _("Next"));
+  text_ctrl_name_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
+  text_ctrl_surname_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
+  spin_ctrl_age_ = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
+                                  wxDefaultPosition, wxDefaultSize,
+                                  wxSP_VERTICAL | wxSP_ARROW_KEYS,
+                                  0, 100, 18);
 
-  set_properties();
-  do_layout();
-  // end wxGlade
+  wxDateTime *date_time = new wxDateTime;
+  // TODO(egeldenhuys): Handle invalid date + Date format
+  datepicker_ctrl_ = new wxDatePickerCtrl(this, wxID_ANY, *date_time,
+                                          wxDefaultPosition, wxDefaultSize,
+                                          wxDP_DEFAULT | wxDP_SHOWCENTURY);
+  delete date_time;
+  button_next_ = new wxButton(this, kButtonNextId, _("Next"));
+
+  SetProperties();
+  DoLayout();
 }
 
-void DetailsPanel::set_properties() {
-  // begin wxGlade: DetailsPanel::set_properties
-  text_ctrl_name->SetMinSize(wxSize(150, -1));
-  text_ctrl_surname->SetMinSize(wxSize(200, -1));
-  // end wxGlade
+void DetailsPanel::SetProperties() {
+  text_ctrl_name_->SetMinSize(wxSize(150, -1));
+  text_ctrl_surname_->SetMinSize(wxSize(200, -1));
 }
 
-
-void DetailsPanel::do_layout() {
-  // begin wxGlade: DetailsPanel::do_layout
-  wxFlexGridSizer* details_grid_sizer = new wxFlexGridSizer(0, 2, 7, 25);
-  wxStaticText* label_name = new wxStaticText(this, wxID_ANY, _("Name"));
+void DetailsPanel::DoLayout() {
+  wxFlexGridSizer *details_grid_sizer = new wxFlexGridSizer(5, 2, 7, 25);
+  wxStaticText *label_name = new wxStaticText(this, wxID_ANY, _("Name"));
+  // Add (wxWindow *window, int proportion=0, int flag=0, int border=0
   details_grid_sizer->Add(label_name, 0, 0, 0);
+
   wxStaticText* label_surname = new wxStaticText(this, wxID_ANY, _("Surname"));
   details_grid_sizer->Add(label_surname, 0, 0, 0);
-  details_grid_sizer->Add(text_ctrl_name, 0, 0, 0);
-  details_grid_sizer->Add(text_ctrl_surname, 0, 0, 0);
+
+  details_grid_sizer->Add(text_ctrl_name_, 0, 0, 0);
+  details_grid_sizer->Add(text_ctrl_surname_, 0, 0, 0);
+
   wxStaticText* label_age = new wxStaticText(this, wxID_ANY, _("Age"));
   details_grid_sizer->Add(label_age, 0, 0, 0);
+
   wxStaticText* label_date = new wxStaticText(this, wxID_ANY, _("Date"));
   details_grid_sizer->Add(label_date, 0, 0, 0);
-  details_grid_sizer->Add(spin_ctrl_age, 0, 0, 0);
-  details_grid_sizer->Add(datepicker_ctrl_1, 0, 0, 0);
+
+  details_grid_sizer->Add(spin_ctrl_age_, 0, 0, 0);
+  details_grid_sizer->Add(datepicker_ctrl_, 0, 0, 0);
   details_grid_sizer->Add(0, 0, 0, 0, 0);
-  details_grid_sizer->Add(button_next, 0, wxALIGN_RIGHT, 0);
+  details_grid_sizer->Add(button_next_, 0, wxALIGN_RIGHT, 0);
   this->SetSizer(details_grid_sizer);
   details_grid_sizer->Fit(this);
-  // end wxGlade
 }
 
-void DetailsPanel::ButtonNextOnClick(wxCommandEvent &event) {
+void DetailsPanel::OnButtonNextClick(wxCommandEvent &event) {
   event.Skip();
   // notify the user that he hasn't implemented the event handler yet
-  wxLogDebug(wxT("(DetailsPanel::ButtonNextOnClick) not implemented yet"));
+  wxLogDebug(wxT("DetailsPanel::ButtonNextOnClick not implemented yet"));
 }
 
 bool DetailsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
+  wxLogDebug(wxT("DetailsPanel::SetGuiState not implemented yet"));
   return false;
 }
 
 std::shared_ptr<cpptoml::table> DetailsPanel::GetUserState() {
+  wxLogDebug(wxT("DetailsPanel::GetUserState not implemented yet"));
   return NULL;
 }
 
 
 bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
+  wxLogDebug(wxT("DetailsPanel::SetUserSate not implemented yet"));
   return false;
 }
 
@@ -76,7 +84,5 @@ DetailsPanel::~DetailsPanel() {
 }
 
 BEGIN_EVENT_TABLE(DetailsPanel, wxPanel)
-// begin wxGlade: DetailsPanel::event_table
-EVT_BUTTON(wxID_ANY, DetailsPanel::ButtonNextOnClick)
-// end wxGlade
+EVT_BUTTON(kButtonNextId, DetailsPanel::OnButtonNextClick)
 END_EVENT_TABLE()

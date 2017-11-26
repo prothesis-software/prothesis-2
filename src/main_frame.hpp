@@ -10,18 +10,18 @@
 
 class MainFrame: public wxFrame {
  public:
-  MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
-
+  MainFrame(wxWindow *parent,
+            wxWindowID id,
+            const wxString &title,
+            const wxPoint &pos = wxDefaultPosition,
+            const wxSize &size = wxDefaultSize,
+            int64_t style = wxDEFAULT_FRAME_STYLE,
+            const wxString name = wxFrameNameStr);
  private:
-  // begin wxGlade: MainFrame::methods
-  void set_properties();
-  void do_layout();
-  // end wxGlade
+  void DoLayout();
 
  protected:
-  // begin wxGlade: MainFrame::attributes
-  DetailsPanel* details_panel;
-  // end wxGlade
+  DetailsPanel *details_panel_;
 };
 
 #endif  // MAIN_FRAME_HPP_

@@ -5,13 +5,13 @@
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
 #endif
-#include <memory>
 
+#include <memory>
 #include "include/cpptoml.h"
 
+
 /**
- * Abstract base class for panels with an associated state.
- * All panels should inherit from this class.
+ * Base class for all custom panels that store user data
  */
 class DataPanel : public wxPanel {
  public:
@@ -22,15 +22,18 @@ class DataPanel : public wxPanel {
             int64_t style = 0);
 
   /**
-   * Generate the GUI elements given a toml config
+   * Generate the GUI elements from a TOML config
    */
   virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state) = 0;
+
   /**
-   * Get the toml state from the data the user provided
+   * Return the user data as a TOML config
    */
   virtual std::shared_ptr<cpptoml::table> GetUserState() = 0;
+
   /**
-   * Set the user state after the GUI has been generated from a toml config
+   * Populate the GUI with the user TOML config.
+   * SetGUIState() needs to be called before SetUserState()
    */
   virtual bool SetUserState(std::shared_ptr<cpptoml::table> state) = 0;
 };

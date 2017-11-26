@@ -8,9 +8,11 @@
 
 #include <wx/datectrl.h>
 #include <wx/spinctrl.h>
+#include <wx/utils.h>
 #include <memory>
 
 #include "src/data_panel.hpp"
+
 
 class DetailsPanel : public DataPanel {
  public:
@@ -19,38 +21,27 @@ class DetailsPanel : public DataPanel {
                const wxPoint &pos = wxDefaultPosition,
                const wxSize &size = wxDefaultSize,
                int64_t style = 0);
-  void ButtonNextOnClick(wxCommandEvent &event);  // NOLINT
   ~DetailsPanel();
 
-  /**
-   * Generate the GUI elements given a toml config
-   */
+  void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
   bool SetGuiState(std::shared_ptr<cpptoml::table> state);
-
-  /**
-   * Get the toml state from the data the user provided
-   */
   std::shared_ptr<cpptoml::table> GetUserState();
-
-  /**
-   * Set the user state after the GUI has been generated from a toml config
-   */
   bool SetUserState(std::shared_ptr<cpptoml::table> state);
 
  private:
-  // begin wxGlade: DetailsPanel::methods
-  void set_properties();
-  void do_layout();
-  // end wxGlade
+  void SetProperties();
+  void DoLayout();
 
  protected:
-  // begin wxGlade: DetailsPanel::attributes
-  wxTextCtrl* text_ctrl_name;
-  wxTextCtrl* text_ctrl_surname;
-  wxSpinCtrl* spin_ctrl_age;
-  wxDatePickerCtrl* datepicker_ctrl_1;
-  wxButton* button_next;
-  // end wxGlade
+  wxTextCtrl *text_ctrl_name_;
+  wxTextCtrl *text_ctrl_surname_;
+  wxSpinCtrl *spin_ctrl_age_;
+  wxDatePickerCtrl *datepicker_ctrl_;
+  wxButton *button_next_;
+
+  enum {
+    kButtonNextId = wxID_ANY
+  };
 
   DECLARE_EVENT_TABLE()
 };
