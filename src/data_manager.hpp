@@ -6,13 +6,20 @@
     #include <wx/wx.h>
 #endif
 
+#include <vector>
+
+#include "data_panel.hpp"
+
 /**
  * The Data Manager class is responsible for storing reference
  * to the frames containing data, as well as to save and restore their
  * state.
  */
 class DataManager {
-  // TODO(egeldenhuys)
-};
+ public:
+  void AddPanel(DataPanel panel);
 
+ private:
+  std::vector<DataPanel> panels;
+};
 #endif  // DATA_MANAGER_HPP_

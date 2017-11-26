@@ -9,8 +9,9 @@ bool ProthesisApp::OnInit() {
   MainFrame *main_frame = new MainFrame(_("Prothesis v2"),
                                         wxDefaultPosition,
                                         wxSize(300, 200));
-  main_frame->Show(true);
+
   SetTopWindow(main_frame);
+  main_frame->Show();
   return true;
 }
 
