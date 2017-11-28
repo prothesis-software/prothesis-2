@@ -24,9 +24,9 @@ class DetailsPanel : public DataPanel {
   ~DetailsPanel();
 
   void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
-  bool SetGuiState(std::shared_ptr<cpptoml::table> state);
-  std::shared_ptr<cpptoml::table> GetUserState();
-  bool SetUserState(std::shared_ptr<cpptoml::table> state);
+  virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state);
+  virtual std::shared_ptr<cpptoml::base> GetUserState();
+  virtual bool SetUserState(std::shared_ptr<cpptoml::table> state);
 
  private:
   void SetProperties();

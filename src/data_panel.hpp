@@ -27,9 +27,18 @@ class DataPanel : public wxPanel {
   virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state) = 0;
 
   /**
-   * Return the user data as a TOML config
+   * Return the user data as a TOML config.
+   *
+   * The returned config should be of the form:
+   * [panel_name]
+   *   key = value
+   *
+   *   [[buttons]]
+   *     key = value
+   *   [[buttons]]
+   *     key = value
    */
-  virtual std::shared_ptr<cpptoml::table> GetUserState() = 0;
+  virtual std::shared_ptr<cpptoml::base> GetUserState() = 0;
 
   /**
    * Populate the GUI with the user TOML config.

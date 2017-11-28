@@ -19,7 +19,8 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
   if (active_panel_ != NULL)
     active_panel_->Hide();
 
-  main_frame_sizer_->Remove(kPanelViewIndex);
+  // TODO(egeldenhuys): Detach vs Remove
+  main_frame_sizer_->Detach(kPanelViewIndex);
   main_frame_sizer_->Insert(kPanelViewIndex, panel, 1, wxEXPAND, 0);
   panel->Show();
   active_panel_ = panel;

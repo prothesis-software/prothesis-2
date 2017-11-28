@@ -1,12 +1,129 @@
 #include "data_manager.hpp"
+#include <string>
+#include <memory>
+#include <sstream>
+#include <fstream>
+#include <vector>
+
+void DataManager::Load() {
+  bool gui_config_exists = Utilities::FileExists(gui_config_path_);
+  bool user_config_exists = Utilities::FileExists(user_config_path_);
+
+  if (gui_config_exists) {
+    std::shared_ptr<cpptoml::table> gui_config =
+      cpptoml::parse_file(gui_config_path_);
+
+    for (size_t i = 0; i < PanelId::kPanelCount; i++) {
+      panels_[i]->SetGuiState(gui_config);
+    }
+  } else {
+    wxLogDebug(_("The GUI config file does not exist: ") + _(gui_config_path_));
+  }
+
+  if (user_config_exists) {
+    std::shared_ptr<cpptoml::table> user_config =
+      cpptoml::parse_file(user_config_path_);
+    for (size_t i = 0; i < PanelId::kPanelCount; i++) {
+      panels_[i]->SetUserState(user_config);
+    }
+  } else {
+    wxLogDebug(_("The User config file does not exist: ") +
+               _(user_config_path_));
+  }
+}
+
+void DataManager::DeclarePanels() {
+  DetailsPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY);
+  panels_[PanelId::kDetailsPanel] = details_panel;
+}
 
 DataManager::DataManager(MainFrame *main_frame) {
   main_frame_ = main_frame;
+  std::string base_path = GetBasePath();
+  wxLogDebug(_(std::string("base_path = ") + base_path));
 
-  DetailsPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY);
-  panels_[0] = details_panel;
+  user_config_path_ = base_path + user_config_path_;
+  wxLogDebug(_(std::string("user_config_path_ = ") + user_config_path_));
+
+  gui_config_path_ = base_path + gui_config_path_;
+  wxLogDebug(_(std::string("gui_config_path_ = ") + gui_config_path_));
+
+  for (size_t i = 0; i < PanelId::kPanelCount; i++) {
+    panels_[i] = NULL;
+  }
+
+  DeclarePanels();
+  Load();
 }
 
 void DataManager::DisplayPanel(PanelId panel_id) {
   main_frame_->DisplayPanel(panels_[panel_id]);
+}
+
+void DataManager::SaveUserConfig() {
+  wxLogDebug(_("Creating table array..."));
+  std::shared_ptr<cpptoml::table_array> user_config =
+    cpptoml::make_table_array();
+  // TODO(egeldenhuys): Fix on Windows
+  try {
+    wxLogDebug("Saving user data...");
+    std::shared_ptr<cpptoml::table_array> user_config =
+      cpptoml::make_table_array();
+
+    for (size_t i = 0; i < PanelId::kPanelCount; i++) {
+      std::shared_ptr<cpptoml::table> panel_config =
+        panels_[i]->GetUserState()->as_table();
+      user_config->push_back(panel_config);
+    }
+
+    wxLogDebug("A");
+    std::stringstream ss;
+    wxLogDebug("B");
+    ss << *user_config;
+    wxLogDebug("C");
+    wxLogDebug(_("User data = \n") + _(ss.str().c_str()));
+    wxLogDebug("Writing User config...");
+    std::fstream fs(user_config_path_, std::fstream::out);
+    fs << ss.str();
+    fs.close();
+    wxLogDebug("Done.");
+  } catch (std::exception &e) {
+    wxLogDebug("Failed to save user config");
+    wxLogDebug(e.what());
+  } catch (...) {
+    wxLogDebug("SaveUserConfig() FAILED");
+  }
+}
+
+// TODO(egeldenhuys): MacOS
+std::string DataManager::GetBasePath() {
+  #ifdef __linux__
+  // Find the relative path using argv[0]
+  // TODO(egeldenhuys): Absolute path
+  std::vector<std::string> tokens =
+    Utilities::SplitString(std::string(wxTheApp->argv[0]), '/');
+  std::string base_path = "";
+  for (size_t i = 0; i < tokens.size() - 1; i++) {
+    base_path.append(tokens.at(i));
+    base_path.append("/");
+  }
+  return base_path;
+  #elif _WIN32
+  // https://stackoverflow.com/questions/2647429/c-windows-
+  // path-to-the-folder-where-the-executable-is-located
+  HMODULE hModule = GetModuleHandleW(NULL);
+  WCHAR path[MAX_PATH];
+  GetModuleFileNameW(hModule, path, MAX_PATH);
+
+  std::wstring ws(path);
+  std::string str(ws.begin(), ws.end());
+  std::string base_path = "";
+  std::vector<std::string> tokens = Utilities::SplitString(str, '\\');
+  for (size_t i = 0; i < tokens.size() - 1; i++) {
+    base_path.append(tokens.at(i));
+    base_path.append("/");
+  }
+  return base_path;
+  #endif
+  return "UNKNOWN OPERATING SYSTEM";
 }

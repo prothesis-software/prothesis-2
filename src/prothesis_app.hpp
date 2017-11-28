@@ -6,12 +6,15 @@
     #include <wx/wx.h>
 #endif
 
+#include <csignal>
 #include "data_manager.hpp"
 
 class ProthesisApp : public wxApp {
  public:
   virtual bool OnInit();
   virtual ~ProthesisApp();
+  virtual int OnExit();
+  static void OnKillRequest(int sig_num);
 
  private:
   DataManager *data_manager_;
