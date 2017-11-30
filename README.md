@@ -1,10 +1,22 @@
 # Prothesis v2
 
 ## Building
+### Build using Meson
+```
+meson build/linux
+meson build/windows --cross-file cross_file.txt
+
+cd build/<linux|windows>
+ninja
+./prothesis-2[.exe]
+```
+
+### Build using make
 ```
 make linux -j4
+make windows -j4
 
-./build/prothesis-2
+./build/prothesis-2[.exe]
 ```
 
 ```
