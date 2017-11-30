@@ -22,6 +22,9 @@ WX_PATH=$(shell cat ${WIN_WX_STATIC_CONFIG} 2> /dev/null)
 WX_CONFIG_WINDOWS = `${WX_PATH}/wx-config --cxxflags`
 WX_CONFIG_WINDOWS_LINK = `${WX_PATH}/wx-config --libs`
 
+all: linux windows
+	@echo "Build done for Linux and Windows"
+
 windows_build_dir:
 	mkdir -p build/windows
 

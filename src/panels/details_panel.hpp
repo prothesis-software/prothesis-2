@@ -10,6 +10,7 @@
 #include <wx/spinctrl.h>
 #include <wx/utils.h>
 #include <memory>
+#include <string>
 
 #include "src/data_panel.hpp"
 
@@ -18,6 +19,7 @@ class DetailsPanel : public DataPanel {
  public:
   DetailsPanel(wxWindow *parent,
                wxWindowID id,
+               std::string panel_name,
                const wxPoint &pos = wxDefaultPosition,
                const wxSize &size = wxDefaultSize,
                int64_t style = 0);
@@ -25,7 +27,7 @@ class DetailsPanel : public DataPanel {
 
   void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
   virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state);
-  virtual std::shared_ptr<cpptoml::base> GetUserState();
+  virtual std::shared_ptr<cpptoml::table> GetUserState();
   virtual bool SetUserState(std::shared_ptr<cpptoml::table> state);
 
  private:

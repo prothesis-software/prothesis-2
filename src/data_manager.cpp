@@ -33,7 +33,8 @@ void DataManager::Load() {
 }
 
 void DataManager::DeclarePanels() {
-  DetailsPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY);
+  DetailsPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY,
+                                                 "details");
   panels_[PanelId::kDetailsPanel] = details_panel;
 }
 
@@ -62,29 +63,27 @@ void DataManager::DisplayPanel(PanelId panel_id) {
 
 void DataManager::SaveUserConfig() {
   wxLogDebug(_("Creating table array..."));
-  std::shared_ptr<cpptoml::table_array> user_config =
-    cpptoml::make_table_array();
+  std::shared_ptr<cpptoml::table> user_config = cpptoml::make_table();
+
   // TODO(egeldenhuys): Fix on Windows
   try {
     wxLogDebug("Saving user data...");
-    std::shared_ptr<cpptoml::table_array> user_config =
-      cpptoml::make_table_array();
+    std::shared_ptr<cpptoml::table> user_config =
+      cpptoml::make_table();
 
     for (size_t i = 0; i < PanelId::kPanelCount; i++) {
+      wxLogDebug(_("Getting state for panel ") + _(panels_[i]->GetPanelName()));
       std::shared_ptr<cpptoml::table> panel_config =
-        panels_[i]->GetUserState()->as_table();
-      user_config->push_back(panel_config);
+        panels_[i]->GetUserState();
+      user_config->insert(panels_[i]->GetPanelName(), panel_config);
     }
 
-    wxLogDebug("A");
-    std::stringstream ss;
-    wxLogDebug("B");
-    ss << *user_config;
-    wxLogDebug("C");
-    wxLogDebug(_("User data = \n") + _(ss.str().c_str()));
+    std::stringstream output;
+    output << *user_config;
+    wxLogDebug(_("User data = \n") + _(output.str().c_str()));
     wxLogDebug("Writing User config...");
     std::fstream fs(user_config_path_, std::fstream::out);
-    fs << ss.str();
+    fs << output.str();
     fs.close();
     wxLogDebug("Done.");
   } catch (std::exception &e) {

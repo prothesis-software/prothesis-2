@@ -4,10 +4,11 @@
 
 DetailsPanel::DetailsPanel(wxWindow *parent,
                            wxWindowID id,
+                           std::string panel_name,
                            const wxPoint &pos,
                            const wxSize &size,
                            int64_t style)
-  : DataPanel(parent, id, pos, size, style) {
+  : DataPanel(parent, id, panel_name, pos, size, style) {
   text_ctrl_name_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   text_ctrl_surname_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   spin_ctrl_age_ = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
@@ -81,9 +82,9 @@ bool DetailsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
 // different way in an attempt to fix the windows
 // problems
 // TODO(egeldenhuys): Fix on Windows
-std::shared_ptr<cpptoml::base> DetailsPanel::GetUserState() {
+std::shared_ptr<cpptoml::table> DetailsPanel::GetUserState() {
   wxLogDebug(_("DetailsPanel::GetUserState()"));
-  std::shared_ptr<cpptoml::table> root = cpptoml::make_table();
+  // std::shared_ptr<cpptoml::table> root = cpptoml::make_table();
   std::shared_ptr<cpptoml::table> panel_data = cpptoml::make_table();
 
   panel_data->insert("name", text_ctrl_name_->GetLineText(0).ToStdString());
@@ -92,12 +93,12 @@ std::shared_ptr<cpptoml::base> DetailsPanel::GetUserState() {
   panel_data->insert("age", spin_ctrl_age_->GetValue());
   panel_data->insert("date", datepicker_ctrl_->GetValue()
                .FormatISODate().ToStdString());
-  root->insert("details", panel_data);
-  return root->clone();
+  // root->insert("details", panel_data);
+  return panel_data;
 }
 
 bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
-  std::shared_ptr<cpptoml::table> details_table = state->get_table("details");
+  std::shared_ptr<cpptoml::table> details_table = state->get_table(panel_name_);
 
   if (details_table) {
       cpptoml::option<std::string> name =

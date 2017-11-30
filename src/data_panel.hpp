@@ -7,6 +7,7 @@
 #endif
 
 #include <memory>
+#include <string>
 #include "include/cpptoml.h"
 
 
@@ -17,6 +18,7 @@ class DataPanel : public wxPanel {
  public:
   DataPanel(wxWindow* parent,
             wxWindowID id,
+            std::string panel_name,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             int64_t style = 0);
@@ -38,13 +40,17 @@ class DataPanel : public wxPanel {
    *   [[buttons]]
    *     key = value
    */
-  virtual std::shared_ptr<cpptoml::base> GetUserState() = 0;
+  virtual std::shared_ptr<cpptoml::table> GetUserState() = 0;
 
   /**
    * Populate the GUI with the user TOML config.
    * SetGUIState() needs to be called before SetUserState()
    */
   virtual bool SetUserState(std::shared_ptr<cpptoml::table> state) = 0;
+  std::string GetPanelName();
+
+ protected:
+  std::string panel_name_;
 };
 
 #endif  // DATA_PANEL_HPP_
