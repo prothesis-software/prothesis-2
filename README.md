@@ -1,17 +1,19 @@
 # Prothesis v2
 
 ## Building
+### Linux
 ```
 make linux -j4
 
 ./build/prothesis-2
 ```
 
+### Windows
 ```
 # Set config used in makefile
 echo "path/to/static/msw-wxwidgets" > .win_wx_static_config
 
-make windows
+make windows -j4
 
 ./build/prothesis-2.exe
 ```
