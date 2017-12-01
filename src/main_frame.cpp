@@ -1,4 +1,10 @@
 #include "main_frame.hpp"
+#include <csignal>
+
+void MainFrame::OnKill(int sig) {
+  wxLogDebug("MainFrame::OnKill");
+  wxExit();
+}
 
 MainFrame::MainFrame(wxWindow *parent,
                      wxWindowID id,
@@ -8,9 +14,19 @@ MainFrame::MainFrame(wxWindow *parent,
                      int64_t style,
                      const wxString name)
   : wxFrame(parent, id, title, pos, size, style, name) {
-  active_panel_ = NULL;
+  std::signal(SIGINT, OnKill);
+
+  data_manager_ = new DataManager(this);
   SetProperties();
   DoLayout();
+
+    DisplayPanel(data_manager_->
+               GetPanelById(DataManager::PanelId::kDetailsPanel));
+}
+
+void MainFrame::OnClose(wxCloseEvent &e) {
+  wxLogDebug(_("MainFrame::OnClose()"));
+  data_manager_->SaveUserConfig();
 }
 
 void MainFrame::DisplayPanel(DataPanel *panel) {
@@ -52,4 +68,9 @@ void MainFrame::DoLayout() {
   this->SetSizer(main_frame_sizer_);
   main_frame_sizer_->Fit(this);
   this->Layout();
+}
+
+MainFrame::~MainFrame() {
+  wxLogDebug("MainFrame::~MainFrame()");
+  data_manager_->SaveUserConfig();
 }

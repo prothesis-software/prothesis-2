@@ -6,7 +6,9 @@
     #include <wx/wx.h>
 #endif
 
+#include "data_panel.hpp"
 #include "panels/details_panel.hpp"
+#include "data_manager.hpp"
 
 class MainFrame: public wxFrame {
  public:
@@ -22,6 +24,9 @@ class MainFrame: public wxFrame {
    * Display the given panel and adds it to the sizer
    */
   void DisplayPanel(DataPanel *panel);
+  DataManager *data_manager_;
+  static void OnKill(int sig);
+  ~MainFrame();
 
  private:
   void DoLayout();
@@ -30,7 +35,8 @@ class MainFrame: public wxFrame {
  protected:
   DetailsPanel *details_panel_;
   wxFlexGridSizer *main_frame_sizer_;
-  wxWindow *active_panel_;
+  DataPanel *active_panel_;
+  void OnClose(wxCloseEvent &e); // NOLINT
 };
 
 #endif  // MAIN_FRAME_HPP_

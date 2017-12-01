@@ -4,6 +4,7 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include "panels/details_panel.hpp"
 
 void DataManager::Load() {
   bool gui_config_exists = Utilities::FileExists(gui_config_path_);
@@ -32,14 +33,19 @@ void DataManager::Load() {
   }
 }
 
+DataPanel* DataManager::GetPanelById(DataManager::PanelId panel_id) {
+  return panels_[panel_id];
+}
+
 void DataManager::DeclarePanels() {
   DetailsPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY,
-                                                 "details");
+                                                 std::string("details"));
   panels_[PanelId::kDetailsPanel] = details_panel;
 }
 
-DataManager::DataManager(MainFrame *main_frame) {
+DataManager::DataManager(wxFrame *main_frame) {
   main_frame_ = main_frame;
+
   std::string base_path = GetBasePath();
   wxLogDebug(_(std::string("base_path = ") + base_path));
 
@@ -57,17 +63,11 @@ DataManager::DataManager(MainFrame *main_frame) {
   Load();
 }
 
-void DataManager::DisplayPanel(PanelId panel_id) {
-  main_frame_->DisplayPanel(panels_[panel_id]);
-}
-
 void DataManager::SaveUserConfig() {
-  wxLogDebug(_("Creating table array..."));
-  std::shared_ptr<cpptoml::table> user_config = cpptoml::make_table();
+  wxLogDebug("Saving user data...");
 
-  // TODO(egeldenhuys): Fix on Windows
+  std::shared_ptr<cpptoml::table> user_config = cpptoml::make_table();
   try {
-    wxLogDebug("Saving user data...");
     std::shared_ptr<cpptoml::table> user_config =
       cpptoml::make_table();
 
@@ -82,6 +82,7 @@ void DataManager::SaveUserConfig() {
     output << *user_config;
     wxLogDebug(_("User data = \n") + _(output.str().c_str()));
     wxLogDebug("Writing User config...");
+
     std::fstream fs(user_config_path_, std::fstream::out);
     fs << output.str();
     fs.close();
@@ -125,4 +126,8 @@ std::string DataManager::GetBasePath() {
   return base_path;
   #endif
   return "UNKNOWN OPERATING SYSTEM";
+}
+
+DataManager::~DataManager() {
+  // void
 }

@@ -22,14 +22,6 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
   datepicker_ctrl_ = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime,
                                           wxDefaultPosition, wxDefaultSize,
                                           wxDP_DEFAULT | wxDP_SHOWCENTURY);
-  time_t time_now = wxDateTime::GetTimeNow();
-  wxDateTime dt;
-  dt.Set(time_now);
-  dt.SetCountry(wxDateTime::Country::France);
-  datepicker_ctrl_->SetValue(dt);
-
-  button_next_ = new wxButton(this, kButtonNextId, _("Next"));
-
   SetProperties();
   DoLayout();
 }
@@ -41,6 +33,8 @@ void DetailsPanel::SetProperties() {
 
 void DetailsPanel::DoLayout() {
   const int kPanelBorderSize = 10;
+
+  button_next_ = new wxButton(this, kButtonNextId, _("Next"));
 
   wxFlexGridSizer *details_grid_sizer = new wxFlexGridSizer(5, 2, 7, 25);
   wxStaticText *label_name = new wxStaticText(this, wxID_ANY, _("Name"));
@@ -68,11 +62,6 @@ void DetailsPanel::DoLayout() {
   details_grid_sizer->Fit(this);
 }
 
-void DetailsPanel::OnButtonNextClick(wxCommandEvent &event) {
-  event.Skip();
-  wxLogDebug(wxT("DetailsPanel::ButtonNextOnClick not implemented yet"));
-}
-
 bool DetailsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   wxLogDebug(wxT("DetailsPanel does not use a GUI config."));
   return false;
@@ -93,7 +82,6 @@ std::shared_ptr<cpptoml::table> DetailsPanel::GetUserState() {
   panel_data->insert("age", spin_ctrl_age_->GetValue());
   panel_data->insert("date", datepicker_ctrl_->GetValue()
                .FormatISODate().ToStdString());
-  // root->insert("details", panel_data);
   return panel_data;
 }
 
@@ -137,7 +125,3 @@ bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
 DetailsPanel::~DetailsPanel() {
   // void
 }
-
-BEGIN_EVENT_TABLE(DetailsPanel, wxPanel)
-EVT_BUTTON(kButtonNextId, DetailsPanel::OnButtonNextClick)
-END_EVENT_TABLE()

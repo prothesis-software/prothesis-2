@@ -12,7 +12,6 @@
 
 #include "include/cpptoml.h"
 #include "data_panel.hpp"
-#include "main_frame.hpp"
 #include "utilities.hpp"
 
 /**
@@ -26,7 +25,9 @@ class DataManager {
    * Initializes all panels from the GUI config and the User config and adds
    * them as children to the MainFrame
    */
-  explicit DataManager(MainFrame *main_frame);
+  explicit DataManager(wxFrame *main_frame);
+
+  ~DataManager();
 
   /** The PanelId corresponds to the index of the panel in the panels_ array
    */
@@ -34,12 +35,6 @@ class DataManager {
     kDetailsPanel = 0,
     kPanelCount = 1
   };
-
-  /**
-   * Display the panel with the given ID on the Main Frame.
-   * This is a wrapper for MainFrame::DisplayPanel(DataPanel *panel)
-   */
-  void DisplayPanel(PanelId panel_id);
 
   /**
    * Save the User config
@@ -50,6 +45,7 @@ class DataManager {
    * Returns the path to the directory where the executable is in
    */
   std::string GetBasePath();
+  DataPanel* GetPanelById(DataManager::PanelId panel_id);
 
  private:
   /**
@@ -62,10 +58,10 @@ class DataManager {
    * All panels are declared in this function
    */
   void DeclarePanels();
-  MainFrame *main_frame_;
   DataPanel *panels_[1];
   // Paths are relative to the base directory of the binary
   std::string gui_config_path_ = "gui.toml";
   std::string user_config_path_ = "user.toml";
+  wxFrame *main_frame_;
 };
 #endif  // DATA_MANAGER_HPP_

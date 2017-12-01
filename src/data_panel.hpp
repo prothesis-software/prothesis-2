@@ -35,9 +35,9 @@ class DataPanel : public wxPanel {
    * [panel_name]
    *   key = value
    *
-   *   [[buttons]]
+   *   [[panel_name.buttons]]
    *     key = value
-   *   [[buttons]]
+   *   [[panel_name.buttons]]
    *     key = value
    */
   virtual std::shared_ptr<cpptoml::table> GetUserState() = 0;

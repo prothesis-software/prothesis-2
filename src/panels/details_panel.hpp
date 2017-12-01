@@ -14,7 +14,6 @@
 
 #include "src/data_panel.hpp"
 
-
 class DetailsPanel : public DataPanel {
  public:
   DetailsPanel(wxWindow *parent,
@@ -25,10 +24,10 @@ class DetailsPanel : public DataPanel {
                int64_t style = 0);
   ~DetailsPanel();
 
-  void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
   virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state);
   virtual std::shared_ptr<cpptoml::table> GetUserState();
   virtual bool SetUserState(std::shared_ptr<cpptoml::table> state);
+  wxButton *button_next_;
 
  private:
   void SetProperties();
@@ -39,13 +38,10 @@ class DetailsPanel : public DataPanel {
   wxTextCtrl *text_ctrl_surname_;
   wxSpinCtrl *spin_ctrl_age_;
   wxDatePickerCtrl *datepicker_ctrl_;
-  wxButton *button_next_;
 
   enum {
     kButtonNextId = wxID_ANY
   };
-
-  DECLARE_EVENT_TABLE()
 };
 
 #endif  // PANELS_DETAILS_PANEL_HPP_
