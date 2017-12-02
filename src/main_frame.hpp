@@ -5,6 +5,8 @@
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
 #endif
+#include <wx/treectrl.h>
+#include <wx/statline.h>
 
 #include "data_panel.hpp"
 #include "panels/details_panel.hpp"
@@ -28,15 +30,21 @@ class MainFrame: public wxFrame {
   static void OnKill(int sig);
   ~MainFrame();
 
+ protected:
+  wxFlexGridSizer *sizer_content_;
+  DataPanel *active_panel_;
+  wxButton *button_drawer_;
+  wxButton *button_config_;
+  wxStaticText *label_title_;
+  wxTreeCtrl *tree_ctrl_drawer_;
+  wxPanel *panel_config_button_;
+  wxPanel *panel_title_;
+  wxPanel *panel_drawer_button_;
+  void OnClose(wxCloseEvent &e); // NOLINT
+
  private:
   void DoLayout();
   void SetProperties();
-
- protected:
-  DetailsPanel *details_panel_;
-  wxFlexGridSizer *main_frame_sizer_;
-  DataPanel *active_panel_;
-  void OnClose(wxCloseEvent &e); // NOLINT
 };
 
 #endif  // MAIN_FRAME_HPP_

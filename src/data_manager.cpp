@@ -129,5 +129,5 @@ std::string DataManager::GetBasePath() {
 }
 
 DataManager::~DataManager() {
-  // void
+  // wxLogDebug("DataManager::~DataManager()");
 }
