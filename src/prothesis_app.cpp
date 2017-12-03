@@ -15,5 +15,5 @@ bool ProthesisApp::OnInit() {
 }
 
 ProthesisApp::~ProthesisApp() {
-  // void
+  // wxLogDebug("ProthesisApp::~ProthesisApp()");
 }

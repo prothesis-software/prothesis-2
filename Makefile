@@ -11,8 +11,8 @@ build/linux/data_panel.o build/linux/utilities.o
 OBJECT_FILES_WINDOWS=build/windows/data_manager.o build/windows/main_frame.o \
 build/windows/prothesis_app.o build/windows/details_panel.o \
 build/windows/data_panel.o build/windows/utilities.o
-WX_CONFIG_LINUX=`wx-config --libs --cxxflags`
-RESOURCE_FILE=src/resources.rc
+WX_CONFIG_LINUX=`wx-config --toolkit=gtk2 --libs --cxxflags`
+RESOURCE_FILE=src/resources.r
 
 WIN_WX_STATIC_CONFIG=.win_wx_static_config
 
