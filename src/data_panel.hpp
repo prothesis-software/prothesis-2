@@ -19,6 +19,7 @@ class DataPanel : public wxPanel {
   DataPanel(wxWindow* parent,
             wxWindowID id,
             std::string panel_name,
+            std::string panel_title,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             int64_t style = 0);
@@ -48,9 +49,11 @@ class DataPanel : public wxPanel {
    */
   virtual bool SetUserState(std::shared_ptr<cpptoml::table> state) = 0;
   std::string GetPanelName();
+  std::string GetPanelTitle();
 
  protected:
   std::string panel_name_;
+  std::string panel_title_;
 };
 
 #endif  // DATA_PANEL_HPP_

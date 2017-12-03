@@ -1,5 +1,6 @@
 #include "main_frame.hpp"
 #include <csignal>
+#include <string>
 
 void MainFrame::OnKill(int sig) {
   wxLogDebug("MainFrame::OnKill");
@@ -41,6 +42,10 @@ MainFrame::MainFrame(wxWindow *parent,
                GetPanelById(DataManager::PanelId::kDetailsPanel));
 }
 
+void MainFrame::SetHeaderTitle(std::string title) {
+  label_title_->SetLabel(_(title));
+}
+
 void MainFrame::OnClose(wxCloseEvent &e) {
   wxLogDebug(_("MainFrame::OnClose()"));
   data_manager_->SaveUserConfig();
@@ -57,13 +62,13 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
   sizer_content_->Insert(kPanelViewIndex, panel, 1, wxEXPAND, 0);
   panel->Show();
   active_panel_ = panel;
-
+  SetHeaderTitle(active_panel_->GetPanelTitle());
   Layout();
   Fit();
 }
 
 void MainFrame::SetProperties() {
-  // void
+  label_title_->SetFont(wxFont(16, wxDEFAULT, wxNORMAL, wxBOLD, 0, wxT("")));
 }
 
 void MainFrame::DoLayout() {
@@ -79,9 +84,11 @@ void MainFrame::DoLayout() {
   sizer_header->Add(panel_drawer_button_, 1, wxEXPAND, 0);
 
   // title
-  wxBoxSizer *sizer_title = new wxBoxSizer(wxVERTICAL);
-  sizer_title->Add(label_title_, 0, wxALIGN_CENTER, 0);
-  panel_title_->SetSizer(sizer_title);
+  wxBoxSizer *sizer_title_h = new wxBoxSizer(wxHORIZONTAL);
+  wxBoxSizer *sizer_title_v = new wxBoxSizer(wxVERTICAL);
+  sizer_title_v->Add(label_title_, 0, wxEXPAND, 0);
+  sizer_title_h->Add(sizer_title_v, 1, wxALIGN_BOTTOM, 0);
+  panel_title_->SetSizer(sizer_title_h);
   sizer_header->Add(panel_title_, 1, wxEXPAND, 0);
 
   // config button

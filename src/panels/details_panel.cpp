@@ -5,10 +5,11 @@
 DetailsPanel::DetailsPanel(wxWindow *parent,
                            wxWindowID id,
                            std::string panel_name,
+                           std::string panel_title,
                            const wxPoint &pos,
                            const wxSize &size,
                            int64_t style)
-  : DataPanel(parent, id, panel_name, pos, size, style) {
+  : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   text_ctrl_name_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   text_ctrl_surname_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   spin_ctrl_age_ = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,

@@ -39,7 +39,8 @@ DataPanel* DataManager::GetPanelById(DataManager::PanelId panel_id) {
 
 void DataManager::DeclarePanels() {
   DetailsPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY,
-                                                 std::string("details"));
+                                                 std::string("details"),
+                                                 std::string("Details"));
   panels_[PanelId::kDetailsPanel] = details_panel;
 }
 

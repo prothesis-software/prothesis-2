@@ -19,6 +19,7 @@ class DetailsPanel : public DataPanel {
   DetailsPanel(wxWindow *parent,
                wxWindowID id,
                std::string panel_name,
+               std::string panel_title,
                const wxPoint &pos = wxDefaultPosition,
                const wxSize &size = wxDefaultSize,
                int64_t style = 0);

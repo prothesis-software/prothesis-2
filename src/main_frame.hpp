@@ -8,6 +8,8 @@
 #include <wx/treectrl.h>
 #include <wx/statline.h>
 
+#include <string>
+
 #include "data_panel.hpp"
 #include "panels/details_panel.hpp"
 #include "data_manager.hpp"
@@ -26,8 +28,13 @@ class MainFrame: public wxFrame {
    * Display the given panel and adds it to the sizer
    */
   void DisplayPanel(DataPanel *panel);
-  DataManager *data_manager_;
+
+  /**
+   * Set the title displayed in the header
+   */
+  void SetHeaderTitle(std::string title);
   static void OnKill(int sig);
+  DataManager *data_manager_;
   ~MainFrame();
 
  protected:
