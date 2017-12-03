@@ -27,9 +27,11 @@ MainFrame::MainFrame(wxWindow *parent,
 
   panel_title_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
                              wxDefaultSize, header_style);
+
+  // Need to give Ellipsize flags: http://trac.wxwidgets.org/ticket/10716
   label_title_ = new wxStaticText(panel_title_, wxID_ANY, wxT("Title"),
                                   wxDefaultPosition, wxDefaultSize,
-                                  wxALIGN_CENTER);
+                                  wxALIGN_CENTER | wxST_ELLIPSIZE_END);
 
   panel_config_button_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
                                      wxDefaultSize, header_style);
