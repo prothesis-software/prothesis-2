@@ -1,5 +1,6 @@
 #ifndef PROTHESIS_APP_HPP_
 #define PROTHESIS_APP_HPP_
+#define wxDEBUG_LEVEL 1
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
