@@ -1,3 +1,4 @@
-userData.md
-userData.json
-node_modules/
+build/
+include/cpptoml.h
+cpplint.py
+.win_wx_static_config
