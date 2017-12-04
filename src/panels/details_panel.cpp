@@ -1,6 +1,7 @@
 #include "details_panel.hpp"
 #include <memory>
 #include <string>
+#include "src/main_frame.hpp"
 
 DetailsPanel::DetailsPanel(wxWindow *parent,
                            wxWindowID id,
@@ -10,6 +11,7 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
                            const wxSize &size,
                            int64_t style)
   : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
+  wxLogDebug("DetailsPanel::DetailsPanel() START");
   text_ctrl_name_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   text_ctrl_surname_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   spin_ctrl_age_ = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
@@ -23,8 +25,18 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
   datepicker_ctrl_ = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime,
                                           wxDefaultPosition, wxDefaultSize,
                                           wxDP_DEFAULT | wxDP_SHOWCENTURY);
+  button_next_ = new wxButton(this, wxID_ANY, _("Next"));
+  button_next_->Bind(wxEVT_BUTTON, &DetailsPanel::OnButtonNextClick, this,
+                    wxID_ANY);
   SetProperties();
   DoLayout();
+  wxLogDebug("DetailsPanel::DetailsPanel() START");
+}
+
+void DetailsPanel::OnButtonNextClick(wxCommandEvent &event) {
+  // void
+  MainFrame *frame = static_cast<MainFrame*>(this->GetParent());
+  frame->DisplayPanelById(DataManager::PanelId::kTestPanel);
 }
 
 void DetailsPanel::SetProperties() {
@@ -33,9 +45,8 @@ void DetailsPanel::SetProperties() {
 }
 
 void DetailsPanel::DoLayout() {
+  wxLogDebug("DetailsPanel::DoLayout() START");
   const int kPanelBorderSize = 10;
-
-  button_next_ = new wxButton(this, kButtonNextId, _("Next"));
 
   wxFlexGridSizer *details_grid_sizer = new wxFlexGridSizer(5, 2, 7, 25);
   wxStaticText *label_name = new wxStaticText(this, wxID_ANY, _("Name"));
@@ -61,6 +72,7 @@ void DetailsPanel::DoLayout() {
                           kPanelBorderSize);
   this->SetSizer(details_grid_sizer);
   details_grid_sizer->Fit(this);
+  wxLogDebug("DetailsPanel::DoLayout() END");
 }
 
 bool DetailsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {

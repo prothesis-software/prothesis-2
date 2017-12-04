@@ -5,6 +5,8 @@
 #include <fstream>
 #include <vector>
 #include "panels/details_panel.hpp"
+#include "questions_panel.hpp"
+#include "panels/passion_panel.hpp"
 
 void DataManager::Load() {
   bool gui_config_exists = Utilities::FileExists(gui_config_path_);
@@ -33,6 +35,10 @@ void DataManager::Load() {
   }
 }
 
+DataPanel* DataManager::GetPanelByIndex(size_t index) {
+  return panels_[index];
+}
+
 DataPanel* DataManager::GetPanelById(DataManager::PanelId panel_id) {
   return panels_[panel_id];
 }
@@ -41,7 +47,14 @@ void DataManager::DeclarePanels() {
   DetailsPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY,
                                                  std::string("details"),
                                                  std::string("Details"));
+  details_panel->Hide();
   panels_[PanelId::kDetailsPanel] = details_panel;
+
+  PagedPanel *passion_panel = new PassionPanel(main_frame_, wxID_ANY,
+                                    std::string("passion"),
+                                    std::string("Passion"));
+  passion_panel->Hide();
+  panels_[PanelId::kTestPanel] = passion_panel;
 }
 
 DataManager::DataManager(wxFrame *main_frame) {
@@ -76,7 +89,9 @@ void DataManager::SaveUserConfig() {
       wxLogDebug(_("Getting state for panel ") + _(panels_[i]->GetPanelName()));
       std::shared_ptr<cpptoml::table> panel_config =
         panels_[i]->GetUserState();
-      user_config->insert(panels_[i]->GetPanelName(), panel_config);
+      if (panel_config) {
+        user_config->insert(panels_[i]->GetPanelName(), panel_config);
+      }
     }
 
     std::stringstream output;

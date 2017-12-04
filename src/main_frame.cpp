@@ -15,6 +15,7 @@ MainFrame::MainFrame(wxWindow *parent,
                      int64_t style,
                      const wxString name)
   : wxFrame(parent, id, title, pos, size, style, name) {
+  wxLogDebug("MainFrame::MainFrame() START");
   std::signal(SIGINT, OnKill);
 
   const int64_t header_style = 0;
@@ -40,9 +41,12 @@ MainFrame::MainFrame(wxWindow *parent,
   SetProperties();
   DoLayout();
 
-    DisplayPanel(data_manager_->
+  wxLogDebug("MainFrame::MainFrame() Getting detail panel");
+  DisplayPanel(data_manager_->
                GetPanelById(DataManager::PanelId::kDetailsPanel));
+  wxLogDebug("MainFrame::MainFrame() END");
 }
+
 
 void MainFrame::SetHeaderTitle(std::string title) {
   label_title_->SetLabel(_(title));
@@ -53,20 +57,29 @@ void MainFrame::OnClose(wxCloseEvent &e) {
   data_manager_->SaveUserConfig();
 }
 
+void MainFrame::DisplayPanelById(DataManager::PanelId id) {
+  DisplayPanel(data_manager_->GetPanelById(id));
+}
+
+// WARN(egeldenhuys): Causes valgrind errors
 void MainFrame::DisplayPanel(DataPanel *panel) {
+  wxLogDebug("MainFrame::DisplayPanel() START");
   const size_t kPanelViewIndex = 1;
+  const size_t kBorderSize = 0;
 
   if (active_panel_ != NULL)
     active_panel_->Hide();
 
   // TODO(egeldenhuys): Detach vs Remove
   sizer_content_->Detach(kPanelViewIndex);
-  sizer_content_->Insert(kPanelViewIndex, panel, 1, wxEXPAND, 0);
+  sizer_content_->Insert(kPanelViewIndex,
+                         panel, 1, wxEXPAND | wxALL, kBorderSize);
   panel->Show();
   active_panel_ = panel;
   SetHeaderTitle(active_panel_->GetPanelTitle());
   Layout();
   Fit();
+  wxLogDebug("MainFrame::DisplayPanel() END");
 }
 
 void MainFrame::SetProperties() {
