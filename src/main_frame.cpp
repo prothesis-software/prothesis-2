@@ -15,39 +15,48 @@ MainFrame::MainFrame(wxWindow *parent,
                      int64_t style,
                      const wxString name)
   : wxFrame(parent, id, title, pos, size, style, name) {
-  wxLogDebug("MainFrame::MainFrame() START");
-  std::signal(SIGINT, OnKill);
+  try {
+    wxLogDebug("MainFrame::MainFrame() START");
+    std::signal(SIGINT, OnKill);
 
-  const int64_t header_style = 0;
+    const int64_t header_style = 0;
 
-  data_manager_ = new DataManager(this);
-  sizer_content_ = new wxFlexGridSizer(1, 3, 0, 0);
-  panel_drawer_button_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
-                                     wxDefaultSize, header_style);
-  button_drawer_ = new wxButton(panel_drawer_button_, wxID_ANY, wxT("Drawer"));
+    data_manager_ = new DataManager(this);
+    sizer_content_ = new wxFlexGridSizer(1, 3, 0, 0);
+    panel_drawer_button_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
+                                       wxDefaultSize, header_style);
+    button_drawer_ = new wxButton(panel_drawer_button_,
+                                  wxID_ANY, wxT("Drawer"));
 
-  panel_title_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
-                             wxDefaultSize, header_style);
+    panel_title_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
+                               wxDefaultSize, header_style);
 
-  // Need to give Ellipsize flags: http://trac.wxwidgets.org/ticket/10716
-  label_title_ = new wxStaticText(panel_title_, wxID_ANY, wxT("Title"),
-                                  wxDefaultPosition, wxDefaultSize,
-                                  wxALIGN_CENTER | wxST_ELLIPSIZE_END);
+    // Need to give Ellipsize flags: http://trac.wxwidgets.org/ticket/10716
+    label_title_ = new wxStaticText(panel_title_, wxID_ANY, wxT("Title"),
+                                    wxDefaultPosition, wxDefaultSize,
+                                    wxALIGN_CENTER | wxST_ELLIPSIZE_END);
 
-  panel_config_button_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
-                                     wxDefaultSize, header_style);
-  button_config_ = new wxButton(panel_config_button_, wxID_ANY, wxT("Config"));
+    panel_config_button_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
+                                       wxDefaultSize, header_style);
+    button_config_ = new wxButton(panel_config_button_,
+                                  wxID_ANY, wxT("Config"));
 
-  sizer_main_frame_master_ = new wxFlexGridSizer(4, 1, 0, 0);
+    sizer_main_frame_master_ = new wxFlexGridSizer(4, 1, 0, 0);
 
-  SetProperties();
-  DoLayout();
+    wxLogDebug("MainFrame::MainFrame() do layout stuff");
+    SetProperties();
+    DoLayout();
+    wxLogDebug("MainFrame::MainFrame() do layout stuff = DONE");
 
-  wxLogDebug("MainFrame::MainFrame() Getting detail panel");
-  DisplayPanel(data_manager_->
-               GetPanelById(DataManager::PanelId::kDetailsPanel));
-  //  sizer_main_frame_master_->Fit(this);
-  wxLogDebug("MainFrame::MainFrame() END");
+    wxLogDebug("MainFrame::MainFrame() Getting detail panel");
+    DisplayPanel(data_manager_->
+                 GetPanelById(DataManager::PanelId::kDetailsPanel));
+    //  sizer_main_frame_master_->Fit(this);
+    wxLogDebug("MainFrame::MainFrame() END");
+  } catch (std::exception &e) {
+    wxLogDebug("KEKEd");
+    wxLogDebug(e.what());
+  }
 }
 
 
@@ -74,6 +83,13 @@ bool MainFrame::DisplayNextPanel() {
     break;
   case DataManager::PanelId::kPeopleIdPanel:
     DisplayPanelById(DataManager::PanelId::kDreamsPanel);
+    break;
+  case DataManager::PanelId::kDreamsPanel:
+    DisplayPanelById(DataManager::PanelId::kValuesPanel);
+    break;
+  case DataManager::PanelId::kValuesPanel:
+    DisplayPanelById(DataManager::PanelId::kSpokenWordsPanel);
+    break;
   default:
     return false;
   }

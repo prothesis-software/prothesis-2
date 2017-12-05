@@ -11,6 +11,7 @@ QuestionsPanel::QuestionsPanel(wxWindow *parent,
                            const wxSize &size,
                            int64_t style)
   : PagedPanel(parent, id, panel_name, panel_title, pos, size, style) {
+  wxLogDebug(_("Creating QuestionsPanel: ") + _(GetPanelName()));
   // void
 }
 

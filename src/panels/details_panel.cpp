@@ -30,7 +30,7 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
                     wxID_ANY);
   SetProperties();
   DoLayout();
-  wxLogDebug("DetailsPanel::DetailsPanel() START");
+  wxLogDebug("DetailsPanel::DetailsPanel() END");
 }
 
 void DetailsPanel::OnButtonNextClick(wxCommandEvent &event) {

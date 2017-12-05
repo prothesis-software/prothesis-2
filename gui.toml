@@ -1,3 +1,7 @@
+####################################
+# PASSION
+###########
+
 [passion]
     [[passion.question]]
         question = "What are your 3 favourite topics to discuss? What could you talk about for hours on end?"
@@ -8,7 +12,7 @@
     [[passion.question]]
         question = "What naturally flows for you without you even having to try?"
     [[passion.question]]
-        question = "If you were to wake up tomorrow feeling truly free and happily excited about your day ahead what  would you be off to do?"
+        question = "If you were to wake up tomorrow feeling truly free and happily excited about your day ahead, what  would you be off to do?"
     [[passion.question]]
         question = "You are totally ‘in your element’ and time seems to have disappeared. What are you doing?"
     [[passion.question]]
@@ -18,7 +22,7 @@
     [[passion.question]]
         question = "What do people ask you for information/advice about? Which areas are you deemed to be a little fountain of knowledge?"
     [[passion.question]]
-        question = "If you were to pioneer a cause around the world and it was guaranteed to be a success what would it be?"
+        question = "If you were to pioneer a cause around the world, and it was guaranteed to be a success, what would it be?"
     [[passion.question]]
         question = "What do you love to do when you have free time and what is it that gives you that real buzz of excitement?"
     [[passion.question]]
@@ -29,6 +33,10 @@
         question = "What interests or hobbies have you had in the past few years that intrigue you and might hold the potential for a life passion?"
     [[passion.question]]
         question = "What would be hard for you to give up?"
+
+#########################################3
+# PEOPLE ID
+################
 [people_id]
     [[people_id.question]]
         question = "5 people that inspire you most in the world stand before you. Who are they and what is it about them that sparks something within you?"
@@ -40,34 +48,62 @@
         question = "With which character in a book or movie did you relate well and why?"
     [[people_id.question]]
         question = "Which super hero was you favourite when you were small? What can that say about you?"
+
+#########################################
+# DREAMS
+##############
 [dreams]
     [[dreams.question]]
-        question = "When you were a child what did you always dream of doing when you got older? What do they symbolise?"
+        question = "When you were a child, what did you always dream of doing when you got older? What do they symbolise?"
     [[dreams.question]]
         question = "What are some childhood dreams or interests you were never able to fully explore but still find intriguing?"
     [[dreams.question]]
         question = "What difference do you want to make in the world? What legacy would you like to leave behind?"
     [[dreams.question]]
-        question = "You inherit R100 million how would it change your life? What would you do with your days?"
+        question = "You inherit R100 million, how would it change your life? What would you do with your days?"
     [[dreams.question]]
-        question = "When you are dead and gone what would you like people to say about the way you lived your life?"
+        question = "When you are dead and gone, what would you like people to say about the way you lived your life?"
     [[dreams.question]]
         question = "What careers do you have wild dreams of having?"
     [[dreams.question]]
-        question = "If someone were to pay all of your living costs and expenses for 2 years what work would you pursue in that time?"
+        question = "If someone were to pay all of your living costs and expenses for 2 years, what work would you pursue in that time?"
     [[dreams.question]]
-        question = "If you were to change 3 things in the world for the greater good what would they be?"
+        question = "If you were to change 3 things in the world for the greater good, what would they be?"
     [[dreams.question]]
-        question = "What is it that you would regret not doing with your life if you were to die tomorrow?"
+        question = "What is it that you would regret not doing with your life, if you were to die tomorrow?"
     [[dreams.question]]
         question = "What piece of knowledge do you feel as though you would love to share with the world?"
     [[dreams.question]]
         question = "The person that loves you most in the whole world asks you what you need to be doing with your life in order to be really happy. How do you respond?"
     [[dreams.question]]
-        question = "If you had 5 years left to live what would you do?"
+        question = "If you had 5 years left to live, what would you do?"
     [[dreams.question]]
         question = "How have your fears and limiting beliefs held you back from finding or pursuing your passion in the past?"
     [[dreams.question]]
         question = "Are there any people in your life preventing you from pursuing your passion? Who are they and how are they holding you back?"
     [[dreams.question]]
         question = "What is something (or several things) you’d really like to achieve before you die?"
+
+#########################################
+# VALUES
+##########################
+[values]
+    [[values.question]]
+        question = "What are your top  most deeply held core values?"
+    [[values.question]]
+        question = "How does your life currently support or reflect those values?"
+    [[values.question]]
+        question = "Which of your top values are you ignoring or not giving enough attention?"
+    [[values.question]]
+        question = "What values will you never compromise?"
+    [[values.question]]
+        question = "Which jobs would encompass your core values?"
+
+#########################################
+# SPOKEN WORDS
+#######################
+[spoken_words]
+    [[spoken_words.question]]
+        question = "Things people say about you has a big impact on your life and often reveal a lot more than you think...\nFill these commonly spoken words below"
+    [[spoken_words.question]]
+        question = "Now summarise the central themes from your answer and type them below"
