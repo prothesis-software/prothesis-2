@@ -22,7 +22,7 @@ wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
   wxLogDebug(_("Creating question panel: ") + _(question));
 
   wxPanel *panel = new wxPanel(this, wxID_ANY);
-  panel->Hide();
+  // panel->Hide();
   wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 10, 0);
   wxStaticText *question_text = new wxStaticText(panel, wxID_ANY, _(question));
   wxTextCtrl *text_ctrl_answer = new wxTextCtrl(panel, wxID_ANY, wxEmptyString);

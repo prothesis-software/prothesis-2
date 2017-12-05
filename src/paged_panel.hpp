@@ -7,6 +7,7 @@
 #endif
 #include <wx/hyperlink.h>
 #include <wx/statline.h>
+#include <wx/simplebook.h>
 
 #include <vector>
 #include <memory>
@@ -67,5 +68,6 @@ class PagedPanel : public DataPanel {
   wxPanel *active_panel_ = NULL;
   wxButton *button_next_ = NULL;
   wxPanel* panel_page_numbers_;
+  wxSimplebook *simple_book_;
 };
 #endif  // PAGED_PANEL_HPP_

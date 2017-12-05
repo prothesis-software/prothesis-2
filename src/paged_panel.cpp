@@ -1,4 +1,6 @@
 #include "paged_panel.hpp"
+#include <wx/simplebook.h>
+
 #include <string>
 #include <memory>
 #include <vector>
@@ -14,7 +16,7 @@ PagedPanel::PagedPanel(wxWindow* parent,
   panel_page_numbers_ = new wxPanel(this, wxID_ANY);
   sizer_paged_panel_ = new wxFlexGridSizer(4, 3, 0, 0);
   button_next_ = new wxButton(this, wxID_ANY, _("Next"));
-
+  simple_book_ = new wxSimplebook(this, wxID_ANY);
   button_next_->Bind(wxEVT_BUTTON, &PagedPanel::OnButtonNextClick, this);
 }
 
@@ -24,8 +26,11 @@ void PagedPanel::OnButtonNextClick(wxCommandEvent &event) {
 
 void PagedPanel::AddPage(wxPanel *panel) {
   panels_.push_back(panel);
+  panel->Reparent(simple_book_);
+  simple_book_->AddPage(panel, "LOLWAT");
 }
 
+// TODO(egeldenhuys): Rename to GenerateLinks
 void PagedPanel::Init() {
   wxLogDebug("PagedPanel::Init() START");
 
@@ -62,24 +67,28 @@ size_t PagedPanel::GetPageCount() {
 
 void PagedPanel::DisplayPage(size_t index) {
   wxLogDebug("PagedPanel::DisplayPanel() START");
-  active_panel_index_ = index;
-  const size_t kPanelViewIndex = 7;
 
-  wxPanel *panel = panels_.at(index);
+  simple_book_->SetSelection(index);
+  // active_panel_index_ = index;
+  // const size_t kPanelViewIndex = 7;
 
-  if (active_panel_ != NULL)
-    active_panel_->Hide();
+  // wxPanel *panel = panels_.at(index);
 
-  sizer_paged_panel_->Detach(kPanelViewIndex);
-  sizer_paged_panel_->Insert(kPanelViewIndex, panel, 1, wxEXPAND, 0);
-  active_panel_ = panel;
+  // if (active_panel_ != NULL)
+  //   active_panel_->Hide();
 
-  active_panel_->Show();
-  // sizer_paged_panel_->Fit(this);
-  Layout();
-  // GetParent()->Fit();
-  GetParent()->Layout();
+  // sizer_paged_panel_->Detach(kPanelViewIndex);
+  // sizer_paged_panel_->Insert(kPanelViewIndex, panel, 1, wxEXPAND, 0);
+  // active_panel_ = panel;
 
+  // active_panel_->Show();
+  // // sizer_paged_panel_->Fit(this);
+  // Layout();
+  GetParent()->Fit();
+  // GetParent()->Layout();
+
+  // Layout();
+  // Fit();
   wxLogDebug("PagedPanel::DisplayPanel() END");
 }
 
@@ -137,7 +146,8 @@ void PagedPanel::DoLayout() {
 
   // content
   sizer_paged_panel_->Add(0, 0, 0, 0, 0);
-  sizer_paged_panel_->Add(0, 0, 0, 0, 0);  // index 7
+  // sizer_paged_panel_->Add(0, 0, 0, 0, 0);  // index 7
+  sizer_paged_panel_->Add(simple_book_, 0, wxEXPAND, 0);
   sizer_paged_panel_->Add(0, 0, 0, 0, 0);
 
   // Footer

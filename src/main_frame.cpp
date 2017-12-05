@@ -47,7 +47,6 @@ MainFrame::MainFrame(wxWindow *parent,
   DisplayPanel(data_manager_->
                GetPanelById(DataManager::PanelId::kDetailsPanel));
   //  sizer_main_frame_master_->Fit(this);
-  Fit();
   wxLogDebug("MainFrame::MainFrame() END");
 }
 
@@ -82,7 +81,7 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
   panel->Show();
   panel->Layout();
   Layout();
-
+  Fit();
   wxLogDebug("MainFrame::DisplayPanel() END");
 }
 
