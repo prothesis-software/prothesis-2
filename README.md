@@ -9,6 +9,8 @@ make linux -j4
 ```
 
 ### Windows
+- **NOTE:* A Windows build using 4 cores may use up to 2 GB of RAM
+
 ```
 # Set config used in makefile
 echo "path/to/static/msw-wxwidgets" > .win_wx_static_config
@@ -30,12 +32,12 @@ It will stop compiling if there is a linting error.
 ## Development
 ### Dependencies
 - [wxWidgets 3.0.3](https://github.com/prothesis-software/prothesis-2/wiki/Compiling-wxWidgets)
-  - `gtk3`
+  - `gtk2`
   - `make`
   - `gcc`
   - `pkg-config`
   - `mingw-w64-gcc`
-  - Shared gtk3 build of wxWidgets for Linux
+  - Shared gtk2 build of wxWidgets for Linux
   - Static msw build of wxWidgets for Windows cross compilation
 - `python2` (for linting)
 - `wget` (downloading dependencies)
@@ -46,8 +48,8 @@ It will stop compiling if there is a linting error.
 
 ### Linux
 #### Dependencies
-- `gtk3`
-- `wxgtk3`
+- `gtk2`
+- `wxgtk2`
 
 ### Windows
 #### Dependencies
