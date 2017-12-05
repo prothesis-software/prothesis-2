@@ -100,6 +100,8 @@ bool MainFrame::DisplayNextPanel() {
 // TODO(egeldenhuys): Switch to wxSimplebook
 // WARN(egeldenhuys): Causes valgrind errors
 void MainFrame::DisplayPanel(DataPanel *panel) {
+  // Freeze and thaw are required to prevent visual artifacts
+  Freeze();
   wxLogDebug("MainFrame::DisplayPanel() START");
   const size_t kPanelViewIndex = 1;
   const size_t kBorderSize = 0;
@@ -113,10 +115,9 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
 
   SetHeaderTitle(active_panel_->GetPanelTitle());
   panel->Show();
-  panel->Layout();
-  Layout();
-  Fit();
+  sizer_main_frame_master_->Fit(this);
   wxLogDebug("MainFrame::DisplayPanel() END");
+  Thaw();
 }
 
 void MainFrame::SetProperties() {

@@ -73,7 +73,6 @@ void DetailsPanel::DoLayout() {
   this->SetSizer(details_grid_sizer);
   Layout();
   details_grid_sizer->Fit(this);
-  GetParent()->Fit();
   wxLogDebug("DetailsPanel::DoLayout() END");
 }
 
