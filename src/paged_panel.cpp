@@ -49,7 +49,7 @@ void PagedPanel::Init() {
 }
 
 PagedPanel::~PagedPanel() {
-  // void
+  // wxLogDebug("PagedPanel::~PagedPanel()");
 }
 
 bool PagedPanel::DisplayNextPage() {
@@ -69,26 +69,9 @@ void PagedPanel::DisplayPage(size_t index) {
   wxLogDebug("PagedPanel::DisplayPanel() START");
 
   simple_book_->SetSelection(index);
-  // active_panel_index_ = index;
-  // const size_t kPanelViewIndex = 7;
-
-  // wxPanel *panel = panels_.at(index);
-
-  // if (active_panel_ != NULL)
-  //   active_panel_->Hide();
-
-  // sizer_paged_panel_->Detach(kPanelViewIndex);
-  // sizer_paged_panel_->Insert(kPanelViewIndex, panel, 1, wxEXPAND, 0);
-  // active_panel_ = panel;
-
-  // active_panel_->Show();
-  // // sizer_paged_panel_->Fit(this);
-  // Layout();
+  active_panel_index_ = index;
   GetParent()->Fit();
-  // GetParent()->Layout();
 
-  // Layout();
-  // Fit();
   wxLogDebug("PagedPanel::DisplayPanel() END");
 }
 

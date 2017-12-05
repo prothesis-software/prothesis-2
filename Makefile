@@ -6,20 +6,17 @@ CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic
 
 SOURCE_FILES=src/data_manager.cpp src/main_frame.cpp src/prothesis_app.cpp \
 src/panels/details_panel.cpp src/data_panel.cpp src/utilities.cpp \
-src/paged_panel.cpp src/questions_panel.cpp \
-src/panels/passion_panel.cpp
+src/paged_panel.cpp src/questions_panel.cpp
 
 OBJECT_FILES_LINUX=build/linux/data_manager.o build/linux/main_frame.o \
 build/linux/prothesis_app.o build/linux/details_panel.o \
 build/linux/data_panel.o build/linux/utilities.o \
-build/linux/paged_panel.o build/linux/questions_panel.o \
-build/linux/passion_panel.o
+build/linux/paged_panel.o build/linux/questions_panel.o
 
 OBJECT_FILES_WINDOWS=build/windows/data_manager.o build/windows/main_frame.o \
 build/windows/prothesis_app.o build/windows/details_panel.o \
 build/windows/data_panel.o build/windows/utilities.o \
-build/windows/paged_panel.o build/windows/questions_panel.o \
-build/windows/passion_panel.o
+build/windows/paged_panel.o build/windows/questions_panel.o
 
 WX_CONFIG_LINUX=`wx-config --toolkit=gtk2 --libs --cxxflags`
 RESOURCE_FILE=src/resources.rc
@@ -74,10 +71,6 @@ build/linux/utilities.o: src/utilities.cpp
 	${CXX} ${CXXFLAGS} -c src/utilities.cpp \
 	-o build/linux/utilities.o
 
-build/linux/passion_panel.o: src/panels/passion_panel.cpp
-	${CXX} ${CXXFLAGS} ${WX_CONFIG_LINUX} -c src/panels/passion_panel.cpp \
-	-o build/linux/passion_panel.o
-
 build/linux/paged_panel.o: src/paged_panel.cpp
 	${CXX} ${CXXFLAGS} ${WX_CONFIG_LINUX} -c src/paged_panel.cpp \
 	-o build/linux/paged_panel.o
@@ -122,10 +115,6 @@ build/windows/utilities.o: src/utilities.cpp
 build/windows/paged_panel.o: src/paged_panel.cpp
 	${CXX_WIN} ${CXXFLAGS} ${WX_CONFIG_WINDOWS} -c src/paged_panel.cpp \
 	-o build/windows/paged_panel.o
-
-build/windows/passion_panel.o: src/panels/passion_panel.cpp
-	${CXX_WIN} ${CXXFLAGS} ${WX_CONFIG_WINDOWS} -c src/panels/passion_panel.cpp \
-	-o build/windows/passion_panel.o
 
 build/windows/questions_panel.o: src/questions_panel.cpp
 	${CXX_WIN} ${CXXFLAGS} ${WX_CONFIG_WINDOWS} -c src/questions_panel.cpp \

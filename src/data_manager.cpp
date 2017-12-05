@@ -6,7 +6,6 @@
 #include <vector>
 #include "panels/details_panel.hpp"
 #include "questions_panel.hpp"
-#include "panels/passion_panel.hpp"
 
 void DataManager::Load() {
   bool gui_config_exists = Utilities::FileExists(gui_config_path_);
@@ -44,13 +43,13 @@ DataPanel* DataManager::GetPanelById(DataManager::PanelId panel_id) {
 }
 
 void DataManager::DeclarePanels() {
-  DetailsPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY,
+  DataPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY,
                                                  std::string("details"),
                                                  std::string("Details"));
   details_panel->Hide();
   panels_[PanelId::kDetailsPanel] = details_panel;
 
-  PagedPanel *passion_panel = new PassionPanel(main_frame_, wxID_ANY,
+  DataPanel *passion_panel = new QuestionsPanel(main_frame_, wxID_ANY,
                                     std::string("passion"),
                                     std::string("Passion"));
   passion_panel->Hide();

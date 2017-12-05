@@ -15,7 +15,7 @@ QuestionsPanel::QuestionsPanel(wxWindow *parent,
 }
 
 QuestionsPanel::~QuestionsPanel() {
-  // void
+  // wxLogDebug("QuestionsPanel::~QuestionsPanel()");
 }
 
 wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
@@ -25,15 +25,19 @@ wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
   // panel->Hide();
   wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 10, 0);
   wxStaticText *question_text = new wxStaticText(panel, wxID_ANY, _(question));
-  wxTextCtrl *text_ctrl_answer = new wxTextCtrl(panel, wxID_ANY, wxEmptyString);
-  // wxTextCtrl->wxTextCtrl
-  text_ctrl_answer->SetMinSize(wxSize(300, 150));
+  wxTextCtrl *text_ctrl_answer = new wxTextCtrl(panel, wxID_ANY,
+                                                wxEmptyString,
+                                                wxDefaultPosition,
+                                                wxDefaultSize,
+                                                wxTE_MULTILINE);
+  // WARN:STATIC
+  text_ctrl_answer->SetMinSize(wxSize(400, 100));
   sizer->Add(0, 0, 0, 0);
-  sizer->Add(question_text, 0, wxTOP | wxALIGN_CENTER, 5);
+  sizer->Add(question_text, 0, wxALL | wxALIGN_CENTER, 5);
   sizer->Add(0, 0, 0, 0);
 
   sizer->Add(0, 0, 0, 0);
-  sizer->Add(text_ctrl_answer, 1, wxBOTTOM | wxALIGN_CENTER, 0);
+  sizer->Add(text_ctrl_answer, 1, wxALL | wxALIGN_CENTER, 5);
   sizer->Add(0, 0, 0, 0);
 
   sizer->AddGrowableCol(0);
@@ -89,10 +93,74 @@ bool QuestionsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   return true;
 }
 
+bool QuestionsPanel::SetAnswer(std::string question, std::string answer) {
+  wxTextCtrl *answer_text_ctrl = GetAnswerCtrlByQuestion(question);
+
+  if (answer_text_ctrl != NULL) {
+    answer_text_ctrl->SetValue(answer);
+  } else {
+    return false;
+  }
+
+  return true;
+}
+
+wxTextCtrl* QuestionsPanel::GetAnswerCtrlByQuestion(std::string question) {
+  for (size_t i = 0; i < label_questions_.size(); i++) {
+    std::string label_str = label_questions_.at(i)->GetLabel().ToStdString();
+
+    if (label_str.compare(question) == 0) {
+      return text_ctrl_answers_.at(i);
+    }
+  }
+
+  return NULL;
+}
+
 bool QuestionsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
-  return false;
+  std::shared_ptr<cpptoml::table> panel_table =
+    state->get_table(GetPanelName());
+
+  if (panel_table) {
+    std::shared_ptr<cpptoml::table_array> question_array =
+      panel_table->get_table_array("question");
+
+    for (const auto& question_table : *question_array) {
+      auto question = question_table->get_as<std::string>("question");
+      auto answer = question_table->get_as<std::string>("answer");
+
+      if (answer) {
+        if (question) {
+          SetAnswer(*question, *answer);
+        }
+      }
+    }
+  } else {
+    wxLogDebug(_("No table exists for Question Panel:") + _(GetPanelName()));
+    return false;
+  }
+
+  return true;
 }
 
 std::shared_ptr<cpptoml::table> QuestionsPanel::GetUserState() {
-  return NULL;
+  wxLogDebug("QuestionsPanel::GetUserState()");
+  std::shared_ptr<cpptoml::table> panel_data = cpptoml::make_table();
+
+  std::shared_ptr<cpptoml::table_array> question_array =
+    cpptoml::make_table_array();
+
+  for (size_t i = 0; i < text_ctrl_answers_.size(); i++) {
+    // Create a question answer pair
+    std::shared_ptr<cpptoml::table> question_table =
+    cpptoml::make_table();
+    question_table->insert("answer",
+                           text_ctrl_answers_.at(i)->GetValue().ToStdString());
+    question_table->insert("question",
+                           label_questions_.at(i)->GetLabel().ToStdString());
+    question_array->push_back(question_table);
+  }
+
+  panel_data->insert("question", question_array);
+  return panel_data;
 }

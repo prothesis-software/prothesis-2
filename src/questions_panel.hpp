@@ -56,6 +56,8 @@ class QuestionsPanel : public PagedPanel {
    */
   wxPanel *CreateInternalPanel(std::string question);
 
+  wxTextCtrl* GetAnswerCtrlByQuestion(std::string question);
+
   /**
    * Set the answer for the corresponding question text
    */
