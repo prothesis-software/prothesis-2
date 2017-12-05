@@ -23,13 +23,21 @@ wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
 
   wxPanel *panel = new wxPanel(this, wxID_ANY);
   panel->Hide();
-  wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 1, 10, 0);
+  wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 10, 0);
   wxStaticText *question_text = new wxStaticText(panel, wxID_ANY, _(question));
   wxTextCtrl *text_ctrl_answer = new wxTextCtrl(panel, wxID_ANY, wxEmptyString);
-  //wxTextCtrl->wxTextCtrl
+  // wxTextCtrl->wxTextCtrl
   text_ctrl_answer->SetMinSize(wxSize(300, 150));
-  sizer->Add(question_text, 0, wxTOP | wxEXPAND | wxALIGN_CENTER, 5);
-  sizer->Add(text_ctrl_answer, 1, wxBOTTOM, 5);
+  sizer->Add(0, 0, 0, 0);
+  sizer->Add(question_text, 0, wxTOP | wxALIGN_CENTER, 5);
+  sizer->Add(0, 0, 0, 0);
+
+  sizer->Add(0, 0, 0, 0);
+  sizer->Add(text_ctrl_answer, 1, wxBOTTOM | wxALIGN_CENTER, 0);
+  sizer->Add(0, 0, 0, 0);
+
+  sizer->AddGrowableCol(0);
+  sizer->AddGrowableCol(2);
   panel->SetSizer(sizer);
 
   label_questions_.push_back(question_text);

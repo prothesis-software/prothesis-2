@@ -71,7 +71,9 @@ void DetailsPanel::DoLayout() {
   details_grid_sizer->Add(button_next_, 0, wxRIGHT | wxBOTTOM | wxALIGN_RIGHT,
                           kPanelBorderSize);
   this->SetSizer(details_grid_sizer);
+  Layout();
   details_grid_sizer->Fit(this);
+  GetParent()->Fit();
   wxLogDebug("DetailsPanel::DoLayout() END");
 }
 

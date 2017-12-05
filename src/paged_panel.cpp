@@ -55,6 +55,11 @@ bool PagedPanel::DisplayNextPage() {
     return false;
   }
 }
+
+size_t PagedPanel::GetPageCount() {
+  return panels_.size();
+}
+
 void PagedPanel::DisplayPage(size_t index) {
   wxLogDebug("PagedPanel::DisplayPanel() START");
   active_panel_index_ = index;
@@ -65,16 +70,16 @@ void PagedPanel::DisplayPage(size_t index) {
   if (active_panel_ != NULL)
     active_panel_->Hide();
 
-  // TODO(egeldenhuys): Detach vs Remove
   sizer_paged_panel_->Detach(kPanelViewIndex);
   sizer_paged_panel_->Insert(kPanelViewIndex, panel, 1, wxEXPAND, 0);
-  panel->Show();
   active_panel_ = panel;
 
+  active_panel_->Show();
+  // sizer_paged_panel_->Fit(this);
   Layout();
-  this->GetParent()->Layout();
-  this->GetParent()->Fit();
-  Fit();
+  // GetParent()->Fit();
+  GetParent()->Layout();
+
   wxLogDebug("PagedPanel::DisplayPanel() END");
 }
 
@@ -114,6 +119,8 @@ void PagedPanel::DoLayout() {
   // Spacing col
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
 
+  sizer_page_numbers->AddGrowableCol(0);
+  sizer_page_numbers->AddGrowableCol(hyperlinks_.size() + 1);
   panel_page_numbers_->SetSizer(sizer_page_numbers);
 
   // Page number panel to main sizer
@@ -139,9 +146,10 @@ void PagedPanel::DoLayout() {
   sizer_paged_panel_->Add(0, 0, 0, 0);
 
   SetSizer(sizer_paged_panel_);
-  sizer_paged_panel_->Fit(this);
   sizer_paged_panel_->AddGrowableCol(0);
   sizer_paged_panel_->AddGrowableCol(2);
+
+  sizer_paged_panel_->Fit(this);
   Layout();
   // end wxGlade
 }

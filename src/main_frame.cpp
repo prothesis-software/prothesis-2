@@ -38,12 +38,16 @@ MainFrame::MainFrame(wxWindow *parent,
                                      wxDefaultSize, header_style);
   button_config_ = new wxButton(panel_config_button_, wxID_ANY, wxT("Config"));
 
+  sizer_main_frame_master_ = new wxFlexGridSizer(4, 1, 0, 0);
+
   SetProperties();
   DoLayout();
 
   wxLogDebug("MainFrame::MainFrame() Getting detail panel");
   DisplayPanel(data_manager_->
                GetPanelById(DataManager::PanelId::kDetailsPanel));
+  //  sizer_main_frame_master_->Fit(this);
+  Fit();
   wxLogDebug("MainFrame::MainFrame() END");
 }
 
@@ -67,18 +71,18 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
   const size_t kPanelViewIndex = 1;
   const size_t kBorderSize = 0;
 
-  if (active_panel_ != NULL)
-    active_panel_->Hide();
-
-  // TODO(egeldenhuys): Detach vs Remove
   sizer_content_->Detach(kPanelViewIndex);
   sizer_content_->Insert(kPanelViewIndex,
                          panel, 1, wxEXPAND | wxALL, kBorderSize);
-  panel->Show();
+  if (active_panel_ != NULL)
+      active_panel_->Hide();
   active_panel_ = panel;
+
   SetHeaderTitle(active_panel_->GetPanelTitle());
+  panel->Show();
+  panel->Layout();
   Layout();
-  Fit();
+
   wxLogDebug("MainFrame::DisplayPanel() END");
 }
 
@@ -87,8 +91,6 @@ void MainFrame::SetProperties() {
 }
 
 void MainFrame::DoLayout() {
-  wxFlexGridSizer* sizer_main_frame_master = new wxFlexGridSizer(4, 1, 0, 0);
-
   // sizer_header
   wxFlexGridSizer *sizer_header = new wxFlexGridSizer(1, 3, 0, 0);
 
@@ -115,7 +117,7 @@ void MainFrame::DoLayout() {
   sizer_header->AddGrowableCol(0);
   sizer_header->AddGrowableCol(1);
   sizer_header->AddGrowableCol(2);
-  sizer_main_frame_master->Add(sizer_header, 1, wxEXPAND, 0);
+  sizer_main_frame_master_->Add(sizer_header, 1, wxEXPAND, 0);
 
   // bar
   wxFlexGridSizer *sizer_bar = new wxFlexGridSizer(1, 1, 0, 0);
@@ -124,7 +126,7 @@ void MainFrame::DoLayout() {
   sizer_bar->Add(line, 0, wxEXPAND, 0);
   sizer_bar->AddGrowableRow(0);
   sizer_bar->AddGrowableCol(0);
-  sizer_main_frame_master->Add(sizer_bar, 1, wxEXPAND, 0);
+  sizer_main_frame_master_->Add(sizer_bar, 1, wxEXPAND, 0);
 
   // sizer_content_
   sizer_content_->Add(0, 0, 0, 0, 0);
@@ -132,7 +134,7 @@ void MainFrame::DoLayout() {
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->AddGrowableCol(0);
   sizer_content_->AddGrowableCol(2);
-  sizer_main_frame_master->Add(sizer_content_, 1, wxEXPAND);
+  sizer_main_frame_master_->Add(sizer_content_, 1, wxEXPAND);
 
   // sizer_footer
   wxFlexGridSizer *sizer_footer = new wxFlexGridSizer(1, 3, 0, 0);
@@ -143,12 +145,13 @@ void MainFrame::DoLayout() {
   sizer_footer->AddGrowableCol(0);
   sizer_footer->AddGrowableCol(1);
   sizer_footer->AddGrowableCol(2);
-  sizer_main_frame_master->Add(sizer_footer, 1, wxEXPAND, 0);
+  sizer_main_frame_master_->Add(sizer_footer, 1, wxEXPAND, 0);
 
-  SetSizer(sizer_main_frame_master);
-  sizer_main_frame_master->AddGrowableRow(2);
-  sizer_main_frame_master->AddGrowableCol(0);
+  SetSizer(sizer_main_frame_master_);
+  sizer_main_frame_master_->AddGrowableRow(2);
+  sizer_main_frame_master_->AddGrowableCol(0);
 
+  sizer_main_frame_master_->Fit(this);
   Layout();
 }
 

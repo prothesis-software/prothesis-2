@@ -52,6 +52,7 @@ class MainFrame: public wxFrame {
   void SetProperties();
   DataManager::PanelId active_panel_id_;
   DataPanel *active_panel_ = NULL;
+  wxFlexGridSizer *sizer_main_frame_master_ = NULL;
 
   /**
    * Display the given panel and adds it to the sizer

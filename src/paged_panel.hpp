@@ -48,6 +48,8 @@ class PagedPanel : public DataPanel {
    */
   void AddPage(wxPanel * panel);
 
+  size_t GetPageCount();
+
   virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state) = 0;
   virtual std::shared_ptr<cpptoml::table> GetUserState() = 0;
   virtual bool SetUserState(std::shared_ptr<cpptoml::table> state) = 0;
