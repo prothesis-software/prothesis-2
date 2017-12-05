@@ -62,8 +62,24 @@ void MainFrame::OnClose(wxCloseEvent &e) {
 
 void MainFrame::DisplayPanelById(DataManager::PanelId id) {
   DisplayPanel(data_manager_->GetPanelById(id));
+  active_panel_id_ = id;
 }
 
+// TODO(egeldenhuys): This is a bad implementation. Should be
+// part of DataManager
+bool MainFrame::DisplayNextPanel() {
+  switch (active_panel_id_) {
+  case DataManager::PanelId::kPassionPanel:
+    DisplayPanelById(DataManager::PanelId::kPeopleIdPanel);
+    break;
+  default:
+    return false;
+  }
+
+  return true;
+}
+
+// TODO(egeldenhuys): Switch to wxSimplebook
 // WARN(egeldenhuys): Causes valgrind errors
 void MainFrame::DisplayPanel(DataPanel *panel) {
   wxLogDebug("MainFrame::DisplayPanel() START");

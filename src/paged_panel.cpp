@@ -5,6 +5,8 @@
 #include <memory>
 #include <vector>
 
+#include "main_frame.hpp"
+
 PagedPanel::PagedPanel(wxWindow* parent,
              wxWindowID id,
              std::string panel_name,
@@ -34,9 +36,14 @@ void PagedPanel::AddPage(wxPanel *panel) {
 void PagedPanel::Init() {
   wxLogDebug("PagedPanel::Init() START");
 
+  if (panels_.size() == 0) {
+    wxLogDebug("Nothing to display");
+    return;
+  }
+
   for (size_t i = 0; i < panels_.size(); i++) {
     wxHyperlinkCtrl *link = new wxHyperlinkCtrl(panel_page_numbers_, wxID_ANY,
-                                                _(std::to_string(i)),
+                                                _(std::to_string(i + 1)),
                                                 wxEmptyString);
     link->Bind(wxEVT_HYPERLINK, &PagedPanel::OnHyperlinkClick, this);
     hyperlinks_.push_back(link);
@@ -57,8 +64,11 @@ bool PagedPanel::DisplayNextPage() {
     DisplayPage(++active_panel_index_);
     return true;
   } else {
+    MainFrame * main_frame = static_cast<MainFrame *>(wxTheApp->GetTopWindow());
+    main_frame->DisplayNextPanel();
     return false;
   }
+  return true;
 }
 
 size_t PagedPanel::GetPageCount() {
@@ -82,7 +92,7 @@ void PagedPanel::OnHyperlinkClick(wxHyperlinkEvent &event) {
   wxHyperlinkCtrl *link = static_cast<wxHyperlinkCtrl*>(event.GetEventObject());
   wxString wxStr = link->GetLabel();
   std::string str = wxStr.ToStdString();
-  size_t index = std::stoi(str);
+  size_t index = std::stoi(str) - 1;
 
   DisplayPage(index);
   wxLogDebug("PagedPanel::OnHyperlinkClick() END");

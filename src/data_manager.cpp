@@ -20,6 +20,7 @@ void DataManager::Load() {
     }
   } else {
     wxLogDebug(_("The GUI config file does not exist: ") + _(gui_config_path_));
+    return;
   }
 
   if (user_config_exists) {
@@ -50,10 +51,16 @@ void DataManager::DeclarePanels() {
   panels_[PanelId::kDetailsPanel] = details_panel;
 
   DataPanel *passion_panel = new QuestionsPanel(main_frame_, wxID_ANY,
-                                    std::string("passion"),
-                                    std::string("Passion"));
+                                                std::string("passion"),
+                                                std::string("Passion"));
   passion_panel->Hide();
-  panels_[PanelId::kTestPanel] = passion_panel;
+  panels_[PanelId::kPassionPanel] = passion_panel;
+
+  DataPanel *people_id_panel = new QuestionsPanel(main_frame_, wxID_ANY,
+                                                  std::string("people_id"),
+                                                  std::string("People ID"));
+  people_id_panel->Hide();
+  panels_[PanelId::kPeopleIdPanel] = people_id_panel;
 }
 
 DataManager::DataManager(wxFrame *main_frame) {

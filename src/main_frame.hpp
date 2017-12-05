@@ -11,7 +11,6 @@
 #include <string>
 
 #include "data_panel.hpp"
-#include "panels/details_panel.hpp"
 #include "data_manager.hpp"
 
 class MainFrame: public wxFrame {
@@ -27,6 +26,8 @@ class MainFrame: public wxFrame {
    * Display the panel with the given ID
    */
   void DisplayPanelById(DataManager::PanelId id);
+
+  bool DisplayNextPanel();
 
   /**
    * Set the title displayed in the header

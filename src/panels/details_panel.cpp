@@ -36,7 +36,7 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
 void DetailsPanel::OnButtonNextClick(wxCommandEvent &event) {
   // void
   MainFrame *frame = static_cast<MainFrame*>(this->GetParent());
-  frame->DisplayPanelById(DataManager::PanelId::kTestPanel);
+  frame->DisplayPanelById(DataManager::PanelId::kPassionPanel);
 }
 
 void DetailsPanel::SetProperties() {
@@ -103,7 +103,7 @@ std::shared_ptr<cpptoml::table> DetailsPanel::GetUserState() {
 bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   std::shared_ptr<cpptoml::table> details_table = state->get_table(panel_name_);
 
-  if (details_table) {
+  if (!details_table->empty()) {
       cpptoml::option<std::string> name =
         details_table->get_as<std::string>("name");
       if (name) {

@@ -33,8 +33,9 @@ class DataManager {
    */
   enum PanelId {
     kDetailsPanel = 0,
-    kTestPanel = 1,
-    kPanelCount = 2
+    kPassionPanel = 1,
+    kPeopleIdPanel = 2,
+    kPanelCount = 3
   };
 
   /**
@@ -68,10 +69,10 @@ class DataManager {
    * All panels are declared in this function
    */
   void DeclarePanels();
-  DataPanel *panels_[2];
+  DataPanel *panels_[3];
   // Paths are relative to the base directory of the binary
   std::string gui_config_path_ = "gui.toml";
   std::string user_config_path_ = "user.toml";
-  wxFrame *main_frame_;
+  wxFrame *main_frame_ = NULL;
 };
 #endif  // DATA_MANAGER_HPP_

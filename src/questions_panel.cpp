@@ -85,7 +85,7 @@ bool QuestionsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
       wxLogDebug(_("No questions found for panel ") + _(GetPanelName()));
     }
   } else {
-    wxLogDebug(_("No table exists for panel ") + _(this->GetPanelName()));
+    wxLogDebug(_("No GUI table exists for panel ") + _(this->GetPanelName()));
     return false;
   }
 
@@ -121,7 +121,7 @@ bool QuestionsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   std::shared_ptr<cpptoml::table> panel_table =
     state->get_table(GetPanelName());
 
-  if (panel_table) {
+  if (!panel_table->empty()) {
     std::shared_ptr<cpptoml::table_array> question_array =
       panel_table->get_table_array("question");
 
@@ -136,7 +136,8 @@ bool QuestionsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
       }
     }
   } else {
-    wxLogDebug(_("No table exists for Question Panel:") + _(GetPanelName()));
+    wxLogDebug(_("No User table exists for Question Panel:") +
+               _(GetPanelName()));
     return false;
   }
 

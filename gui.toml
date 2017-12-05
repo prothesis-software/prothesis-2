@@ -29,3 +29,14 @@
         question = "What interests or hobbies have you had in the past few years that intrigue you and might hold the potential for a life passion?"
     [[passion.question]]
         question = "What would be hard for you to give up?"
+[people_id]
+    [[people_id.question]]
+        question = "5 people that inspire you most in the world stand before you. Who are they and what is it about them that sparks something within you?"
+    [[people_id.question]]
+        question = "Who is someone in your life or in history whose life and work inspires and excites you? Why?"
+    [[people_id.question]]
+        question = "Who influenced your life most and why?"
+    [[people_id.question]]
+        question = "With which character in a book or movie did you relate well and why?"
+    [[people_id.question]]
+        question = "Which super hero was you favourite when you were small? What can that say about you?"
