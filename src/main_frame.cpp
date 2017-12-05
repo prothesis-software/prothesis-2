@@ -72,6 +72,8 @@ bool MainFrame::DisplayNextPanel() {
   case DataManager::PanelId::kPassionPanel:
     DisplayPanelById(DataManager::PanelId::kPeopleIdPanel);
     break;
+  case DataManager::PanelId::kPeopleIdPanel:
+    DisplayPanelById(DataManager::PanelId::kDreamsPanel);
   default:
     return false;
   }

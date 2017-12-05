@@ -35,7 +35,8 @@ class DataManager {
     kDetailsPanel = 0,
     kPassionPanel = 1,
     kPeopleIdPanel = 2,
-    kPanelCount = 3
+    kDreamsPanel = 3,
+    kPanelCount = 4
   };
 
   /**
@@ -69,7 +70,7 @@ class DataManager {
    * All panels are declared in this function
    */
   void DeclarePanels();
-  DataPanel *panels_[3];
+  DataPanel *panels_[4];
   // Paths are relative to the base directory of the binary
   std::string gui_config_path_ = "gui.toml";
   std::string user_config_path_ = "user.toml";

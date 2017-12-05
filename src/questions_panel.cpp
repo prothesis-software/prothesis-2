@@ -121,7 +121,7 @@ bool QuestionsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   std::shared_ptr<cpptoml::table> panel_table =
     state->get_table(GetPanelName());
 
-  if (!panel_table->empty()) {
+  if (panel_table != NULL && !panel_table->empty()) {
     std::shared_ptr<cpptoml::table_array> question_array =
       panel_table->get_table_array("question");
 

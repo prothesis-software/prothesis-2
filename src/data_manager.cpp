@@ -61,6 +61,12 @@ void DataManager::DeclarePanels() {
                                                   std::string("People ID"));
   people_id_panel->Hide();
   panels_[PanelId::kPeopleIdPanel] = people_id_panel;
+
+  DataPanel *dreams_panel = new QuestionsPanel(main_frame_, wxID_ANY,
+                                                  std::string("dreams"),
+                                                  std::string("Dreams"));
+  dreams_panel->Hide();
+  panels_[PanelId::kDreamsPanel] = dreams_panel;
 }
 
 DataManager::DataManager(wxFrame *main_frame) {
