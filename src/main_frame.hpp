@@ -11,7 +11,6 @@
 #include <string>
 
 #include "data_panel.hpp"
-#include "panels/details_panel.hpp"
 #include "data_manager.hpp"
 
 class MainFrame: public wxFrame {
@@ -23,11 +22,12 @@ class MainFrame: public wxFrame {
             const wxSize &size = wxDefaultSize,
             int64_t style = wxDEFAULT_FRAME_STYLE,
             const wxString name = wxFrameNameStr);
-
   /**
-   * Display the given panel and adds it to the sizer
+   * Display the panel with the given ID
    */
-  void DisplayPanel(DataPanel *panel);
+  void DisplayPanelById(DataManager::PanelId id);
+
+  bool DisplayNextPanel();
 
   /**
    * Set the title displayed in the header
@@ -39,7 +39,6 @@ class MainFrame: public wxFrame {
 
  protected:
   wxFlexGridSizer *sizer_content_;
-  DataPanel *active_panel_;
   wxButton *button_drawer_;
   wxButton *button_config_;
   wxStaticText *label_title_;
@@ -52,6 +51,14 @@ class MainFrame: public wxFrame {
  private:
   void DoLayout();
   void SetProperties();
+  DataManager::PanelId active_panel_id_;
+  DataPanel *active_panel_ = NULL;
+  wxFlexGridSizer *sizer_main_frame_master_ = NULL;
+
+  /**
+   * Display the given panel and adds it to the sizer
+   */
+  void DisplayPanel(DataPanel *panel);
 };
 
 #endif  // MAIN_FRAME_HPP_

@@ -28,9 +28,9 @@ class DetailsPanel : public DataPanel {
   virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state);
   virtual std::shared_ptr<cpptoml::table> GetUserState();
   virtual bool SetUserState(std::shared_ptr<cpptoml::table> state);
-  wxButton *button_next_;
 
  private:
+  void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
   void SetProperties();
   void DoLayout();
 
@@ -39,10 +39,7 @@ class DetailsPanel : public DataPanel {
   wxTextCtrl *text_ctrl_surname_;
   wxSpinCtrl *spin_ctrl_age_;
   wxDatePickerCtrl *datepicker_ctrl_;
-
-  enum {
-    kButtonNextId = wxID_ANY
-  };
+  wxButton *button_next_;
 };
 
 #endif  // PANELS_DETAILS_PANEL_HPP_

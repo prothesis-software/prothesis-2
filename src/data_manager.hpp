@@ -33,7 +33,12 @@ class DataManager {
    */
   enum PanelId {
     kDetailsPanel = 0,
-    kPanelCount = 1
+    kPassionPanel = 1,
+    kPeopleIdPanel = 2,
+    kDreamsPanel = 3,
+    kValuesPanel = 4,
+    kSpokenWordsPanel = 5,
+    kPanelCount = 6
   };
 
   /**
@@ -45,7 +50,16 @@ class DataManager {
    * Returns the path to the directory where the executable is in
    */
   std::string GetBasePath();
-  DataPanel* GetPanelById(DataManager::PanelId panel_id);
+
+  /**
+   * Return a reference to the panel given its ID
+   */
+  DataPanel *GetPanelById(DataManager::PanelId panel_id);
+
+  /**
+   * Return a reference to a panel given its index
+   */
+  DataPanel *GetPanelByIndex(size_t index);
 
  private:
   /**
@@ -58,10 +72,10 @@ class DataManager {
    * All panels are declared in this function
    */
   void DeclarePanels();
-  DataPanel *panels_[1];
+  DataPanel *panels_[PanelId::kPanelCount];
   // Paths are relative to the base directory of the binary
   std::string gui_config_path_ = "gui.toml";
   std::string user_config_path_ = "user.toml";
-  wxFrame *main_frame_;
+  wxFrame *main_frame_ = NULL;
 };
 #endif  // DATA_MANAGER_HPP_

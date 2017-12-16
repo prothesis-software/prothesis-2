@@ -1,6 +1,7 @@
 #include "details_panel.hpp"
 #include <memory>
 #include <string>
+#include "src/main_frame.hpp"
 
 DetailsPanel::DetailsPanel(wxWindow *parent,
                            wxWindowID id,
@@ -10,6 +11,7 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
                            const wxSize &size,
                            int64_t style)
   : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
+  wxLogDebug("DetailsPanel::DetailsPanel() START");
   text_ctrl_name_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   text_ctrl_surname_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   spin_ctrl_age_ = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
@@ -23,8 +25,18 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
   datepicker_ctrl_ = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime,
                                           wxDefaultPosition, wxDefaultSize,
                                           wxDP_DEFAULT | wxDP_SHOWCENTURY);
+  button_next_ = new wxButton(this, wxID_ANY, _("Next"));
+  button_next_->Bind(wxEVT_BUTTON, &DetailsPanel::OnButtonNextClick, this,
+                    wxID_ANY);
   SetProperties();
   DoLayout();
+  wxLogDebug("DetailsPanel::DetailsPanel() END");
+}
+
+void DetailsPanel::OnButtonNextClick(wxCommandEvent &event) {
+  // void
+  MainFrame *frame = static_cast<MainFrame*>(this->GetParent());
+  frame->DisplayPanelById(DataManager::PanelId::kPassionPanel);
 }
 
 void DetailsPanel::SetProperties() {
@@ -33,9 +45,8 @@ void DetailsPanel::SetProperties() {
 }
 
 void DetailsPanel::DoLayout() {
+  wxLogDebug("DetailsPanel::DoLayout() START");
   const int kPanelBorderSize = 10;
-
-  button_next_ = new wxButton(this, kButtonNextId, _("Next"));
 
   wxFlexGridSizer *details_grid_sizer = new wxFlexGridSizer(5, 2, 7, 25);
   wxStaticText *label_name = new wxStaticText(this, wxID_ANY, _("Name"));
@@ -60,7 +71,9 @@ void DetailsPanel::DoLayout() {
   details_grid_sizer->Add(button_next_, 0, wxRIGHT | wxBOTTOM | wxALIGN_RIGHT,
                           kPanelBorderSize);
   this->SetSizer(details_grid_sizer);
+  Layout();
   details_grid_sizer->Fit(this);
+  wxLogDebug("DetailsPanel::DoLayout() END");
 }
 
 bool DetailsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
@@ -89,7 +102,7 @@ std::shared_ptr<cpptoml::table> DetailsPanel::GetUserState() {
 bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   std::shared_ptr<cpptoml::table> details_table = state->get_table(panel_name_);
 
-  if (details_table) {
+  if (!details_table->empty()) {
       cpptoml::option<std::string> name =
         details_table->get_as<std::string>("name");
       if (name) {

@@ -48,6 +48,7 @@ class DataPanel : public wxPanel {
    * SetGUIState() needs to be called before SetUserState()
    */
   virtual bool SetUserState(std::shared_ptr<cpptoml::table> state) = 0;
+
   std::string GetPanelName();
   std::string GetPanelTitle();
 

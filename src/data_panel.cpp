@@ -20,3 +20,7 @@ std::string DataPanel::GetPanelName() {
 std::string DataPanel::GetPanelTitle() {
   return panel_title_;
 }
+
+// wxSize DataPanel::GetLargestPanelSize() {
+//  return GetMinSize();
+// }
