@@ -1,6 +1,7 @@
 #include "main_frame.hpp"
 #include <csignal>
 #include <string>
+#include "navigation_drawer.hpp"
 
 void MainFrame::OnKill(int sig) {
   wxLogDebug("MainFrame::OnKill");
@@ -51,7 +52,7 @@ MainFrame::MainFrame(wxWindow *parent,
     wxLogDebug("MainFrame::MainFrame() Getting detail panel");
     DisplayPanel(data_manager_->
                  GetPanelById(DataManager::PanelId::kDetailsPanel));
-    //  sizer_main_frame_master_->Fit(this);
+
     wxLogDebug("MainFrame::MainFrame() END");
   } catch (std::exception &e) {
     wxLogDebug("KEKEd");
@@ -134,6 +135,7 @@ void MainFrame::DoLayout() {
   panel_drawer_button_->SetSizer(sizer_drawer_button);
   sizer_header->Add(panel_drawer_button_, 1, wxEXPAND, 0);
 
+
   // title
   wxBoxSizer *sizer_title_h = new wxBoxSizer(wxHORIZONTAL);
   wxBoxSizer *sizer_title_v = new wxBoxSizer(wxVERTICAL);
@@ -163,7 +165,9 @@ void MainFrame::DoLayout() {
   sizer_main_frame_master_->Add(sizer_bar, 1, wxEXPAND, 0);
 
   // sizer_content_
-  sizer_content_->Add(0, 0, 0, 0, 0);
+  // sizer_content_->Add(0, 0, 0, 0, 0);
+  NavigationDrawer *drawer = new NavigationDrawer(this, wxID_ANY);
+  sizer_content_->Add(drawer, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->AddGrowableCol(0);
