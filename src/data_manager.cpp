@@ -144,35 +144,40 @@ void DataManager::SaveUserConfig() {
 
 // TODO(egeldenhuys): MacOS
 std::string DataManager::GetBasePath() {
-  #ifdef __linux__
-  // Find the relative path using argv[0]
-  // TODO(egeldenhuys): Absolute path
-  std::vector<std::string> tokens =
-    Utilities::SplitString(std::string(wxTheApp->argv[0]), '/');
-  std::string base_path = "";
-  for (size_t i = 0; i < tokens.size() - 1; i++) {
-    base_path.append(tokens.at(i));
-    base_path.append("/");
-  }
-  return base_path;
+  // I might be mistaken but seeing as macOs is considered
+  // to be a nix* os this should trigger when compiling on
+  // macos.
+  #ifdef __unix__
+       // Find the relative path using argv[0]
+       // TODO(egeldenhuys): Absolute path
+       std::vector<std::string> tokens =
+         Utilities::SplitString(std::string(wxTheApp->argv[0]), '/');
+       std::string base_path = "";
+       for (size_t i = 0; i < tokens.size() - 1; i++) {
+         base_path.append(tokens.at(i));
+         base_path.append("/");
+       }
+       return base_path;
   #elif _WIN32
-  // https://stackoverflow.com/questions/2647429/c-windows-
-  // path-to-the-folder-where-the-executable-is-located
-  HMODULE hModule = GetModuleHandleW(NULL);
-  WCHAR path[MAX_PATH];
-  GetModuleFileNameW(hModule, path, MAX_PATH);
+       // https://stackoverflow.com/questions/2647429/c-windows-
+       // path-to-the-folder-where-the-executable-is-located
+       HMODULE hModule = GetModuleHandleW(NULL);
+       WCHAR path[MAX_PATH];
+       GetModuleFileNameW(hModule, path, MAX_PATH);
 
-  std::wstring ws(path);
-  std::string str(ws.begin(), ws.end());
-  std::string base_path = "";
-  std::vector<std::string> tokens = Utilities::SplitString(str, '\\');
-  for (size_t i = 0; i < tokens.size() - 1; i++) {
-    base_path.append(tokens.at(i));
-    base_path.append("/");
-  }
-  return base_path;
+       // Use GetCurrentDirectory()
+       std::wstring ws(path);
+       std::string str(ws.begin(), ws.end());
+       std::string base_path = "";
+       std::vector<std::string> tokens = Utilities::SplitString(str, '\\');
+       for (size_t i = 0; i < tokens.size() - 1; i++) {
+         base_path.append(tokens.at(i));
+         base_path.append("/");
+       }
+       return base_path;
   #endif
-  return "UNKNOWN OPERATING SYSTEM";
+
+  throw std::logic_error("UNKNOWN OPERATING SYSTEM");
 }
 
 DataManager::~DataManager() {

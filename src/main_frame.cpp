@@ -51,13 +51,14 @@ MainFrame::MainFrame(wxWindow *parent,
     wxLogDebug("MainFrame::MainFrame() Getting detail panel");
     DisplayPanel(data_manager_->
                  GetPanelById(DataManager::PanelId::kDetailsPanel));
-    //  sizer_main_frame_master_->Fit(this);
+
     wxLogDebug("MainFrame::MainFrame() END");
   } catch (std::exception &e) {
-    wxLogDebug("KEKEd");
+    wxLogDebug("Exception!");
     wxLogDebug(e.what());
   }
 }
+
 
 
 void MainFrame::SetHeaderTitle(std::string title) {
