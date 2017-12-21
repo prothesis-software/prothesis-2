@@ -81,6 +81,7 @@ void PagedPanel::DisplayPage(size_t index) {
   simple_book_->SetSelection(index);
   active_panel_index_ = index;
   Layout();
+  // WARN(egeldenhuys): Modifies parent
   GetParent()->Fit();
 
   wxLogDebug("PagedPanel::DisplayPanel() END");
@@ -88,15 +89,12 @@ void PagedPanel::DisplayPage(size_t index) {
 
 // TODO(egeldenhuys): Error handling for int <-> string conversions
 void PagedPanel::OnHyperlinkClick(wxHyperlinkEvent &event) {
-  wxLogDebug("PagedPanel::OnHyperlinkClick() START");
-
   wxHyperlinkCtrl *link = static_cast<wxHyperlinkCtrl*>(event.GetEventObject());
   wxString wxStr = link->GetLabel();
   std::string str = wxStr.ToStdString();
   size_t index = std::stoi(str) - 1;
 
   DisplayPage(index);
-  wxLogDebug("PagedPanel::OnHyperlinkClick() END");
 }
 
 void PagedPanel::SetProperties() {
