@@ -135,7 +135,6 @@ void MainFrame::DoLayout() {
   panel_drawer_button_->SetSizer(sizer_drawer_button);
   sizer_header->Add(panel_drawer_button_, 1, wxEXPAND, 0);
 
-
   // title
   wxBoxSizer *sizer_title_h = new wxBoxSizer(wxHORIZONTAL);
   wxBoxSizer *sizer_title_v = new wxBoxSizer(wxVERTICAL);
@@ -167,7 +166,7 @@ void MainFrame::DoLayout() {
   // sizer_content_
   // sizer_content_->Add(0, 0, 0, 0, 0);
   NavigationDrawer *drawer = new NavigationDrawer(this, wxID_ANY);
-  sizer_content_->Add(drawer, 0, 0, 0);
+  sizer_content_->Add(drawer, 0, wxEXPAND, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->AddGrowableCol(0);

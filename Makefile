@@ -6,19 +6,22 @@ CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic
 
 SOURCE_FILES=src/data_manager.cpp src/main_frame.cpp src/prothesis_app.cpp \
 src/panels/details_panel.cpp src/data_panel.cpp src/utilities.cpp \
-src/paged_panel.cpp src/questions_panel.cpp src/navigation_drawer.cpp
+src/paged_panel.cpp src/questions_panel.cpp src/navigation_drawer.cpp \
+src/navigation_link.cpp
 
 OBJECT_FILES_LINUX=build/linux/data_manager.o build/linux/main_frame.o \
 build/linux/prothesis_app.o build/linux/details_panel.o \
 build/linux/data_panel.o build/linux/utilities.o \
 build/linux/paged_panel.o build/linux/questions_panel.o \
-build/linux/navigation_drawer.o
+build/linux/navigation_drawer.o \
+build/linux/navigation_link.o
 
 OBJECT_FILES_WINDOWS=build/windows/data_manager.o build/windows/main_frame.o \
 build/windows/prothesis_app.o build/windows/details_panel.o \
 build/windows/data_panel.o build/windows/utilities.o \
 build/windows/paged_panel.o build/windows/questions_panel.o \
-build/windows/navigation_drawer.o
+build/windows/navigation_drawer.o \
+build/windows/navigation_link.o
 
 WX_CONFIG_LINUX=`wx-config --toolkit=gtk2 --libs --cxxflags`
 RESOURCE_FILE=src/resources.rc
@@ -85,6 +88,10 @@ build/linux/navigation_drawer.o: src/navigation_drawer.cpp
 	${CXX} ${CXXFLAGS} ${WX_CONFIG_LINUX} -c src/navigation_drawer.cpp \
 	-o build/linux/navigation_drawer.o
 
+build/linux/navigation_link.o: src/navigation_link.cpp
+	${CXX} ${CXXFLAGS} ${WX_CONFIG_LINUX} -c src/navigation_link.cpp \
+	-o build/linux/navigation_link.o
+
 linux: linux_build_dir lint apply_gui_config ${OBJECT_FILES_LINUX}
 	mkdir -p build
 	${CXX} ${OBJECT_FILES_LINUX} ${CXXFLAGS} ${WX_CONFIG_LINUX} \
@@ -129,6 +136,10 @@ build/windows/questions_panel.o: src/questions_panel.cpp
 build/windows/navigation_drawer.o: src/navigation_drawer.cpp
 	${CXX_WIN} ${CXXFLAGS} ${WX_CONFIG_WINDOWS} -c src/navigation_drawer.cpp \
 	-o build/windows/navigation_drawer.o
+
+build/windows/navigation_link.o: src/navigation_link.cpp
+	${CXX_WIN} ${CXXFLAGS} ${WX_CONFIG_WINDOWS} -c src/navigation_link.cpp \
+	-o build/windows/navigation_link.o
 
 build/resources.o: ${RESOURCE_FILE}
 	mkdir -p build
