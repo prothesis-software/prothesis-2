@@ -97,23 +97,14 @@ void MainFrame::SetProperties() {
 }
 
 void MainFrame::DoLayout() {
-  // title
-  // wxBoxSizer *sizer_title_h = new wxBoxSizer(wxHORIZONTAL);
-  // wxBoxSizer *sizer_title_v = new wxBoxSizer(wxVERTICAL);
-  // sizer_title_v->Add(label_title_, 0, wxEXPAND, 0);
-  // sizer_title_h->Add(sizer_title_v, 1, wxALIGN_BOTTOM, 0);
-  // panel_title_->SetSizer(sizer_title_h);
-  // sizer_header->Add(panel_title_, 1, wxEXPAND, 0);
+  // TODO(egeldenhuys): panel_main_frame_ otherwise we have strange backround
+  // colour on windows
+
   sizer_main_frame_->Add(label_title_, 1, wxALIGN_CENTER | wxEXPAND, 0);
 
   // bar
-  // wxFlexGridSizer *sizer_bar = new wxFlexGridSizer(1, 1, 0, 0);
   wxStaticLine *line = new wxStaticLine(this, wxID_ANY);
   line->SetMinSize(wxSize(10, 4));  // Required to work
-  // sizer_bar->Add(line, 0, wxEXPAND, 0);
-  // sizer_bar->AddGrowableRow(0);
-  // sizer_bar->AddGrowableCol(0);
-  // sizer_main_frame_master_->Add(sizer_bar, 1, wxEXPAND, 0);
   sizer_main_frame_->Add(line, 1, wxEXPAND, 0);
 
   // sizer_content_
@@ -123,11 +114,13 @@ void MainFrame::DoLayout() {
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);  // TODO(egeldenhuys): button_next
+  sizer_content_->AddGrowableCol(0);
   sizer_content_->AddGrowableCol(2);
   sizer_content_->AddGrowableRow(1);
   sizer_main_frame_->Add(sizer_content_, 1, wxEXPAND, 0);
 
   sizer_main_frame_->AddGrowableCol(0);
+
   SetSizer(sizer_main_frame_);
   sizer_main_frame_->Fit(this);
   Fit();
