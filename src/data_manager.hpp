@@ -29,7 +29,8 @@ class DataManager {
 
   ~DataManager();
 
-  /** The PanelId corresponds to the index of the panel in the panels_ array
+  /**
+   * Id correspond to index in panels_
    */
   enum PanelId {
     kDetailsPanel = 0,
@@ -40,6 +41,8 @@ class DataManager {
     kSpokenWordsPanel = 5,
     kPanelCount = 6
   };
+
+  static std::string kIdMap[];
 
   /**
    * Save the User config
@@ -72,10 +75,16 @@ class DataManager {
    * All panels are declared in this function
    */
   void DeclarePanels();
-  DataPanel *panels_[PanelId::kPanelCount];
+
+  /**
+   * Add a panel to the panel vector. Calls Hide() on the panel.
+   */
+  void AddPanel(DataPanel* panel, PanelId id);
+
+  DataPanel* panels_[PanelId::kPanelCount];
+  wxFrame *main_frame_ = NULL;
   // Paths are relative to the base directory of the binary
   std::string gui_config_path_ = "gui.toml";
   std::string user_config_path_ = "user.toml";
-  wxFrame *main_frame_ = NULL;
 };
 #endif  // DATA_MANAGER_HPP_

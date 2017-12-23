@@ -7,6 +7,64 @@
 #include "panels/details_panel.hpp"
 #include "questions_panel.hpp"
 
+DataManager::DataManager(wxFrame *main_frame) {
+  main_frame_ = main_frame;
+
+  std::string base_path = GetBasePath();
+  wxLogDebug(_(std::string("base_path = ") + base_path));
+
+  user_config_path_ = base_path + user_config_path_;
+  wxLogDebug(_(std::string("user_config_path_ = ") + user_config_path_));
+
+  gui_config_path_ = base_path + gui_config_path_;
+  wxLogDebug(_(std::string("gui_config_path_ = ") + gui_config_path_));
+
+  for (size_t i = 0; i < PanelId::kPanelCount; i++) {
+    panels_[i] = NULL;
+  }
+
+  DeclarePanels();
+  Load();
+}
+
+void DataManager::AddPanel(DataPanel* panel, PanelId id) {
+  panels_[id] = panel;
+  panel->Hide();
+}
+
+void DataManager::DeclarePanels() {
+  // DETAILS
+  AddPanel(new DetailsPanel(main_frame_, wxID_ANY,
+                            std::string("details"),
+                            std::string("Details")),
+           PanelId::kDetailsPanel);
+  // PASSIONS
+  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+                              std::string("passion"),
+                              std::string("Passion")),
+           PanelId::kPassionPanel);
+  // PEOPLE ID
+  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+                              std::string("people_id"),
+                              std::string("People ID")),
+           PanelId::kPeopleIdPanel);
+  // DREAMS
+  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+                              std::string("dreams"),
+                              std::string("Dreams")),
+           PanelId::kDreamsPanel);
+  // VALUES
+  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+                              std::string("values"),
+                              std::string("Values")),
+           PanelId::kValuesPanel);
+  // SPOKEN WORDS
+  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+                              std::string("spoken_words"),
+                              std::string("Spoken Words")),
+           PanelId::kSpokenWordsPanel);
+}
+
 // TODO(egeldenhuys): Handle parse errors
 void DataManager::Load() {
   bool gui_config_exists = Utilities::FileExists(gui_config_path_);
@@ -42,70 +100,6 @@ DataPanel* DataManager::GetPanelByIndex(size_t index) {
 
 DataPanel* DataManager::GetPanelById(DataManager::PanelId panel_id) {
   return panels_[panel_id];
-}
-
-void DataManager::DeclarePanels() {
-  // DETAILS
-  DataPanel *details_panel = new DetailsPanel(main_frame_, wxID_ANY,
-                                                 std::string("details"),
-                                                 std::string("Details"));
-  details_panel->Hide();
-  panels_[PanelId::kDetailsPanel] = details_panel;
-
-  // PASSIONS
-  DataPanel *passion_panel = new QuestionsPanel(main_frame_, wxID_ANY,
-                                                std::string("passion"),
-                                                std::string("Passion"));
-  passion_panel->Hide();
-  panels_[PanelId::kPassionPanel] = passion_panel;
-
-  // PEOPLE ID
-  DataPanel *people_id_panel = new QuestionsPanel(main_frame_, wxID_ANY,
-                                                  std::string("people_id"),
-                                                  std::string("People ID"));
-  people_id_panel->Hide();
-  panels_[PanelId::kPeopleIdPanel] = people_id_panel;
-
-  // DREAMS
-  DataPanel *dreams_panel = new QuestionsPanel(main_frame_, wxID_ANY,
-                                                  std::string("dreams"),
-                                                  std::string("Dreams"));
-  dreams_panel->Hide();
-  panels_[PanelId::kDreamsPanel] = dreams_panel;
-
-  // VALUES
-  DataPanel *values_panel = new QuestionsPanel(main_frame_, wxID_ANY,
-                                               std::string("values"),
-                                               std::string("Values"));
-  values_panel->Hide();
-  panels_[PanelId::kValuesPanel] = values_panel;
-
-  // SPOKEN WORDS
-  DataPanel *spoken_words_panel = new QuestionsPanel(main_frame_, wxID_ANY,
-                                               std::string("spoken_words"),
-                                               std::string("Spoken Words"));
-  spoken_words_panel->Hide();
-  panels_[PanelId::kSpokenWordsPanel] = spoken_words_panel;
-}
-
-DataManager::DataManager(wxFrame *main_frame) {
-  main_frame_ = main_frame;
-
-  std::string base_path = GetBasePath();
-  wxLogDebug(_(std::string("base_path = ") + base_path));
-
-  user_config_path_ = base_path + user_config_path_;
-  wxLogDebug(_(std::string("user_config_path_ = ") + user_config_path_));
-
-  gui_config_path_ = base_path + gui_config_path_;
-  wxLogDebug(_(std::string("gui_config_path_ = ") + gui_config_path_));
-
-  for (size_t i = 0; i < PanelId::kPanelCount; i++) {
-    panels_[i] = NULL;
-  }
-
-  DeclarePanels();
-  Load();
 }
 
 void DataManager::SaveUserConfig() {
