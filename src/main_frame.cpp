@@ -15,48 +15,19 @@ MainFrame::MainFrame(wxWindow *parent,
                      int64_t style,
                      const wxString name)
   : wxFrame(parent, id, title, pos, size, style, name) {
-  try {
-    wxLogDebug("MainFrame::MainFrame() START");
-    std::signal(SIGINT, OnKill);
+  std::signal(SIGINT, OnKill);
+  data_manager_ = new DataManager(this);
+  sizer_content_ = new wxFlexGridSizer(2, 3, 0, 0);
+  sizer_main_frame_ = new wxFlexGridSizer(3, 1, 0, 0);
 
-    const int64_t header_style = 0;
-
-    data_manager_ = new DataManager(this);
-    sizer_content_ = new wxFlexGridSizer(1, 3, 0, 0);
-    panel_drawer_button_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
-                                       wxDefaultSize, header_style);
-    button_drawer_ = new wxButton(panel_drawer_button_,
-                                  wxID_ANY, wxT("Drawer"));
-
-    panel_title_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
-                               wxDefaultSize, header_style);
-
-    // Need to give Ellipsize flags: http://trac.wxwidgets.org/ticket/10716
-    label_title_ = new wxStaticText(panel_title_, wxID_ANY, wxT("Title"),
-                                    wxDefaultPosition, wxDefaultSize,
-                                    wxALIGN_CENTER | wxST_ELLIPSIZE_END);
-
-    panel_config_button_ = new wxPanel(this, wxID_ANY, wxDefaultPosition,
-                                       wxDefaultSize, header_style);
-    button_config_ = new wxButton(panel_config_button_,
-                                  wxID_ANY, wxT("Config"));
-
-    sizer_main_frame_master_ = new wxFlexGridSizer(4, 1, 0, 0);
-
-    wxLogDebug("MainFrame::MainFrame() do layout stuff");
-    SetProperties();
-    DoLayout();
-    wxLogDebug("MainFrame::MainFrame() do layout stuff = DONE");
-
-    wxLogDebug("MainFrame::MainFrame() Getting detail panel");
-    DisplayPanel(data_manager_->
-                 GetPanelById(DataManager::PanelId::kDetailsPanel));
-
-    wxLogDebug("MainFrame::MainFrame() END");
-  } catch (std::exception &e) {
-    wxLogDebug("Exception!");
-    wxLogDebug(e.what());
-  }
+  // Need to give Ellipsize flags: http://trac.wxwidgets.org/ticket/10716
+  label_title_ = new wxStaticText(this, wxID_ANY, wxT("Title"),
+                                  wxDefaultPosition, wxDefaultSize,
+                                  wxALIGN_CENTER | wxST_ELLIPSIZE_END);
+  SetProperties();
+  DoLayout();
+  DisplayPanel(data_manager_->
+               GetPanelById(DataManager::PanelId::kDetailsPanel));
 }
 
 
@@ -116,7 +87,7 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
 
   SetHeaderTitle(active_panel_->GetPanelTitle());
   panel->Show();
-  sizer_main_frame_master_->Fit(this);
+  Fit();
   wxLogDebug("MainFrame::DisplayPanel() END");
   Thaw();
 }
@@ -126,67 +97,40 @@ void MainFrame::SetProperties() {
 }
 
 void MainFrame::DoLayout() {
-  // sizer_header
-  wxFlexGridSizer *sizer_header = new wxFlexGridSizer(1, 3, 0, 0);
-
-  // drawer button
-  wxBoxSizer *sizer_drawer_button = new wxBoxSizer(wxVERTICAL);
-  sizer_drawer_button->Add(button_drawer_, 0, 0, 0);
-  panel_drawer_button_->SetSizer(sizer_drawer_button);
-  sizer_header->Add(panel_drawer_button_, 1, wxEXPAND, 0);
-
   // title
-  wxBoxSizer *sizer_title_h = new wxBoxSizer(wxHORIZONTAL);
-  wxBoxSizer *sizer_title_v = new wxBoxSizer(wxVERTICAL);
-  sizer_title_v->Add(label_title_, 0, wxEXPAND, 0);
-  sizer_title_h->Add(sizer_title_v, 1, wxALIGN_BOTTOM, 0);
-  panel_title_->SetSizer(sizer_title_h);
-  sizer_header->Add(panel_title_, 1, wxEXPAND, 0);
-
-  // config button
-  wxBoxSizer *sizer_config_button = new wxBoxSizer(wxVERTICAL);
-  sizer_config_button->Add(button_config_, 0, wxALIGN_RIGHT, 0);
-  panel_config_button_->SetSizer(sizer_config_button);
-  sizer_header->Add(panel_config_button_, 1, wxEXPAND, 0);
-  sizer_header->AddGrowableRow(0);
-  sizer_header->AddGrowableCol(0);
-  sizer_header->AddGrowableCol(1);
-  sizer_header->AddGrowableCol(2);
-  sizer_main_frame_master_->Add(sizer_header, 1, wxEXPAND, 0);
+  // wxBoxSizer *sizer_title_h = new wxBoxSizer(wxHORIZONTAL);
+  // wxBoxSizer *sizer_title_v = new wxBoxSizer(wxVERTICAL);
+  // sizer_title_v->Add(label_title_, 0, wxEXPAND, 0);
+  // sizer_title_h->Add(sizer_title_v, 1, wxALIGN_BOTTOM, 0);
+  // panel_title_->SetSizer(sizer_title_h);
+  // sizer_header->Add(panel_title_, 1, wxEXPAND, 0);
+  sizer_main_frame_->Add(label_title_, 1, wxALIGN_CENTER | wxEXPAND, 0);
 
   // bar
-  wxFlexGridSizer *sizer_bar = new wxFlexGridSizer(1, 1, 0, 0);
+  // wxFlexGridSizer *sizer_bar = new wxFlexGridSizer(1, 1, 0, 0);
   wxStaticLine *line = new wxStaticLine(this, wxID_ANY);
   line->SetMinSize(wxSize(10, 4));  // Required to work
-  sizer_bar->Add(line, 0, wxEXPAND, 0);
-  sizer_bar->AddGrowableRow(0);
-  sizer_bar->AddGrowableCol(0);
-  sizer_main_frame_master_->Add(sizer_bar, 1, wxEXPAND, 0);
+  // sizer_bar->Add(line, 0, wxEXPAND, 0);
+  // sizer_bar->AddGrowableRow(0);
+  // sizer_bar->AddGrowableCol(0);
+  // sizer_main_frame_master_->Add(sizer_bar, 1, wxEXPAND, 0);
+  sizer_main_frame_->Add(line, 1, wxEXPAND, 0);
 
   // sizer_content_
+  sizer_content_->Add(0, 0, 0, 0, 0);  // TODO(egeldenhuys): navbar
+  sizer_content_->Add(0, 0, 0, 0, 0);  // Index 1 content placeholder
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
-  sizer_content_->AddGrowableCol(0);
+  sizer_content_->Add(0, 0, 0, 0, 0);  // TODO(egeldenhuys): button_next
   sizer_content_->AddGrowableCol(2);
-  sizer_main_frame_master_->Add(sizer_content_, 1, wxEXPAND);
+  sizer_content_->AddGrowableRow(1);
+  sizer_main_frame_->Add(sizer_content_, 1, wxEXPAND, 0);
 
-  // sizer_footer
-  wxFlexGridSizer *sizer_footer = new wxFlexGridSizer(1, 3, 0, 0);
-  sizer_footer->Add(0, 0, 0, 0, 0);
-  sizer_footer->Add(0, 0, 0, 0, 0);
-  sizer_footer->Add(0, 0, 0, 0, 0);
-  sizer_footer->AddGrowableRow(0);
-  sizer_footer->AddGrowableCol(0);
-  sizer_footer->AddGrowableCol(1);
-  sizer_footer->AddGrowableCol(2);
-  sizer_main_frame_master_->Add(sizer_footer, 1, wxEXPAND, 0);
-
-  SetSizer(sizer_main_frame_master_);
-  sizer_main_frame_master_->AddGrowableRow(2);
-  sizer_main_frame_master_->AddGrowableCol(0);
-
-  sizer_main_frame_master_->Fit(this);
+  sizer_main_frame_->AddGrowableCol(0);
+  SetSizer(sizer_main_frame_);
+  sizer_main_frame_->Fit(this);
+  Fit();
   Layout();
 }
 
