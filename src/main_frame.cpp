@@ -46,6 +46,7 @@ void MainFrame::OnClose(wxCloseEvent &e) {
 void MainFrame::DisplayPanelById(DataManager::PanelId id) {
   DisplayPanel(data_manager_->GetPanelById(id));
   active_panel_id_ = id;
+  Refresh();
 }
 
 // TODO(egeldenhuys): This is a bad implementation. Should be
