@@ -37,6 +37,11 @@ class MainFrame: public wxFrame {
   DataManager *data_manager_;
   ~MainFrame();
 
+  /**
+   * Returns the minimun size that will fit every page
+   */
+  wxSize GetOverallMinSize();
+
  private:
   void DoLayout();
   void SetProperties();

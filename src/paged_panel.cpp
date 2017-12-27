@@ -81,7 +81,6 @@ void PagedPanel::DisplayPage(size_t index) {
   simple_book_->SetSelection(index);
   active_panel_index_ = index;
   Layout();
-  GetParent()->Fit();
 
   wxLogDebug("PagedPanel::DisplayPanel() END");
 }

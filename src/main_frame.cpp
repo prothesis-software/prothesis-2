@@ -26,8 +26,10 @@ MainFrame::MainFrame(wxWindow *parent,
                                   wxALIGN_CENTER | wxST_ELLIPSIZE_END);
   SetProperties();
   DoLayout();
-  DisplayPanel(data_manager_->
-               GetPanelById(DataManager::PanelId::kDetailsPanel));
+  DisplayPanelById(DataManager::PanelId::kDetailsPanel);
+  Fit();
+
+  SetMinSize(GetOverallMinSize());
 }
 
 
@@ -50,6 +52,9 @@ void MainFrame::DisplayPanelById(DataManager::PanelId id) {
 // part of DataManager
 bool MainFrame::DisplayNextPanel() {
   switch (active_panel_id_) {
+  case DataManager::PanelId::kDetailsPanel:
+    DisplayPanelById(DataManager::PanelId::kPassionPanel);
+    break;
   case DataManager::PanelId::kPassionPanel:
     DisplayPanelById(DataManager::PanelId::kPeopleIdPanel);
     break;
@@ -71,6 +76,7 @@ bool MainFrame::DisplayNextPanel() {
 
 // TODO(egeldenhuys): Switch to wxSimplebook
 // WARN(egeldenhuys): Causes valgrind errors
+// Do not use directly. Use DisplayPanelById()
 void MainFrame::DisplayPanel(DataPanel *panel) {
   // Freeze and thaw are required to prevent visual artifacts
   Freeze();
@@ -87,9 +93,41 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
 
   SetHeaderTitle(active_panel_->GetPanelTitle());
   panel->Show();
-  Fit();
+  Layout();
   wxLogDebug("MainFrame::DisplayPanel() END");
   Thaw();
+}
+
+
+wxSize MainFrame::GetOverallMinSize() {
+  Freeze();
+  wxLogDebug(_("Getting best size..."));
+  wxSize minSize = GetSize();
+  DataManager::PanelId orig = active_panel_id_;
+
+  wxLogDebug(_(std::to_string(minSize.x)) +
+             _(", ") +
+             _(std::to_string(minSize.y)));
+
+  while (DisplayNextPanel() != false) {
+    Fit();
+    wxSize tmpSize = GetSize();
+    wxLogDebug(_(std::to_string(tmpSize.x)) +
+               _(", ") +
+               _(std::to_string(tmpSize.y)));
+    if (tmpSize.x > minSize.x || tmpSize.y > minSize.y) {
+      minSize = tmpSize;
+    }
+  }
+
+  wxLogDebug(_("Best size = ") +
+             _(std::to_string(minSize.x)) +
+             _(", ") +
+             _(std::to_string(minSize.y)));
+
+  DisplayPanelById(orig);
+  Thaw();
+  return minSize;
 }
 
 void MainFrame::SetProperties() {
