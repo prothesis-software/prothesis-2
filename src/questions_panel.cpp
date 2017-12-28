@@ -20,8 +20,6 @@ QuestionsPanel::~QuestionsPanel() {
 }
 
 wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
-  wxLogDebug(_("Creating question panel: ") + _(question));
-
   wxPanel *panel = new wxPanel(this, wxID_ANY);
   // panel->Hide();
   wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 10, 0);
@@ -60,8 +58,6 @@ bool QuestionsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
     state->get_table(this->GetPanelName());
 
   if (panel_table) {
-    std::cout << *panel_table << std::endl;
-
     // We can get the array named questions since we already
     // extracted the panel table.
     // ie the '[[panel_name.questions]]' becomes '[[questions]]'

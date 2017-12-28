@@ -127,7 +127,6 @@ void DataManager::SaveUserConfig() {
 
     std::stringstream output;
     output << *user_config;
-    wxLogDebug(_("User data = \n") + _(output.str().c_str()));
     wxLogDebug("Writing User config...");
 
     std::fstream fs(user_config_path_, std::fstream::out);
