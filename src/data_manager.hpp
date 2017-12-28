@@ -39,8 +39,8 @@ class DataManager {
     kDreamsPanel = 3,
     kValuesPanel = 4,
     kSpokenWordsPanel = 5,
-    kPanelCount = 6,
-    kSkillsPanel = 7,
+    kSkillsPanel = 6,
+    kPanelCount = 7,
     kDefaultPanel = -1
   };
 

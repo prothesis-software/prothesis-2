@@ -66,7 +66,7 @@ void DataManager::DeclarePanels() {
            PanelId::kSpokenWordsPanel);
   // Skills
   AddPanel(new CheckBoxPanel(main_frame_, wxID_ANY,
-                             std::string("Skills"),
+                             std::string("skills"),
                              std::string("Skills")),
           PanelId::kSkillsPanel);
 }
