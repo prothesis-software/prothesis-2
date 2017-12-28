@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~
+cd $HOME
 
 ###############
 # LINUX
@@ -15,7 +15,7 @@ cd wxWidgets-3.0.3
 #-----
 mkdir build-gtk2
 cd build-gtk2
-../configure --prefix=~/wxwidgets/gtk2 --disable-unicode --with-gtk=2
+../configure --prefix=$HOME/wxwidgets/gtk2 --disable-unicode --with-gtk=2
 make
 make install
 

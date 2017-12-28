@@ -2,7 +2,7 @@ git:
   depth: 1
 cache:
   directories:
-  - $HOME/wxwidgets/gtk2
+  - $HOME/wxwidgets
 language: cpp
 install:
   - sudo apt-get -qq update
