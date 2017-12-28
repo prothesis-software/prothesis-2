@@ -10,7 +10,7 @@ OBJECT_FILES_LINUX=${SOURCE_FILES:src/%.cpp=build/linux/%.o}
 OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 RESOURCE_FILE=src/resources.rc
 
-#WX_PATH_LINUX=$HOME/wxwidgets/gtk2/
+#WX_PATH_LINUX=$HOME/wxwidgets/gtk2/bin/
 # NOTE: trailing dash is required!
 WX_CONFIG_LINUX=`${WX_PATH_LINUX}wx-config --toolkit=gtk2 --libs --cxxflags`
 

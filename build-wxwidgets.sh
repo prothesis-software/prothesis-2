@@ -1,33 +1,41 @@
 #!/bin/bash
 
+WX_WIDGETS_SOURCE_DIR=$HOME/wxWidgets-3.0.3
+
+WX_WIDGETS_LINUX_INSTALL_DIR=$HOME/wxwidgets/gtk2
+WX_WIDGETS_WIN_INSTALL_DIR=$HOME/wxwidgets/msw
 
 cd $HOME
-
-###############
-# LINUX
-#######
 wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
 tar -xf wxWidgets-3.0.3.tar.bz2
 
-cd wxWidgets-3.0.3
-
 # Patch
-patch include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
+patch $WX_WIDGETS_SOURCE_DIR/include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
 
-#------------
-# GTK2
-#-----
+###################
+# LINUX (GTK2)
+##############
+cd $WX_WIDGETS_SOURCE_DIR
 
-if ! [ -d $HOME/wxwidgets/gtk2 ]; then
+# Check if cache exists
+if ! [ -d $WX_WIDGETS_LINUX_INSTALL_DIR ]; then
     mkdir build-gtk2
     cd build-gtk2
-    ../configure --prefix=$HOME/wxwidgets/gtk2 --disable-unicode --with-gtk=2
+    ../configure --prefix=$WX_WIDGETS_LINUX_INSTALL_DIR --disable-unicode --with-gtk=2
     make
     make install
 fi
 
-# cd ../
-# mkdir build-msw-static
-# cd build-msw-static
-# ../configure --prefix=$(pwd) --host=i686-w64-mingw32 --disable-unicode --with-msw --without-subdirs --disable-shared
-# make
+####################
+# WINDOWS (MSW)
+###############
+cd $WX_WIDGETS_SOURCE_DIR
+
+# Check if cache exists
+if ! [ -d $WX_WIDGETS_WIN_INSTALL_DIR ]; then
+    mkdir build-msw-static
+    cd build-msw-static
+    ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --host=i686-w64-mingw32 --disable-unicode --with-msw --without-subdirs --disable-shared
+    make
+    make install
+fi
