@@ -10,17 +10,17 @@ OBJECT_FILES_LINUX=${SOURCE_FILES:src/%.cpp=build/linux/%.o}
 OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 RESOURCE_FILE=src/resources.rc
 
-#WX_PATH_LINUX=$HOME/wxwidgets/gtk2/bin/
 # NOTE: trailing dash is required!
+# export WX_PATH_LINUX=$HOME/wxwidgets/gtk2/bin/
+#
 WX_CONFIG_LINUX=`${WX_PATH_LINUX}wx-config --toolkit=gtk2 --libs --cxxflags`
 
-WIN_WX_STATIC_CONFIG=.win_wx_static_config
+# WX_PATH_WINDOWS=$HOME/wxwidgets/msw
 
-# WX_PATH should look like /home/evert/wxWidgets-3.0.3/msw-static
-# Where wxWidgets-3.0.3 is the source extracted from the .tar.gz
-WX_PATH=$(shell cat ${WIN_WX_STATIC_CONFIG} 2> /dev/null)
-WX_CONFIG_WINDOWS = `${WX_PATH}/wx-config --cxxflags`
-WX_CONFIG_WINDOWS_LINK = `${WX_PATH}/wx-config --libs`
+# export WX_SOURCE_PATH=$HOME/wxWidgets-3.0.3
+
+WX_CONFIG_WINDOWS = `${WX_PATH_WINDOWS}/wx-config --cxxflags`
+WX_CONFIG_WINDOWS_LINK = `${WX_PATH_WINDOWS}/wx-config --libs`
 
 all: linux windows
 	@echo "Build done for Linux and Windows"
@@ -66,7 +66,7 @@ build/windows/%.o: src/%.cpp
 
 build/resources.o: ${RESOURCE_FILE}
 	mkdir -p build
-	${WINDRES} ${RESOURCE_FILE} -I${WX_PATH}/../include -o build/resources.o
+	${WINDRES} ${RESOURCE_FILE} -I${WX_SOURCE_PATH}/include -o build/resources.o
 
 windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_WINDOWS}
 ifneq (${WX_PATH}, )
