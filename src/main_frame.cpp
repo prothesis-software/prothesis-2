@@ -154,11 +154,12 @@ void MainFrame::DoLayout() {
   NavigationDrawer *drawer = new NavigationDrawer(this, wxID_ANY);
   sizer_content_->Add(drawer, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);  // Index 1 content placeholder
-  sizer_content_->Add(0, 0, 0, 0, 0); 
+  sizer_content_->Add(0, 0, 0, 0, 0);
 
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);  // TODO(egeldenhuys): button_next
+
   sizer_content_->AddGrowableCol(0);
   sizer_content_->AddGrowableCol(2);
   sizer_content_->AddGrowableRow(1);
