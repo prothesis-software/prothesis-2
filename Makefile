@@ -10,15 +10,13 @@ OBJECT_FILES_LINUX=${SOURCE_FILES:src/%.cpp=build/linux/%.o}
 OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 RESOURCE_FILE=src/resources.rc
 
-# NOTE: trailing dash is required!
-# export WX_PATH_LINUX=$HOME/wxwidgets/gtk2/bin/
-#
-WX_CONFIG_LINUX=`${WX_PATH_LINUX}wx-config --toolkit=gtk2 --libs --cxxflags`
-
-# WX_PATH_WINDOWS=$HOME/wxwidgets/msw
-
 # export WX_SOURCE_PATH=$HOME/wxWidgets-3.0.3
 
+# NOTE: trailing dash is required to not break local builds
+# export WX_PATH_LINUX=$HOME/wxwidgets/gtk2/bin/
+WX_CONFIG_LINUX=`${WX_PATH_LINUX}wx-config --toolkit=gtk2 --libs --cxxflags`
+
+# export WX_PATH_WINDOWS=$HOME/wxwidgets/msw/
 WX_CONFIG_WINDOWS = `${WX_PATH_WINDOWS}/wx-config --cxxflags`
 WX_CONFIG_WINDOWS_LINK = `${WX_PATH_WINDOWS}/wx-config --libs`
 
@@ -69,11 +67,6 @@ build/resources.o: ${RESOURCE_FILE}
 	${WINDRES} ${RESOURCE_FILE} -I${WX_SOURCE_PATH}/include -o build/resources.o
 
 windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_WINDOWS}
-ifneq (${WX_PATH}, )
 	mkdir -p build
 	${CXX_WIN} ${CXXFLAGS} ${OBJECT_FILES_WINDOWS} ${WX_CONFIG_WINDOWS_LINK} --static \
 	build/resources.o -o build/prothesis-2.exe
-else
-	@echo "Please add the path to the statically compiled wxWidgets \
-	to the file '.win_wx_static_config'"
-endif
