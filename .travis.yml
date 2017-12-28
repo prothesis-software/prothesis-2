@@ -12,4 +12,4 @@ install:
   - ./build-wxwidgets.sh
   - make get-deps
 script:
-  - echo "Cache?"
+  - make linux
