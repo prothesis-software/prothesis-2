@@ -39,6 +39,7 @@ if ! [ -d $WX_WIDGETS_WIN_INSTALL_DIR ]; then
     ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --host=i686-w64-mingw32 --disable-unicode --with-msw --without-subdirs --disable-shared CFLAGS=-I/usr/i686-w64-mingw32/include
     ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --host=i586-mingw32msvc --disable-unicode --with-msw --without-subdirs --disable-shared CFLAGS=-I/usr/i586-mingw32msvc/include
     ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --host=amd64-mingw32msvc --disable-unicode --with-msw --without-subdirs --disable-shared CFLAGS=-I/usr/amd64-mingw32msvc/include
+    ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --target=mingw32 --host=mingw32 --with-msw --enable-unicode
     make
     make install
 fi
