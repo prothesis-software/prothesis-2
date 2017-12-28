@@ -6,7 +6,7 @@ cache:
 language: cpp
 install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y gtk2.0 gcc-mingw-w64-x86-64
+  - sudo apt-get install -y gtk2.0 gcc-mingw-w64-x86-64 mingw-w64-i686-dev
   - ./build-wxwidgets.sh
   - make get-deps
 script:
