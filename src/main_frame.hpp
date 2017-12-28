@@ -37,23 +37,20 @@ class MainFrame: public wxFrame {
   DataManager *data_manager_;
   ~MainFrame();
 
- protected:
-  wxFlexGridSizer *sizer_content_;
-  wxButton *button_drawer_;
-  wxButton *button_config_;
-  wxStaticText *label_title_;
-  wxTreeCtrl *tree_ctrl_drawer_;
-  wxPanel *panel_config_button_;
-  wxPanel *panel_title_;
-  wxPanel *panel_drawer_button_;
-  void OnClose(wxCloseEvent &e); // NOLINT
+  /**
+   * Returns the minimun size that will fit every page
+   */
+  wxSize GetOverallMinSize();
 
  private:
   void DoLayout();
   void SetProperties();
+  void OnClose(wxCloseEvent &e); // NOLINT
   DataManager::PanelId active_panel_id_;
   DataPanel *active_panel_ = NULL;
-  wxFlexGridSizer *sizer_main_frame_master_ = NULL;
+  wxFlexGridSizer *sizer_main_frame_ = NULL;
+  wxFlexGridSizer *sizer_content_ = NULL;
+  wxStaticText *label_title_ = NULL;
 
   /**
    * Display the given panel and adds it to the sizer
