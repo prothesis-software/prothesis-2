@@ -2,6 +2,9 @@ git:
   depth: 1
 language: cpp
 install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y gtk2 mingw-w64-gcc
+  - ./build-wxwidgets.sh
   - make get-deps
 script:
   - make linux
