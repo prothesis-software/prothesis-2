@@ -2,6 +2,8 @@
 #include <csignal>
 #include <string>
 
+#include "navigation_drawer.hpp"
+
 void MainFrame::OnKill(int sig) {
   wxLogDebug("MainFrame::OnKill");
   wxExit();
@@ -44,9 +46,11 @@ void MainFrame::OnClose(wxCloseEvent &e) {
 }
 
 void MainFrame::DisplayPanelById(DataManager::PanelId id) {
-  DisplayPanel(data_manager_->GetPanelById(id));
-  active_panel_id_ = id;
-  Refresh();
+  if (active_panel_id_ != id) {
+    DisplayPanel(data_manager_->GetPanelById(id));
+    active_panel_id_ = id;
+    Refresh();
+  }
 }
 
 // TODO(egeldenhuys): This is a bad implementation. Should be
@@ -147,9 +151,11 @@ void MainFrame::DoLayout() {
   sizer_main_frame_->Add(line, 1, wxEXPAND, 0);
 
   // sizer_content_
-  sizer_content_->Add(0, 0, 0, 0, 0);  // TODO(egeldenhuys): navbar
+  NavigationDrawer *drawer = new NavigationDrawer(this, wxID_ANY);
+  sizer_content_->Add(drawer, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);  // Index 1 content placeholder
-  sizer_content_->Add(0, 0, 0, 0, 0);
+  sizer_content_->Add(0, 0, 0, 0, 0); 
+
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);  // TODO(egeldenhuys): button_next
