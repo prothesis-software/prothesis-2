@@ -32,12 +32,6 @@ void NavigationDrawer::AddItem(std::string label, DataManager::PanelId target) {
 
 void NavigationDrawer::DoLayout() {
   wxLogDebug("NavigationDrawer::DoLayout() START");
-  AddItem("Details", DataManager::PanelId::kDetailsPanel);
-  AddItem("Passions", DataManager::PanelId::kPassionPanel);
-  AddItem("Dreams", DataManager::PanelId::kDreamsPanel);
-  AddItem("People ID", DataManager::PanelId::kPeopleIdPanel);
-  AddItem("Values", DataManager::PanelId::kValuesPanel);
-  AddItem("Spoken Words", DataManager::PanelId::kSpokenWordsPanel);
   this->SetSizer(sizer_);
   Layout();
   wxLogDebug("NavigationDrawer::DoLayout() END");

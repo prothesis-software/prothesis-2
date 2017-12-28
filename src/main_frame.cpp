@@ -53,30 +53,13 @@ void MainFrame::DisplayPanelById(DataManager::PanelId id) {
   }
 }
 
-// TODO(egeldenhuys): This is a bad implementation. Should be
-// part of DataManager
 bool MainFrame::DisplayNextPanel() {
-  switch (active_panel_id_) {
-  case DataManager::PanelId::kDetailsPanel:
-    DisplayPanelById(DataManager::PanelId::kPassionPanel);
-    break;
-  case DataManager::PanelId::kPassionPanel:
-    DisplayPanelById(DataManager::PanelId::kPeopleIdPanel);
-    break;
-  case DataManager::PanelId::kPeopleIdPanel:
-    DisplayPanelById(DataManager::PanelId::kDreamsPanel);
-    break;
-  case DataManager::PanelId::kDreamsPanel:
-    DisplayPanelById(DataManager::PanelId::kValuesPanel);
-    break;
-  case DataManager::PanelId::kValuesPanel:
-    DisplayPanelById(DataManager::PanelId::kSpokenWordsPanel);
-    break;
-  default:
+  if (active_panel_id_ + 1 < DataManager::PanelId::kPanelCount) {
+    DisplayPanelById(data_manager_->GetIdFromIndex(active_panel_id_ + 1));
+    return true;
+  } else {
     return false;
   }
-
-  return true;
 }
 
 // TODO(egeldenhuys): Switch to wxSimplebook
@@ -152,6 +135,12 @@ void MainFrame::DoLayout() {
 
   // sizer_content_
   NavigationDrawer *drawer = new NavigationDrawer(this, wxID_ANY);
+
+  for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
+    drawer->AddItem(data_manager_->GetPanelByIndex(i)->GetPanelTitle(),
+                    data_manager_->GetIdFromIndex(i));
+  }
+
   sizer_content_->Add(drawer, 0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0, 0);  // Index 1 content placeholder
   sizer_content_->Add(0, 0, 0, 0, 0);
@@ -174,8 +163,8 @@ void MainFrame::DoLayout() {
 }
 
 MainFrame::~MainFrame() {
-  // wxLogDebug("MainFrame::~MainFrame() START");
+  wxLogDebug("MainFrame::~MainFrame() START");
   data_manager_->SaveUserConfig();
   delete data_manager_;
-  // wxLogDebug("MainFrame::~MainFrame() END");
+  wxLogDebug("MainFrame::~MainFrame() END");
 }

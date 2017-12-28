@@ -28,11 +28,17 @@ DataManager::DataManager(wxFrame *main_frame) {
 }
 
 void DataManager::AddPanel(DataPanel* panel, PanelId id) {
+  wxLogDebug(_("Registering panel: ") + _(panel->GetPanelName()));
+
   panels_[id] = panel;
+  ids_[id] = id;
+
   panel->Hide();
 }
 
 void DataManager::DeclarePanels() {
+  // FLAG: new-panel
+
   // DETAILS
   AddPanel(new DetailsPanel(main_frame_, wxID_ANY,
                             std::string("details"),
@@ -92,6 +98,10 @@ void DataManager::Load() {
     wxLogDebug(_("The User config file does not exist: ") +
                _(user_config_path_));
   }
+}
+
+DataManager::PanelId DataManager::GetIdFromIndex(size_t index) {
+  return ids_[index];
 }
 
 DataPanel* DataManager::GetPanelByIndex(size_t index) {

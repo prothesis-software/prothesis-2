@@ -31,19 +31,18 @@ class DataManager {
 
   /**
    * Id correspond to index in panels_
+   * FLAG: new-panel
    */
   enum PanelId {
+    kDefaultPanel = -1,
     kDetailsPanel = 0,
     kPassionPanel = 1,
     kPeopleIdPanel = 2,
     kDreamsPanel = 3,
     kValuesPanel = 4,
     kSpokenWordsPanel = 5,
-    kPanelCount = 6,
-    kDefaultPanel = -1
+    kPanelCount = 6
   };
-
-  static std::string kIdMap[];
 
   /**
    * Save the User config
@@ -65,6 +64,8 @@ class DataManager {
    */
   DataPanel *GetPanelByIndex(size_t index);
 
+  PanelId GetIdFromIndex(size_t index);
+
  private:
   /**
    * Reads the user and gui config and initializes each panel
@@ -79,11 +80,15 @@ class DataManager {
 
   /**
    * Add a panel to the panel vector. Calls Hide() on the panel.
+   * Required to initialise the index to enum array
    */
   void AddPanel(DataPanel* panel, PanelId id);
 
   DataPanel* panels_[PanelId::kPanelCount];
+  DataManager::PanelId ids_[PanelId::kPanelCount];
+
   wxFrame *main_frame_ = NULL;
+
   // Paths are relative to the base directory of the binary
   std::string gui_config_path_ = "gui.toml";
   std::string user_config_path_ = "user.toml";
