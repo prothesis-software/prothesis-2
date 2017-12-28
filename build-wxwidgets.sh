@@ -4,7 +4,7 @@ mkdir -p build
 cd build
 
 wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
-tar -xvf wxWidgets-3.0.3.tar.bz2
+tar -xf wxWidgets-3.0.3.tar.bz2
 
 cd wxWidgets-3.0.3
 
