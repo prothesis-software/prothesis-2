@@ -18,7 +18,7 @@ patch include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
 # GTK2
 #-----
 
-if ! [ -d ~/wxwidgets/build-gtk2 ]; then
+if ! [ -d $HOME/wxwidgets/gtk2 ]; then
     mkdir build-gtk2
     cd build-gtk2
     ../configure --prefix=$HOME/wxwidgets/gtk2 --disable-unicode --with-gtk=2
