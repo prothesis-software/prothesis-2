@@ -107,3 +107,12 @@
         question = "Things people say about you has a big impact on your life and often reveal a lot more than you think...\nFill these commonly spoken words below"
     [[spoken_words.question]]
         question = "Now summarise the central themes from your answer and type them below"
+
+#########################################
+# CAREER_GUIDANCE
+##########################
+[career_guidance]
+     [[career_guidance.question]]
+          question = "Do you like?"
+          options = ["Fruit", "Veggies", "Meat"]
+          checked = [1,3]

@@ -38,6 +38,8 @@ void NavigationDrawer::DoLayout() {
   AddItem("People ID", DataManager::PanelId::kPeopleIdPanel);
   AddItem("Values", DataManager::PanelId::kValuesPanel);
   AddItem("Spoken Words", DataManager::PanelId::kSpokenWordsPanel);
+  AddItem("Skills", DataManager::PanelId::kSkillsPanel);
+
   this->SetSizer(sizer_);
   Layout();
   wxLogDebug("NavigationDrawer::DoLayout() END");

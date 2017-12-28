@@ -46,6 +46,7 @@ void MainFrame::OnClose(wxCloseEvent &e) {
 }
 
 void MainFrame::DisplayPanelById(DataManager::PanelId id) {
+  wxLogDebug(_("Displaying Panel:"));
   if (active_panel_id_ != id) {
     DisplayPanel(data_manager_->GetPanelById(id));
     active_panel_id_ = id;
@@ -71,6 +72,9 @@ bool MainFrame::DisplayNextPanel() {
     break;
   case DataManager::PanelId::kValuesPanel:
     DisplayPanelById(DataManager::PanelId::kSpokenWordsPanel);
+    break;
+  case DataManager::PanelId::kSpokenWordsPanel:
+    DisplayPanelById(DataManager::PanelId::kSkillsPanel);
     break;
   default:
     return false;
