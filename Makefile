@@ -27,6 +27,10 @@ all: linux windows
 # COMMON
 ############
 
+get-deps:
+	./get-cpplint.sh
+	./get-cpptoml.sh
+
 apply_gui_config:
 	mkdir -p build
 	cp gui.toml build/
