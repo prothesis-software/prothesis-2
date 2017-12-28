@@ -19,9 +19,9 @@ class NavigationDrawer : public wxPanel {
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    int64_t style = 0);
+  void AddItem(std::string label, DataManager::PanelId target);
 
  private:
-  void AddItem(std::string label, DataManager::PanelId);
   void OnItemClick(wxCommandEvent &event);  // NOLINT
   void SetProperties();
   void DoLayout();
