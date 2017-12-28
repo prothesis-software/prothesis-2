@@ -35,7 +35,8 @@ cd $WX_WIDGETS_SOURCE_DIR
 if ! [ -d $WX_WIDGETS_WIN_INSTALL_DIR ]; then
     mkdir build-msw-static
     cd build-msw-static
-    ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --host=i686-w64-mingw32 --disable-unicode --with-msw --without-subdirs --disable-shared CFLAGS=-I/usr/i686-w64-mingw32/include/
+    ls /usr
+    ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --host=i686-w64-mingw32 --disable-unicode --with-msw --without-subdirs --disable-shared CFLAGS=-I/usr/x86_64-w64-mingw32/include
     make
     make install
 fi
