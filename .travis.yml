@@ -3,7 +3,7 @@ git:
 language: cpp
 install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y gtk2 mingw-w64-gcc
+  - sudo apt-get install -y gtk2.0 gcc-mingw-w64-x86-64
   - ./build-wxwidgets.sh
   - make get-deps
 script:
