@@ -2,7 +2,7 @@ CXX=g++
 CXX_WIN=i686-w64-mingw32-g++
 WINDRES=i686-w64-mingw32-windres
 
-CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic
+CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic -lhpdf
 
 SOURCE_FILES=$(shell find -name '*.cpp' | sed 's/\.\///g')
 OBJECT_FILES_LINUX=${SOURCE_FILES:src/%.cpp=build/linux/%.o}
@@ -17,8 +17,8 @@ WIN_WX_STATIC_CONFIG=.win_wx_static_config
 # WX_PATH should look like /home/evert/wxWidgets-3.0.3/msw-static
 # Where wxWidgets-3.0.3 is the source extracted from the .tar.gz
 WX_PATH=$(shell cat ${WIN_WX_STATIC_CONFIG} 2> /dev/null)
-WX_CONFIG_WINDOWS = `${WX_PATH}/wx-config --cxxflags`
-WX_CONFIG_WINDOWS_LINK = `${WX_PATH}/wx-config --libs`
+WX_CONFIG_WINDOWS = `${WX_PATH}/wx-config --cxxflags` -I /home/evert/github/libharu/include -I /home/evert/github/libharu/build-win/include
+WX_CONFIG_WINDOWS_LINK = `${WX_PATH}/wx-config --libs` -L /home/evert/github/libharu/build-win/include
 
 all: linux windows
 	@echo "Build done for Linux and Windows"

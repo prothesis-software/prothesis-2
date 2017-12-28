@@ -55,6 +55,8 @@ MainFrame::MainFrame(wxWindow *parent,
                  GetPanelById(DataManager::PanelId::kDetailsPanel));
 
     wxLogDebug("MainFrame::MainFrame() END");
+
+    Pdf();
   } catch (std::exception &e) {
     wxLogDebug("Exception!");
     wxLogDebug(e.what());
@@ -200,4 +202,57 @@ MainFrame::~MainFrame() {
   data_manager_->SaveUserConfig();
   delete data_manager_;
   // wxLogDebug("MainFrame::~MainFrame() END");
+}
+
+void MainFrame::error_handler(HPDF_STATUS error_no,
+                              HPDF_STATUS detail_no,
+                              void *user_data) {
+  // void
+}
+
+void MainFrame::Pdf() {
+  // compile and install libharu for linux -> Success
+  // Client also needs to build and install
+
+  // Cross compile libharu for windows -> Fail
+  // ../configure --prefix=$(pwd) --host=i686-w64-mingw32 --disable-shared
+  // checking for deflate in -lz... no
+  // configure: error: deflate() is missing, check config.log for more details
+
+  // NOTE: Change the paths in the Makefile!
+
+  HPDF_Doc pdf;
+  jmp_buf env;
+
+  pdf = HPDF_New(MainFrame::error_handler, NULL);
+  if (!pdf) {
+    printf("ERROR: cannot create pdf object.\n");
+    return;
+  }
+
+  if (setjmp(env)) {
+    HPDF_Free(pdf);
+    return;
+  }
+
+  HPDF_Page page_1;
+
+  page_1 = HPDF_AddPage(pdf);
+
+  HPDF_Page_SetRGBFill(page_1, 0.1, 0.3, 0.1);
+  HPDF_Font font = HPDF_GetFont(pdf, "Helvetica", NULL);
+  float fsize = 8;
+  HPDF_RGBColor c = HPDF_Page_GetRGBFill(page_1);
+
+  HPDF_Page_BeginText(page_1);
+  HPDF_Page_SetRGBFill(page_1, 0, 0, 0);
+  HPDF_Page_SetTextRenderingMode(page_1, HPDF_FILL);
+  HPDF_Page_SetFontAndSize(page_1, font, 10);
+  HPDF_Page_TextOut(page_1, 100, 100 - 12, "HELLO");
+  HPDF_Page_EndText(page_1);
+
+  HPDF_Page_SetFontAndSize(page_1, font, fsize);
+  HPDF_Page_SetRGBFill(page_1, c.r, c.g, c.b);
+
+  HPDF_SaveToFile(pdf, "test.pdf");
 }

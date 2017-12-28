@@ -7,8 +7,11 @@
 #endif
 #include <wx/treectrl.h>
 #include <wx/statline.h>
+#include <setjmp.h>
 
 #include <string>
+
+#include "hpdf.h"  // NOLINT
 
 #include "data_panel.hpp"
 #include "data_manager.hpp"
@@ -54,7 +57,10 @@ class MainFrame: public wxFrame {
   DataManager::PanelId active_panel_id_;
   DataPanel *active_panel_ = NULL;
   wxFlexGridSizer *sizer_main_frame_master_ = NULL;
-
+  void Pdf();
+  static void error_handler(HPDF_STATUS error_no,
+                            HPDF_STATUS detail_no,
+                            void *user_data);
   /**
    * Display the given panel and adds it to the sizer
    */
