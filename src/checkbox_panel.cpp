@@ -12,7 +12,7 @@ CheckBoxPanel::CheckBoxPanel(wxWindow* parent,
                              int64_t style)
                              : DataPanel(parent, id, panel_name,
                                panel_title, pos, size, style) {
-  // void
+  DoLayout();
 }
 
 CheckBoxPanel::~CheckBoxPanel() {
