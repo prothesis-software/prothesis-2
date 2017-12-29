@@ -74,6 +74,7 @@ if [ "$TARGET" == "linux" ]; then
         ../configure --prefix=$LINUX_INSTALL_DIR --disable-unicode --with-gtk=2
         make -j $MAKE_CORES
         make install
+        patch --forward --force $LINUX_INSTALL_DIR/include/wx-3.0/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
     else
         echo "wxWidgets has already been build for Linux"
     fi
@@ -85,6 +86,7 @@ elif [ "$TARGET" == "win" ]; then
         ../configure --prefix=$WIN_INSTALL_DIR --disable-unicode --disable-shared --with-msw 
         make -j $MAKE_CORES
         make install
+        patch --forward --force $WIN_INSTALL_DIR/include/wx-3.0/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
     else
         echo "wxWidgets has already been build for Windows"
     fi

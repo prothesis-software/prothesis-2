@@ -64,7 +64,8 @@ build/windows/%.o: src/%.cpp
 
 build/resources.o: ${RESOURCE_FILE}
 	mkdir -p build
-	${WINDRES} ${RESOURCE_FILE} -I${WX_SOURCE_PATH}/include -o build/resources.o
+	# -I${WX_SOURCE_PATH}/include
+	${WINDRES} ${RESOURCE_FILE} -o build/resources.o
 
 windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_WINDOWS}
 	mkdir -p build
