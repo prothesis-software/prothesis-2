@@ -4,9 +4,9 @@
 # Downloads and builds wxWidgets-3.0.3 for Linux and Windows (MSYS2)
 
 # Usage:
-# ./build-wxwidgets.sh <root_dir> <win|linux>
+# ./build-wxwidgets.sh <root_dir> <win|linux> <cores>
 #
-# ./build-wxwidgets.sh $HOME linux
+# ./build-wxwidgets.sh $HOME linux 6
 
 # Dependencies:
 #
@@ -25,7 +25,7 @@
 
 ROOT_DIR=$1
 TARGET=$2
-
+MAKE_CORES=$3
 # '-linux' or '-win' is appended depending on target
 SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
 LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/3.0.3/gtk2
@@ -38,9 +38,9 @@ if [ "$TARGET" == "linux" ]; then
     SOURCE_DIR=$SOURCE_DIR-linux
 
     wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
-    mkdir -p $SOURCE_DIR
     echo "Extracting wxWidgets-3.0.3.tar.bz2"
-    tar -xf wxWidgets-3.0.3.tar.bz2 -C $SOURCE_DIR
+    tar -xf wxWidgets-3.0.3.tar.bz2
+    mv wxWidgets-3.0.3 $SOURCE_DIR
 
 elif [ "$TARGET" == "win" ]; then
     SOURCE_DIR=$SOURCE_DIR-win
@@ -68,7 +68,7 @@ if [ "$TARGET" == "linux" ]; then
         mkdir -p build-gtk2
         cd build-gtk2
         ../configure --prefix=$LINUX_INSTALL_DIR --disable-unicode --with-gtk=2
-        make
+        make -j $MAKE_CORES
         make install
     else
         echo "wxWidgets has already been build for Linux"
@@ -79,7 +79,7 @@ elif [ "$TARGET" == "win" ]; then
         mkdir -p build-msw-static
         cd build-msw-static
         ../configure --prefix=$WIN_INSTALL_DIR --disable-unicode --disable-shared --with-msw 
-        make
+        make -j $MAKE_CORES
         make install
     else
         echo "wxWidgets has already been build for Windows"
