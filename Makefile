@@ -12,7 +12,7 @@ OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 # Enviornment Variables
 ###########
 # - WX_INSTALL_PATH  // Path where wxWidgets is installed to
-# - WX_SOURCE_PATH  // Path where the wxWidgets source is
+# - WX_SOURCE_DIR  // Path where the wxWidgets source is
 
 WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH}/bin/wx-config --toolkit=gtk2 --cxxflags`
 WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH}/bin/wx-config --toolkit=gtk2 --libs`
@@ -33,7 +33,9 @@ apply_gui_config:
 	cp gui.toml build/
 
 lint:
+	@echo "-------------------------------------------------------------------"
 	@echo "Remember to set the WX_INSTALL_PATH and WX_SOURCE_PATH env variables!"
+	@echo "-------------------------------------------------------------------"
 	./lint.sh
 
 clean:

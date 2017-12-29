@@ -26,6 +26,11 @@
 ROOT_DIR=$1
 TARGET=$2
 MAKE_CORES=$3
+
+if [ -z ${var+x} ]; then
+    TRAVIS_BUILD_DIR=$PWD
+fi
+
 # '-linux' or '-win' is appended depending on target
 SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
 LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/3.0.3/gtk2
@@ -57,8 +62,7 @@ elif [ "$TARGET" == "win" ]; then
 fi
 
 # Patch extra ;
-sed -i '220s/wxDECL_FOR_STRICT_MINGW32\(int, fseeko64, \(FILE\*, long long, int\)\);\
-/wxDECL_FOR_STRICT_MINGW32\(int, fseeko64, \(FILE\*, long long, int\)\)/' $SOURCE_DIR/include/wx/filefn.h
+patch --forward --force $WX_WIDGETS_SOURCE_DIR/include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
 
 cd $SOURCE_DIR
 # Build and Install
