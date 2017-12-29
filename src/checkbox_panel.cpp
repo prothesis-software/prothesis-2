@@ -34,12 +34,14 @@ void CheckBoxPanel::SetProperties() {
 }
 
 void CheckBoxPanel::DoLayout() {
-  wxGridSizer *sizer = new wxGridSizer(0, 1, 0, 0);
-  wxCheckListBox *list = new wxCheckListBox(this, wxID_ANY);
+  wxGridSizer *sizer = new wxGridSizer(0, 3, 0, 0);
+  this->listBoxA = new wxCheckListBox(this, wxID_ANY);
+  this->listBoxB = new wxCheckListBox(this, wxID_ANY);
+  this->listBoxC = new wxCheckListBox(this, wxID_ANY);
 
-  wxString *label = new wxString("KEK");
-  list->InsertItems(1, label, 0);
-  sizer->Add(list, 1, wxEXPAND, 0, 0);
+  sizer->Add(listBoxA, 1, wxEXPAND | wxALIGN_LEFT, 0, 0);
+  sizer->Add(listBoxB, 1, wxEXPAND | wxALIGN_CENTER, 0, 0);
+  sizer->Add(listBoxC, 1, wxEXPAND | wxALIGN_RIGHT, 0, 0);
 
   this->SetSizer(sizer);
   Layout();
@@ -50,7 +52,15 @@ void CheckBoxPanel::SetCheckboxStateByLabel(std::string label, bool checked) {
 }
 
 void CheckBoxPanel::AddCheckBox(std::string label) {
-  // void
+    wxCheckListBox *box = this->listBoxA;
+    if (box->GetCount() >= MAX_ITEMS) {
+      box = this->listBoxB;
+      if (box->GetCount() >= MAX_ITEMS) {
+        box = this->listBoxC;
+      }
+    }
+
+    box->InsertItems(1, new wxString(label), 0);
 }
 
   std::shared_ptr<cpptoml::table> CheckBoxPanel::GetUserState() {

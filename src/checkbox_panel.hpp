@@ -1,5 +1,6 @@
 #ifndef CHECKBOX_PANEL_HPP_
 #define CHECKBOX_PANEL_HPP_
+#define MAX_ITEMS 8
 
 #include <wx/checkbox.h>
 
@@ -41,6 +42,10 @@ class CheckBoxPanel : public DataPanel {
    * TOML Specification is the same as for GetUserState()
    */
   bool SetUserState(std::shared_ptr<cpptoml::table> state) override;
+
+  wxCheckListBox *listBoxA;
+  wxCheckListBox *listBoxB;
+  wxCheckListBox *listBoxC;
 
  private:
   void SetProperties();
