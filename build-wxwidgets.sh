@@ -19,11 +19,11 @@
 # ## Windows:
 # - p7zip
 
-ROOT_DIR=$2
+ROOT_DIR=$1
 # '-linux' or '-win' is appended depending on target
-SOURCE_DIR=$1/wxWidgets-3.0.3-source
-LINUX_INSTALL_DIR=$1/wxWidgets/3.0.3/gtk2
-WIN_INSTALL_DIR=$1/wxWidgets/3.0.3/msw-static
+SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
+LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/3.0.3/gtk2
+WIN_INSTALL_DIR=$ROOT_DIR/wxWidgets/3.0.3/msw-static
 
 cd $ROOT_DIR
 
