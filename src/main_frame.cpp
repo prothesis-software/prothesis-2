@@ -31,7 +31,9 @@ MainFrame::MainFrame(wxWindow *parent,
   DisplayPanelById(DataManager::PanelId::kDetailsPanel);
   Fit();
 
-  SetMinSize(GetOverallMinSize());
+  wxSize minSize = GetOverallMinSize();
+  SetMinSize(minSize);
+  SetSize(minSize);
 }
 
 
@@ -103,8 +105,13 @@ wxSize MainFrame::GetOverallMinSize() {
     wxLogDebug(_(std::to_string(tmpSize.x)) +
                _(", ") +
                _(std::to_string(tmpSize.y)));
-    if (tmpSize.x > minSize.x || tmpSize.y > minSize.y) {
-      minSize = tmpSize;
+
+    if (tmpSize.x > minSize.x) {
+      minSize.x = tmpSize.x;
+    }
+
+    if (tmpSize.y > minSize.y) {
+      minSize.y = tmpSize.y;
     }
   }
 
