@@ -48,7 +48,27 @@ void CheckBoxPanel::DoLayout() {
 }
 
 void CheckBoxPanel::SetCheckboxStateByLabel(std::string label, bool checked) {
-  // void
+  wxCheckListBox *box = this->listBoxA;
+  int pos = box->FindString(label);
+  if (pos != -1) {
+    box->Check(pos, checked);
+    return;
+  }
+
+  box = this->listBoxB;
+  pos = box->FindString(label);
+  if (pos != -1) {
+    box->Check(pos, checked);
+    return;
+  }
+
+  box = this->listBoxC;
+  pos = box->FindString(label);
+    if (pos != -1) {
+      box->Check(pos, checked);
+      return;
+    }
+  // What is looooveeeee! Baby don't huuurt meee
 }
 
 void CheckBoxPanel::AddCheckBox(std::string label) {
