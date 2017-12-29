@@ -62,6 +62,7 @@ elif [ "$TARGET" == "win" ]; then
 fi
 
 # Patch extra ;
+echo "Patching $WX_WIDGETS_SOURCE_DIR/include/wx/filefn.h"
 patch --forward --force $WX_WIDGETS_SOURCE_DIR/include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
 
 cd $SOURCE_DIR
