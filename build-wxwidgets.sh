@@ -59,7 +59,7 @@ cd $SOURCE_DIR
 if [ "$2" == "linux" ]; then
     # Check if cache exists
     if ! [ -d $LINUX_INSTALL_DIR ]; then
-        mkdir build-gtk2
+        mkdir -p build-gtk2
         cd build-gtk2
         ../configure --prefix=$LINUX_INSTALL_DIR --disable-unicode --with-gtk=2
         make
@@ -70,7 +70,7 @@ if [ "$2" == "linux" ]; then
 elif [ "$2" == "win" ]; then
     # Check if cache exists
     if ! [ -d $WIN_INSTALL_DIR ]; then
-        mkdir build-msw-static
+        mkdir -p build-msw-static
         cd build-msw-static
         ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --disable-unicode --disable-shared --with-msw 
         make
