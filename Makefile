@@ -58,7 +58,7 @@ linux: lint apply_gui_config ${OBJECT_FILES_LINUX}
 
 build/windows/%.o: src/%.cpp
 	@mkdir -p $(@D)
-	${CXX_WIN} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_WIN} -c $< -o $@
+	${CXX} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_WIN} -c $< -o $@
 
 build/resources.o: ${RESOURCE_FILE}
 	mkdir -p build
@@ -66,5 +66,5 @@ build/resources.o: ${RESOURCE_FILE}
 
 windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_WINDOWS}
 	mkdir -p build
-	${CXX_WIN} ${CXXFLAGS} ${OBJECT_FILES_WINDOWS} ${WX_CONFIG_FLAGS_LINK_WIN} --static \
+	${CXX} ${CXXFLAGS} ${OBJECT_FILES_WINDOWS} ${WX_CONFIG_FLAGS_LINK_WIN} --static \
 	build/resources.o -o build/prothesis-2.exe
