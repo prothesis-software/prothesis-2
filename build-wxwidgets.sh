@@ -58,7 +58,7 @@ fi
 
 # Patch extra ;
 sed -i '220s/wxDECL_FOR_STRICT_MINGW32\(int, fseeko64, \(FILE*, long long, int\)\);\
-/wxDECL_FOR_STRICT_MINGW32\(int, fseeko64, \(FILE*, long long, int\)\);/' $SOURCE_DIR/include/wx/filefn.h
+/wxDECL_FOR_STRICT_MINGW32\(int, fseeko64, \(FILE*, long long, int\)\)/' $SOURCE_DIR/include/wx/filefn.h
 
 cd $SOURCE_DIR
 # Build and Install
