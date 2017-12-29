@@ -107,3 +107,11 @@
         question = "Things people say about you has a big impact on your life and often reveal a lot more than you think...\nFill these commonly spoken words below"
     [[spoken_words.question]]
         question = "Now summarise the central themes from your answer and type them below"
+
+####################################
+# PASSION
+###########
+
+[skills]
+    [[skills.question]]
+        question = "What are your 3 favourite topics to discuss? What could you talk about for hours on end?"
