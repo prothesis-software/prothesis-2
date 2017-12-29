@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# DESCRIPTION:
+# Downloads and builds wxWidgets-3.0.3 for Linux and Windows (MSYS2)
+
 # Usage:
 # ./build-wxwidgets.sh <root_dir> <win|linux>
 #
@@ -12,6 +15,7 @@
 # - sed
 # - autotools
 # - make
+# - gcc
 #
 # ## Linux:
 # - tar

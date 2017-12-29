@@ -1,4 +1,0 @@
-220c220
-<         wxDECL_FOR_STRICT_MINGW32(int, fseeko64, (FILE*, long long, int));
----
->         wxDECL_FOR_STRICT_MINGW32(int, fseeko64, (FILE*, long long, int))
