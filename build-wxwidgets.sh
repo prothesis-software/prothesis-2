@@ -20,6 +20,8 @@
 # - p7zip
 
 ROOT_DIR=$1
+TARGET=$2
+
 # '-linux' or '-win' is appended depending on target
 SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
 LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/3.0.3/gtk2
@@ -28,7 +30,7 @@ WIN_INSTALL_DIR=$ROOT_DIR/wxWidgets/3.0.3/msw-static
 cd $ROOT_DIR
 
 # Download and extract source
-if [ "$2" == "linux" ]; then
+if [ "$TARGET" == "linux" ]; then
     SOURCE_DIR=$SOURCE_DIR-linux
 
     wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
@@ -36,7 +38,7 @@ if [ "$2" == "linux" ]; then
     echo "Extracting wxWidgets-3.0.3.tar.bz2"
     tar -xf wxWidgets-3.0.3.tar.bz2 -C $SOURCE_DIR
 
-elif [ "$2" == "win" ]; then
+elif [ "$TARGET" == "win" ]; then
     SOURCE_DIR=$SOURCE_DIR-win
 
     wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.7z
@@ -56,7 +58,7 @@ sed -i '220s/wxDECL_FOR_STRICT_MINGW32\(int, fseeko64, \(FILE*, long long, int\)
 
 cd $SOURCE_DIR
 # Build and Install
-if [ "$2" == "linux" ]; then
+if [ "$TARGET" == "linux" ]; then
     # Check if cache exists
     if ! [ -d $LINUX_INSTALL_DIR ]; then
         mkdir -p build-gtk2
@@ -67,12 +69,12 @@ if [ "$2" == "linux" ]; then
     else
         echo "wxWidgets has already been build for Linux"
     fi
-elif [ "$2" == "win" ]; then
+elif [ "$TARGET" == "win" ]; then
     # Check if cache exists
     if ! [ -d $WIN_INSTALL_DIR ]; then
         mkdir -p build-msw-static
         cd build-msw-static
-        ../configure --prefix=$WX_WIDGETS_WIN_INSTALL_DIR --disable-unicode --disable-shared --with-msw 
+        ../configure --prefix=$WIN_INSTALL_DIR --disable-unicode --disable-shared --with-msw 
         make
         make install
     else
