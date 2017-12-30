@@ -39,8 +39,8 @@ fi
 
 # '-linux' or '-win' is later appended depending on target
 SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
-LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/gtk2
-WIN_INSTALL_DIR=$ROOT_DIR/wxWidgets/msw-static
+LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/gtk2u
+WIN_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static
 
 cd $ROOT_DIR
 
@@ -63,7 +63,7 @@ if [ "$TARGET" == "linux" ]; then
         # Build and Install
         mkdir -p build-gtk2
         cd build-gtk2
-        ../configure --prefix=$LINUX_INSTALL_DIR --disable-unicode --with-gtk=2
+        ../configure --prefix=$LINUX_INSTALL_DIR --enable-unicode --with-gtk=2
         make -j $MAKE_CORES
         make install
         # patch --forward --force $LINUX_INSTALL_DIR/include/wx-3.0/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
@@ -94,7 +94,7 @@ elif [ "$TARGET" == "win" ]; then
         # Build and Install
         mkdir -p build-msw-static
         cd build-msw-static
-        ../configure --prefix=$WIN_INSTALL_DIR --disable-unicode --disable-shared --with-msw 
+        ../configure --prefix=$WIN_INSTALL_DIR --enable-unicode --disable-shared --with-msw 
         make -j $MAKE_CORES
         make install
         # patch --forward --force $WIN_INSTALL_DIR/include/wx-3.0/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch

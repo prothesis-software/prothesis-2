@@ -13,11 +13,11 @@ OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 ###########
 # - WX_INSTALL_PATH  // Path where wxWidgets is installed to
 
-WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH}/bin/wx-config --toolkit=gtk2 --cxxflags`
-WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH}/bin/wx-config --toolkit=gtk2 --libs`
+WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH}/bin/wx-config --unicode=yes --toolkit=gtk2 --cxxflags`
+WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH}/bin/wx-config --unicode=yes --toolkit=gtk2 --libs`
 
-WX_CONFIG_FLAGS_COMPILE_WIN=`${WX_INSTALL_PATH}/bin/wx-config --cxxflags`
-WX_CONFIG_FLAGS_LINK_WIN=`${WX_INSTALL_PATH}/bin/wx-config --libs`
+WX_CONFIG_FLAGS_COMPILE_WIN=`${WX_INSTALL_PATH}/bin/wx-config --unicode=yes --cxxflags`
+WX_CONFIG_FLAGS_LINK_WIN=`${WX_INSTALL_PATH}/bin/wx-config --unicode=yes --libs`
 
 ##############################################
 # COMMON
