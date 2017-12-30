@@ -107,3 +107,67 @@
         question = "Things people say about you has a big impact on your life and often reveal a lot more than you think...\nFill these commonly spoken words below"
     [[spoken_words.question]]
         question = "Now summarise the central themes from your answer and type them below"
+
+####################################
+# SKILLS
+###########
+
+[skills]
+    [[skills.question]]
+        question = "Administration"
+    [[skills.question]]
+        question = "Analyse"
+    [[skills.question]]
+        question = "Artistic"
+    [[skills.question]]
+        question = "Communicate"
+    [[skills.question]]
+        question = "Computers"
+    [[skills.question]]
+        question = "Control"
+    [[skills.question]]
+        question = "Counseling"
+    [[skills.question]]
+        question = "Creative"
+    [[skills.question]]
+        question = "Devision Making"
+    [[skills.question]]
+        question = "Empathy"
+    [[skills.question]]
+        question = "Entertaining"
+    [[skills.question]]
+        question = "Handwork"
+    [[skills.question]]
+        question = "Marketing"
+    [[skills.question]]
+        question = "Negotiate"
+    [[skills.question]]
+        question = "Numeracy"
+    [[skills.question]]
+        question = "Objectivity"
+    [[skills.question]]
+        question = "Organise"
+    [[skills.question]]
+        question = "Planning"
+    [[skills.question]]
+        question = "Playing Musical Instruments"
+    [[skills.question]]
+        question = "Practical"
+    [[skills.question]]
+        question = "Public Speaking"
+    [[skills.question]]
+        question = "Receptive for people"
+    [[skills.question]]
+        question = "Sharing"
+    [[skills.question]]
+        question = "Sport"
+    [[skills.question]]
+        question = "Strategic Planning"
+    [[skills.question]]
+        question = "Study"
+    [[skills.question]]
+        question = "Taking the lead"
+    [[skills.question]]
+        question = "Teaching"
+    [[skills.question]]
+        question = "Writing"
