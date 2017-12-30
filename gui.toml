@@ -109,9 +109,65 @@
         question = "Now summarise the central themes from your answer and type them below"
 
 ####################################
-# PASSION
+# SKILLS
 ###########
 
 [skills]
     [[skills.question]]
-        question = "What are your 3 favourite topics to discuss? What could you talk about for hours on end?"
+        question = "Administration"
+    [[skills.question]]
+        question = "Analyse"
+    [[skills.question]]
+        question = "Artistic"
+    [[skills.question]]
+        question = "Communicate"
+    [[skills.question]]
+        question = "Computers"
+    [[skills.question]]
+        question = "Control"
+    [[skills.question]]
+        question = "Counseling"
+    [[skills.question]]
+        question = "Creative"
+    [[skills.question]]
+        question = "Devision Making"
+    [[skills.question]]
+        question = "Empathy"
+    [[skills.question]]
+        question = "Entertaining"
+    [[skills.question]]
+        question = "Handwork"
+    [[skills.question]]
+        question = "Marketing"
+    [[skills.question]]
+        question = "Negotiate"
+    [[skills.question]]
+        question = "Numeracy"
+    [[skills.question]]
+        question = "Objectivity"
+    [[skills.question]]
+        question = "Organise"
+    [[skills.question]]
+        question = "Planning"
+    [[skills.question]]
+        question = "Playing Musical Instruments"
+    [[skills.question]]
+        question = "Practical"
+    [[skills.question]]
+        question = "Public Speaking"
+    [[skills.question]]
+        question = "Receptive for people"
+    [[skills.question]]
+        question = "Sharing"
+    [[skills.question]]
+        question = "Sport"
+    [[skills.question]]
+        question = "Strategic Planning"
+    [[skills.question]]
+        question = "Study"
+    [[skills.question]]
+        question = "Taking the lead"
+    [[skills.question]]
+        question = "Teaching"
+    [[skills.question]]
+        question = "Writing"

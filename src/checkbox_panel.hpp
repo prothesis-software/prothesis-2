@@ -1,6 +1,6 @@
 #ifndef CHECKBOX_PANEL_HPP_
 #define CHECKBOX_PANEL_HPP_
-#define MAX_ITEMS 8
+#define MAX_ITEMS 10
 
 #include <wx/checkbox.h>
 
@@ -48,7 +48,7 @@ class CheckBoxPanel : public DataPanel {
   wxCheckListBox *listBoxC;
 
  private:
-  void SetProperties();
+  // void SetProperties();
   void DoLayout();
   void SetCheckboxStateByLabel(std::string label, bool checked);
 
