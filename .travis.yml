@@ -4,12 +4,12 @@ git:
   depth: 1
 cache:
   directories:
-  - $HOME/wxwidgets
+  - $HOME/wxWidgets
 language: cpp
 install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y gtk2.0 gcc-mingw-w64-x86-64 mingw-w64-i686-dev mingw32 mingw32-binutils mingw32-runtime wine
-  - ./build-wxwidgets.sh
+  - sudo apt-get install -y gtk2.0
+  - ./build-wxwidgets.sh $HOME linux 1
   - make get-deps
 script:
   - make linux

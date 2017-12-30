@@ -3,26 +3,32 @@
 # DESCRIPTION:
 # Downloads and builds wxWidgets-3.0.3 for Linux and Windows (MSYS2)
 
-# Usage:
+# USAGE:
 # ./build-wxwidgets.sh <root_dir> <win|linux> <cores>
 #
 # ./build-wxwidgets.sh $HOME linux 6
 
-# Dependencies:
-#
+# OUTPUTS in $ROOT_DIR:
+# - wxWidgets-3.0.3-source-<linux|windows>
+# - wxWidgets/<gtk2|msw-static>
+# - wxWidgets-3.0.3.<tar.bz2|7z>
+
+# DEPENDENCIES:
 # ## Common:
 # - wget
-# - sed
+# - patch
 # - autotools
 # - make
-# - gcc
 #
 # ## Linux:
 # - tar
+# - gcc
 #
 # ## Windows:
 # - p7zip
+# - mingw-w64-x86_x64-gcc
 
+# POSITIONAL ARGS
 ROOT_DIR=$1
 TARGET=$2
 MAKE_CORES=$3
@@ -31,10 +37,10 @@ if [ -z ${var+x} ]; then
     TRAVIS_BUILD_DIR=$PWD
 fi
 
-# '-linux' or '-win' is appended depending on target
+# '-linux' or '-win' is later appended depending on target
 SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
-LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/3.0.3/gtk2
-WIN_INSTALL_DIR=$ROOT_DIR/wxWidgets/3.0.3/msw-static
+LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/gtk2
+WIN_INSTALL_DIR=$ROOT_DIR/wxWidgets/msw-static
 
 cd $ROOT_DIR
 
