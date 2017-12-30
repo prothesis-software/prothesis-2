@@ -4,13 +4,14 @@
 # Downloads and builds wxWidgets-3.0.3 for Linux and Windows (MSYS2)
 
 # USAGE:
-# ./build-wxwidgets.sh <root_dir> <win|linux> <cores>
+# ./build-wxwidgets.sh <root_dir> <windows|windows-cross|linux>
 #
-# ./build-wxwidgets.sh $HOME linux 6
+# Example:
+# ./build-wxwidgets.sh $HOME linux
 
 # OUTPUTS in $ROOT_DIR:
 # - wxWidgets-3.0.3-source-<linux|windows>
-# - wxWidgets/<gtk2|msw-static>
+# - wxWidgets/<gtk2u|mswu-static|mswu-static-cross>
 # - wxWidgets-3.0.3.<tar.bz2|7z>
 
 # DEPENDENCIES:
@@ -20,27 +21,30 @@
 # - autotools
 # - make
 #
-# ## Linux:
+# ## linux:
 # - tar
 # - gcc
 #
-# ## Windows:
+# ## windows:
 # - p7zip
 # - mingw-w64-x86_x64-gcc
+#
+# ## windows-cross:
+# - mingw-w64-gcc
 
 # POSITIONAL ARGS
 ROOT_DIR=$1
 TARGET=$2
-MAKE_CORES=$3
 
 if [ -z ${var+x} ]; then
     TRAVIS_BUILD_DIR=$PWD
 fi
 
-# '-linux' or '-win' is later appended depending on target
+# '-linux' or '-windows' is later appended depending on target
 SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
 LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/gtk2u
-WIN_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static
+WINDOWS_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static
+WINDOWS_CROSS_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static-cross
 
 cd $ROOT_DIR
 
@@ -48,12 +52,13 @@ if [ "$TARGET" == "linux" ]; then
     # Check if cache exists
     if ! [ -d $LINUX_INSTALL_DIR ]; then
         SOURCE_DIR=$SOURCE_DIR-linux
+        BUILD_DIR=build-gtk2u
 
         # Download and extract source
         wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
         echo "Extracting wxWidgets-3.0.3.tar.bz2"
-        tar -xf wxWidgets-3.0.3.tar.bz2
-        mv wxWidgets-3.0.3 $SOURCE_DIR
+        mkdir -p $SOURCE_DIR
+        tar -xf wxWidgets-3.0.3.tar.bz2 --strip 1 -C $SOURCE_DIR
 
         # Patch extra ;
         patch --forward --force $SOURCE_DIR/include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
@@ -61,19 +66,19 @@ if [ "$TARGET" == "linux" ]; then
         cd $SOURCE_DIR
 
         # Build and Install
-        mkdir -p build-gtk2
-        cd build-gtk2
+        mkdir -p $BUILD_DIR
+        cd $BUILD_DIR
         ../configure --prefix=$LINUX_INSTALL_DIR --enable-unicode --with-gtk=2
-        make -j $MAKE_CORES
+        make -j $(nproc)
         make install
-        # patch --forward --force $LINUX_INSTALL_DIR/include/wx-3.0/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
     else
-        echo "wxWidgets has already been build for Linux"
+        echo "wxWidgets has already been build for Windows"
     fi
-elif [ "$TARGET" == "win" ]; then
+elif [ "$TARGET" == "windows" ]; then
     # Check if cache exists
-    if ! [ -d $WIN_INSTALL_DIR ]; then
-        SOURCE_DIR=$SOURCE_DIR-win
+    if ! [ -d $WINDOWS_INSTALL_DIR ]; then
+        SOURCE_DIR=$SOURCE_DIR-windows
+        BUILD_DIR=build-mswu-static
 
         # Download and extract source
         wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.7z
@@ -92,13 +97,40 @@ elif [ "$TARGET" == "win" ]; then
         cd $SOURCE_DIR
 
         # Build and Install
-        mkdir -p build-msw-static
-        cd build-msw-static
-        ../configure --prefix=$WIN_INSTALL_DIR --enable-unicode --disable-shared --with-msw 
-        make -j $MAKE_CORES
+        mkdir -p $BUILD_DIR
+        cd $BUILD_DIR
+        ../configure --prefix=$WINDOWS_INSTALL_DIR --enable-unicode --disable-shared --with-msw 
+        make -j $(nproc)
         make install
-        # patch --forward --force $WIN_INSTALL_DIR/include/wx-3.0/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
     else
         echo "wxWidgets has already been build for Windows"
     fi
+elif [ "$TARGET" == "windows-cross" ]; then
+    # Check if cache exists
+    if ! [ -d $WINDOWS_CROSS_INSTALL_DIR ]; then
+        SOURCE_DIR=$SOURCE_DIR-linux
+        BUILD_DIR=build-mswu-static-cross
+
+        # Download and extract source
+        wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
+        echo "Extracting wxWidgets-3.0.3.tar.bz2"
+        mkdir -p $SOURCE_DIR
+        tar -xf wxWidgets-3.0.3.tar.bz2 --strip 1 -C $SOURCE_DIR
+
+        # Patch extra ;
+        patch --forward --force $SOURCE_DIR/include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
+
+        cd $SOURCE_DIR
+
+        # Build and Install
+        mkdir -p $BUILD_DIR
+        cd $BUILD_DIR
+        ../configure --prefix=$WINDOWS_CROSS_INSTALL_DIR --host=i686-w64-mingw32 --build=x86_64-unknown-linux-gnu --enable-unicode --with-msw --disable-shared
+        make -j $(nproc)
+        make install
+    else
+        echo "wxWidgets has already been build for windows-cross"
+    fi
+else
+    echo "ERROR: Unknown target!"
 fi

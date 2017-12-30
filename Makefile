@@ -11,13 +11,14 @@ OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 #####################3
 # Enviornment Variables
 ###########
-# - WX_INSTALL_PATH  // Path where wxWidgets is installed to
+# - WX_INSTALL_PATH_LINUX  	// Path where wxWidgets is installed to for linux builds
+# - WX_INSTALL_PATH_WINDOWS	// Path where wxWidgets is installed for Windows and windows-cross
 
-WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH}/bin/wx-config --unicode=yes --toolkit=gtk2 --cxxflags`
-WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH}/bin/wx-config --unicode=yes --toolkit=gtk2 --libs`
+WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=yes --toolkit=gtk2 --cxxflags`
+WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=yes --toolkit=gtk2 --libs`
 
-WX_CONFIG_FLAGS_COMPILE_WIN=`${WX_INSTALL_PATH}/bin/wx-config --unicode=yes --cxxflags`
-WX_CONFIG_FLAGS_LINK_WIN=`${WX_INSTALL_PATH}/bin/wx-config --unicode=yes --libs`
+WX_CONFIG_FLAGS_COMPILE_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode=yes --cxxflags`
+WX_CONFIG_FLAGS_LINK_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode=yes --libs`
 
 ##############################################
 # COMMON
@@ -32,7 +33,7 @@ apply_gui_config:
 	cp gui.toml build/
 
 lint:
-	@echo "Remember to set the WX_INSTALL_PATH!"
+	@echo "Remember to set the WX_INSTALL_PATH_LINUX and WX_INSTALL_PATH_WINDOWS"
 	./lint.sh
 
 clean:
@@ -41,6 +42,7 @@ clean:
 ############################################
 # LINUX
 ####################
+
 build/linux/%.o: src/%.cpp
 	@mkdir -p $(@D)
 	${CXX} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_LINUX} -c $< -o $@
@@ -57,13 +59,13 @@ linux: lint apply_gui_config ${OBJECT_FILES_LINUX}
 
 build/windows/%.o: src/%.cpp
 	@mkdir -p $(@D)
-	${CXX} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_WIN} -c $< -o $@
+	${CXX} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_WINDOWS} -c $< -o $@
 
 build/resources.o: ${RESOURCE_FILE}
 	mkdir -p build
-	${WINDRES} -I${WX_INSTALL_PATH}/include/wx-3.0 ${RESOURCE_FILE} -o build/resources.o
+	${WINDRES} -I${WX_INSTALL_PATH_WINDOWS}/include/wx-3.0 ${RESOURCE_FILE} -o build/resources.o
 
 windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_WINDOWS}
 	mkdir -p build
-	${CXX} ${CXXFLAGS} ${OBJECT_FILES_WINDOWS} ${WX_CONFIG_FLAGS_LINK_WIN} --static \
+	${CXX} ${CXXFLAGS} ${OBJECT_FILES_WINDOWS} ${WX_CONFIG_FLAGS_LINK_WINDOWS} --static \
 	build/resources.o -o build/prothesis-2.exe
