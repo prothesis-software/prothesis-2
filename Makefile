@@ -32,7 +32,7 @@ apply_gui_config:
 	cp gui.toml build/
 
 lint:
-	@echo "Remember to set the WX_INSTALL_PATH!
+	@echo "Remember to set the WX_INSTALL_PATH!"
 	./lint.sh
 
 clean:
