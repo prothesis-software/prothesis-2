@@ -4,12 +4,20 @@ git:
   depth: 1
 cache:
   directories:
-  - $HOME/wxWidgets
+  - "$HOME/wxWidgets"
 language: cpp
 install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y gtk2.0
-  - ./build-wxwidgets.sh $HOME linux 1
-  - make get-deps
+- sudo apt-get -qq update
+- sudo apt-get install -y gtk2.0
+- "./build-wxwidgets.sh $HOME linux 1"
+- make get-deps
 script:
-  - make linux
+- make linux
+deploy:
+  provider: bintray
+  file: bintray.json
+  user: egeldenhuys
+  on:
+    all_branches: true
+  key:
+    secure: C1uA9oiF9flWk+BbakwvBOn+aXXiBKXOEOwExMdV0KzIJAOjomL08/PAP6O7xuvzv4PcrHO3LxyU3Ex36Fij2AMWicI36yJaYWuweTNA/Q+BiDfMXNhxwCyOANkaPXlFEhvC42vlBxkZqIrpXLN1plWFfVRN90x3FspCAf8h/AyXZYUM7+MzjwXqL5BiTVCQht1HwCi2uVvv62T0U/XNMUHrT/T43A766QjWwza+NYPO5KoJOL1totXX4gag42Hcc0HZzWEXe+IchAZHZGWmUoEvfnqzv6M/kV16LdakNGdlc9tRRKh0Si2KnxHjKBcJXf8MkyItcWAly14GV6Hds3pXYo9pNT6V2+3BIdVPdS3CPdkJGj6cIGg2GsbGzvA22Bv4oDojTkl4GfXUFPwhKQK1Wev2JtSsS9oq3I7/vPHz55L/orCyT8xrrVej5cZWOva25VGesbwTX3mEJ5pIDULzFhcUFJJCZI/zC+H5jVYPBj0HOqJK5J/6Qj3WNgHs1gD7GAK8lo7k64KEvQYgNyWrR1WMn6y+w/EyxBP+psCbP0BaIMVJxGc3MY5PjrZnCQ5xG69hEQ4D+1t+HOb6+Ut0VPVEJi8ilt9sVur31hURCXcTI/RrcJsugC6EGvLR747egUfFx2otzyFRigBqtnyNL8GT0tZOZ3Alj6bRLCI=
