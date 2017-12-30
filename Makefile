@@ -32,9 +32,7 @@ apply_gui_config:
 	cp gui.toml build/
 
 lint:
-	@echo "-------------------------------------------------------------------"
 	@echo "Remember to set the WX_INSTALL_PATH!
-	@echo "-------------------------------------------------------------------"
 	./lint.sh
 
 clean:
@@ -63,7 +61,7 @@ build/windows/%.o: src/%.cpp
 
 build/resources.o: ${RESOURCE_FILE}
 	mkdir -p build
-	${WINDRES} -I${WX_INSTALL_PATH}/include ${RESOURCE_FILE} -o build/resources.o
+	${WINDRES} -I${WX_INSTALL_PATH}/include/wx-3.0 ${RESOURCE_FILE} -o build/resources.o
 
 windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_WINDOWS}
 	mkdir -p build
