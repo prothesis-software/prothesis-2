@@ -136,7 +136,7 @@ elif [ "$TARGET" == "windows-cross" ]; then
                      --enable-unicode \
                      --disable-shared \
                      --with-msw \
-                     CFLAGS=-I/usr/x86_64-w64-mingw32/include/
+                     CFLAGS=-I/usr/x86_64-w64-mingw32/include
         make -j $(nproc)
         make install
     else

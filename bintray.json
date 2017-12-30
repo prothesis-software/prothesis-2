@@ -14,15 +14,15 @@
     },
 
     "version": {
-        "name": "VERSION_NUMBER",
+        "name": "0.0.0",
         "desc": "",
         "gpgSign": false
     },
 
     "files":
         [
-            {"includePattern": "build/prothesis-2", "uploadPattern": "prothesis-2"},
-            {"includePattern": "build/prothesis-2.*", "uploadPattern": "moar/$1"}
+            {"includePattern": "build/prothesis-2", "uploadPattern": "VERSION_NUMBER/prothesis-2"},
+            {"includePattern": "build/prothesis-2.exe", "uploadPattern": "VERSION_NUMBER/prothesis-2.exe"}
         ],
     "publish": true
 }
