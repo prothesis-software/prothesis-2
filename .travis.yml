@@ -11,7 +11,7 @@ env:
   - WX_INSTALL_PATH_WINDOWS_CROSS=$HOME/wxWidgets/mswu-static-cross
 install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y gtk2.0 mingw-w64 mingw32 libc-dev gcc-mingw-w64-x86-64 gcc-mingw-w64-i686-dev mingw32 mingw32-binutils mingw32-runtime
+  - sudo apt-get install -y gtk2.0 mingw-w64 mingw32 libc-dev gcc-mingw-w64-x86-64 mingw-w64-i686-dev mingw32 mingw32-binutils mingw32-runtime
   - ./build-wxwidgets-init.sh
   - make get-deps
 script:
