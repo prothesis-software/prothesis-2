@@ -6,7 +6,7 @@ cache:
 language: cpp
 env:
   - WX_INSTALL_PATH_LINUX=$HOME/wxWidgets/gtk2u
-  - WX_INSTALL_PATH_WINDOWS=$HOME/wxWidgets/mswu-static-cross
+  - WX_INSTALL_PATH_WINDOWS_CROSS=$HOME/wxWidgets/mswu-static-cross
 install:
   - sudo apt-get -qq update
   - sudo apt-get install -y gtk2.0 mingw-w64 mingw32
