@@ -13,6 +13,9 @@ OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 ###########
 # - WX_INSTALL_PATH_LINUX  	// Path where wxWidgets is installed to for linux builds
 # - WX_INSTALL_PATH_WINDOWS	// Path where wxWidgets is installed for Windows and windows-cross
+# - WX_INSTALL_PATH_WINDOWS_CROSS	// Path where wxWidgets is installed for windows-cross
+#					// Used only for triggering the wxWidgets build
+WX_INSTALL_PATH_WINDOWS=${WX_INSTALL_PATH_WINDOWS_CROSS}
 
 WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=yes --toolkit=gtk2 --cxxflags`
 WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=yes --toolkit=gtk2 --libs`
