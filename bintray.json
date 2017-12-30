@@ -1,28 +1,28 @@
 {
     "package": {
-        "name": "auto-upload",
+        "name": "travis-ci",
         "repo": "prothesis-2-builds",
         "subject": "prothesis-software",
-        "desc": "I was pushed completely automatically",
+        "desc": "Travis CI build",
         "website_url": "https://github.com/prothesis-software/prothesis-2",
         "issue_tracker_url": "https://github.com/prothesis-software/prothesis-2/issues",
         "vcs_url": "https://github.com/prothesis-software/prothesis-2",
         "github_use_tag_release_notes": false,
-        "github_release_notes_file": "RELEASE.txt",
         "licenses": ["GPL-3.0"],
         "public_download_numbers": false,
         "public_stats": false
     },
 
     "version": {
-        "name": "0.0.0",
-        "desc": "This is a version",
+        "name": "VERSION_NUMBER",
+        "desc": "",
         "gpgSign": false
     },
 
     "files":
         [
-        {"includePattern": "build/prothesis-2", "uploadPattern": "prothesis-2"}
+            {"includePattern": "build/prothesis-2", "uploadPattern": "prothesis-2"},
+            {"includePattern": "build/prothesis-2.*", "uploadPattern": "moar/$1"}
         ],
     "publish": true
 }

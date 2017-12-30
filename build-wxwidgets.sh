@@ -68,7 +68,9 @@ if [ "$TARGET" == "linux" ]; then
         # Build and Install
         mkdir -p $BUILD_DIR
         cd $BUILD_DIR
-        ../configure --prefix=$LINUX_INSTALL_DIR --enable-unicode --with-gtk=2
+        ../configure --prefix=$LINUX_INSTALL_DIR \
+                     --enable-unicode \
+                     --with-gtk=2
         make -j $(nproc)
         make install
     else
@@ -99,7 +101,10 @@ elif [ "$TARGET" == "windows" ]; then
         # Build and Install
         mkdir -p $BUILD_DIR
         cd $BUILD_DIR
-        ../configure --prefix=$WINDOWS_INSTALL_DIR --enable-unicode --disable-shared --with-msw 
+        ../configure --prefix=$WINDOWS_INSTALL_DIR \
+                     --enable-unicode \
+                     --disable-shared \
+                     --with-msw
         make -j $(nproc)
         make install
     else
@@ -125,7 +130,13 @@ elif [ "$TARGET" == "windows-cross" ]; then
         # Build and Install
         mkdir -p $BUILD_DIR
         cd $BUILD_DIR
-        ../configure --prefix=$WINDOWS_CROSS_INSTALL_DIR --host=i686-w64-mingw32 --build=x86_64-unknown-linux-gnu --enable-unicode --with-msw --disable-shared
+        ../configure --prefix=$WINDOWS_CROSS_INSTALL_DIR \
+                     --build=x86_64-unknown-linux-gnu \
+                     --host=x86_64-w64-mingw32 \
+                     --enable-unicode \
+                     --disable-shared \
+                     --with-msw \
+                     CFLAGS=-I/usr/x86_64-w64-mingw32/include/
         make -j $(nproc)
         make install
     else

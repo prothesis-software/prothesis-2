@@ -56,7 +56,9 @@ linux: lint apply_gui_config ${OBJECT_FILES_LINUX}
 ################################################
 # WINDOWS
 #########################
-
+# Example:
+# 	export WX_INSTALL_PATH_WINDOWS=...
+# 	make windows CXX=x86_64-w64-mingw32-g++ WINDRES=x86_64-w64-mingw32-windres
 build/windows/%.o: src/%.cpp
 	@mkdir -p $(@D)
 	${CXX} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_WINDOWS} -c $< -o $@

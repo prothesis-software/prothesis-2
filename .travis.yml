@@ -11,12 +11,15 @@ env:
   - WX_INSTALL_PATH_WINDOWS="$HOME/wxWidgets/mswu-static-cross"
 install:
 - sudo apt-get -qq update
-- sudo apt-get install -y gtk2.0 gcc-mingw-w64-x86-64 mingw-w64-i686-dev mingw32 mingw32-binutils mingw32-runtime
+- sudo apt-get install -y gtk2.0 mingw-w64
 - "./build-wxwidgets.sh $HOME linux"
 - "./build-wxwidgets.sh $HOME windows-cross"
 - make get-deps
 script:
 - make linux
+- make windows CXX=x86_64-w64-mingw32-g++ WINDRES=x86_64-w64-mingw32-windres
+before_deploy:
+  - sed -i s/VERSION_NUMBER/`git rev-list --all --count`/ bintray.json
 deploy:
   provider: bintray
   file: bintray.json
