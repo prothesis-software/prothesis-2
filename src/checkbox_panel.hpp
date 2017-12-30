@@ -25,7 +25,8 @@ class CheckBoxPanel : public DataPanel {
    * TOML Specification for Setting the GUI State
    *
    * [panel_name]
-   *     checked = ["Cats", "Dogs", "Rabbits"]
+   *   [[panel_name.question]]
+   *     question = "Example"
    */
   bool SetGuiState(std::shared_ptr<cpptoml::table> state) override;
 
@@ -33,8 +34,9 @@ class CheckBoxPanel : public DataPanel {
    * TOML Specification for Getting the User state:
    *
    * [panel_name]
-   *     options = ["Cats", "Dogs", "Rabbits", "Krokodile"]
-   *     limit = 3
+   *   [[panel_name.question]]
+   *     question = "Example"
+   *    checked = "true"
    */
   std::shared_ptr<cpptoml::table> GetUserState() override;
 
