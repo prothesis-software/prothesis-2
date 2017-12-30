@@ -32,6 +32,7 @@
 # ## windows-cross:
 # - mingw-w64-gcc
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/x86_64-w64-mingw32/include
 # POSITIONAL ARGS
 ROOT_DIR=$1
 TARGET=$2
