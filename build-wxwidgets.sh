@@ -28,17 +28,26 @@
 # ## windows:
 # - p7zip
 # - mingw-w64-x86_x64-gcc
+# - mingw-w64-i686-gcc
 #
 # ## windows-cross:
 # - mingw-w64-gcc
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/x86_64-w64-mingw32/include
 # POSITIONAL ARGS
 ROOT_DIR=$1
 TARGET=$2
 
-if [ -z ${var+x} ]; then
+# DEFAULTS
+if [ -z ${TRAVIS_BUILD_DIR+x} ]; then
     TRAVIS_BUILD_DIR=$PWD
+fi
+
+if [ -z ${CROSS_BUILD+x} ]; then
+    CROSS_BUILD=x86_64-unknown-linux-gnu
+fi
+
+if [ -z ${CROSS_HOST+x} ]; then
+    CROSS_HOST=i686-w64-mingw32
 fi
 
 # '-linux' or '-windows' is later appended depending on target
@@ -132,12 +141,12 @@ elif [ "$TARGET" == "windows-cross" ]; then
         mkdir -p $BUILD_DIR
         cd $BUILD_DIR
         ../configure --prefix=$WINDOWS_CROSS_INSTALL_DIR \
-                     --build=x86_64-unknown-linux-gnu \
-                     --host=x86_64-w64-mingw32 \
+                     --build=$CROSS_BUILD \
+                     --host=$CROSS_HOST \
                      --enable-unicode \
                      --disable-shared \
                      --with-msw \
-                     CFLAGS=-I/usr/x86_64-w64-mingw32/include
+                     CFLAGS=-I/usr/$CROSS_HOST/include
         make -j $(nproc)
         make install
     else
