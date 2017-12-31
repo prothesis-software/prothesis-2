@@ -42,7 +42,8 @@ class DataManager {
     kValuesPanel = 4,
     kSpokenWordsPanel = 5,
     kSkillsPanel = 6,
-    kPanelCount = 7
+    kExternalPanel = 7,
+    kPanelCount = 8
   };
 
   /**
