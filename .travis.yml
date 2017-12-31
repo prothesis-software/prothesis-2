@@ -14,7 +14,7 @@ install:
 script:
   - ./build-prothesis-2-init.sh
 before_deploy:
-  - sed -i s/VERSION_NUMBER/`git rev-list --all --count`/ bintray.json
+  - sed -i s/VERSION_NUMBER/$TRAVIS_BUILD_NUMBER/ bintray.json
 deploy:
   provider: bintray
   file: bintray.json
