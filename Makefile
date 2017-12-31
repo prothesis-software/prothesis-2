@@ -1,37 +1,42 @@
 CXX=g++
-CXX_WIN=i686-w64-mingw32-g++
-WINDRES=i686-w64-mingw32-windres
-
 CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic
+WINDRES=windres
 
 SOURCE_FILES=$(shell find -name '*.cpp' | sed 's/\.\///g')
 OBJECT_FILES_LINUX=${SOURCE_FILES:src/%.cpp=build/linux/%.o}
-
-OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 RESOURCE_FILE=src/resources.rc
 
-WX_CONFIG_LINUX=`wx-config --toolkit=gtk2 --libs --cxxflags`
+OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 
-WIN_WX_STATIC_CONFIG=.win_wx_static_config
+#####################3
+# Enviornment Variables
+###########
+# - WX_INSTALL_PATH_LINUX  	// Path where wxWidgets is installed to for linux builds
+# - WX_INSTALL_PATH_WINDOWS	// Path where wxWidgets is installed for Windows and windows-cross
+# - WX_INSTALL_PATH_WINDOWS_CROSS	// Path where wxWidgets is installed for windows-cross
+#					// Used only for triggering the wxWidgets build
+WX_INSTALL_PATH_WINDOWS=${WX_INSTALL_PATH_WINDOWS_CROSS}
 
-# WX_PATH should look like /home/evert/wxWidgets-3.0.3/msw-static
-# Where wxWidgets-3.0.3 is the source extracted from the .tar.gz
-WX_PATH=$(shell cat ${WIN_WX_STATIC_CONFIG} 2> /dev/null)
-WX_CONFIG_WINDOWS = `${WX_PATH}/wx-config --cxxflags`
-WX_CONFIG_WINDOWS_LINK = `${WX_PATH}/wx-config --libs`
+WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=yes --toolkit=gtk2 --cxxflags`
+WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=yes --toolkit=gtk2 --libs`
 
-all: linux windows
-	@echo "Build done for Linux and Windows"
+WX_CONFIG_FLAGS_COMPILE_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode=yes --cxxflags`
+WX_CONFIG_FLAGS_LINK_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode=yes --libs`
 
 ##############################################
 # COMMON
 ############
+
+get-deps:
+	./get-cpplint.sh
+	./get-cpptoml.sh
 
 apply_gui_config:
 	mkdir -p build
 	cp gui.toml build/
 
 lint:
+	@echo "Remember to set the WX_INSTALL_PATH_LINUX and WX_INSTALL_PATH_WINDOWS"
 	./lint.sh
 
 clean:
@@ -40,34 +45,32 @@ clean:
 ############################################
 # LINUX
 ####################
+
 build/linux/%.o: src/%.cpp
 	@mkdir -p $(@D)
-	${CXX} ${CXXFLAGS} ${WX_CONFIG_LINUX} -c $< -o $@
+	${CXX} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_LINUX} -c $< -o $@
 
 linux: lint apply_gui_config ${OBJECT_FILES_LINUX}
 	@echo ${SOURCE_FILES}
 	mkdir -p build
-	${CXX} ${OBJECT_FILES_LINUX} ${CXXFLAGS} ${WX_CONFIG_LINUX} \
+	${CXX} ${CXXFLAGS} ${OBJECT_FILES_LINUX} ${WX_CONFIG_FLAGS_LINK_LINUX} \
 	-o build/prothesis-2
 
 ################################################
 # WINDOWS
 #########################
-
+# Example:
+# 	export WX_INSTALL_PATH_WINDOWS=...
+# 	make windows CXX=x86_64-w64-mingw32-g++ WINDRES=x86_64-w64-mingw32-windres
 build/windows/%.o: src/%.cpp
 	@mkdir -p $(@D)
-	${CXX_WIN} ${CXXFLAGS} ${WX_CONFIG_WINDOWS} -c $< -o $@
+	${CXX} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_WINDOWS} -c $< -o $@
 
 build/resources.o: ${RESOURCE_FILE}
 	mkdir -p build
-	${WINDRES} ${RESOURCE_FILE} -I${WX_PATH}/../include -o build/resources.o
+	${WINDRES} -I${WX_INSTALL_PATH_WINDOWS}/include/wx-3.0 ${RESOURCE_FILE} -o build/resources.o
 
 windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_WINDOWS}
-ifneq (${WX_PATH}, )
 	mkdir -p build
-	${CXX_WIN} ${CXXFLAGS} ${OBJECT_FILES_WINDOWS} ${WX_CONFIG_WINDOWS_LINK} --static \
+	${CXX} ${CXXFLAGS} ${OBJECT_FILES_WINDOWS} ${WX_CONFIG_FLAGS_LINK_WINDOWS} --static \
 	build/resources.o -o build/prothesis-2.exe
-else
-	@echo "Please add the path to the statically compiled wxWidgets \
-	to the file '.win_wx_static_config'"
-endif
