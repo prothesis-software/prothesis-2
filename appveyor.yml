@@ -1,5 +1,5 @@
 environment:
-- WX_INSTALL_PATH_WINDOWS: $HOME/wxWidgets/mswu-static
+  WX_INSTALL_PATH_WINDOWS: $HOME/wxWidgets/mswu-static
 
 build_script:
 - '%APPVEYOR_BUILD_FOLDER%\appveyor.bat'
