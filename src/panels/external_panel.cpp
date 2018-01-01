@@ -43,7 +43,7 @@ bool ExternalPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
 
             if (key) {
               // Add the key to the key vector
-              keys.Add(wxT(*key));
+              keys.Add(wxString(*key));
             } else {
               wxLogDebug(_("'key' was not found for ") +
                          _("table external.life_keys.type ") +
@@ -150,7 +150,7 @@ bool ExternalPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
 
             if (key) {
               // Add the key to the key vector
-              keys.Add(wxT(*key));
+              keys.Add(wxString(*key));
             } else {
               wxLogDebug(_("'key' was not found for ") +
                          _("table external.life_keys.type ") +
