@@ -96,7 +96,9 @@ void DataManager::Load() {
       panels_[i]->SetGuiState(gui_config);
     }
   } else {
-    wxLogDebug(_("The GUI config file does not exist: ") + _(gui_config_path_));
+    wxLogWarning(_("The GUI config file does not exist: ") +
+                 _(gui_config_path_) +
+                 _("\nThe program will not work without it!"));
     return;
   }
 

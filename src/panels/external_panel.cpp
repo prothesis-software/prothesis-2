@@ -14,6 +14,10 @@ ExternalPanel::ExternalPanel(wxWindow *parent,
   : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   sizer_keys_ = new wxBoxSizer(wxVERTICAL);
 
+  for (size_t i = 0; i < CHOICE_BOX_KEYS_COUNT; i++) {
+    choice_boxes_keys_[i] = NULL;
+  }
+
   DoLayout();
 }
 
@@ -97,7 +101,6 @@ std::shared_ptr<cpptoml::table> ExternalPanel::GetUserState() {
     } else {
       mbti[i] = "";
     }
-
     mbti_array->push_back(mbti[i]);
   }
 
@@ -105,16 +108,18 @@ std::shared_ptr<cpptoml::table> ExternalPanel::GetUserState() {
   // life keys
   size_t keys_found = 0;
   for (size_t i = 0; i < CHOICE_BOX_KEYS_COUNT; i++) {
-    if (choice_boxes_keys_[i]->GetSelection() != wxNOT_FOUND) {
-      auto life_key_type = cpptoml::make_table();
-      const int selection = choice_boxes_keys_[i]->GetSelection();
+    if (choice_boxes_keys_[i]) {
+      if (choice_boxes_keys_[i]->GetSelection() != wxNOT_FOUND) {
+        auto life_key_type = cpptoml::make_table();
+        const int selection = choice_boxes_keys_[i]->GetSelection();
 
-      const std::string key =
-        choice_boxes_keys_[i]->GetString(selection).ToStdString();
+        const std::string key =
+          choice_boxes_keys_[i]->GetString(selection).ToStdString();
 
-      life_key_type->insert("key", key);
-      life_keys_table_array->push_back(life_key_type);
-      keys_found++;
+        life_key_type->insert("key", key);
+        life_keys_table_array->push_back(life_key_type);
+        keys_found++;
+      }
     }
   }
 
