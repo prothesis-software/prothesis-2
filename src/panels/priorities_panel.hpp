@@ -6,7 +6,7 @@
     #include <wx/wx.h>
 #endif
 
-#include <wx/listbox.h>
+#include <wx/listctrl.h>
 
 #include <memory>
 #include <string>
@@ -51,16 +51,17 @@ class PrioritiesPanel : public DataPanel {
   /**
    * Ad hoc method to calculate the height of a listbox item.
    * Used for setting the best size.
+   * \warning Hack
    */
-  int GetItemHeight(wxListBox *list);
-  void SetBestListHeight(wxListBox *list);
-  void OnUnsortedListBoxSelectionChange(wxCommandEvent &event);  // NOLINT
+  int GetItemHeight(wxListCtrl *list);
+  void SetBestListHeight(wxListCtrl *list);
+  void OnUnsortedListBoxSelectionChange(wxListEvent &event);  // NOLINT
   void OnButtonAddClick(wxCommandEvent &event);  // NOLINT
   void AddSelectedItemToSorted();
-  wxListBox *list_unsorted_1_ = NULL;
-  wxListBox *list_unsorted_2_ = NULL;
-  wxListBox *list_sorted_ = NULL;
-  wxListBox *unsorted_lists_[2];
+  wxListCtrl *list_unsorted_1_ = NULL;
+  wxListCtrl *list_unsorted_2_ = NULL;
+  wxListCtrl *list_sorted_ = NULL;
+  wxListCtrl *unsorted_lists_[2];
   int item_height_ = -1;
 };
 

@@ -11,24 +11,22 @@ PrioritiesPanel::PrioritiesPanel(wxWindow *parent,
                            const wxSize &size,
                                  int64_t style)
   : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
-  list_unsorted_1_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
-                                   wxSize(-1, -1), 0, NULL,
-                                   wxLB_SINGLE);
-  list_unsorted_1_->Bind(wxEVT_LISTBOX,
+  list_unsorted_1_ = new wxListCtrl(this, wxID_ANY, wxDefaultPosition,
+                                   wxSize(-1, -1), wxLC_SINGLE_SEL | wxLC_LIST);
+  list_unsorted_1_->Bind(wxEVT_LIST_ITEM_SELECTED,
                          &PrioritiesPanel::OnUnsortedListBoxSelectionChange,
                          this);
   unsorted_lists_[0] = list_unsorted_1_;
 
-  list_unsorted_2_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
-                                   wxSize(-1, -1), 0, NULL,
-                                   wxLB_SINGLE);
-  list_unsorted_2_->Bind(wxEVT_LISTBOX,
+  list_unsorted_2_ = new wxListCtrl(this, wxID_ANY, wxDefaultPosition,
+                                   wxSize(-1, -1), wxLC_SINGLE_SEL | wxLC_LIST);
+  list_unsorted_2_->Bind(wxEVT_LIST_ITEM_SELECTED,
                          &PrioritiesPanel::OnUnsortedListBoxSelectionChange,
                          this);
   unsorted_lists_[1] = list_unsorted_2_;
 
-  list_sorted_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
-                               wxSize(-1, -1), 0, NULL, wxLB_SINGLE);
+  list_sorted_ = new wxListCtrl(this, wxID_ANY, wxDefaultPosition,
+                               wxSize(-1, -1), wxLC_SINGLE_SEL | wxLC_LIST);
   DoLayout();
 }
 
@@ -36,7 +34,7 @@ PrioritiesPanel::~PrioritiesPanel() {
   // void
 }
 
-int PrioritiesPanel::GetItemHeight(wxListBox *list) {
+int PrioritiesPanel::GetItemHeight(wxListCtrl *list) {
   wxLogDebug("Finding item height...");
 
   wxLogDebug(_("Original: ") +
@@ -47,14 +45,14 @@ int PrioritiesPanel::GetItemHeight(wxListBox *list) {
   size_t count = 15;
 
   while (best_height == list->GetBestHeight(-1) && count > 0) {
-    list->InsertItems(1, new wxString("test_item"), 0);
+    list->InsertItem(0, wxString("test_item"));
     count--;
   }
   int initial_height = list->GetBestHeight(-1);
 
   wxLogDebug(_("initial: ") +
              _(std::to_string(initial_height)));
-  list->InsertItems(1, new wxString("test_item"), 0);
+  list->InsertItem(0, wxString("test_item"));
 
   int final_height = list->GetBestHeight(-1);
   wxLogDebug(_("final: ") +
@@ -68,32 +66,32 @@ int PrioritiesPanel::GetItemHeight(wxListBox *list) {
     wxLogWarning("Could not calculate the height of a wxListBox item!");
   }
 
-  list->Clear();
+  list->ClearAll();
 
   // To correct for errors
-  return delta + 1;
+  return 23;
 }
 
-void PrioritiesPanel::SetBestListHeight(wxListBox *list) {
-  int best = (list->GetCount() + 1) * item_height_;
+void PrioritiesPanel::SetBestListHeight(wxListCtrl *list) {
+  int best = (list->GetItemCount() + 1) * item_height_;
   list->SetMinSize(wxSize(-1, best));
 }
 
 void PrioritiesPanel::AddUnsortedPriority(std::string priority) {
   // Get list with least items
 
-  wxListBox *best_list = unsorted_lists_[0];
-  size_t least_items = unsorted_lists_[0]->GetCount();
+  wxListCtrl *best_list = unsorted_lists_[0];
+  size_t least_items = unsorted_lists_[0]->GetItemCount();
 
   for (size_t i = 1; i < 2; i++) {
-    size_t items = unsorted_lists_[i]->GetCount();
+    size_t items = unsorted_lists_[i]->GetItemCount();
     if (items < least_items) {
       least_items = items;
       best_list = unsorted_lists_[i];
     }
   }
 
-  best_list->InsertItems(1, new wxString(priority), 0);
+  best_list->InsertItem(0, wxString(priority));
 }
 
 bool PrioritiesPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
@@ -133,26 +131,27 @@ bool PrioritiesPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
 }
 
 void PrioritiesPanel::AddSelectedItemToSorted() {
-  wxListBox *list_box = NULL;
+  // wxListBox *list_box = NULL;
 
-  if (list_unsorted_1_->GetSelection() != wxNOT_FOUND) {
-    list_box = list_unsorted_1_;
-  } else if (list_unsorted_2_->GetSelection() != wxNOT_FOUND) {
-    list_box = list_unsorted_2_;
-  }
+  // if (list_unsorted_1_->GetSelection() != wxNOT_FOUND) {
+  //   list_box = list_unsorted_1_;
+  // } else if (list_unsorted_2_->GetSelection() != wxNOT_FOUND) {
+  //   list_box = list_unsorted_2_;
+  // }
 
-  if (list_box != NULL) {
-    wxString str = list_box->GetString(list_box->GetSelection());
-    list_sorted_->InsertItems(1, new wxString(str), list_sorted_->GetCount());
-  }
+  // if (list_box != NULL) {
+  //   wxString str = list_box->GetString(list_box->GetSelection());
+  //   list_sorted_->InsertItems(1, new wxString(str),
+  // list_sorted_->GetCount());
+  // }
 }
 
 void PrioritiesPanel::OnButtonAddClick(wxCommandEvent &event) {
   AddSelectedItemToSorted();
 }
 
-void PrioritiesPanel::OnUnsortedListBoxSelectionChange(wxCommandEvent &event) {
-  wxListBox *list_box = static_cast<wxListBox*>(event.GetEventObject());
+void PrioritiesPanel::OnUnsortedListBoxSelectionChange(wxListEvent &event) {
+  wxListBox *list_box = static_cast<wxListCtrl*>(event.GetEventObject());
 
   if (list_box == list_unsorted_1_) {
     list_unsorted_2_->SetSelection(wxNOT_FOUND);
