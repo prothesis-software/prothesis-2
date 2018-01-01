@@ -10,8 +10,11 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "src/data_panel.hpp"
+
+#define CHOICE_BOX_KEYS_COUNT 3
 
 class ExternalPanel : public DataPanel {
  public:
@@ -49,6 +52,7 @@ class ExternalPanel : public DataPanel {
    * [external.life_keys]
    *   [[external.life_keys.type]]
    *     key = "key"
+   * mbti = ["I", "S", "T", "J"]
    */
   std::shared_ptr<cpptoml::table> GetUserState() override;
 
@@ -59,7 +63,11 @@ class ExternalPanel : public DataPanel {
 
  private:
   void DoLayout();
+  void AddMbtiTuple(std::vector<wxArrayString> *source_vector,
+                    std::string str1,
+                    std::string str2);
   wxBoxSizer *sizer_keys_ = NULL;
-  wxChoice *choice_boxes_keys_[3];
+  wxChoice *choice_boxes_keys_[CHOICE_BOX_KEYS_COUNT];
+  wxChoice *choice_boxes_mbti_[4];
 };
 #endif  // PANELS_EXTERNAL_PANEL_HPP_
