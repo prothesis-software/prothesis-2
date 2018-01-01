@@ -144,6 +144,10 @@ void MainFrame::DoLayout() {
   NavigationDrawer *drawer = new NavigationDrawer(this, wxID_ANY);
 
   for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
+    wxLogDebug(_("Adding panel ") +
+               _(data_manager_->GetPanelByIndex(i)->GetPanelTitle()) +
+               _(" to navigation drawer"));
+
     drawer->AddItem(data_manager_->GetPanelByIndex(i)->GetPanelTitle(),
                     data_manager_->GetIdFromIndex(i));
   }

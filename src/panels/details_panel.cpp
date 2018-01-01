@@ -83,10 +83,6 @@ bool DetailsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   return false;
 }
 
-// cpptoml::base was is to pass the shared_ptr in a
-// different way in an attempt to fix the windows
-// problems
-// TODO(egeldenhuys): Fix on Windows
 std::shared_ptr<cpptoml::table> DetailsPanel::GetUserState() {
   wxLogDebug(_("DetailsPanel::GetUserState()"));
   // std::shared_ptr<cpptoml::table> root = cpptoml::make_table();
