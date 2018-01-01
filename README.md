@@ -1,36 +1,21 @@
 # Prothesis v2
 
+Prothesis software for Target Life
+
 ## Building
 ### Linux
-```
-make linux -j4
-
-./build/prothesis-2
-```
-
-### Windows
-- **NOTE:* A Windows build using 4 cores may use up to 2 GB of RAM
+#### wxWidgets
+View the `build-wxwidgets.sh` for more information
 
 ```
-# Set config used in makefile
-echo "path/to/static/msw-wxwidgets" > .win_wx_static_config
-
-make windows -j4
-
-./build/prothesis-2.exe
+./build-wxwidgets.sh <root_dir> linux
 ```
+- wxWidgets will be installed at <root_dir>/wxWidgets/gtk2u
+- wxWidgets source will be at <root_dir>/wxWidgets-3.0.3-linux
+- wxWidgets source archive will be downloaded to <root_dir>/wxWidgets-3.0.3.tar.bz2
 
-## Linter
-The source is automatically linted when using the makefile.
-It will stop compiling if there is a linting error.
-
-```
-./get-cpplint.sh
-./lint.sh
-```
-
-## Development
-### Dependencies
+#### Prothesis-2
+##### Dependencies
 - [wxWidgets 3.0.3](https://github.com/prothesis-software/prothesis-2/wiki/Compiling-wxWidgets)
   - `gtk2`
   - `make`
@@ -41,11 +26,39 @@ It will stop compiling if there is a linting error.
   - Static msw build of wxWidgets for Windows cross compilation
 - `python2` (for linting)
 - `wget` (downloading dependencies)
-- `cpplint.py` (run `get-cpplint.sh`)
-- `cpptoml.h` (run `get-cpptoml.sh`)
+- `cpplint.py` (run `make get-deps`)
+- `cpptoml.h` (run `make get-deps`)
+
+```
+export WX_INTALL_PATH_LINUX=<root_dir>/wxWidgets/gtku2/
+make linux -j $(nproc)
+```
+
+### Windows
+#### wxWidgets
+- Install MSYS2 (see wiki)
+
+```
+# Install dependencies
+pacman -S git mingw-w64-i686-gcc python2 p7zip make patch
+
+# Build wxWidgets
+./build-wxdigets <root_dir> windows
+```
+
+#### Prothesis-2
+##### Dependencies
+```
+pacman -S mingw-w64-i686-g++
+```
+
+##### Building
+```
+export WX_INSTALL_PATH_WINDOWS=<root_dir>/wxWidgets/mswu-static
+make windows -j ($nproc)
+```
 
 ## Deploying
-
 ### Linux
 #### Dependencies
 - `gtk2`
