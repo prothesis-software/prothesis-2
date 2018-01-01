@@ -24,12 +24,32 @@ class PrioritiesPanel : public DataPanel {
                   int64_t style = 0);
   ~PrioritiesPanel();
 
+  /**
+   * TOML Specification:
+   * [priorities]
+   *   options = ["a", "b", "c"]
+   */
   bool SetGuiState(std::shared_ptr<cpptoml::table> state) override;
+
+  /**
+   * TOML Specification:
+   * [priorities]
+   *   options = ["c", "a", "b"]
+   */
   std::shared_ptr<cpptoml::table> GetUserState() override;
+
+  /**
+   * TOML Specifcation:
+   *   The same as GetUserState()
+   */
   bool SetUserState(std::shared_ptr<cpptoml::table> state) override;
 
  private:
   void DoLayout();
+  void AddUnsortedPriority(std::string priority);
+  wxListBox *list_unsorted_1_ = NULL;
+  wxListBox *list_unsorted_2_ = NULL;
+  wxListBox *unsorted_lists_[2];
 };
 
 #endif  // PANELS_PRIORITIES_PANEL_HPP_
