@@ -54,6 +54,9 @@ class PrioritiesPanel : public DataPanel {
    */
   int GetItemHeight(wxListBox *list);
   void SetBestListHeight(wxListBox *list);
+  void OnUnsortedListBoxSelectionChange(wxCommandEvent &event);  // NOLINT
+  void OnButtonAddClick(wxCommandEvent &event);  // NOLINT
+  void AddSelectedItemToSorted();
   wxListBox *list_unsorted_1_ = NULL;
   wxListBox *list_unsorted_2_ = NULL;
   wxListBox *list_sorted_ = NULL;
