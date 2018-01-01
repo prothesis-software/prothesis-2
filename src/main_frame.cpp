@@ -126,7 +126,10 @@ wxSize MainFrame::GetOverallMinSize() {
 }
 
 void MainFrame::SetProperties() {
-  label_title_->SetFont(wxFont(16, wxDEFAULT, wxNORMAL, wxBOLD, 0, wxT("")));
+  label_title_->SetFont(wxFont(16, wxFONTFAMILY_DEFAULT,
+                               wxFONTSTYLE_NORMAL,
+                               wxFONTWEIGHT_BOLD, 0,
+                               wxString("")));
 }
 
 void MainFrame::DoLayout() {

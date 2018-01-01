@@ -10,9 +10,9 @@
 # ./build-wxwidgets.sh $HOME linux
 
 # OUTPUTS in $ROOT_DIR:
-# - wxWidgets-3.0.3-source-<linux|windows>
+# - wxWidgets-3.1.0-source-<linux|windows>
 # - wxWidgets/<gtk2u|mswu-static|mswu-static-cross>
-# - wxWidgets-3.0.3.<tar.bz2|7z>
+# - wxWidgets-3.1.0.<tar.bz2|7z>
 
 # DEPENDENCIES:
 # ## Common:
@@ -50,8 +50,10 @@ if [ -z ${CROSS_HOST+x} ]; then
     CROSS_HOST=i686-w64-mingw32
 fi
 
+WX_WIDGETS_VERSION=3.1.0
+
 # '-linux' or '-windows' is later appended depending on target
-SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
+SOURCE_DIR=$ROOT_DIR/wxWidgets-$WX_WIDGETS_VERSION-source
 LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/gtk2u
 WINDOWS_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static
 WINDOWS_CROSS_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static-cross
@@ -65,10 +67,10 @@ if [ "$TARGET" == "linux" ]; then
         BUILD_DIR=build-gtk2u
 
         # Download and extract source
-        wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
-        echo "Extracting wxWidgets-3.0.3.tar.bz2"
+        wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v$WX_WIDGETS_VERSION/wxWidgets-$WX_WIDGETS_VERSION.tar.bz2
+        echo "Extracting wxWidgets-$WX_WIDGETS_VERSION.tar.bz2"
         mkdir -p $SOURCE_DIR
-        tar -xf wxWidgets-3.0.3.tar.bz2 --strip 1 -C $SOURCE_DIR
+        tar -xf wxWidgets-$WX_WIDGETS_VERSION.tar.bz2 --strip 1 -C $SOURCE_DIR
 
         # Patch extra ;
         patch --forward --force $SOURCE_DIR/include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
@@ -93,14 +95,14 @@ elif [ "$TARGET" == "windows" ]; then
         BUILD_DIR=build-mswu-static
 
         # Download and extract source
-        wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.7z
+        wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/$WX_WIDGETS_VERSION/wxWidgets-$WX_WIDGETS_VERSION.7z
         # p7zip deletes original file, so preserve it
-        cp wxWidgets-3.0.3.7z wxWidgets-3.0.3-tmp.7z
+        cp wxWidgets-$WX_WIDGETS_VERSION.7z wxWidgets-$WX_WIDGETS_VERSION-tmp.7z
         mkdir -p $SOURCE_DIR
         cd $SOURCE_DIR
-        echo "Extracting wxWidgets-3.0.3-tmp.7z ..."
+        echo "Extracting wxWidgets-$WX_WIDGETS_VERSION-tmp.7z ..."
         # Overwrite existing files
-        echo "A" | p7zip -d ../wxWidgets-3.0.3-tmp.7z &> /dev/null
+        echo "A" | p7zip -d ../wxWidgets-$WX_WIDGETS_VERSION-tmp.7z &> /dev/null
         cd ../
 
         # Patch extra ;
@@ -127,10 +129,10 @@ elif [ "$TARGET" == "windows-cross" ]; then
         BUILD_DIR=build-mswu-static-cross
 
         # Download and extract source
-        wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
-        echo "Extracting wxWidgets-3.0.3.tar.bz2"
+        wget -nc https://github.com/wxWidgets/wxWidgets/releases/download/$WX_WIDGETS_VERSION/wxWidgets-$WX_WIDGETS_VERSION.tar.bz2
+        echo "Extracting wxWidgets-$WX_WIDGETS_VERSION.tar.bz2"
         mkdir -p $SOURCE_DIR
-        tar -xf wxWidgets-3.0.3.tar.bz2 --strip 1 -C $SOURCE_DIR
+        tar -xf wxWidgets-$WX_WIDGETS_VERSION.tar.bz2 --strip 1 -C $SOURCE_DIR
 
         # Patch extra ;
         patch --forward --force $SOURCE_DIR/include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
