@@ -17,14 +17,60 @@ PrioritiesPanel::PrioritiesPanel(wxWindow *parent,
   unsorted_lists_[0] = list_unsorted_1_;
 
   list_unsorted_2_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
-                                   wxDefaultSize, 0, NULL,
+                                   wxSize(-1, -1), 0, NULL,
                                    wxLB_SINGLE);
   unsorted_lists_[1] = list_unsorted_2_;
+
+  list_sorted_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
+                               wxSize(-1, -1), 0, NULL, wxLB_SINGLE);
   DoLayout();
 }
 
 PrioritiesPanel::~PrioritiesPanel() {
   // void
+}
+
+int PrioritiesPanel::GetItemHeight(wxListBox *list) {
+  wxLogDebug("Finding item height...");
+
+  wxLogDebug(_("Original: ") +
+             _(std::to_string(list->GetBestHeight(-1))));
+
+  // Add items until we start increasing in size
+  int best_height = list->GetBestHeight(-1);
+  size_t count = 15;
+
+  while (best_height == list->GetBestHeight(-1) && count > 0) {
+    list->InsertItems(1, new wxString("test_item"), 0);
+    count--;
+  }
+  int initial_height = list->GetBestHeight(-1);
+
+  wxLogDebug(_("initial: ") +
+             _(std::to_string(initial_height)));
+  list->InsertItems(1, new wxString("test_item"), 0);
+
+  int final_height = list->GetBestHeight(-1);
+  wxLogDebug(_("final: ") +
+             _(std::to_string(final_height)));
+
+  int delta = final_height - initial_height;
+  wxLogDebug(_("delta: ") +
+             _(std::to_string(delta)));
+
+  if (delta <= 0) {
+    wxLogWarning("Could not calculate the height of a wxListBox item!");
+  }
+
+  list->Clear();
+
+  // To correct for errors
+  return delta + 1;
+}
+
+void PrioritiesPanel::SetBestListHeight(wxListBox *list) {
+  int best = (list->GetCount() + 1) * item_height_;
+  list->SetMinSize(wxSize(-1, best));
 }
 
 void PrioritiesPanel::AddUnsortedPriority(std::string priority) {
@@ -55,6 +101,12 @@ bool PrioritiesPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
       for (const auto& priority_string : *priorities_array) {
         AddUnsortedPriority(priority_string);
       }
+      SetBestListHeight(unsorted_lists_[0]);
+      // GetSize() does not seem to return the actual size,
+      // so these hacks are used.
+      unsorted_lists_[1]->SetMinSize(unsorted_lists_[0]->GetSize());
+      list_sorted_->SetMinSize(wxSize(unsorted_lists_[0]->GetBestWidth(-1),
+                                      unsorted_lists_[0]->GetMinSize().y));
     } else {
       wxLogDebug("Key 'options' was not found for panel Priorities.");
     }
@@ -82,10 +134,8 @@ void PrioritiesPanel::DoLayout() {
   wxStaticText *label_sorted = new wxStaticText(this, wxID_ANY,
                                                 _("Sorted Priorities"));
   sizer_sorted->Add(label_sorted, 0, 0, 0);
-
-  wxListBox *list_sorted = new wxListBox(this, wxID_ANY, wxDefaultPosition,
-                                         wxDefaultSize, 0, NULL, wxLB_SINGLE);
-  sizer_sorted->Add(list_sorted, 0, 0, 0);
+  sizer_sorted->Add(list_sorted_, 0, 0, 0);
+  item_height_ = GetItemHeight(list_sorted_);
 
   sizer->Add(sizer_sorted, 0, 0, 0);
 
@@ -107,8 +157,8 @@ void PrioritiesPanel::DoLayout() {
   wxStaticText *label_unsorted = new wxStaticText(this, wxID_ANY,
                                                 _("Priorities to select from"));
   sizer_unsorted->Add(label_unsorted, 0, 0, 0);
-  sizer_unsorted_lists->Add(list_unsorted_1_, 0, 0, 0);
-  sizer_unsorted_lists->Add(list_unsorted_2_, 0, 0, 0);
+  sizer_unsorted_lists->Add(list_unsorted_1_, 1, wxEXPAND, 0);
+  sizer_unsorted_lists->Add(list_unsorted_2_, 1, wxEXPAND, 0);
   sizer_unsorted->Add(sizer_unsorted_lists, 0, 0, 0);
 
   sizer->Add(sizer_unsorted, 0, 0, 0);

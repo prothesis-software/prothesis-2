@@ -47,9 +47,18 @@ class PrioritiesPanel : public DataPanel {
  private:
   void DoLayout();
   void AddUnsortedPriority(std::string priority);
+
+  /**
+   * Ad hoc method to calculate the height of a listbox item.
+   * Used for setting the best size.
+   */
+  int GetItemHeight(wxListBox *list);
+  void SetBestListHeight(wxListBox *list);
   wxListBox *list_unsorted_1_ = NULL;
   wxListBox *list_unsorted_2_ = NULL;
+  wxListBox *list_sorted_ = NULL;
   wxListBox *unsorted_lists_[2];
+  int item_height_ = -1;
 };
 
 #endif  // PANELS_PRIORITIES_PANEL_HPP_
