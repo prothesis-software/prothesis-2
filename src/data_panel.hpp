@@ -8,8 +8,9 @@
 
 #include <memory>
 #include <string>
-#include "include/cpptoml.h"
+#include <vector>
 
+#include "include/cpptoml.h"
 
 /**
  * Base class for all custom panels that store user data
@@ -51,6 +52,9 @@ class DataPanel : public wxPanel {
 
   std::string GetPanelName();
   std::string GetPanelTitle();
+  DataPanel* GetPanelByName(std::string panel_name);
+
+  static std::vector<DataPanel*> panels_;
 
  protected:
   std::string panel_name_;
