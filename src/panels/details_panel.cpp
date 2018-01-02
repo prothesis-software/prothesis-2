@@ -13,32 +13,17 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
   : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   wxLogDebug("DetailsPanel::DetailsPanel() START");
   text_ctrl_name_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-  wxLogDebug("a1");
   text_ctrl_surname_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-  wxLogDebug("ka2");
   spin_ctrl_age_ = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
                                   wxDefaultPosition, wxDefaultSize,
                                   wxSP_VERTICAL | wxSP_ARROW_KEYS,
                                   0, 100, 18);
-  wxLogDebug("ka3");
   datepicker_ctrl_ = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime,
                                           wxDefaultPosition, wxDefaultSize,
                                           wxDP_DEFAULT | wxDP_SHOWCENTURY);
-  wxLogDebug("ka4");
-  button_next_ = new wxButton(this, wxID_ANY, _("Next"));
-  wxLogDebug("ka5");
-  button_next_->Bind(wxEVT_BUTTON, &DetailsPanel::OnButtonNextClick, this,
-                    wxID_ANY);
-  wxLogDebug("6");
   SetProperties();
   DoLayout();
   wxLogDebug("DetailsPanel::DetailsPanel() END");
-}
-
-void DetailsPanel::OnButtonNextClick(wxCommandEvent &event) {
-  // void
-  MainFrame *frame = static_cast<MainFrame*>(this->GetParent());
-  frame->DisplayPanelById(DataManager::PanelId::kPassionPanel);
 }
 
 void DetailsPanel::SetProperties() {
@@ -70,8 +55,8 @@ void DetailsPanel::DoLayout() {
   details_grid_sizer->Add(datepicker_ctrl_, 0, wxRIGHT,
                           kPanelBorderSize);
   details_grid_sizer->Add(0, 0, 0, 0, 0);
-  details_grid_sizer->Add(button_next_, 0, wxRIGHT | wxBOTTOM | wxALIGN_RIGHT,
-                          kPanelBorderSize);
+  details_grid_sizer->Add(0, 0, 0, 0);
+
   this->SetSizer(details_grid_sizer);
   Layout();
   details_grid_sizer->Fit(this);

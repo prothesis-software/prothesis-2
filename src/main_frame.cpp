@@ -36,8 +36,6 @@ MainFrame::MainFrame(wxWindow *parent,
   SetSize(minSize);
 }
 
-
-
 void MainFrame::SetHeaderTitle(std::string title) {
   label_title_->SetLabel(_(title));
 }
@@ -51,6 +49,7 @@ void MainFrame::DisplayPanelById(DataManager::PanelId id) {
   if (active_panel_id_ != id) {
     DisplayPanel(data_manager_->GetPanelById(id));
     active_panel_id_ = id;
+    active_panel_ = data_manager_->GetPanelById(id);
     Refresh();
   }
 }
@@ -70,7 +69,7 @@ bool MainFrame::DisplayNextPanel() {
 void MainFrame::DisplayPanel(DataPanel *panel) {
   // Freeze and thaw are required to prevent visual artifacts
   Freeze();
-  wxLogDebug("MainFrame::DisplayPanel() START");
+
   const size_t kPanelViewIndex = 1;
   const size_t kBorderSize = 0;
 
@@ -80,11 +79,11 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
   if (active_panel_ != NULL)
       active_panel_->Hide();
   active_panel_ = panel;
-
+  wxLogDebug(_("Displaying panel ") + _(panel->GetPanelName()));
   SetHeaderTitle(active_panel_->GetPanelTitle());
   panel->Show();
   Layout();
-  wxLogDebug("MainFrame::DisplayPanel() END");
+
   Thaw();
 }
 
@@ -129,12 +128,23 @@ void MainFrame::SetProperties() {
   label_title_->SetFont(wxFont(16, wxDEFAULT, wxNORMAL, wxBOLD, 0, wxT("")));
 }
 
+void MainFrame::OnButtonNextClick(wxCommandEvent &event) {
+  if (active_panel_ == NULL) {
+    wxLogWarning("active_panel_ == NULL");
+  }
+
+  if (!active_panel_->Next()) {
+    wxLogDebug("End of panel pages, going to next panel");
+    DisplayNextPanel();
+  }
+}
+
 void MainFrame::DoLayout() {
   // TODO(egeldenhuys): panel_main_frame_ otherwise we have strange backround
   // colour on windows
 
-  sizer_main_frame_->Add(label_title_, 1, wxALIGN_CENTER | wxEXPAND, 0);
-
+  // HEADER
+  sizer_main_frame_->Add(label_title_, 1, wxEXPAND | wxALIGN_CENTER, 0);
   // bar
   wxStaticLine *line = new wxStaticLine(this, wxID_ANY);
   line->SetMinSize(wxSize(10, 4));  // Required to work
@@ -152,13 +162,17 @@ void MainFrame::DoLayout() {
                     data_manager_->GetIdFromIndex(i));
   }
 
-  sizer_content_->Add(drawer, 0, 0, 0, 0);
-  sizer_content_->Add(0, 0, 0, 0, 0);  // Index 1 content placeholder
-  sizer_content_->Add(0, 0, 0, 0, 0);
+  sizer_content_->Add(drawer, 0, 0, 0);
+  sizer_content_->Add(0, 0, 0, 0);  // Index 1 content placeholder
+  sizer_content_->Add(0, 0, 0, 0);
 
-  sizer_content_->Add(0, 0, 0, 0, 0);
-  sizer_content_->Add(0, 0, 0, 0, 0);
-  sizer_content_->Add(0, 0, 0, 0, 0);  // TODO(egeldenhuys): button_next
+  wxButton *button_next = new wxButton(this, wxID_ANY, _("Next"));
+  button_next->Bind(wxEVT_BUTTON, &MainFrame::OnButtonNextClick, this);
+
+  sizer_content_->Add(0, 0, 0, 0);
+  sizer_content_->Add(0, 0, 0, 0);
+  sizer_content_->Add(button_next, 0, wxALIGN_RIGHT | wxALIGN_BOTTOM | wxALL,
+                      20);
 
   sizer_content_->AddGrowableCol(0);
   sizer_content_->AddGrowableCol(2);
@@ -166,7 +180,7 @@ void MainFrame::DoLayout() {
   sizer_main_frame_->Add(sizer_content_, 1, wxEXPAND, 0);
 
   sizer_main_frame_->AddGrowableCol(0);
-
+  sizer_main_frame_->AddGrowableRow(2);
   SetSizer(sizer_main_frame_);
   sizer_main_frame_->Fit(this);
   Fit();

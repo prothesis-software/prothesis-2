@@ -46,6 +46,7 @@ class MainFrame: public wxFrame {
   void DoLayout();
   void SetProperties();
   void OnClose(wxCloseEvent &e); // NOLINT
+  void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
   DataManager::PanelId active_panel_id_;
   DataPanel *active_panel_ = NULL;
   wxFlexGridSizer *sizer_main_frame_ = NULL;

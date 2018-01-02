@@ -52,6 +52,12 @@ class DataPanel : public wxPanel {
   std::string GetPanelName();
   std::string GetPanelTitle();
 
+  /**
+   * Instruct the panel to display it's next page if suported.
+   * Returns false if at end or not supported
+   */
+  virtual bool Next();
+
  protected:
   std::string panel_name_;
   std::string panel_title_;

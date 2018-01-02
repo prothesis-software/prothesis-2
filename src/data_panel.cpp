@@ -21,6 +21,6 @@ std::string DataPanel::GetPanelTitle() {
   return panel_title_;
 }
 
-// wxSize DataPanel::GetLargestPanelSize() {
-//  return GetMinSize();
-// }
+bool DataPanel::Next() {
+  return false;
+}

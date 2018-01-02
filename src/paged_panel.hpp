@@ -43,6 +43,8 @@ class PagedPanel : public DataPanel {
    */
   bool DisplayNextPage();
 
+  bool Next() override;
+
   /**
    * Add a panel to the list of pages to be initialised
    * when Init() is called
@@ -59,14 +61,12 @@ class PagedPanel : public DataPanel {
   void DoLayout();
   void SetProperties();
   void OnHyperlinkClick(wxHyperlinkEvent &event);  // NOLINT
-  void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
   size_t active_panel_index_ = 0;
   std::vector<wxPanel*> panels_;
   std::vector<wxHyperlinkCtrl*> hyperlinks_;
 
   wxFlexGridSizer *sizer_paged_panel_ = NULL;
   wxPanel *active_panel_ = NULL;
-  wxButton *button_next_ = NULL;
   wxPanel* panel_page_numbers_ = NULL;
   wxSimplebook *simple_book_ = NULL;
 };
