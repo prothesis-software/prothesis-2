@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic
+CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic -Wno-write-strings
 WINDRES=windres
 
 SOURCE_FILES=$(shell find -name '*.cpp' | sed 's/\.\///g')
