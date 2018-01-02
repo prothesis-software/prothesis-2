@@ -8,6 +8,7 @@
 #include "questions_panel.hpp"
 #include "checkbox_panel.hpp"
 #include "panels/priorities_panel.hpp"
+#include "panels/external_panel.hpp"
 
 DataManager::DataManager(wxFrame *main_frame) {
   main_frame_ = main_frame;
@@ -81,6 +82,11 @@ void DataManager::DeclarePanels() {
                               std::string("priorities"),
                               std::string("Priorities")),
            PanelId::kPrioritiesPanel);
+    // EXTERNAL
+  AddPanel(new ExternalPanel(main_frame_, wxID_ANY,
+                              std::string("external"),
+                              std::string("External")),
+           PanelId::kExternalPanel);
 }
 
 // TODO(egeldenhuys): Handle parse errors
@@ -96,7 +102,9 @@ void DataManager::Load() {
       panels_[i]->SetGuiState(gui_config);
     }
   } else {
-    wxLogDebug(_("The GUI config file does not exist: ") + _(gui_config_path_));
+    wxLogWarning(_("The GUI config file does not exist: ") +
+                 _(gui_config_path_) +
+                 _("\nThe program will not work without it!"));
     return;
   }
 
