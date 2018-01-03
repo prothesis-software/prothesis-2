@@ -48,6 +48,7 @@ class MainFrame: public wxFrame {
   void SetProperties();
   void OnClose(wxCloseEvent &e); // NOLINT
   void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
+  void OnNotebookSelectionChange(wxBookCtrlEvent& event);  // NOLINT
   wxNotebook *notebook_ = NULL;
   DataManager::PanelId active_panel_id_;
   DataPanel *active_panel_ = NULL;

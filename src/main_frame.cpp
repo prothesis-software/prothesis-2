@@ -24,6 +24,9 @@ MainFrame::MainFrame(wxWindow *parent,
   sizer_main_frame_ = new wxFlexGridSizer(3, 1, 0, 0);
   notebook_ = new wxNotebook(panel_main_, wxID_ANY, wxDefaultPosition,
                                         wxDefaultSize, wxNB_TOP);
+  notebook_->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED,
+                  &MainFrame::OnNotebookSelectionChange,
+                  this);
   data_manager_ = new DataManager(notebook_);
   // Need to give Ellipsize flags: http://trac.wxwidgets.org/ticket/10716
   label_title_ = new wxStaticText(panel_main_, wxID_ANY, wxT("Title"),
@@ -46,6 +49,16 @@ void MainFrame::SetHeaderTitle(std::string title) {
 void MainFrame::OnClose(wxCloseEvent &e) {
   wxLogDebug(_("MainFrame::OnClose()"));
   data_manager_->SaveUserConfig();
+}
+
+void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
+  int index = notebook_->GetSelection();
+  DataManager::PanelId id = data_manager_->GetIdFromIndex(index);
+
+  DataPanel *panel = data_manager_->GetPanelById(id);
+  active_panel_ = panel;
+  active_panel_id_ = id;
+  SetHeaderTitle(active_panel_->GetPanelTitle());
 }
 
 void MainFrame::DisplayPanelById(DataManager::PanelId id) {
