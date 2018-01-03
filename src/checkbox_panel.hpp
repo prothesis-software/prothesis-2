@@ -45,14 +45,10 @@ class CheckBoxPanel : public DataPanel {
    */
   bool SetUserState(std::shared_ptr<cpptoml::table> state) override;
 
-  wxCheckListBox *listBoxA;
-  wxCheckListBox *listBoxB;
-  wxCheckListBox *listBoxC;
-
  private:
-  // void SetProperties();
   void DoLayout();
   void SetCheckboxStateByLabel(std::string label, bool checked);
+  void OnCheckBoxListSelectionChange(wxCommandEvent &event);  // NOLINT
 
   /**
    * Create a new checkbox (unchecked) and add it to the panel
@@ -60,6 +56,10 @@ class CheckBoxPanel : public DataPanel {
   void AddCheckBox(std::string label);
 
   std::vector<wxCheckBox> checkboxes_;
+  wxCheckListBox *list_box_a_;
+  wxCheckListBox *list_box_b_;
+  wxCheckListBox *list_box_c_;
+  wxCheckListBox *boxes_[3];
 };
 
 #endif  // CHECKBOX_PANEL_HPP_
