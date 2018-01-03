@@ -12,6 +12,10 @@
 
 #include "paged_panel.hpp"
 
+#define QUESTION_WRAP_WIDTH 600
+#define ANSWER_WIDTH 400
+#define ANSWER_HEIGHT 100
+
 class QuestionsPanel : public PagedPanel {
  public:
   QuestionsPanel(wxWindow* parent,
