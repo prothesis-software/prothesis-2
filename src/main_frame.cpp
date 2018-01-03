@@ -154,8 +154,6 @@ void MainFrame::DoLayout() {
   line->SetMinSize(wxSize(10, 4));  // Required to work
   sizer_main_frame_->Add(line, 1, wxEXPAND, 0);
 
-  wxColour notebook_colour = notebook_->GetBackgroundColour();
-
   // sizer_content_
   for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
     wxLogDebug(_("Adding panel ") +
@@ -163,8 +161,6 @@ void MainFrame::DoLayout() {
                _(" to notebook"));
 
     wxPanel *panel = data_manager_->GetPanelByIndex(i);
-    panel->SetBackgroundColour(notebook_colour);
-
     notebook_->AddPage(panel,
                       data_manager_->GetPanelByIndex(i)->GetPanelTitle());
   }

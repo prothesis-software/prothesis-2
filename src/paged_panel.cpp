@@ -145,8 +145,8 @@ void PagedPanel::DoLayout() {
   sizer_paged_panel_->Add(0, 0, 0, 0);
 
   SetSizer(sizer_paged_panel_);
-  sizer_paged_panel_->AddGrowableCol(0);
-  sizer_paged_panel_->AddGrowableCol(2);
+  sizer_paged_panel_->AddGrowableCol(1);
+  sizer_paged_panel_->AddGrowableRow(2);
 
   sizer_paged_panel_->Fit(this);
   Layout();
