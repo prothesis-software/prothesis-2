@@ -5,8 +5,6 @@
 #include <memory>
 #include <vector>
 
-#include "main_frame.hpp"
-
 PagedPanel::PagedPanel(wxWindow* parent,
              wxWindowID id,
              std::string panel_name,
@@ -17,13 +15,7 @@ PagedPanel::PagedPanel(wxWindow* parent,
   : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   panel_page_numbers_ = new wxPanel(this, wxID_ANY);
   sizer_paged_panel_ = new wxFlexGridSizer(4, 3, 0, 0);
-  button_next_ = new wxButton(this, wxID_ANY, _("Next"));
   simple_book_ = new wxSimplebook(this, wxID_ANY);
-  button_next_->Bind(wxEVT_BUTTON, &PagedPanel::OnButtonNextClick, this);
-}
-
-void PagedPanel::OnButtonNextClick(wxCommandEvent &event) {
-  DisplayNextPage();
 }
 
 void PagedPanel::AddPage(wxPanel *panel) {
@@ -42,33 +34,31 @@ void PagedPanel::Init() {
   }
 
   for (size_t i = 0; i < panels_.size(); i++) {
-    wxHyperlinkCtrl *link = new wxHyperlinkCtrl(panel_page_numbers_, wxID_ANY,
-                                                _(std::to_string(i + 1)),
-                                                wxEmptyString);
-    link->Bind(wxEVT_HYPERLINK, &PagedPanel::OnHyperlinkClick, this);
-    hyperlinks_.push_back(link);
+    wxButton *page_item = new wxButton(panel_page_numbers_, wxID_ANY,
+                                       _(std::to_string(i + 1)),
+                                       wxDefaultPosition,
+                                       wxDefaultSize,
+                                       wxBU_EXACTFIT);
+    page_item->Bind(wxEVT_BUTTON, &PagedPanel::OnPageClick, this);
+    page_items_.push_back(page_item);
   }
 
   DoLayout();
-  SetProperties();
   DisplayPage(0);
   wxLogDebug("PagedPanel::Init() END");
 }
 
 PagedPanel::~PagedPanel() {
-  // wxLogDebug("PagedPanel::~PagedPanel()");
+  // void
 }
 
 bool PagedPanel::DisplayNextPage() {
   if (active_panel_index_ + 1 < panels_.size()) {
     DisplayPage(++active_panel_index_);
     return true;
-  } else {
-    MainFrame * main_frame = static_cast<MainFrame *>(wxTheApp->GetTopWindow());
-    main_frame->DisplayNextPanel();
-    return false;
   }
-  return true;
+
+  return false;
 }
 
 size_t PagedPanel::GetPageCount() {
@@ -80,48 +70,51 @@ void PagedPanel::DisplayPage(size_t index) {
 
   simple_book_->SetSelection(index);
   active_panel_index_ = index;
+  page_items_.at(index)->SetForegroundColour(wxColour(255, 0, 0));
   Layout();
   wxLogDebug("PagedPanel::DisplayPanel() END");
 }
 
-// TODO(egeldenhuys): Error handling for int <-> string conversions
-void PagedPanel::OnHyperlinkClick(wxHyperlinkEvent &event) {
-  wxLogDebug("PagedPanel::OnHyperlinkClick() START");
+void PagedPanel::OnPageClick(wxCommandEvent &event) {
+  wxLogDebug("PagedPanel::OnPageClick() START");
 
-  wxHyperlinkCtrl *link = static_cast<wxHyperlinkCtrl*>(event.GetEventObject());
-  wxString wxStr = link->GetLabel();
+  wxButton *page_item = static_cast<wxButton*>(event.GetEventObject());
+  wxString wxStr = page_item->GetLabel();
   std::string str = wxStr.ToStdString();
   size_t index = std::stoi(str) - 1;
+
+  for (size_t i = 0; i < page_items_.size(); i++) {
+    if (page_items_.at(i) != page_item) {
+      wxColour default_colour =
+        wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT);
+      page_items_.at(i)->SetForegroundColour(default_colour);
+    }
+  }
 
   DisplayPage(index);
   wxLogDebug("PagedPanel::OnHyperlinkClick() END");
 }
 
-void PagedPanel::SetProperties() {
-  for (size_t i = 0; i < hyperlinks_.size(); i++) {
-    hyperlinks_.at(i)->SetMinSize(wxSize(35, -1));
-  }
-}
-
 void PagedPanel::DoLayout() {
   // begin wxGlade: MainFrame::do_layout
   wxFlexGridSizer* sizer_page_numbers =
-    new wxFlexGridSizer(1, hyperlinks_.size() + 2, 0, 0);
+    new wxFlexGridSizer(1, page_items_.size() + 2, 0, 5);
 
   // Page numbers panel
   // Add col for spacing
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
 
   // Add hyperlinks
-  for (size_t i = 0; i < hyperlinks_.size(); i++) {
-    sizer_page_numbers->Add(hyperlinks_.at(i), 0, 0, 0);
+  for (size_t i = 0; i < page_items_.size(); i++) {
+    sizer_page_numbers->Add(page_items_.at(i), 0, 0, 0);
+    // page_items_.at(i)->SetMinSize(wxSize(35, -1));
   }
 
   // Spacing col
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
 
   sizer_page_numbers->AddGrowableCol(0);
-  sizer_page_numbers->AddGrowableCol(hyperlinks_.size() + 1);
+  sizer_page_numbers->AddGrowableCol(page_items_.size() + 1);
   panel_page_numbers_->SetSizer(sizer_page_numbers);
 
   // Page number panel to main sizer
@@ -144,7 +137,7 @@ void PagedPanel::DoLayout() {
 
   // Footer
   sizer_paged_panel_->Add(0, 0, 0, 0);
-  sizer_paged_panel_->Add(button_next_, 1, wxALIGN_RIGHT | wxRIGHT, 0);
+  sizer_paged_panel_->Add(0, 0, 0, 0);
   sizer_paged_panel_->Add(0, 0, 0, 0);
 
   SetSizer(sizer_paged_panel_);
