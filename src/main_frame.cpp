@@ -18,12 +18,15 @@ MainFrame::MainFrame(wxWindow *parent,
                      const wxString name)
   : wxFrame(parent, id, title, pos, size, style, name) {
   std::signal(SIGINT, OnKill);
-  data_manager_ = new DataManager(this);
-  sizer_content_ = new wxFlexGridSizer(2, 3, 0, 0);
-  sizer_main_frame_ = new wxFlexGridSizer(3, 1, 0, 0);
+  panel_main_ = new wxPanel(this, wxID_ANY);
 
+  sizer_content_ = new wxFlexGridSizer(2, 2, 0, 0);
+  sizer_main_frame_ = new wxFlexGridSizer(3, 1, 0, 0);
+  notebook_ = new wxNotebook(panel_main_, wxID_ANY, wxDefaultPosition,
+                                        wxDefaultSize, wxNB_TOP);
+  data_manager_ = new DataManager(notebook_);
   // Need to give Ellipsize flags: http://trac.wxwidgets.org/ticket/10716
-  label_title_ = new wxStaticText(this, wxID_ANY, wxT("Title"),
+  label_title_ = new wxStaticText(panel_main_, wxID_ANY, wxT("Title"),
                                   wxDefaultPosition, wxDefaultSize,
                                   wxALIGN_CENTER | wxST_ELLIPSIZE_END);
   SetProperties();
@@ -47,9 +50,10 @@ void MainFrame::OnClose(wxCloseEvent &e) {
 
 void MainFrame::DisplayPanelById(DataManager::PanelId id) {
   if (active_panel_id_ != id) {
-    DisplayPanel(data_manager_->GetPanelById(id));
+    notebook_->ChangeSelection(id);
     active_panel_id_ = id;
     active_panel_ = data_manager_->GetPanelById(id);
+    SetHeaderTitle(active_panel_->GetPanelTitle());
     Refresh();
   }
 }
@@ -66,7 +70,7 @@ bool MainFrame::DisplayNextPanel() {
 // TODO(egeldenhuys): Switch to wxSimplebook
 // WARN(egeldenhuys): Causes valgrind errors
 // Do not use directly. Use DisplayPanelById()
-void MainFrame::DisplayPanel(DataPanel *panel) {
+void MainFrame::DisplayPanel_deprecated(DataPanel *panel) {
   // Freeze and thaw are required to prevent visual artifacts
   Freeze();
 
@@ -146,43 +150,44 @@ void MainFrame::DoLayout() {
   // HEADER
   sizer_main_frame_->Add(label_title_, 1, wxEXPAND | wxALIGN_CENTER, 0);
   // bar
-  wxStaticLine *line = new wxStaticLine(this, wxID_ANY);
+  wxStaticLine *line = new wxStaticLine(panel_main_, wxID_ANY);
   line->SetMinSize(wxSize(10, 4));  // Required to work
   sizer_main_frame_->Add(line, 1, wxEXPAND, 0);
 
-  // sizer_content_
-  NavigationDrawer *drawer = new NavigationDrawer(this, wxID_ANY);
+  wxColour notebook_colour = notebook_->GetBackgroundColour();
 
+  // sizer_content_
   for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
     wxLogDebug(_("Adding panel ") +
                _(data_manager_->GetPanelByIndex(i)->GetPanelTitle()) +
-               _(" to navigation drawer"));
+               _(" to notebook"));
 
-    drawer->AddItem(data_manager_->GetPanelByIndex(i)->GetPanelTitle(),
-                    data_manager_->GetIdFromIndex(i));
+    wxPanel *panel = data_manager_->GetPanelByIndex(i);
+    panel->SetBackgroundColour(notebook_colour);
+
+    notebook_->AddPage(panel,
+                      data_manager_->GetPanelByIndex(i)->GetPanelTitle());
   }
 
-  sizer_content_->Add(drawer, 0, 0, 0);
-  sizer_content_->Add(0, 0, 0, 0);  // Index 1 content placeholder
+  sizer_content_->Add(notebook_, 1, wxEXPAND, 0);
+  sizer_content_->Add(0, 0, 0, 0);
   sizer_content_->Add(0, 0, 0, 0);
 
-  wxButton *button_next = new wxButton(this, wxID_ANY, _("Next"));
+  wxButton *button_next = new wxButton(panel_main_, wxID_ANY, _("Next"));
   button_next->Bind(wxEVT_BUTTON, &MainFrame::OnButtonNextClick, this);
 
-  sizer_content_->Add(0, 0, 0, 0);
-  sizer_content_->Add(0, 0, 0, 0);
   sizer_content_->Add(button_next, 0, wxALIGN_RIGHT | wxALIGN_BOTTOM | wxALL,
                       20);
 
-  sizer_content_->AddGrowableCol(0);
-  sizer_content_->AddGrowableCol(2);
+  sizer_content_->AddGrowableCol(1);
   sizer_content_->AddGrowableRow(1);
+
   sizer_main_frame_->Add(sizer_content_, 1, wxEXPAND, 0);
 
   sizer_main_frame_->AddGrowableCol(0);
   sizer_main_frame_->AddGrowableRow(2);
-  SetSizer(sizer_main_frame_);
-  sizer_main_frame_->Fit(this);
+  panel_main_->SetSizer(sizer_main_frame_);
+  sizer_main_frame_->Fit(panel_main_);
   Fit();
   Layout();
 }

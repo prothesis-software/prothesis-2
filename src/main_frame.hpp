@@ -7,6 +7,7 @@
 #endif
 #include <wx/treectrl.h>
 #include <wx/statline.h>
+#include <wx/notebook.h>
 
 #include <string>
 
@@ -47,16 +48,18 @@ class MainFrame: public wxFrame {
   void SetProperties();
   void OnClose(wxCloseEvent &e); // NOLINT
   void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
+  wxNotebook *notebook_ = NULL;
   DataManager::PanelId active_panel_id_;
   DataPanel *active_panel_ = NULL;
   wxFlexGridSizer *sizer_main_frame_ = NULL;
   wxFlexGridSizer *sizer_content_ = NULL;
   wxStaticText *label_title_ = NULL;
+  wxPanel *panel_main_ = NULL;
 
   /**
    * Display the given panel and adds it to the sizer
    */
-  void DisplayPanel(DataPanel *panel);
+  void DisplayPanel_deprecated(DataPanel *panel);
 };
 
 #endif  // MAIN_FRAME_HPP_

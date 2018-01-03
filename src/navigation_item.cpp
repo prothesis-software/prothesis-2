@@ -10,6 +10,7 @@ NavigationItem::NavigationItem(wxWindow *parent,
                                int64_t style)
   : wxButton(parent, id, label, pos, size, style) {
   target_ = target;
+  SetBackgroundColour(wxColour(255, 0, 0));
 }
 
 DataManager::PanelId NavigationItem::GetTarget() {
