@@ -21,6 +21,7 @@
 #include "panels/external_panel.hpp"
 #include "panels/work_environment_panel.hpp"
 #include "panels/details_panel.hpp"
+#include "panels/priorities_panel.hpp"
 
 /**
  * The Data Manager class is responsible for storing reference
@@ -50,7 +51,7 @@ class DataManager {
     kValuesPanel = 4,
     kSpokenWordsPanel = 5,
     kSkillsPanel = 6,
-    kExternalPanel = 7, 
+    kExternalPanel = 7,
     kWorkEnvironmentPanel = 8,
     kPrioritiesPanel = 9,
     kPanelCount = 10
