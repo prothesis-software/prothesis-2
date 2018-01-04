@@ -92,13 +92,8 @@ std::shared_ptr<cpptoml::table> CheckBoxPanel::GetUserState() {
   std::shared_ptr<cpptoml::table_array> question_array =
       cpptoml::make_table_array();
 
-  wxCheckListBox *boxes[3];
-  boxes[0] = listBoxA;
-  boxes[1] = listBoxB;
-  boxes[2] = listBoxC;
-
   for (size_t i = 0; i < 3; i++) {
-    wxCheckListBox *box = boxes[i];
+    wxCheckListBox *box = boxes_[i];
     for (size_t i = 0; i < box->GetCount(); i++) {
       // Create a question answer pair
       std::shared_ptr<cpptoml::table> question_table = cpptoml::make_table();
@@ -116,50 +111,55 @@ std::shared_ptr<cpptoml::table> CheckBoxPanel::GetUserState() {
   return panel_data;
 }
 
+void CheckBoxPanel::OnCheckBoxListSelectionChange(wxCommandEvent &event) {
+  wxCheckListBox *list_box =
+    static_cast<wxCheckListBox*>(event.GetEventObject());
+
+  for (size_t i = 0; i < 3; i++) {
+    if (boxes_[i] != list_box) {
+      boxes_[i]->SetSelection(wxNOT_FOUND);
+    }
+  }
+}
+
 void CheckBoxPanel::DoLayout() {
   wxGridSizer *sizer = new wxGridSizer(0, 3, 0, 0);
-  this->listBoxA = new wxCheckListBox(this, wxID_ANY);
-  this->listBoxB = new wxCheckListBox(this, wxID_ANY);
-  this->listBoxC = new wxCheckListBox(this, wxID_ANY);
+  this->list_box_a_ = new wxCheckListBox(this, wxID_ANY);
+  this->list_box_b_ = new wxCheckListBox(this, wxID_ANY);
+  this->list_box_c_ = new wxCheckListBox(this, wxID_ANY);
 
-  sizer->Add(listBoxA, 1, wxEXPAND | wxALIGN_LEFT, 0, 0);
-  sizer->Add(listBoxB, 1, wxEXPAND | wxALIGN_CENTER, 0, 0);
-  sizer->Add(listBoxC, 1, wxEXPAND | wxALIGN_RIGHT, 0, 0);
+  boxes_[0] = list_box_a_;
+  boxes_[1] = list_box_b_;
+  boxes_[2] = list_box_c_;
+
+  for (size_t i = 0; i < 3; i++) {
+    sizer->Add(boxes_[i], 1, wxEXPAND | wxALIGN_LEFT, 0, 0);
+    boxes_[i]->Bind(wxEVT_LISTBOX,
+                    &CheckBoxPanel::OnCheckBoxListSelectionChange, this);
+  }
 
   this->SetSizer(sizer);
   Layout();
 }
 
 void CheckBoxPanel::SetCheckboxStateByLabel(std::string label, bool checked) {
-  wxCheckListBox *box = this->listBoxA;
-  int pos = box->FindString(label);
-  if (pos != -1) {
-    box->Check(pos, checked);
-    return;
-  }
-
-  box = this->listBoxB;
-  pos = box->FindString(label);
-  if (pos != -1) {
-    box->Check(pos, checked);
-    return;
-  }
-
-  box = this->listBoxC;
-  pos = box->FindString(label);
-  if (pos != -1) {
-    box->Check(pos, checked);
-    return;
+  for (size_t i = 0; i < 3; i++) {
+    int pos = boxes_[i]->FindString(label);
+    if (pos != -1) {
+      boxes_[i]->Check(pos, checked);
+      return;
+    }
   }
   // What is looooveeeee! Baby don't huuurt meee
+  // love is loops and arrays
 }
 
 void CheckBoxPanel::AddCheckBox(std::string label) {
-  wxCheckListBox *box = this->listBoxA;
+  wxCheckListBox *box = this->list_box_a_;
   if (box->GetCount() >= MAX_ITEMS) {
-    box = this->listBoxB;
+    box = this->list_box_b_;
     if (box->GetCount() >= MAX_ITEMS) {
-      box = this->listBoxC;
+      box = this->list_box_c_;
     }
   }
 
