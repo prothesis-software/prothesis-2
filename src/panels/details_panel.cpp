@@ -13,32 +13,17 @@ DetailsPanel::DetailsPanel(wxWindow *parent,
   : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   wxLogDebug("DetailsPanel::DetailsPanel() START");
   text_ctrl_name_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-  wxLogDebug("a1");
   text_ctrl_surname_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-  wxLogDebug("ka2");
   spin_ctrl_age_ = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
                                   wxDefaultPosition, wxDefaultSize,
                                   wxSP_VERTICAL | wxSP_ARROW_KEYS,
                                   0, 100, 18);
-  wxLogDebug("ka3");
   datepicker_ctrl_ = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime,
                                           wxDefaultPosition, wxDefaultSize,
                                           wxDP_DEFAULT | wxDP_SHOWCENTURY);
-  wxLogDebug("ka4");
-  button_next_ = new wxButton(this, wxID_ANY, _("Next"));
-  wxLogDebug("ka5");
-  button_next_->Bind(wxEVT_BUTTON, &DetailsPanel::OnButtonNextClick, this,
-                    wxID_ANY);
-  wxLogDebug("6");
   SetProperties();
   DoLayout();
   wxLogDebug("DetailsPanel::DetailsPanel() END");
-}
-
-void DetailsPanel::OnButtonNextClick(wxCommandEvent &event) {
-  // void
-  MainFrame *frame = static_cast<MainFrame*>(this->GetParent());
-  frame->DisplayPanelById(DataManager::PanelId::kPassionPanel);
 }
 
 void DetailsPanel::SetProperties() {
@@ -50,28 +35,42 @@ void DetailsPanel::DoLayout() {
   wxLogDebug("DetailsPanel::DoLayout() START");
   const int kPanelBorderSize = 10;
 
-  wxFlexGridSizer *details_grid_sizer = new wxFlexGridSizer(5, 2, 7, 25);
+  wxFlexGridSizer *details_grid_sizer = new wxFlexGridSizer(6, 4, 7, 25);
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
   wxStaticText *label_name = new wxStaticText(this, wxID_ANY, _("Name"));
   details_grid_sizer->Add(label_name, 0, wxTOP | wxLEFT, kPanelBorderSize);
   wxStaticText* label_surname = new wxStaticText(this, wxID_ANY, _("Surname"));
   details_grid_sizer->Add(label_surname, 0, wxTOP | wxRIGHT, kPanelBorderSize);
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
 
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
   details_grid_sizer->Add(text_ctrl_name_, 0, wxLEFT, kPanelBorderSize);
   details_grid_sizer->Add(text_ctrl_surname_, 0, wxRIGHT, kPanelBorderSize);
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
 
   wxStaticText* label_age = new wxStaticText(this, wxID_ANY, _("Age"));
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
   details_grid_sizer->Add(label_age, 0, wxLEFT, kPanelBorderSize);
 
   wxStaticText* label_date = new wxStaticText(this, wxID_ANY, _("Date"));
   details_grid_sizer->Add(label_date, 0, wxRIGHT, kPanelBorderSize);
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
 
+    details_grid_sizer->Add(0, 0, 0, 0);  // Center float
   details_grid_sizer->Add(spin_ctrl_age_, 0, wxLEFT,
                           kPanelBorderSize);
   details_grid_sizer->Add(datepicker_ctrl_, 0, wxRIGHT,
                           kPanelBorderSize);
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
+
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
   details_grid_sizer->Add(0, 0, 0, 0, 0);
-  details_grid_sizer->Add(button_next_, 0, wxRIGHT | wxBOTTOM | wxALIGN_RIGHT,
-                          kPanelBorderSize);
+  details_grid_sizer->Add(0, 0, 0, 0);
+  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
+
+  details_grid_sizer->AddGrowableCol(0);
+  details_grid_sizer->AddGrowableCol(3);
+  details_grid_sizer->AddGrowableRow(5);
   this->SetSizer(details_grid_sizer);
   Layout();
   details_grid_sizer->Fit(this);

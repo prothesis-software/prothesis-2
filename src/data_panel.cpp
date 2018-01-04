@@ -26,6 +26,10 @@ std::string DataPanel::GetPanelTitle() {
   return panel_title_;
 }
 
+bool DataPanel::Next() {
+  return false;
+}
+
 DataPanel* DataPanel::GetPanelByName(std::string panel_name) {
   for (size_t i = 0; i < DataPanel::panels_.size(); i++) {
     if (panels_.at(i)->GetPanelName().compare(panel_name) == 0) {

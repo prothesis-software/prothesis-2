@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 
-DataManager::DataManager(wxFrame *main_frame) {
+DataManager::DataManager(wxWindow *main_frame) {
   main_frame_ = main_frame;
 
   std::string base_path = GetBasePath();
@@ -30,8 +30,6 @@ void DataManager::AddPanel(DataPanel* panel, PanelId id) {
 
   panels_[id] = panel;
   ids_[id] = id;
-
-  panel->Hide();
 }
 
 void DataManager::DeclarePanels() {

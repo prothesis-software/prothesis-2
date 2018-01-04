@@ -17,18 +17,13 @@ PagedPanel::PagedPanel(wxWindow* parent,
   : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   panel_page_numbers_ = new wxPanel(this, wxID_ANY);
   sizer_paged_panel_ = new wxFlexGridSizer(4, 3, 0, 0);
-  button_next_ = new wxButton(this, wxID_ANY, _("Next"));
   simple_book_ = new wxSimplebook(this, wxID_ANY);
-  button_next_->Bind(wxEVT_BUTTON, &PagedPanel::OnButtonNextClick, this);
-}
-
-void PagedPanel::OnButtonNextClick(wxCommandEvent &event) {
-  DisplayNextPage();
 }
 
 void PagedPanel::AddPage(wxPanel *panel) {
   panels_.push_back(panel);
   panel->Reparent(simple_book_);
+  // TODO(egeldenuys): lolwat? can't remember the purpose.
   simple_book_->AddPage(panel, "LOLWAT");
 }
 
@@ -59,13 +54,15 @@ PagedPanel::~PagedPanel() {
   // wxLogDebug("PagedPanel::~PagedPanel()");
 }
 
+bool PagedPanel::Next() {
+  return DisplayNextPage();
+}
+
 bool PagedPanel::DisplayNextPage() {
   if (active_panel_index_ + 1 < panels_.size()) {
     DisplayPage(++active_panel_index_);
     return true;
   } else {
-    MainFrame * main_frame = static_cast<MainFrame *>(wxTheApp->GetTopWindow());
-    main_frame->DisplayNextPanel();
     return false;
   }
   return true;
@@ -144,12 +141,12 @@ void PagedPanel::DoLayout() {
 
   // Footer
   sizer_paged_panel_->Add(0, 0, 0, 0);
-  sizer_paged_panel_->Add(button_next_, 1, wxALIGN_RIGHT | wxRIGHT, 0);
+  sizer_paged_panel_->Add(0, 0, 0, 0);
   sizer_paged_panel_->Add(0, 0, 0, 0);
 
   SetSizer(sizer_paged_panel_);
-  sizer_paged_panel_->AddGrowableCol(0);
-  sizer_paged_panel_->AddGrowableCol(2);
+  sizer_paged_panel_->AddGrowableCol(1);
+  sizer_paged_panel_->AddGrowableRow(2);
 
   sizer_paged_panel_->Fit(this);
   Layout();
