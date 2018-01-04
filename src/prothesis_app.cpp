@@ -1,12 +1,22 @@
 #include "prothesis_app.hpp"
+
+#include <string>
+
 #include "main_frame.hpp"
 
 IMPLEMENT_APP(ProthesisApp)
 
 // Entry point for our program
 bool ProthesisApp::OnInit() {
-  MainFrame *main_frame = new MainFrame(NULL, wxID_ANY,
-                                        _("Prothesis v2.0.0"),
+#ifdef PROTHESIS_VERSION
+  wxString title = _("Prothesis ") + std::string(PROTHESIS_VERSION);
+#else
+  wxString title = _("Prothesis");
+#endif
+
+  MainFrame
+    *main_frame = new MainFrame(NULL, wxID_ANY,
+                                        title,
                                         wxDefaultPosition,
                                         wxSize(-1, -1));
   SetTopWindow(main_frame);

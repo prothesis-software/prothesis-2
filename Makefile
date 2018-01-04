@@ -1,7 +1,10 @@
+PROTHESIS_VERSION=2.0.0-dev
+
 CXX=g++
 CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic -Wno-write-strings
-WINDRES=windres
+CXXFLAGS+=-DPROTHESIS_VERSION=\"${PROTHESIS_VERSION}\"
 
+WINDRES=windres
 SOURCE_FILES=$(shell find -name '*.cpp' | sed 's/\.\///g')
 OBJECT_FILES_LINUX=${SOURCE_FILES:src/%.cpp=build/linux/%.o}
 RESOURCE_FILE=src/resources.rc

@@ -183,7 +183,15 @@ void MainFrame::DoLayout() {
 
   sizer_content_->Add(notebook_, 1, wxEXPAND, 0);
   sizer_content_->Add(0, 0, 0, 0);
+
+#ifdef PROTHESIS_VERSION
+  wxStaticText *version = new wxStaticText(panel_main_,
+                                           wxID_ANY,
+                                           _(PROTHESIS_VERSION));
+  sizer_content_->Add(version, 0, wxALIGN_LEFT | wxALIGN_BOTTOM, 0);
+#else
   sizer_content_->Add(0, 0, 0, 0);
+#endif
 
   wxButton *button_next = new wxButton(panel_main_, wxID_ANY, _("Next"));
   button_next->Bind(wxEVT_BUTTON, &MainFrame::OnButtonNextClick, this);
