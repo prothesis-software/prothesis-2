@@ -5,7 +5,7 @@
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
 #endif
-#include <wx/hyperlink.h>
+
 #include <wx/statline.h>
 #include <wx/simplebook.h>
 
@@ -51,21 +51,30 @@ class PagedPanel : public DataPanel {
    */
   void AddPage(wxPanel * panel);
 
+  /**
+   * Return the number of pages in the simplebook
+   */
   size_t GetPageCount();
 
-  virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state) = 0;
-  virtual std::shared_ptr<cpptoml::table> GetUserState() = 0;
-  virtual bool SetUserState(std::shared_ptr<cpptoml::table> state) = 0;
+  // virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state) = 0;
+  // virtual std::shared_ptr<cpptoml::table> GetUserState() = 0;
+  // virtual bool SetUserState(std::shared_ptr<cpptoml::table> state) = 0;
 
  private:
   void DoLayout();
-  void SetProperties();
-  void OnHyperlinkClick(wxHyperlinkEvent &event);  // NOLINT
-  size_t active_panel_index_ = 0;
+
+  /**
+   * Displays the page with the given index from the button
+   * label that triggered the event
+   */
+  void OnPageClick(wxCommandEvent &event);  // NOLINT
+
   std::vector<wxPanel*> panels_;
-  std::vector<wxHyperlinkCtrl*> hyperlinks_;
+  std::vector<wxButton*> page_items_;
 
   wxFlexGridSizer *sizer_paged_panel_ = NULL;
+
+  size_t active_panel_index_ = 0;
   wxPanel *active_panel_ = NULL;
   wxPanel* panel_page_numbers_ = NULL;
   wxSimplebook *simple_book_ = NULL;
