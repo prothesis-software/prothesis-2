@@ -60,10 +60,20 @@ make windows -j ($nproc)
 
 ## Deploying
 ### Linux
+```
+make linux DEBUG=0
+make package-linux
+```
+
 #### Dependencies
 - `gtk2`
 - `wxgtk2`
 
 ### Windows
+```
+make windows DEBUG=0
+make package-windows
+```
+
 #### Dependencies
 - None!
