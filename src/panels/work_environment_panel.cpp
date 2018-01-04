@@ -26,7 +26,7 @@ WorkEnvironmentPanel::WorkEnvironmentPanel(wxWindow *parent,
 }
 
 WorkEnvironmentPanel::~WorkEnvironmentPanel() {
-  // void
+  wxLogDebug("WorkEnvironmentPanel::~WorkEnvironmentPanel()");
 }
 
 bool WorkEnvironmentPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {

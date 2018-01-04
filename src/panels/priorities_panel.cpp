@@ -33,7 +33,7 @@ PrioritiesPanel::PrioritiesPanel(wxWindow *parent,
 }
 
 PrioritiesPanel::~PrioritiesPanel() {
-  // void
+  wxLogDebug("PrioritiesPanel::~PrioritiesPanel()");
 }
 
 void PrioritiesPanel::GetItemHeight(wxListBox *list) {

@@ -134,5 +134,5 @@ bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
 }
 
 DetailsPanel::~DetailsPanel() {
-  // wxLogDebug("DetailsPanel::~DetailsPanel()");
+  wxLogDebug("DetailsPanel::~DetailsPanel()");
 }

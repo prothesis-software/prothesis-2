@@ -12,7 +12,8 @@ CheckBoxPanel::CheckBoxPanel(wxWindow *parent, wxWindowID id,
 }
 
 CheckBoxPanel::~CheckBoxPanel() {
-  // void
+  wxLogDebug(_("CheckBoxPanel::~CheckBoxPanel(): ") +
+             _(this->GetPanelName()));
 }
 
 bool CheckBoxPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {

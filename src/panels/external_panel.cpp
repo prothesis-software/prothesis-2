@@ -22,7 +22,7 @@ ExternalPanel::ExternalPanel(wxWindow *parent,
 }
 
 ExternalPanel::~ExternalPanel() {
-  // void
+  wxLogDebug("ExternalPanel::~ExternalPanel()");
 }
 
 

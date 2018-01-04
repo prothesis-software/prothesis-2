@@ -6,6 +6,8 @@
     #include <wx/wx.h>
 #endif
 
+#include <wx/dialog.h>
+
 #include <wx/log.h>
 #include <vector>
 #include <string>
@@ -21,6 +23,7 @@
 #include "panels/external_panel.hpp"
 #include "panels/work_environment_panel.hpp"
 #include "panels/details_panel.hpp"
+#include "panels/priorities_panel.hpp"
 
 /**
  * The Data Manager class is responsible for storing reference
@@ -50,7 +53,7 @@ class DataManager {
     kValuesPanel = 4,
     kSpokenWordsPanel = 5,
     kSkillsPanel = 6,
-    kExternalPanel = 7, 
+    kExternalPanel = 7,
     kWorkEnvironmentPanel = 8,
     kPrioritiesPanel = 9,
     kPanelCount = 10
@@ -83,7 +86,7 @@ class DataManager {
    * Reads the user and gui config and initializes each panel
    * with the config data
    */
-  void Load();
+  bool Load();
 
   /**
    * All panels are declared in this function
