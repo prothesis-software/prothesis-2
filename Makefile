@@ -59,6 +59,12 @@ linux: lint apply_gui_config ${OBJECT_FILES_LINUX}
 	${CXX} ${CXXFLAGS} ${OBJECT_FILES_LINUX} ${WX_CONFIG_FLAGS_LINK_LINUX} \
 	-o build/prothesis-2
 
+package-linux: build/prothesis-2 gui.toml
+	mkdir -p /tmp/prothesis-${PROTHESIS_VERSION}
+	cp build/prothesis-2 gui.toml /tmp/prothesis-${PROTHESIS_VERSION}
+	cd build && tar -czvf prothesis-${PROTHESIS_VERSION}.tar.gz -C /tmp prothesis-${PROTHESIS_VERSION}
+	rm -fr /tmp/prothesis-${PROTHESIS_VERSION}
+
 ################################################
 # WINDOWS
 #########################
@@ -77,3 +83,9 @@ windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_
 	mkdir -p build
 	${CXX} ${CXXFLAGS} ${OBJECT_FILES_WINDOWS} ${WX_CONFIG_FLAGS_LINK_WINDOWS} --static \
 	build/resources.o -o build/prothesis-2.exe
+
+package-windows: build/prothesis-2.exe gui.toml
+	mkdir -p /tmp/prothesis-${PROTHESIS_VERSION}
+	cp build/prothesis-2.exe gui.toml /tmp/prothesis-${PROTHESIS_VERSION}
+	cd build && bsdtar -acf prothesis-${PROTHESIS_VERSION}.zip -C /tmp prothesis-${PROTHESIS_VERSION}
+	rm -fr /tmp/prothesis-${PROTHESIS_VERSION}
