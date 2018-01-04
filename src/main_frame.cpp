@@ -61,6 +61,8 @@ void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
     active_panel_ = panel;
     active_panel_id_ = id;
     SetHeaderTitle(active_panel_->GetPanelTitle());
+
+    DisplayPanelById(id);
   }
 }
 
@@ -71,6 +73,10 @@ void MainFrame::DisplayPanelById(DataManager::PanelId id) {
     active_panel_ = data_manager_->GetPanelById(id);
     SetHeaderTitle(active_panel_->GetPanelTitle());
     Refresh();
+  }
+
+  if (id == DataManager::PanelId::kExternalPanel) {
+    active_panel_->GetUserState();
   }
 }
 
