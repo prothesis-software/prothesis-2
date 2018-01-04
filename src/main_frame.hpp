@@ -56,6 +56,7 @@ class MainFrame: public wxFrame {
   wxFlexGridSizer *sizer_content_ = NULL;
   wxStaticText *label_title_ = NULL;
   wxPanel *panel_main_ = NULL;
+  bool exit_requested_ = false;
 
   /**
    * Display the given panel and adds it to the sizer

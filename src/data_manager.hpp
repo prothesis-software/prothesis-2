@@ -6,6 +6,8 @@
     #include <wx/wx.h>
 #endif
 
+#include <wx/dialog.h>
+
 #include <wx/log.h>
 #include <vector>
 #include <string>
@@ -84,7 +86,7 @@ class DataManager {
    * Reads the user and gui config and initializes each panel
    * with the config data
    */
-  void Load();
+  bool Load();
 
   /**
    * All panels are declared in this function

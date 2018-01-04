@@ -16,7 +16,8 @@ QuestionsPanel::QuestionsPanel(wxWindow *parent,
 }
 
 QuestionsPanel::~QuestionsPanel() {
-  // wxLogDebug("QuestionsPanel::~QuestionsPanel()");
+  wxLogDebug(_("QuestionsPanel::~QuestionsPanel(): ") +
+             _(this->GetPanelName()));
 }
 
 wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
@@ -73,7 +74,6 @@ bool QuestionsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
         // Get the question text from the table we extracted
         cpptoml::option<std::string> question_text =
           table->get_as<std::string>("question");
-
         if (question_text) {
           wxPanel* internal_panel = CreateInternalPanel(*question_text);
           AddPage(internal_panel);

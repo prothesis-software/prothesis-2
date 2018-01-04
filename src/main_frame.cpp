@@ -52,13 +52,16 @@ void MainFrame::OnClose(wxCloseEvent &e) {
 }
 
 void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
-  int index = notebook_->GetSelection();
-  DataManager::PanelId id = data_manager_->GetIdFromIndex(index);
+  // Only do stuff if there are still objects to work with
+  if (!exit_requested_) {
+    int index = notebook_->GetSelection();
+    DataManager::PanelId id = data_manager_->GetIdFromIndex(index);
 
-  DataPanel *panel = data_manager_->GetPanelById(id);
-  active_panel_ = panel;
-  active_panel_id_ = id;
-  SetHeaderTitle(active_panel_->GetPanelTitle());
+    DataPanel *panel = data_manager_->GetPanelById(id);
+    active_panel_ = panel;
+    active_panel_id_ = id;
+    SetHeaderTitle(active_panel_->GetPanelTitle());
+  }
 }
 
 void MainFrame::DisplayPanelById(DataManager::PanelId id) {
@@ -203,7 +206,9 @@ void MainFrame::DoLayout() {
 
 MainFrame::~MainFrame() {
   wxLogDebug("MainFrame::~MainFrame() START");
+  exit_requested_ = true;
   data_manager_->SaveUserConfig();
   delete data_manager_;
+  delete notebook_;
   wxLogDebug("MainFrame::~MainFrame() END");
 }

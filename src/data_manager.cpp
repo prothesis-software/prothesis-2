@@ -87,35 +87,60 @@ void DataManager::DeclarePanels() {
            PanelId::kWorkEnvironmentPanel);
 }
 
-// TODO(egeldenhuys): Handle parse errors
-void DataManager::Load() {
+// TODO(egeldenhuys): Check for invalid characters causing empty appearing
+// strings
+bool DataManager::Load() {
   bool gui_config_exists = Utilities::FileExists(gui_config_path_);
   bool user_config_exists = Utilities::FileExists(user_config_path_);
 
   if (gui_config_exists) {
-    std::shared_ptr<cpptoml::table> gui_config =
-      cpptoml::parse_file(gui_config_path_);
+    try {
+      std::shared_ptr<cpptoml::table> gui_config =
+        cpptoml::parse_file(gui_config_path_);
 
-    for (size_t i = 0; i < PanelId::kPanelCount; i++) {
-      panels_[i]->SetGuiState(gui_config);
+      for (size_t i = 0; i < PanelId::kPanelCount; i++) {
+        panels_[i]->SetGuiState(gui_config);
+      }
+    } catch (const cpptoml::parse_exception& e) {
+      wxString error = _("Failed to parse ") +
+        _(gui_config_path_) +
+        _(": ") +
+        _(e.what());
+
+      wxLogDebug(error);
+      wxLogError(error);
+      return false;
     }
   } else {
     wxLogWarning(_("The GUI config file does not exist: ") +
                  _(gui_config_path_) +
                  _("\nThe program will not work without it!"));
-    return;
+    return false;
   }
 
   if (user_config_exists) {
-    std::shared_ptr<cpptoml::table> user_config =
-      cpptoml::parse_file(user_config_path_);
-    for (size_t i = 0; i < PanelId::kPanelCount; i++) {
-      panels_[i]->SetUserState(user_config);
+    try {
+      std::shared_ptr<cpptoml::table> user_config =
+        cpptoml::parse_file(user_config_path_);
+      for (size_t i = 0; i < PanelId::kPanelCount; i++) {
+        panels_[i]->SetUserState(user_config);
+      }
+    } catch (const cpptoml::parse_exception& e) {
+      wxString error = _("Failed to parse ") +
+        _(gui_config_path_) +
+        _(": ") +
+        _(e.what());
+
+      wxLogDebug(error);
+      wxLogError(error);
+      return false;
     }
   } else {
     wxLogDebug(_("The User config file does not exist: ") +
                _(user_config_path_));
   }
+
+  return true;
 }
 
 DataManager::PanelId DataManager::GetIdFromIndex(size_t index) {
