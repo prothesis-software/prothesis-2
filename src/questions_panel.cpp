@@ -33,7 +33,9 @@ wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
                                                 wxDefaultSize,
                                                 wxTE_MULTILINE);
   // WARN:STATIC
-  text_ctrl_answer->SetMinSize(wxSize(400, 100));
+  text_ctrl_answer->SetMinSize(wxSize(ANSWER_WIDTH, ANSWER_HEIGHT));
+  question_text->Wrap(QUESTION_WRAP_WIDTH);
+
   sizer->Add(0, 0, 0, 0);
   sizer->Add(question_text, 0, wxALL | wxALIGN_CENTER, 5);
   sizer->Add(0, 0, 0, 0);
