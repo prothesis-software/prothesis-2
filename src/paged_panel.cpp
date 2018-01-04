@@ -77,6 +77,15 @@ void PagedPanel::DisplayPage(size_t index) {
 
   simple_book_->SetSelection(index);
   active_panel_index_ = index;
+
+  for (size_t i = 0; i < page_items_.size(); i++) {
+    if (i != index) {
+      wxColour default_colour =
+        wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT);
+      page_items_.at(i)->SetForegroundColour(default_colour);
+    }
+  }
+
   page_items_.at(index)->SetForegroundColour(wxColour(255, 0, 0));
   Layout();
   wxLogDebug("PagedPanel::DisplayPanel() END");
@@ -89,14 +98,6 @@ void PagedPanel::OnPageClick(wxCommandEvent &event) {
   wxString wxStr = page_item->GetLabel();
   std::string str = wxStr.ToStdString();
   size_t index = std::stoi(str) - 1;
-
-  for (size_t i = 0; i < page_items_.size(); i++) {
-    if (page_items_.at(i) != page_item) {
-      wxColour default_colour =
-        wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT);
-      page_items_.at(i)->SetForegroundColour(default_colour);
-    }
-  }
 
   DisplayPage(index);
   wxLogDebug("PagedPanel::OnHyperlinkClick() END");

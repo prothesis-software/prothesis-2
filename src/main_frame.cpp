@@ -61,6 +61,8 @@ void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
     active_panel_ = panel;
     active_panel_id_ = id;
     SetHeaderTitle(active_panel_->GetPanelTitle());
+
+    DisplayPanelById(id);
   }
 }
 
@@ -71,6 +73,10 @@ void MainFrame::DisplayPanelById(DataManager::PanelId id) {
     active_panel_ = data_manager_->GetPanelById(id);
     SetHeaderTitle(active_panel_->GetPanelTitle());
     Refresh();
+  }
+
+  if (id == DataManager::PanelId::kExternalPanel) {
+    active_panel_->GetUserState();
   }
 }
 
@@ -183,7 +189,15 @@ void MainFrame::DoLayout() {
 
   sizer_content_->Add(notebook_, 1, wxEXPAND, 0);
   sizer_content_->Add(0, 0, 0, 0);
+
+#ifdef PROTHESIS_VERSION
+  wxStaticText *version = new wxStaticText(panel_main_,
+                                           wxID_ANY,
+                                           _(PROTHESIS_VERSION));
+  sizer_content_->Add(version, 0, wxALIGN_LEFT | wxALIGN_BOTTOM, 0);
+#else
   sizer_content_->Add(0, 0, 0, 0);
+#endif
 
   wxButton *button_next = new wxButton(panel_main_, wxID_ANY, _("Next"));
   button_next->Bind(wxEVT_BUTTON, &MainFrame::OnButtonNextClick, this);
