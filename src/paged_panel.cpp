@@ -21,6 +21,7 @@ PagedPanel::PagedPanel(wxWindow* parent,
 void PagedPanel::AddPage(wxPanel *panel) {
   panels_.push_back(panel);
   panel->Reparent(simple_book_);
+  // TODO(egeldenuys): lolwat? can't remember the purpose.
   simple_book_->AddPage(panel, "LOLWAT");
 }
 
@@ -52,10 +53,16 @@ PagedPanel::~PagedPanel() {
   // void
 }
 
+bool PagedPanel::Next() {
+  return DisplayNextPage();
+}
+
 bool PagedPanel::DisplayNextPage() {
   if (active_panel_index_ + 1 < panels_.size()) {
     DisplayPage(++active_panel_index_);
     return true;
+  } else {
+    return false;
   }
 
   return false;
@@ -141,8 +148,8 @@ void PagedPanel::DoLayout() {
   sizer_paged_panel_->Add(0, 0, 0, 0);
 
   SetSizer(sizer_paged_panel_);
-  sizer_paged_panel_->AddGrowableCol(0);
-  sizer_paged_panel_->AddGrowableCol(2);
+  sizer_paged_panel_->AddGrowableCol(1);
+  sizer_paged_panel_->AddGrowableRow(2);
 
   sizer_paged_panel_->Fit(this);
   Layout();

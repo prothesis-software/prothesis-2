@@ -20,8 +20,11 @@ QuestionsPanel::~QuestionsPanel() {
 }
 
 wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
-  wxPanel *panel = new wxPanel(this, wxID_ANY);
-  // panel->Hide();
+  wxPanel *panel = new wxPanel();
+  panel->SetBackgroundStyle(wxBG_STYLE_SYSTEM);
+  panel->Create(this, wxID_ANY, wxDefaultPosition,
+                wxDefaultSize);
+
   wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 10, 0);
   wxStaticText *question_text = new wxStaticText(panel, wxID_ANY, _(question));
   wxTextCtrl *text_ctrl_answer = new wxTextCtrl(panel, wxID_ANY,

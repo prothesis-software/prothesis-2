@@ -43,6 +43,8 @@ class PagedPanel : public DataPanel {
    */
   bool DisplayNextPage();
 
+  bool Next() override;
+
   /**
    * Add a panel to the list of pages to be initialised
    * when Init() is called
