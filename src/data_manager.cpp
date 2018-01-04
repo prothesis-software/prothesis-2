@@ -7,6 +7,7 @@
 #include "panels/details_panel.hpp"
 #include "questions_panel.hpp"
 #include "checkbox_panel.hpp"
+#include "panels/priorities_panel.hpp"
 #include "panels/external_panel.hpp"
 
 DataManager::DataManager(wxFrame *main_frame) {
@@ -76,6 +77,11 @@ void DataManager::DeclarePanels() {
                               std::string("skills"),
                               std::string("Skills")),
            PanelId::kSkillsPanel);
+    // PRIORITIES
+  AddPanel(new PrioritiesPanel(main_frame_, wxID_ANY,
+                              std::string("priorities"),
+                              std::string("Priorities")),
+           PanelId::kPrioritiesPanel);
     // EXTERNAL
   AddPanel(new ExternalPanel(main_frame_, wxID_ANY,
                               std::string("external"),
