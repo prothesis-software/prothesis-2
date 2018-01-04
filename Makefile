@@ -1,7 +1,7 @@
-PROTHESIS_VERSION=2.0.0-dev
+PROTHESIS_VERSION=2.0.0-dev.1
 
 CXX=g++
-CXXFLAGS=-std=c++11 -g -I. -Werror -Wall -pedantic -Wno-write-strings
+CXXFLAGS=-std=c++11 -I. -Werror -Wall -pedantic -Wno-write-strings
 CXXFLAGS+=-DPROTHESIS_VERSION=\"${PROTHESIS_VERSION}\"
 
 WINDRES=windres
@@ -10,6 +10,9 @@ OBJECT_FILES_LINUX=${SOURCE_FILES:src/%.cpp=build/linux/%.o}
 RESOURCE_FILE=src/resources.rc
 
 OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
+
+PACKAGE_LINUX_NAME=prothesis-linux-x86_64-${PROTHESIS_VERSION}
+PACKAGE_WINDOWS_NAME=prothesis-windows-32bit-${PROTHESIS_VERSION}.zip
 
 #####################3
 # Enviornment Variables
