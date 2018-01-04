@@ -21,11 +21,23 @@ void NavigationDrawer::OnItemClick(wxCommandEvent &event) {
   NavigationItem *item = static_cast<NavigationItem*>(event.GetEventObject());
   MainFrame *main_frame = static_cast<MainFrame*>(wxTheApp->GetTopWindow());
 
+  // \note triggers for clicking on nav buttons
+  if (item->GetTarget() == DataManager::kWorkEnvironmentPanel) {
+    wxLogDebug(_("Trigger for WorkEnvironmentPanel in ") +
+               _("NavigationDrawer::OnItemClick()"));
+    DataPanel* target = item->GetTargetPanel();
+    if (target) {
+      target->GetUserState();
+    }
+  }
+
   main_frame->DisplayPanelById(item->GetTarget());
 }
 
-void NavigationDrawer::AddItem(std::string label, DataManager::PanelId target) {
-  NavigationItem *btn = new NavigationItem(this, wxID_ANY, _(label), target);
+void NavigationDrawer::AddItem(std::string label, DataManager::PanelId target,
+                               DataPanel* target_panel) {
+  NavigationItem *btn = new NavigationItem(this, wxID_ANY, _(label), target,
+                                           target_panel);
   sizer_->Add(btn, 1, wxEXPAND, 0);
   btn->Bind(wxEVT_BUTTON, &NavigationDrawer::OnItemClick, this);
 }
