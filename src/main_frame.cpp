@@ -70,7 +70,7 @@ bool MainFrame::DisplayNextPanel() {
 void MainFrame::DisplayPanel(DataPanel *panel) {
   // Freeze and thaw are required to prevent visual artifacts
   Freeze();
-  wxLogDebug("MainFrame::DisplayPanel() START");
+
   const size_t kPanelViewIndex = 1;
   const size_t kBorderSize = 0;
 
@@ -84,7 +84,7 @@ void MainFrame::DisplayPanel(DataPanel *panel) {
   SetHeaderTitle(active_panel_->GetPanelTitle());
   panel->Show();
   Layout();
-  wxLogDebug("MainFrame::DisplayPanel() END");
+
   Thaw();
 }
 
@@ -149,7 +149,8 @@ void MainFrame::DoLayout() {
                _(" to navigation drawer"));
 
     drawer->AddItem(data_manager_->GetPanelByIndex(i)->GetPanelTitle(),
-                    data_manager_->GetIdFromIndex(i));
+                    data_manager_->GetIdFromIndex(i),
+                    data_manager_->GetPanelByIndex(i));
   }
 
   sizer_content_->Add(drawer, 0, 0, 0, 0);

@@ -11,8 +11,16 @@
 #include <string>
 
 #include "include/cpptoml.h"
+
 #include "data_panel.hpp"
 #include "utilities.hpp"
+
+#include "questions_panel.hpp"
+#include "checkbox_panel.hpp"
+
+#include "panels/external_panel.hpp"
+#include "panels/work_environment_panel.hpp"
+#include "panels/details_panel.hpp"
 
 /**
  * The Data Manager class is responsible for storing reference
@@ -42,9 +50,10 @@ class DataManager {
     kValuesPanel = 4,
     kSpokenWordsPanel = 5,
     kSkillsPanel = 6,
-    kPrioritiesPanel = 7,
-    kExternalPanel = 8,
-    kPanelCount = 9
+    kExternalPanel = 7, 
+    kWorkEnvironmentPanel = 8,
+    kPrioritiesPanel = 9,
+    kPanelCount = 10
   };
 
   /**
