@@ -5,8 +5,9 @@
 #include <fstream>
 #include <vector>
 
-DataManager::DataManager(wxWindow *main_frame) {
+DataManager::DataManager(wxWindow *main_frame, wxWindow *assessments_window) {
   main_frame_ = main_frame;
+  assessments_window_ = assessments_window;
 
   std::string base_path = GetBasePath();
   wxLogDebug(_(std::string("base_path = ") + base_path));
@@ -41,47 +42,47 @@ void DataManager::DeclarePanels() {
                             std::string("Details")),
            PanelId::kDetailsPanel);
   // PASSIONS
-  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+  AddPanel(new QuestionsPanel(assessments_window_, wxID_ANY,
                               std::string("passion"),
                               std::string("Passion")),
            PanelId::kPassionPanel);
   // PEOPLE ID
-  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+  AddPanel(new QuestionsPanel(assessments_window_, wxID_ANY,
                               std::string("people_id"),
                               std::string("People ID")),
            PanelId::kPeopleIdPanel);
   // DREAMS
-  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+  AddPanel(new QuestionsPanel(assessments_window_, wxID_ANY,
                               std::string("dreams"),
                               std::string("Dreams")),
            PanelId::kDreamsPanel);
   // VALUES
-  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+  AddPanel(new QuestionsPanel(assessments_window_, wxID_ANY,
                               std::string("values"),
                               std::string("Values")),
            PanelId::kValuesPanel);
   // SPOKEN WORDS
-  AddPanel(new QuestionsPanel(main_frame_, wxID_ANY,
+  AddPanel(new QuestionsPanel(assessments_window_, wxID_ANY,
                               std::string("spoken_words"),
                               std::string("Spoken Words")),
            PanelId::kSpokenWordsPanel);
   // SKILLS
-  AddPanel(new CheckBoxPanel(main_frame_, wxID_ANY,
+  AddPanel(new CheckBoxPanel(assessments_window_, wxID_ANY,
                               std::string("skills"),
                               std::string("Skills")),
            PanelId::kSkillsPanel);
     // PRIORITIES
-  AddPanel(new PrioritiesPanel(main_frame_, wxID_ANY,
+  AddPanel(new PrioritiesPanel(assessments_window_, wxID_ANY,
                               std::string("priorities"),
                               std::string("Priorities")),
            PanelId::kPrioritiesPanel);
   // EXTERNAL
-  AddPanel(new ExternalPanel(main_frame_, wxID_ANY,
+  AddPanel(new ExternalPanel(assessments_window_, wxID_ANY,
                               std::string("external"),
                               std::string("External")),
            PanelId::kExternalPanel);
   // WORK ENVIRONMENT
-  AddPanel(new WorkEnvironmentPanel(main_frame_, wxID_ANY,
+  AddPanel(new WorkEnvironmentPanel(assessments_window_, wxID_ANY,
                              std::string("work_environment"),
                              std::string("Work Environment")),
            PanelId::kWorkEnvironmentPanel);
@@ -141,6 +142,19 @@ bool DataManager::Load() {
   }
 
   return true;
+}
+
+DataManager::PanelId DataManager::GetIdFromName(std::string name) {
+  for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
+    if (panels_[i]->GetPanelName().compare(name) == 0) {
+      return GetIdFromIndex(i);
+    }
+  }
+
+  wxLogWarning(_("Could not find panel with the name '") +
+               _(name));
+
+  return PanelId::kDefaultPanel;
 }
 
 DataManager::PanelId DataManager::GetIdFromIndex(size_t index) {

@@ -19,7 +19,7 @@ void NavigationDrawer::SetProperties() {
 
 void NavigationDrawer::OnItemClick(wxCommandEvent &event) {
   NavigationItem *item = static_cast<NavigationItem*>(event.GetEventObject());
-  MainFrame *main_frame = static_cast<MainFrame*>(wxTheApp->GetTopWindow());
+  // MainFrame *main_frame = static_cast<MainFrame*>(wxTheApp->GetTopWindow());
 
   // \note triggers for clicking on nav buttons
   if (item->GetTarget() == DataManager::kWorkEnvironmentPanel) {
@@ -31,7 +31,7 @@ void NavigationDrawer::OnItemClick(wxCommandEvent &event) {
     }
   }
 
-  main_frame->DisplayPanelById(item->GetTarget());
+  // main_frame->DisplayPanelById(item->GetTarget());
 }
 
 void NavigationDrawer::AddItem(std::string label, DataManager::PanelId target,
