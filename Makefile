@@ -1,7 +1,18 @@
+####################
+# ARGS
+######
+#	DEBUG=[0|1]
+
 PROTHESIS_VERSION=2.0.0-dev.1
 
-CXX=g++
 CXXFLAGS=-std=c++11 -I. -Werror -Wall -pedantic -Wno-write-strings
+
+DEBUG=1
+
+ifeq ($(DEBUG),1)
+        CXXFLAGS+=-g
+endif
+
 CXXFLAGS+=-DPROTHESIS_VERSION=\"${PROTHESIS_VERSION}\"
 
 WINDRES=windres
@@ -12,9 +23,10 @@ RESOURCE_FILE=src/resources.rc
 OBJECT_FILES_WINDOWS=${SOURCE_FILES:src/%.cpp=build/windows/%.o}
 
 PACKAGE_LINUX_NAME=prothesis-linux-x86_64-${PROTHESIS_VERSION}
-PACKAGE_WINDOWS_NAME=prothesis-windows-32bit-${PROTHESIS_VERSION}.zip
+PACKAGE_WINDOWS_NAME=prothesis-windows-32bit-${PROTHESIS_VERSION}
 
-#####################3
+
+#######################
 # Enviornment Variables
 ###########
 # - WX_INSTALL_PATH_LINUX  	// Path where wxWidgets is installed to for linux builds
@@ -32,6 +44,12 @@ WX_CONFIG_FLAGS_LINK_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode
 ##############################################
 # COMMON
 ############
+
+deploy: all package-linux package-windows
+	@echo "Done"
+
+all: linux windows
+	@echo "Done"
 
 get-deps:
 	./get-cpplint.sh
@@ -63,10 +81,10 @@ linux: lint apply_gui_config ${OBJECT_FILES_LINUX}
 	-o build/prothesis-2
 
 package-linux: build/prothesis-2 gui.toml
-	mkdir -p /tmp/prothesis-${PROTHESIS_VERSION}
-	cp build/prothesis-2 gui.toml /tmp/prothesis-${PROTHESIS_VERSION}
-	cd build && tar -czvf prothesis-${PROTHESIS_VERSION}.tar.gz -C /tmp prothesis-${PROTHESIS_VERSION}
-	rm -fr /tmp/prothesis-${PROTHESIS_VERSION}
+	mkdir -p /tmp/${PACKAGE_LINUX_NAME}
+	cp build/prothesis-2 gui.toml /tmp/${PACKAGE_LINUX_NAME}
+	cd build && tar -czvf ${PACKAGE_LINUX_NAME}.tar.gz  -C /tmp ${PACKAGE_LINUX_NAME}
+	rm -fr /tmp/${PACKAGE_LINUX_NAME}
 
 ################################################
 # WINDOWS
@@ -74,6 +92,7 @@ package-linux: build/prothesis-2 gui.toml
 # Example:
 # 	export WX_INSTALL_PATH_WINDOWS=...
 # 	make windows CXX=x86_64-w64-mingw32-g++ WINDRES=x86_64-w64-mingw32-windres
+
 build/windows/%.o: src/%.cpp
 	@mkdir -p $(@D)
 	${CXX} ${CXXFLAGS} ${WX_CONFIG_FLAGS_COMPILE_WINDOWS} -c $< -o $@
@@ -88,7 +107,7 @@ windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_
 	build/resources.o -o build/prothesis-2.exe
 
 package-windows: build/prothesis-2.exe gui.toml
-	mkdir -p /tmp/prothesis-${PROTHESIS_VERSION}
-	cp build/prothesis-2.exe gui.toml /tmp/prothesis-${PROTHESIS_VERSION}
-	cd build && bsdtar -acf prothesis-${PROTHESIS_VERSION}.zip -C /tmp prothesis-${PROTHESIS_VERSION}
-	rm -fr /tmp/prothesis-${PROTHESIS_VERSION}
+	mkdir -p /tmp/${PACKAGE_WINDOWS_NAME}
+	cp build/prothesis-2.exe gui.toml /tmp/${PACKAGE_WINDOWS_NAME}
+	cd build && bsdtar -acf ${PACKAGE_WINDOWS_NAME}.zip -C /tmp ${PACKAGE_WINDOWS_NAME}
+	rm -fr /tmp/${PACKAGE_WINDOWS_NAME}
