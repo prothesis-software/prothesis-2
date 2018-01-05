@@ -68,7 +68,7 @@ void WorkEnvironmentPanel::FitText() {
 
   wxLogDebug(_(std::to_string(width)));
   text_description_->SetMinSize(wxSize(width, -1));
-  text_description_->SetMaxSize(wxSize(width, -1));
+  // text_description_->SetMaxSize(wxSize(width, -1));
   Layout();
 }
 
@@ -152,4 +152,5 @@ void WorkEnvironmentPanel::DoLayout() {
   sizer->Add(label_mbti_, 0, wxEXPAND | wxALIGN_CENTER, 0);
   sizer->Add(text_description_, 1, wxEXPAND | wxALIGN_CENTER, 0);
   this->SetSizer(sizer);
+  sizer->Fit(this);
 }

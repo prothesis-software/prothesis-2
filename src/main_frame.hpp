@@ -10,6 +10,7 @@
 #include <wx/notebook.h>
 
 #include <string>
+#include <vector>
 
 #include "data_panel.hpp"
 #include "data_manager.hpp"
@@ -23,20 +24,11 @@ class MainFrame: public wxFrame {
             const wxSize &size = wxDefaultSize,
             int64_t style = wxDEFAULT_FRAME_STYLE,
             const wxString name = wxFrameNameStr);
-  /**
-   * Display the panel with the given ID
-   */
-  void DisplayPanelById(DataManager::PanelId id);
+  ~MainFrame();
 
   bool DisplayNextPanel();
-
-  /**
-   * Set the title displayed in the header
-   */
-  void SetHeaderTitle(std::string title);
   static void OnKill(int sig);
   DataManager *data_manager_;
-  ~MainFrame();
 
   /**
    * Returns the minimun size that will fit every page
@@ -45,23 +37,15 @@ class MainFrame: public wxFrame {
 
  private:
   void DoLayout();
-  void SetProperties();
   void OnClose(wxCloseEvent &e); // NOLINT
-  void OnButtonNextClick(wxCommandEvent &event);  // NOLINT
   void OnNotebookSelectionChange(wxBookCtrlEvent& event);  // NOLINT
   wxNotebook *notebook_ = NULL;
-  DataManager::PanelId active_panel_id_;
-  DataPanel *active_panel_ = NULL;
+  wxNotebook *notebook_assessments_ = NULL;
   wxFlexGridSizer *sizer_main_frame_ = NULL;
   wxFlexGridSizer *sizer_content_ = NULL;
-  wxStaticText *label_title_ = NULL;
   wxPanel *panel_main_ = NULL;
   bool exit_requested_ = false;
-
-  /**
-   * Display the given panel and adds it to the sizer
-   */
-  void DisplayPanel_deprecated(DataPanel *panel);
+  std::vector<std::vector<DataPanel*>> index_layout_;
 };
 
 #endif  // MAIN_FRAME_HPP_

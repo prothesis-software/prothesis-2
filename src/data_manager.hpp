@@ -36,7 +36,7 @@ class DataManager {
    * Initializes all panels from the GUI config and the User config and adds
    * them as children to the MainFrame
    */
-  explicit DataManager(wxWindow *main_frame);
+  explicit DataManager(wxWindow *main_frame, wxWindow *assessments_window);
 
   ~DataManager();
 
@@ -81,6 +81,8 @@ class DataManager {
 
   PanelId GetIdFromIndex(size_t index);
 
+  DataManager::PanelId GetIdFromName(std::string name);
+
  private:
   /**
    * Reads the user and gui config and initializes each panel
@@ -103,6 +105,7 @@ class DataManager {
   DataManager::PanelId ids_[PanelId::kPanelCount];
 
   wxWindow *main_frame_ = NULL;
+  wxWindow *assessments_window_ = NULL;
 
   // Paths are relative to the base directory of the binary
   std::string gui_config_path_ = "gui.toml";

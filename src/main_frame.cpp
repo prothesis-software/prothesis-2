@@ -1,6 +1,7 @@
 #include "main_frame.hpp"
 #include <csignal>
 #include <string>
+#include <vector>
 
 #include "navigation_drawer.hpp"
 
@@ -18,32 +19,26 @@ MainFrame::MainFrame(wxWindow *parent,
                      const wxString name)
   : wxFrame(parent, id, title, pos, size, style, name) {
   std::signal(SIGINT, OnKill);
-  panel_main_ = new wxPanel(this, wxID_ANY);
 
+  panel_main_ = new wxPanel(this, wxID_ANY);
   sizer_content_ = new wxFlexGridSizer(2, 2, 0, 0);
-  sizer_main_frame_ = new wxFlexGridSizer(3, 1, 0, 0);
+  sizer_main_frame_ = new wxFlexGridSizer(1, 1, 0, 0);
   notebook_ = new wxNotebook(panel_main_, wxID_ANY, wxDefaultPosition,
                                         wxDefaultSize, wxNB_TOP);
-  notebook_->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED,
-                  &MainFrame::OnNotebookSelectionChange,
-                  this);
-  data_manager_ = new DataManager(notebook_);
-  // Need to give Ellipsize flags: http://trac.wxwidgets.org/ticket/10716
-  label_title_ = new wxStaticText(panel_main_, wxID_ANY, wxT("Title"),
-                                  wxDefaultPosition, wxDefaultSize,
-                                  wxALIGN_CENTER | wxST_ELLIPSIZE_END);
-  SetProperties();
+  notebook_assessments_ = new wxNotebook(notebook_, wxID_ANY, wxDefaultPosition,
+                                         wxDefaultSize, wxNB_TOP);
+  notebook_assessments_->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED,
+                              &MainFrame::OnNotebookSelectionChange,
+                              this);
+
+  data_manager_ = new DataManager(notebook_, notebook_assessments_);
+
   DoLayout();
-  DisplayPanelById(DataManager::PanelId::kDetailsPanel);
   Fit();
 
   wxSize minSize = GetOverallMinSize();
   SetMinSize(minSize);
   SetSize(minSize);
-}
-
-void MainFrame::SetHeaderTitle(std::string title) {
-  label_title_->SetLabel(_(title));
 }
 
 void MainFrame::OnClose(wxCloseEvent &e) {
@@ -54,71 +49,50 @@ void MainFrame::OnClose(wxCloseEvent &e) {
 void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
   // Only do stuff if there are still objects to work with
   if (!exit_requested_) {
-    int index = notebook_->GetSelection();
-    DataManager::PanelId id = data_manager_->GetIdFromIndex(index);
+    int top_index = notebook_->GetSelection();
+    int bottom_index = notebook_assessments_->GetSelection();
 
-    DataPanel *panel = data_manager_->GetPanelById(id);
-    active_panel_ = panel;
-    active_panel_id_ = id;
-    SetHeaderTitle(active_panel_->GetPanelTitle());
+    if (top_index == 1) {
+      DataPanel *panel = index_layout_.at(1).at(bottom_index);
+      DataManager::PanelId id =
+        data_manager_->GetIdFromName(panel->GetPanelName());
 
-    DisplayPanelById(id);
+      if (id == DataManager::PanelId::kWorkEnvironmentPanel) {
+        panel->GetUserState();
+      }
+    }
   }
 }
 
-void MainFrame::DisplayPanelById(DataManager::PanelId id) {
-  if (active_panel_id_ != id) {
-    notebook_->ChangeSelection(id);
-    active_panel_id_ = id;
-    active_panel_ = data_manager_->GetPanelById(id);
-    SetHeaderTitle(active_panel_->GetPanelTitle());
-    Refresh();
-  }
-
-  if (id == DataManager::PanelId::kWorkEnvironmentPanel) {
-    active_panel_->GetUserState();
-  }
-}
 
 bool MainFrame::DisplayNextPanel() {
-  if (active_panel_id_ + 1 < DataManager::PanelId::kPanelCount) {
-    DisplayPanelById(data_manager_->GetIdFromIndex(active_panel_id_ + 1));
+  int top_index = notebook_->GetSelection();
+  int top_count = notebook_->GetPageCount();
+
+  int bottom_index = notebook_assessments_->GetSelection();
+  int bottom_count = notebook_assessments_->GetPageCount();
+
+  if (top_index == 1) {
+    if (bottom_index < bottom_count - 1) {
+      notebook_assessments_->AdvanceSelection();
+      return true;
+    }
+  }
+
+  if (top_index < top_count - 1) {
+    notebook_->AdvanceSelection();
     return true;
   } else {
     return false;
   }
+
+  return false;
 }
-
-// TODO(egeldenhuys): Switch to wxSimplebook
-// WARN(egeldenhuys): Causes valgrind errors
-// Do not use directly. Use DisplayPanelById()
-void MainFrame::DisplayPanel_deprecated(DataPanel *panel) {
-  // Freeze and thaw are required to prevent visual artifacts
-  Freeze();
-
-  const size_t kPanelViewIndex = 1;
-  const size_t kBorderSize = 0;
-
-  sizer_content_->Detach(kPanelViewIndex);
-  sizer_content_->Insert(kPanelViewIndex,
-                         panel, 1, wxEXPAND | wxALL, kBorderSize);
-  if (active_panel_ != NULL)
-      active_panel_->Hide();
-  active_panel_ = panel;
-  wxLogDebug(_("Displaying panel ") + _(panel->GetPanelName()));
-  SetHeaderTitle(active_panel_->GetPanelTitle());
-  panel->Show();
-  Layout();
-
-  Thaw();
-}
-
 
 wxSize MainFrame::GetOverallMinSize() {
   Freeze();
   wxLogDebug(_("Getting best size..."));
   wxSize minSize = GetSize();
-  DataManager::PanelId orig = active_panel_id_;
 
   wxLogDebug(_(std::to_string(minSize.x)) +
              _(", ") +
@@ -145,36 +119,16 @@ wxSize MainFrame::GetOverallMinSize() {
              _(", ") +
              _(std::to_string(minSize.y)));
 
-  DisplayPanelById(orig);
+  notebook_->SetSelection(0);
+  notebook_assessments_->SetSelection(0);
+
   Thaw();
   return minSize;
 }
 
-void MainFrame::SetProperties() {
-  label_title_->SetFont(wxFont(16, wxDEFAULT, wxNORMAL, wxBOLD, 0, wxT("")));
-}
-
-void MainFrame::OnButtonNextClick(wxCommandEvent &event) {
-  if (active_panel_ == NULL) {
-    wxLogWarning("active_panel_ == NULL");
-  }
-
-  if (!active_panel_->Next()) {
-    wxLogDebug("End of panel pages, going to next panel");
-    DisplayNextPanel();
-  }
-}
-
 void MainFrame::DoLayout() {
-  // TODO(egeldenhuys): panel_main_frame_ otherwise we have strange backround
-  // colour on windows
-
-  // HEADER
-  sizer_main_frame_->Add(label_title_, 1, wxEXPAND | wxALIGN_CENTER, 0);
-  // bar
-  wxStaticLine *line = new wxStaticLine(panel_main_, wxID_ANY);
-  line->SetMinSize(wxSize(10, 4));  // Required to work
-  sizer_main_frame_->Add(line, 1, wxEXPAND, 0);
+  std::vector<DataPanel*> top_layout;
+  std::vector<DataPanel*> bottom_layout;
 
   // sizer_content_
   for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
@@ -182,11 +136,22 @@ void MainFrame::DoLayout() {
                _(data_manager_->GetPanelByIndex(i)->GetPanelTitle()) +
                _(" to notebook"));
 
-    wxPanel *panel = data_manager_->GetPanelByIndex(i);
-    notebook_->AddPage(panel,
-                      data_manager_->GetPanelByIndex(i)->GetPanelTitle());
+    DataPanel *panel = data_manager_->GetPanelByIndex(i);
+    wxNotebook *panel_parent = static_cast<wxNotebook*>(panel->GetParent());
+    panel_parent->AddPage(panel,
+                          data_manager_->GetPanelByIndex(i)->GetPanelTitle());
+
+    if (panel_parent == notebook_) {
+      top_layout.push_back(panel);
+    } else {
+      bottom_layout.push_back(panel);
+    }
   }
 
+  index_layout_.push_back(top_layout);
+  index_layout_.push_back(bottom_layout);
+
+  notebook_->InsertPage(1, notebook_assessments_, "Assessments");
   sizer_content_->Add(notebook_, 1, wxEXPAND, 0);
   sizer_content_->Add(0, 0, 0, 0);
 
@@ -199,21 +164,18 @@ void MainFrame::DoLayout() {
   sizer_content_->Add(0, 0, 0, 0);
 #endif
 
-  wxButton *button_next = new wxButton(panel_main_, wxID_ANY, _("Next"));
-  button_next->Bind(wxEVT_BUTTON, &MainFrame::OnButtonNextClick, this);
-
-  sizer_content_->Add(button_next, 0, wxALIGN_RIGHT | wxALIGN_BOTTOM | wxALL,
-                      20);
+  sizer_content_->Add(0, 0, 0, 0);
 
   sizer_content_->AddGrowableCol(1);
   sizer_content_->AddGrowableRow(1);
 
   sizer_main_frame_->Add(sizer_content_, 1, wxEXPAND, 0);
-
   sizer_main_frame_->AddGrowableCol(0);
-  sizer_main_frame_->AddGrowableRow(2);
+  sizer_main_frame_->AddGrowableRow(0);
+
   panel_main_->SetSizer(sizer_main_frame_);
   sizer_main_frame_->Fit(panel_main_);
+
   Fit();
   Layout();
 }
