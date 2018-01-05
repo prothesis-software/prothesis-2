@@ -75,7 +75,7 @@ void MainFrame::DisplayPanelById(DataManager::PanelId id) {
     Refresh();
   }
 
-  if (id == DataManager::PanelId::kExternalPanel) {
+  if (id == DataManager::PanelId::kWorkEnvironmentPanel) {
     active_panel_->GetUserState();
   }
 }
