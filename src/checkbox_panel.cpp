@@ -36,7 +36,10 @@ bool CheckBoxPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
             table->get_as<std::string>("question");
 
         if (question_text) {
-          // void
+          wxLogDebug(_(this->GetPanelName()) +
+                     _(": Adding checkbox '") +
+                     _(*question_text) +
+                     _("'"));
           AddCheckBox(*question_text);
         } else {
           wxLogError(_("A question table was found for panel ") +

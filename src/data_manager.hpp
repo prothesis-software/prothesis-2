@@ -56,7 +56,9 @@ class DataManager {
     kExternalPanel = 7,
     kWorkEnvironmentPanel = 8,
     kPrioritiesPanel = 9,
-    kPanelCount = 10
+    kRolesPanel = 10,
+    kPeopleOrientationPanel = 11,
+    kPanelCount = 12
   };
 
   /**

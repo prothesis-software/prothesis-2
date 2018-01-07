@@ -68,24 +68,34 @@ void DataManager::DeclarePanels() {
            PanelId::kSpokenWordsPanel);
   // SKILLS
   AddPanel(new CheckBoxPanel(assessments_window_, wxID_ANY,
-                              std::string("skills"),
-                              std::string("Skills")),
+                             std::string("skills"),
+                             std::string("Skills")),
            PanelId::kSkillsPanel);
-    // PRIORITIES
+  // PRIORITIES
   AddPanel(new PrioritiesPanel(assessments_window_, wxID_ANY,
-                              std::string("priorities"),
-                              std::string("Priorities")),
+                               std::string("priorities"),
+                               std::string("Priorities")),
            PanelId::kPrioritiesPanel);
   // EXTERNAL
   AddPanel(new ExternalPanel(assessments_window_, wxID_ANY,
-                              std::string("external"),
-                              std::string("External")),
+                             std::string("external"),
+                             std::string("External")),
            PanelId::kExternalPanel);
   // WORK ENVIRONMENT
   AddPanel(new WorkEnvironmentPanel(assessments_window_, wxID_ANY,
-                             std::string("work_environment"),
-                             std::string("Work Environment")),
+                                    std::string("work_environment"),
+                                    std::string("Work Environment")),
            PanelId::kWorkEnvironmentPanel);
+  // ROLES
+  AddPanel(new CheckBoxPanel(assessments_window_, wxID_ANY,
+                             std::string("roles"),
+                             std::string("Roles")),
+           PanelId::kRolesPanel);
+  // PEOPLE ORIENTATION
+  AddPanel(new CheckBoxPanel(assessments_window_, wxID_ANY,
+                             std::string("people_orientation"),
+                             std::string("People Orientation")),
+           PanelId::kPeopleOrientationPanel);
 }
 
 // TODO(egeldenhuys): Check for invalid characters causing empty appearing
