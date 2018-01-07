@@ -695,3 +695,215 @@
     "Value deep and authentic relationships",
     "Want to be seen and appreciated for who they are"
   ]
+
+###################
+# PEOPLE ORIENTATION
+######
+
+[people_orientation]
+
+  [[people_orientation.question]]
+  question = "Babies"
+  tooltip = "You like to interact with babies between the newborn stage and the age of 2."
+
+  [[people_orientation.question]]
+  question = "Toddlers"
+  tooltip = "You like to interact with children between the ages of 2 and 5."
+
+  [[people_orientation.question]]
+  question = "Primary school children"
+  tooltip = "You like to interact with children between the ages of 6 and 13."
+
+  [[people_orientation.question]]
+  question = "High school children"
+  tooltip = "You like to interact with children between the ages of 13 and 19."
+
+  [[people_orientation.question]]
+  question = "Students"
+  tooltip = "You like to interact young adults that are between the ages of 19 and 24."
+
+  [[people_orientation.question]]
+  question = "Teenagers"
+  tooltip = "You like to interact with children between the ages of 13 and 19."
+
+  [[people_orientation.question]]
+  question = "People in need"
+  tooltip = "You like to interact with people who have some or other need."
+
+  [[people_orientation.question]]
+  question = "Working people"
+  tooltip = "You like to interact with people who are currently in a career."
+
+  [[people_orientation.question]]
+  question = "Married people"
+  tooltip = "You like to interact with people who are currently married."
+
+  [[people_orientation.question]]
+  question = "Older people"
+  tooltip = "You like to interact with senior citizens."
+
+  [[people_orientation.question]]
+  question = "The handicapped"
+  tooltip = "You like to interact with people who are physically and/or mentally handicapped."
+
+  [[people_orientation.question]]
+  question = "Addicted people"
+  tooltip = "You like to interact with people who are addicted to a substance."
+
+  [[people_orientation.question]]
+  question = "The homeless"
+  tooltip = "You like to interact with people who have no refuge."
+
+  [[people_orientation.question]]
+  question = "Men"
+  tooltip = "You like to interact with males."
+
+  [[people_orientation.question]]
+  question = "Women"
+  tooltip = "You like to interact with females."
+
+  [[people_orientation.question]]
+  question = "To be on my own"
+  tooltip = "You do not like to interact with people in general."
+
+###############
+# ROLES
+######
+
+[roles]
+
+  [[roles.question]]
+  question = "Analyzer"
+  tooltip = "You are good at resolving anything complex and like to pull it apart to make it simple. Concentrate on the detail."
+
+  [[roles.question]]
+  question = "Artist"
+  tooltip = "You are good at expressing yourself in one of the art forms, fine arts, literature, music, performing arts, etc"
+
+  [[roles.question]]
+  question = "Clarifier"
+  tooltip = "Someone who has an easy explanation for things. Wants everyone to understand."
+
+  [[roles.question]]
+  question = "Collector"
+  tooltip = "Someone who loves to collect things, information, memories, etc."
+
+  [[roles.question]]
+  question = "Competitor"
+  tooltip = "Someone who is positively stimulated by competition. Thrives on challenges."
+
+  [[roles.question]]
+  question = "Creator of order"
+  tooltip = "You like to invent systems to establish order out of chaos or disorder."
+
+  [[roles.question]]
+  question = "Decision maker"
+  tooltip = "You are a person with great assertiveness, you are willing to make decisions and bear the consequences. <br />If you make a decision you easily stick to it."
+
+  [[roles.question]]
+  question = "Diplomat"
+  tooltip = "You have a special skill to handle a situation in such a way that no one is offended, you are tactful."
+
+  [[roles.question]]
+  question = "Encourager"
+  tooltip = "You find it easy to support your friends in any difficult situation adding positive energy to complete the task."
+
+  [[roles.question]]
+  question = "Entrepreneur"
+  tooltip = "You see the business potential in any situation."
+
+  [[roles.question]]
+  question = "Facilitator"
+  tooltip = "You create a situation or environment where things can happen, you make progress easier. Launch pad."
+
+  [[roles.question]]
+  question = "Follower/Supporter"
+  tooltip = "You are an enthusiast. Backer, ally, loyal"
+
+  [[roles.question]]
+  question = "Friend"
+  tooltip = "You are extremely loyal, trustworthy and committed."
+
+  [[roles.question]]
+  question = "Giver"
+  tooltip = "You are fond of sharing your resources (money, time, etc)"
+
+  [[roles.question]]
+  question = "Harmoniser"
+  tooltip = "You like to see that things and people are working or blending together. You are a mediator who brings one thing into harmonious agreement with another."
+
+  [[roles.question]]
+  question = "Influencer/Inspire"
+  tooltip = "You have an inner drive to challenge people. You easily affect other people by what you say."
+
+  [[roles.question]]
+  question = "Inventor"
+  tooltip = "You like to think about new ideas, you are innovative."
+
+  [[roles.question]]
+  question = "Investigator"
+  tooltip = "You always want to know the truth behind every situation."
+
+  [[roles.question]]
+  question = "Leader"
+  tooltip = "People find it easy to follow your lead."
+
+  [[roles.question]]
+  question = "Listener"
+  tooltip = "You find it easy to be focused on what people say when they talk to you. Soundboard."
+
+  [[roles.question]]
+  question = "Marketer"
+  tooltip = "You know how to persuade people to believe in anything that you’re selling: products, ideas etc."
+
+  [[roles.question]]
+  question = "Mentor"
+  tooltip = "You like coaching people in one on one relationships. You are considered a wise and trusted counsellor or teacher."
+
+  [[roles.question]]
+  question = "Negotiator"
+  tooltip = "You like to bargain, like to find a common ground. You are good at arranging or settling a matter by discussion and mutual agreement."
+
+  [[roles.question]]
+  question = "Organizer"
+  tooltip = "You are good at bringing together all the components."
+
+  [[roles.question]]
+  question = "Peacemaker"
+  tooltip = "You like to see that conflict situations are resolved."
+
+  [[roles.question]]
+  question = "Pioneer"
+  tooltip = "You are not afraid to start something new. You plant the seed."
+
+  [[roles.question]]
+  question = "Protector"
+  tooltip = "You tend fight for the underdog. You are considered a guardian, place of safety or a defender."
+
+  [[roles.question]]
+  question = "Reality Tester"
+  tooltip = "You always think about the practical workability of a task. Ask daring but necessary questions."
+
+  [[roles.question]]
+  question = "Standard Setter"
+  tooltip = "You will always challenge a group to excellence."
+
+  [[roles.question]]
+  question = "Student"
+  tooltip = "Lifelong self learner, you enjoy to learn new things, read up."
+
+  [[roles.question]]
+  question = "Teacher"
+  tooltip = "You have the ability to explain something."
+
+  [[roles.question]]
+  question = "Team Builder"
+  tooltip = "You bring a team together to accomplish a goal and motivate them."
+
+  [[roles.question]]
+  question = "Trend setter"
+  tooltip = "You like to start something new (like a pioneer) but people tend to follow you."
+
+  [[roles.question]]
+  question = "Worker"
+  tooltip = "You like get do the things done. You like working hard to achieve your goals."
