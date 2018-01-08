@@ -907,3 +907,17 @@
   [[roles.question]]
   question = "Worker"
   tooltip = "You like get do the things done. You like working hard to achieve your goals."
+
+  ###############
+  # CAREER GUIDANCE
+  ######
+
+  [career_guidance]
+
+  [[career_guidance.question]]
+  title = "Clerical"
+  options = ["pie", "fruit", "veggies"]
+
+  [[career_guidance.question]]
+  title = "Healthcare"
+  options = ["1111", "2222", "3333"]

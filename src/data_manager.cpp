@@ -93,7 +93,7 @@ void DataManager::DeclarePanels() {
   AddPanel(new CareerGuidancePanel(assessments_window_, wxID_ANY,
                                    std::string("career_guidance"),
                                    std::string("Career Guidance")),
-           PanelId::kPeopleOrientationPanel);
+           PanelId::kCareerGuidancePanel);
 }
 
 // TODO(egeldenhuys): Check for invalid characters causing empty appearing

@@ -12,6 +12,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "src/data_panel.hpp"
 #include "src/paged_panel.hpp"
@@ -23,9 +24,15 @@ class CareerGuidancePanel : public PagedPanel {
                       const wxPoint &pos = wxDefaultPosition,
                       const wxSize &size = wxDefaultSize, int64_t style = 0);
 
-  wxPanel *CreateInternalPanel(std::string question);
+  wxPanel *CreateInternalPanel(std::string question,
+                               std::vector<std::string> options);
   bool SetGuiState(std::shared_ptr<cpptoml::table> state);
   bool SetUserState(std::shared_ptr<cpptoml::table> state);
   std::shared_ptr<cpptoml::table> GetUserState();
+  bool SetAnswer(std::string question, std::vector<std::string> options);
+  wxCheckListBox *AddCheckboxes(std::vector<std::string> titles);
+
+ private:
+  std::vector<wxCheckListBox *> checkboxes;
 };
 #endif  // PANELS_CAREER_GUIDANCE_HPP_

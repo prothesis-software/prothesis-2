@@ -59,7 +59,7 @@ class DataManager {
     kPrioritiesPanel = 9,
     kRolesPanel = 10,
     kPeopleOrientationPanel = 11,
-    kCareerGuideancePanel = 12,
+    kCareerGuidancePanel = 12,
     kPanelCount = 13
   };
 
