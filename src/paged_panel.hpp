@@ -3,27 +3,23 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
-#include <wx/statline.h>
 #include <wx/simplebook.h>
+#include <wx/statline.h>
 
-#include <vector>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "data_panel.hpp"
 
 class PagedPanel : public DataPanel {
  public:
-  PagedPanel(wxWindow* parent,
-             wxWindowID id,
-             std::string panel_name,
-             std::string panel_title,
-             const wxPoint& pos = wxDefaultPosition,
-             const wxSize& size = wxDefaultSize,
-             int64_t style = 0);
+  PagedPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
+             std::string panel_title, const wxPoint& pos = wxDefaultPosition,
+             const wxSize& size = wxDefaultSize, int64_t style = 0);
   ~PagedPanel();
 
   /**
@@ -49,7 +45,7 @@ class PagedPanel : public DataPanel {
    * Add a panel to the list of pages to be initialised
    * when Init() is called
    */
-  void AddPage(wxPanel * panel);
+  void AddPage(wxPanel* panel);
 
   /**
    * Return the number of pages in the simplebook
@@ -67,16 +63,16 @@ class PagedPanel : public DataPanel {
    * Displays the page with the given index from the button
    * label that triggered the event
    */
-  void OnPageClick(wxCommandEvent &event);  // NOLINT
+  void OnPageClick(wxCommandEvent& event);  // NOLINT
 
   std::vector<wxPanel*> panels_;
   std::vector<wxButton*> page_items_;
 
-  wxFlexGridSizer *sizer_paged_panel_ = NULL;
+  wxFlexGridSizer* sizer_paged_panel_ = NULL;
 
   size_t active_panel_index_ = 0;
-  wxPanel *active_panel_ = NULL;
+  wxPanel* active_panel_ = NULL;
   wxPanel* panel_page_numbers_ = NULL;
-  wxSimplebook *simple_book_ = NULL;
+  wxSimplebook* simple_book_ = NULL;
 };
 #endif  // PAGED_PANEL_HPP_

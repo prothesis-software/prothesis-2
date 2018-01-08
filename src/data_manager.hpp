@@ -3,27 +3,28 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
 #include <wx/dialog.h>
 
 #include <wx/log.h>
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "include/cpptoml.h"
 
 #include "data_panel.hpp"
 #include "utilities.hpp"
 
-#include "questions_panel.hpp"
 #include "checkbox_panel.hpp"
+#include "questions_panel.hpp"
 
-#include "panels/external_panel.hpp"
-#include "panels/work_environment_panel.hpp"
+#include "panels/career_guidance.hpp"
 #include "panels/details_panel.hpp"
+#include "panels/external_panel.hpp"
 #include "panels/priorities_panel.hpp"
+#include "panels/work_environment_panel.hpp"
 
 /**
  * The Data Manager class is responsible for storing reference
@@ -58,7 +59,8 @@ class DataManager {
     kPrioritiesPanel = 9,
     kRolesPanel = 10,
     kPeopleOrientationPanel = 11,
-    kPanelCount = 12
+    kCareerGuideancePanel = 12,
+    kPanelCount = 13
   };
 
   /**
@@ -101,9 +103,9 @@ class DataManager {
    * Add a panel to the panel vector. Calls Hide() on the panel.
    * Required to initialise the index to enum array
    */
-  void AddPanel(DataPanel* panel, PanelId id);
+  void AddPanel(DataPanel *panel, PanelId id);
 
-  DataPanel* panels_[PanelId::kPanelCount];
+  DataPanel *panels_[PanelId::kPanelCount];
   DataManager::PanelId ids_[PanelId::kPanelCount];
 
   wxWindow *main_frame_ = NULL;

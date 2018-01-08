@@ -1,18 +1,14 @@
 #include "paged_panel.hpp"
 #include <wx/simplebook.h>
 
-#include <string>
 #include <memory>
+#include <string>
 #include <vector>
 
-PagedPanel::PagedPanel(wxWindow* parent,
-             wxWindowID id,
-             std::string panel_name,
-             std::string panel_title,
-             const wxPoint& pos,
-             const wxSize& size,
-             int64_t style)
-  : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
+PagedPanel::PagedPanel(wxWindow *parent, wxWindowID id, std::string panel_name,
+                       std::string panel_title, const wxPoint &pos,
+                       const wxSize &size, int64_t style)
+    : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   panel_page_numbers_ = new wxPanel(this, wxID_ANY);
   sizer_paged_panel_ = new wxFlexGridSizer(4, 3, 0, 0);
   simple_book_ = new wxSimplebook(this, wxID_ANY);
@@ -35,11 +31,9 @@ void PagedPanel::Init() {
   }
 
   for (size_t i = 0; i < panels_.size(); i++) {
-    wxButton *page_item = new wxButton(panel_page_numbers_, wxID_ANY,
-                                       _(std::to_string(i + 1)),
-                                       wxDefaultPosition,
-                                       wxDefaultSize,
-                                       wxBU_EXACTFIT);
+    wxButton *page_item =
+        new wxButton(panel_page_numbers_, wxID_ANY, _(std::to_string(i + 1)),
+                     wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     page_item->Bind(wxEVT_BUTTON, &PagedPanel::OnPageClick, this);
     page_items_.push_back(page_item);
   }
@@ -53,9 +47,7 @@ PagedPanel::~PagedPanel() {
   // void
 }
 
-bool PagedPanel::Next() {
-  return DisplayNextPage();
-}
+bool PagedPanel::Next() { return DisplayNextPage(); }
 
 bool PagedPanel::DisplayNextPage() {
   if (active_panel_index_ + 1 < panels_.size()) {
@@ -68,9 +60,7 @@ bool PagedPanel::DisplayNextPage() {
   return false;
 }
 
-size_t PagedPanel::GetPageCount() {
-  return panels_.size();
-}
+size_t PagedPanel::GetPageCount() { return panels_.size(); }
 
 void PagedPanel::DisplayPage(size_t index) {
   wxLogDebug("PagedPanel::DisplayPanel() START");
@@ -81,7 +71,7 @@ void PagedPanel::DisplayPage(size_t index) {
   for (size_t i = 0; i < page_items_.size(); i++) {
     if (i != index) {
       wxColour default_colour =
-        wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT);
+          wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT);
       page_items_.at(i)->SetForegroundColour(default_colour);
     }
   }
@@ -94,7 +84,7 @@ void PagedPanel::DisplayPage(size_t index) {
 void PagedPanel::OnPageClick(wxCommandEvent &event) {
   wxLogDebug("PagedPanel::OnPageClick() START");
 
-  wxButton *page_item = static_cast<wxButton*>(event.GetEventObject());
+  wxButton *page_item = static_cast<wxButton *>(event.GetEventObject());
   wxString wxStr = page_item->GetLabel();
   std::string str = wxStr.ToStdString();
   size_t index = std::stoi(str) - 1;
@@ -105,8 +95,8 @@ void PagedPanel::OnPageClick(wxCommandEvent &event) {
 
 void PagedPanel::DoLayout() {
   // begin wxGlade: MainFrame::do_layout
-  wxFlexGridSizer* sizer_page_numbers =
-    new wxFlexGridSizer(1, page_items_.size() + 2, 0, 5);
+  wxFlexGridSizer *sizer_page_numbers =
+      new wxFlexGridSizer(1, page_items_.size() + 2, 0, 5);
 
   // Page numbers panel
   // Add col for spacing
@@ -133,7 +123,7 @@ void PagedPanel::DoLayout() {
 
   // line
   sizer_paged_panel_->Add(0, 0, 0, 0, 0);
-  wxStaticLine* static_line_1 = new wxStaticLine(this, wxID_ANY);
+  wxStaticLine *static_line_1 = new wxStaticLine(this, wxID_ANY);
   sizer_paged_panel_->Add(static_line_1, 1, wxEXPAND, 0);
   sizer_paged_panel_->Add(0, 0, 0, 0, 0);
 

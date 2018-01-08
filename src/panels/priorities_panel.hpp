@@ -3,11 +3,11 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
-#include <wx/listbox.h>
 #include <wx/gdicmn.h>
+#include <wx/listbox.h>
 
 #include <memory>
 #include <string>
@@ -16,13 +16,10 @@
 
 class PrioritiesPanel : public DataPanel {
  public:
-  PrioritiesPanel(wxWindow *parent,
-                  wxWindowID id,
-                  std::string panel_name,
+  PrioritiesPanel(wxWindow *parent, wxWindowID id, std::string panel_name,
                   std::string panel_title,
                   const wxPoint &pos = wxDefaultPosition,
-                  const wxSize &size = wxDefaultSize,
-                  int64_t style = 0);
+                  const wxSize &size = wxDefaultSize, int64_t style = 0);
   ~PrioritiesPanel();
 
   /**
@@ -66,10 +63,10 @@ class PrioritiesPanel : public DataPanel {
   void SetBestListHeight(wxListBox *list);
 
   void OnUnsortedListBoxSelectionChange(wxCommandEvent &event);  // NOLINT
-  void OnButtonAddClick(wxCommandEvent &event);  // NOLINT
-  void OnButtonRemoveClick(wxCommandEvent &event);  // NOLINT
-  void OnButtonMoveUpClick(wxCommandEvent &event);  // NOLINT
-  void OnButtonMoveDownClick(wxCommandEvent &event);  // NOLINT
+  void OnButtonAddClick(wxCommandEvent &event);                  // NOLINT
+  void OnButtonRemoveClick(wxCommandEvent &event);               // NOLINT
+  void OnButtonMoveUpClick(wxCommandEvent &event);               // NOLINT
+  void OnButtonMoveDownClick(wxCommandEvent &event);             // NOLINT
 
   /**
    * Find the given string in the unsorted lists and move it

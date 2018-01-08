@@ -3,25 +3,19 @@
 #include <memory>
 #include <string>
 
-WorkEnvironmentPanel::WorkEnvironmentPanel(wxWindow *parent,
-                             wxWindowID id,
-                             std::string panel_name,
-                             std::string panel_title,
-                             const wxPoint &pos,
-                             const wxSize &size,
-                             int64_t style)
-  : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
-  label_mbti_ = new wxStaticText(this, wxID_ANY,
-                                 _("Please select MBTI in ") +
-                                 _("'External' assessment"),
-                                 wxDefaultPosition,
-                                 wxDefaultSize,
-                                 wxST_ELLIPSIZE_END |
-                                 wxALIGN_CENTRE_HORIZONTAL);
-  text_description_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString,
-                                                wxDefaultPosition,
-                                                wxDefaultSize,
-                                                wxTE_MULTILINE | wxTE_READONLY);
+WorkEnvironmentPanel::WorkEnvironmentPanel(wxWindow *parent, wxWindowID id,
+                                           std::string panel_name,
+                                           std::string panel_title,
+                                           const wxPoint &pos,
+                                           const wxSize &size, int64_t style)
+    : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
+  label_mbti_ = new wxStaticText(
+      this, wxID_ANY, _("Please select MBTI in ") + _("'External' assessment"),
+      wxDefaultPosition, wxDefaultSize,
+      wxST_ELLIPSIZE_END | wxALIGN_CENTRE_HORIZONTAL);
+  text_description_ =
+      new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
+                     wxDefaultSize, wxTE_MULTILINE | wxTE_READONLY);
   DoLayout();
 }
 
@@ -73,7 +67,7 @@ void WorkEnvironmentPanel::FitText() {
 }
 
 std::shared_ptr<cpptoml::table> WorkEnvironmentPanel::GetUserState() {
-  DataPanel* external = DataPanel::GetPanelByName("external");
+  DataPanel *external = DataPanel::GetPanelByName("external");
 
   auto external_table = external->GetUserState();
 

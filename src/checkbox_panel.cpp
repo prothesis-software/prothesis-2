@@ -12,8 +12,7 @@ CheckBoxPanel::CheckBoxPanel(wxWindow *parent, wxWindowID id,
 }
 
 CheckBoxPanel::~CheckBoxPanel() {
-  wxLogDebug(_("CheckBoxPanel::~CheckBoxPanel(): ") +
-             _(this->GetPanelName()));
+  wxLogDebug(_("CheckBoxPanel::~CheckBoxPanel(): ") + _(this->GetPanelName()));
 }
 
 bool CheckBoxPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
@@ -36,10 +35,8 @@ bool CheckBoxPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
             table->get_as<std::string>("question");
 
         if (question_text) {
-          wxLogDebug(_(this->GetPanelName()) +
-                     _(": Adding checkbox '") +
-                     _(*question_text) +
-                     _("'"));
+          wxLogDebug(_(this->GetPanelName()) + _(": Adding checkbox '") +
+                     _(*question_text) + _("'"));
           AddCheckBox(*question_text);
         } else {
           wxLogError(_("A question table was found for panel ") +
@@ -117,7 +114,7 @@ std::shared_ptr<cpptoml::table> CheckBoxPanel::GetUserState() {
 
 void CheckBoxPanel::OnCheckBoxListSelectionChange(wxCommandEvent &event) {
   wxCheckListBox *list_box =
-    static_cast<wxCheckListBox*>(event.GetEventObject());
+      static_cast<wxCheckListBox *>(event.GetEventObject());
 
   for (size_t i = 0; i < 3; i++) {
     if (boxes_[i] != list_box) {

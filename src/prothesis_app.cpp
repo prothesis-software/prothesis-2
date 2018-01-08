@@ -14,11 +14,8 @@ bool ProthesisApp::OnInit() {
   wxString title = _("Prothesis");
 #endif
 
-  MainFrame
-    *main_frame = new MainFrame(NULL, wxID_ANY,
-                                        title,
-                                        wxDefaultPosition,
-                                        wxSize(-1, -1));
+  MainFrame *main_frame =
+      new MainFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(-1, -1));
   SetTopWindow(main_frame);
   main_frame->Show();
   return true;

@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
 #include <wx/datectrl.h>
@@ -17,13 +17,9 @@
 
 class DetailsPanel : public DataPanel {
  public:
-  DetailsPanel(wxWindow *parent,
-               wxWindowID id,
-               std::string panel_name,
-               std::string panel_title,
-               const wxPoint &pos = wxDefaultPosition,
-               const wxSize &size = wxDefaultSize,
-               int64_t style = 0);
+  DetailsPanel(wxWindow *parent, wxWindowID id, std::string panel_name,
+               std::string panel_title, const wxPoint &pos = wxDefaultPosition,
+               const wxSize &size = wxDefaultSize, int64_t style = 0);
   ~DetailsPanel();
 
   virtual bool SetGuiState(std::shared_ptr<cpptoml::table> state);

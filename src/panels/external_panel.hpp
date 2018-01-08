@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
 #include <wx/combobox.h>
@@ -18,13 +18,9 @@
 
 class ExternalPanel : public DataPanel {
  public:
-  ExternalPanel(wxWindow *parent,
-                wxWindowID id,
-                std::string panel_name,
-                std::string panel_title,
-                const wxPoint &pos = wxDefaultPosition,
-                const wxSize &size = wxDefaultSize,
-                int64_t style = 0);
+  ExternalPanel(wxWindow *parent, wxWindowID id, std::string panel_name,
+                std::string panel_title, const wxPoint &pos = wxDefaultPosition,
+                const wxSize &size = wxDefaultSize, int64_t style = 0);
   ~ExternalPanel();
 
   /**
@@ -63,8 +59,7 @@ class ExternalPanel : public DataPanel {
 
  private:
   void DoLayout();
-  void AddMbtiTuple(std::vector<wxArrayString> *source_vector,
-                    std::string str1,
+  void AddMbtiTuple(std::vector<wxArrayString> *source_vector, std::string str1,
                     std::string str2);
   wxBoxSizer *sizer_keys_ = NULL;
   wxChoice *choice_boxes_keys_[CHOICE_BOX_KEYS_COUNT];
