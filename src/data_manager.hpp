@@ -20,7 +20,7 @@
 #include "checkbox_panel.hpp"
 #include "questions_panel.hpp"
 
-#include "panels/career_guidance.hpp"
+#include "panels/career_orientation_panel.hpp"
 #include "panels/details_panel.hpp"
 #include "panels/external_panel.hpp"
 #include "panels/priorities_panel.hpp"
@@ -59,7 +59,7 @@ class DataManager {
     kPrioritiesPanel = 9,
     kRolesPanel = 10,
     kPeopleOrientationPanel = 11,
-    kCareerGuidancePanel = 12,
+    kCareerOrientationPanel = 12,
     kPanelCount = 13
   };
 

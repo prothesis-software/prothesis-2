@@ -1,5 +1,5 @@
-#ifndef PANELS_CAREER_GUIDANCE_HPP_
-#define PANELS_CAREER_GUIDANCE_HPP_
+#ifndef PANELS_CAREER_ORIENTATION_PANEL_HPP_
+#define PANELS_CAREER_ORIENTATION_PANEL_HPP_
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
@@ -17,12 +17,12 @@
 #include "src/data_panel.hpp"
 #include "src/paged_panel.hpp"
 
-class CareerGuidancePanel : public PagedPanel {
+class CareerOrientationPanel : public PagedPanel {
  public:
-  CareerGuidancePanel(wxWindow *parent, wxWindowID id, std::string panel_name,
-                      std::string panel_title,
-                      const wxPoint &pos = wxDefaultPosition,
-                      const wxSize &size = wxDefaultSize, int64_t style = 0);
+  CareerOrientationPanel(wxWindow *parent, wxWindowID id,
+                         std::string panel_name, std::string panel_title,
+                         const wxPoint &pos = wxDefaultPosition,
+                         const wxSize &size = wxDefaultSize, int64_t style = 0);
 
   wxPanel *CreateInternalPanel(std::string question,
                                std::vector<std::string> options);
@@ -36,4 +36,4 @@ class CareerGuidancePanel : public PagedPanel {
  private:
   std::vector<wxCheckListBox *> checkboxes;
 };
-#endif  // PANELS_CAREER_GUIDANCE_HPP_
+#endif  // PANELS_CAREER_ORIENTATION_PANEL_HPP_

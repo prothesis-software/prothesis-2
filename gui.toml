@@ -912,12 +912,12 @@
   # CAREER GUIDANCE
   ######
 
-  [career_guidance]
+  [career_orientation]
 
-  [[career_guidance.question]]
+  [[career_orientation.question]]
   title = "Clerical"
   options = ["pie", "fruit", "veggies"]
 
-  [[career_guidance.question]]
+  [[career_orientation.question]]
   title = "Healthcare"
   options = ["1111", "2222", "3333"]

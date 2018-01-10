@@ -1,22 +1,23 @@
-#include "career_guidance.hpp"
+#include "career_orientation_panel.hpp"
 
 #include <memory>
 #include <string>
 #include <vector>
 
-CareerGuidancePanel::CareerGuidancePanel(wxWindow *parent, wxWindowID id,
-                                         std::string panel_name,
-                                         std::string panel_title,
-                                         const wxPoint &pos, const wxSize &size,
-                                         int64_t style)
+CareerOrientationPanel::CareerOrientationPanel(wxWindow *parent, wxWindowID id,
+                                               std::string panel_name,
+                                               std::string panel_title,
+                                               const wxPoint &pos,
+                                               const wxSize &size,
+                                               int64_t style)
     : PagedPanel(parent, id, panel_name, panel_title, pos, size, style) {
-  wxLogDebug(_("Creating CareerGuidancePanel: ") + _(GetPanelName()));
+  wxLogDebug(_("Creating CareerOrientationPanel: ") + _(GetPanelName()));
 }
 
 #define QUESTION_WRAP_WIDTH 600
 #define ANSWER_WIDTH 400  // DELETE ME
 #define ANSWER_HEIGHT 100
-wxPanel *CareerGuidancePanel::CreateInternalPanel(
+wxPanel *CareerOrientationPanel::CreateInternalPanel(
     std::string question, std::vector<std::string> options) {
   wxPanel *panel = new wxPanel();
   panel->SetBackgroundStyle(wxBG_STYLE_SYSTEM);
@@ -43,12 +44,13 @@ wxPanel *CareerGuidancePanel::CreateInternalPanel(
   return panel;
 }
 
-bool CareerGuidancePanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
+bool CareerOrientationPanel::SetGuiState(
+    std::shared_ptr<cpptoml::table> state) {
   // Parse each quesion string
   // create a panel
   // add the panel to the panel vector
   std::shared_ptr<cpptoml::table> panel_table =
-      state->get_table(this->GetPanelName());
+      state->get_table("career_orientation");
 
   if (panel_table) {
     // We can get the array named questions since we already
@@ -86,7 +88,8 @@ bool CareerGuidancePanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   return true;
 }
 
-bool CareerGuidancePanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
+bool CareerOrientationPanel::SetUserState(
+    std::shared_ptr<cpptoml::table> state) {
   std::shared_ptr<cpptoml::table> panel_table =
       state->get_table(GetPanelName());
 
@@ -104,7 +107,7 @@ bool CareerGuidancePanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
       }
     }
   } else {
-    wxLogDebug(_("No User table exists for Question Panel:") +
+    wxLogDebug(_("No User table exists for Career Orientation Panel:") +
                _(GetPanelName()));
     return false;
   }
@@ -112,15 +115,14 @@ bool CareerGuidancePanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   return true;
 }
 
-bool CareerGuidancePanel::SetAnswer(std::string question,
-                                    std::vector<std::string> options) {
-  std::cout << "EEEEEEEEEEEEEEEEEEK : " << question << std::endl;
+bool CareerOrientationPanel::SetAnswer(std::string question,
+                                       std::vector<std::string> options) {
   for (std::string x : options) std::cout << x << std::endl;
   return true;
 }
 
-std::shared_ptr<cpptoml::table> CareerGuidancePanel::GetUserState() {
-  wxLogDebug("CareerGuidancePanel::GetUserState()");
+std::shared_ptr<cpptoml::table> CareerOrientationPanel::GetUserState() {
+  wxLogDebug("CareerOrientationPanel::GetUserState()");
   std::shared_ptr<cpptoml::table> panel_data = cpptoml::make_table();
 
   std::shared_ptr<cpptoml::table_array> question_array =
@@ -138,7 +140,7 @@ std::shared_ptr<cpptoml::table> CareerGuidancePanel::GetUserState() {
   return panel_data;
 }
 
-wxCheckListBox *CareerGuidancePanel::AddCheckboxes(
+wxCheckListBox *CareerOrientationPanel::AddCheckboxes(
     wxPanel *panel, std::vector<std::string> titles) {
   wxCheckListBox *box = new wxCheckListBox(panel, wxID_ANY);
   checkboxes.push_back(box);
