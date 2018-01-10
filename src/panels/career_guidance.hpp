@@ -30,7 +30,8 @@ class CareerGuidancePanel : public PagedPanel {
   bool SetUserState(std::shared_ptr<cpptoml::table> state);
   std::shared_ptr<cpptoml::table> GetUserState();
   bool SetAnswer(std::string question, std::vector<std::string> options);
-  wxCheckListBox *AddCheckboxes(std::vector<std::string> titles);
+  wxCheckListBox *AddCheckboxes(wxPanel *panel,
+                                std::vector<std::string> titles);
 
  private:
   std::vector<wxCheckListBox *> checkboxes;

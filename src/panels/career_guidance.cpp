@@ -24,7 +24,7 @@ wxPanel *CareerGuidancePanel::CreateInternalPanel(
 
   wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 10, 0);
   wxStaticText *question_text = new wxStaticText(panel, wxID_ANY, _(question));
-  wxCheckListBox *box = AddCheckboxes(options);
+  wxCheckListBox *box = AddCheckboxes(panel, options);
   question_text->Wrap(QUESTION_WRAP_WIDTH);
 
   sizer->Add(0, 0, 0, 0);
@@ -139,8 +139,8 @@ std::shared_ptr<cpptoml::table> CareerGuidancePanel::GetUserState() {
 }
 
 wxCheckListBox *CareerGuidancePanel::AddCheckboxes(
-    std::vector<std::string> titles) {
-  wxCheckListBox *box = new wxCheckListBox(this, wxID_ANY);
+    wxPanel *panel, std::vector<std::string> titles) {
+  wxCheckListBox *box = new wxCheckListBox(panel, wxID_ANY);
   checkboxes.push_back(box);
   for (std::string x : titles) {
     box->InsertItems(1, new wxString(x), 0);
