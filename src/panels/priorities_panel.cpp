@@ -3,28 +3,21 @@
 #include <memory>
 #include <string>
 
-PrioritiesPanel::PrioritiesPanel(wxWindow *parent,
-                           wxWindowID id,
-                           std::string panel_name,
-                           std::string panel_title,
-                           const wxPoint &pos,
-                           const wxSize &size,
-                                 int64_t style)
-  : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
+PrioritiesPanel::PrioritiesPanel(wxWindow* parent, wxWindowID id,
+                                 std::string panel_name,
+                                 std::string panel_title, const wxPoint& pos,
+                                 const wxSize& size, int64_t style)
+    : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   list_unsorted_1_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
-                                   wxSize(-1, -1), 0, NULL,
-                                   wxLB_SINGLE);
-  list_unsorted_1_->Bind(wxEVT_LISTBOX,
-                         &PrioritiesPanel::OnUnsortedListBoxSelectionChange,
-                         this);
+                                   wxSize(-1, -1), 0, NULL, wxLB_SINGLE);
+  list_unsorted_1_->Bind(
+      wxEVT_LISTBOX, &PrioritiesPanel::OnUnsortedListBoxSelectionChange, this);
   unsorted_lists_[0] = list_unsorted_1_;
 
   list_unsorted_2_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
-                                   wxSize(-1, -1), 0, NULL,
-                                   wxLB_SINGLE);
-  list_unsorted_2_->Bind(wxEVT_LISTBOX,
-                         &PrioritiesPanel::OnUnsortedListBoxSelectionChange,
-                         this);
+                                   wxSize(-1, -1), 0, NULL, wxLB_SINGLE);
+  list_unsorted_2_->Bind(
+      wxEVT_LISTBOX, &PrioritiesPanel::OnUnsortedListBoxSelectionChange, this);
   unsorted_lists_[1] = list_unsorted_2_;
 
   list_sorted_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
@@ -36,11 +29,10 @@ PrioritiesPanel::~PrioritiesPanel() {
   wxLogDebug("PrioritiesPanel::~PrioritiesPanel()");
 }
 
-void PrioritiesPanel::GetItemHeight(wxListBox *list) {
+void PrioritiesPanel::GetItemHeight(wxListBox* list) {
   wxLogDebug("Finding item height...");
 
-  wxLogDebug(_("Original: ") +
-             _(std::to_string(list->GetBestHeight(-1))));
+  wxLogDebug(_("Original: ") + _(std::to_string(list->GetBestHeight(-1))));
 
   // Add items until we start increasing in size
   int best_height = list->GetBestHeight(-1);
@@ -52,17 +44,14 @@ void PrioritiesPanel::GetItemHeight(wxListBox *list) {
   }
   int initial_height = list->GetBestHeight(-1);
 
-  wxLogDebug(_("initial: ") +
-             _(std::to_string(initial_height)));
+  wxLogDebug(_("initial: ") + _(std::to_string(initial_height)));
   list->InsertItems(1, new wxString("test_item"), 0);
 
   int final_height = list->GetBestHeight(-1);
-  wxLogDebug(_("final: ") +
-             _(std::to_string(final_height)));
+  wxLogDebug(_("final: ") + _(std::to_string(final_height)));
 
   int delta = final_height - initial_height;
-  wxLogDebug(_("delta: ") +
-             _(std::to_string(delta)));
+  wxLogDebug(_("delta: ") + _(std::to_string(delta)));
 
   if (delta <= 0) {
     wxLogWarning("Could not calculate the height of a wxListBox item!");
@@ -74,13 +63,13 @@ void PrioritiesPanel::GetItemHeight(wxListBox *list) {
   item_height_ = delta + 1;
 }
 
-void PrioritiesPanel::SetBestListHeight(wxListBox *list) {
+void PrioritiesPanel::SetBestListHeight(wxListBox* list) {
   int best = (list->GetCount() + 1) * item_height_;
   list->SetMinSize(wxSize(-1, best));
 }
 
 void PrioritiesPanel::AddUnsortedPriority(std::string priority) {
-  wxListBox *best_list = unsorted_lists_[0];
+  wxListBox* best_list = unsorted_lists_[0];
   size_t least_items = unsorted_lists_[0]->GetCount();
 
   for (size_t i = 1; i < 2; i++) {
@@ -94,7 +83,7 @@ void PrioritiesPanel::AddUnsortedPriority(std::string priority) {
   best_list->InsertItems(1, new wxString(priority), best_list->GetCount());
 }
 
-void PrioritiesPanel::OnButtonRemoveClick(wxCommandEvent &event) {
+void PrioritiesPanel::OnButtonRemoveClick(wxCommandEvent& event) {
   int index = list_sorted_->GetSelection();
 
   if (index != wxNOT_FOUND) {
@@ -129,7 +118,7 @@ bool PrioritiesPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
     return false;
   }  // panel_table
 
-return true;
+  return true;
 }
 
 std::shared_ptr<cpptoml::table> PrioritiesPanel::GetUserState() {
@@ -146,17 +135,15 @@ std::shared_ptr<cpptoml::table> PrioritiesPanel::GetUserState() {
   return panel_table;
 }
 
-
 bool PrioritiesPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   auto panel_table = state->get_table(this->GetPanelName());
   if (panel_table) {
     auto priorities_array = panel_table->get_array_of<std::string>("options");
 
     if (priorities_array) {
-      for (const auto &item : *priorities_array) {
+      for (const auto& item : *priorities_array) {
         if (!MoveItemToSorted(item)) {
-          wxLogWarning(_("Could not move item ") +
-                       _(item) +
+          wxLogWarning(_("Could not move item ") + _(item) +
                        _(" to the sorted list"));
         }
       }
@@ -173,7 +160,7 @@ bool PrioritiesPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   return true;
 }
 
-void PrioritiesPanel::RemoveItemFromListBox(wxListBox *list_box, int index) {
+void PrioritiesPanel::RemoveItemFromListBox(wxListBox* list_box, int index) {
   list_box->Freeze();
   wxArrayString items;
 
@@ -210,7 +197,7 @@ bool PrioritiesPanel::MoveItemToSorted(std::string item) {
 }
 
 bool PrioritiesPanel::AddSelectedItemToSorted() {
-  wxListBox *list_box = NULL;
+  wxListBox* list_box = NULL;
   int index = wxNOT_FOUND;
 
   if (list_unsorted_1_->GetSelection() != wxNOT_FOUND) {
@@ -231,7 +218,7 @@ bool PrioritiesPanel::AddSelectedItemToSorted() {
   return false;
 }
 
-void PrioritiesPanel::OnButtonAddClick(wxCommandEvent &event) {
+void PrioritiesPanel::OnButtonAddClick(wxCommandEvent& event) {
   if (AddSelectedItemToSorted()) {
     list_sorted_->SetSelection(list_sorted_->GetCount() - 1);
   }
@@ -270,8 +257,8 @@ void PrioritiesPanel::ChangeOrder(int index, int shift) {
   list_sorted_->Thaw();
 }
 
-void PrioritiesPanel::OnUnsortedListBoxSelectionChange(wxCommandEvent &event) {
-  wxListBox *list_box = static_cast<wxListBox*>(event.GetEventObject());
+void PrioritiesPanel::OnUnsortedListBoxSelectionChange(wxCommandEvent& event) {
+  wxListBox* list_box = static_cast<wxListBox*>(event.GetEventObject());
 
   if (list_box == list_unsorted_1_) {
     list_unsorted_2_->SetSelection(wxNOT_FOUND);
@@ -280,21 +267,21 @@ void PrioritiesPanel::OnUnsortedListBoxSelectionChange(wxCommandEvent &event) {
   }
 }
 
-void PrioritiesPanel::OnButtonMoveUpClick(wxCommandEvent &event) {
+void PrioritiesPanel::OnButtonMoveUpClick(wxCommandEvent& event) {
   ChangeOrder(list_sorted_->GetSelection(), -1);
 }
 
-void PrioritiesPanel::OnButtonMoveDownClick(wxCommandEvent &event) {
+void PrioritiesPanel::OnButtonMoveDownClick(wxCommandEvent& event) {
   ChangeOrder(list_sorted_->GetSelection(), 1);
 }
 
 void PrioritiesPanel::DoLayout() {
-  wxFlexGridSizer *sizer = new wxFlexGridSizer(1, 3, 0, 0);
+  wxFlexGridSizer* sizer = new wxFlexGridSizer(1, 3, 0, 0);
 
   // Sorted
-  wxBoxSizer *sizer_sorted = new wxBoxSizer(wxVERTICAL);
-  wxStaticText *label_sorted = new wxStaticText(this, wxID_ANY,
-                                                _("Sorted Priorities"));
+  wxBoxSizer* sizer_sorted = new wxBoxSizer(wxVERTICAL);
+  wxStaticText* label_sorted =
+      new wxStaticText(this, wxID_ANY, _("Sorted Priorities"));
   sizer_sorted->Add(label_sorted, 0, wxALIGN_CENTER, 0);
   sizer_sorted->Add(list_sorted_, 0, 0, 0);
   GetItemHeight(list_sorted_);
@@ -302,52 +289,45 @@ void PrioritiesPanel::DoLayout() {
   sizer->Add(sizer_sorted, 0, 0, 0);
 
   // Controls
-  wxBoxSizer *sizer_controls_h = new wxBoxSizer(wxHORIZONTAL);
-  wxBoxSizer *sizer_controls = new wxBoxSizer(wxVERTICAL);
-  wxButton *button_add_sorted = new wxButton(this, wxID_ANY,
-                                             _("Add to sorted"),
-                                             wxDefaultPosition,
-                                             wxDefaultSize, wxBU_LEFT);
+  wxBoxSizer* sizer_controls_h = new wxBoxSizer(wxHORIZONTAL);
+  wxBoxSizer* sizer_controls = new wxBoxSizer(wxVERTICAL);
+  wxButton* button_add_sorted =
+      new wxButton(this, wxID_ANY, _("Add to sorted"), wxDefaultPosition,
+                   wxDefaultSize, wxBU_LEFT);
   // Errors when not included here
 #include "images/keyboard_arrow_left.xpm"
   button_add_sorted->SetBitmap(wxBitmap(keyboard_arrow_left));
 
-  button_add_sorted->Bind(wxEVT_BUTTON,
-                          &PrioritiesPanel::OnButtonAddClick,
+  button_add_sorted->Bind(wxEVT_BUTTON, &PrioritiesPanel::OnButtonAddClick,
                           this);
-  wxButton *button_remove_sorted = new wxButton(this, wxID_ANY,
-                                                _("Remove from sorted"),
-                                                wxDefaultPosition,
-                                                wxDefaultSize, wxBU_LEFT);
+  wxButton* button_remove_sorted =
+      new wxButton(this, wxID_ANY, _("Remove from sorted"), wxDefaultPosition,
+                   wxDefaultSize, wxBU_LEFT);
 #include "images/keyboard_arrow_right.xpm"
   button_remove_sorted->SetBitmap(wxBitmap(keyboard_arrow_right));
   button_remove_sorted->Bind(wxEVT_BUTTON,
-                             &PrioritiesPanel::OnButtonRemoveClick,
-                             this);
+                             &PrioritiesPanel::OnButtonRemoveClick, this);
   sizer_controls->Add(button_add_sorted, 0, wxEXPAND, 0);
   sizer_controls->Add(button_remove_sorted, 0, wxEXPAND, 0);
   sizer_controls->AddSpacer(10);
 
-  wxButton *button_move_up = new wxButton(this, wxID_ANY,
-                                          _("Move Up"), wxDefaultPosition,
-                                          wxDefaultSize, wxBU_LEFT);
+  wxButton* button_move_up =
+      new wxButton(this, wxID_ANY, _("Move Up"), wxDefaultPosition,
+                   wxDefaultSize, wxBU_LEFT);
 #include "images/keyboard_arrow_up.xpm"
   button_move_up->SetBitmap(wxBitmap(keyboard_arrow_up));
   button_move_up->SetBitmapPosition(wxLEFT);
-  button_move_up->Bind(wxEVT_BUTTON,
-                       &PrioritiesPanel::OnButtonMoveUpClick,
+  button_move_up->Bind(wxEVT_BUTTON, &PrioritiesPanel::OnButtonMoveUpClick,
                        this);
   sizer_controls->Add(button_move_up, 0, wxEXPAND, 0);
 
-    wxButton *button_move_down = new wxButton(this, wxID_ANY,
-                                              _("Move Down"),
-                                              wxDefaultPosition,
-                                              wxDefaultSize, wxBU_LEFT);
+  wxButton* button_move_down =
+      new wxButton(this, wxID_ANY, _("Move Down"), wxDefaultPosition,
+                   wxDefaultSize, wxBU_LEFT);
 #include "images/keyboard_arrow_down.xpm"
-    button_move_down->SetBitmap(wxBitmap(keyboard_arrow_down));
-    button_move_down->Bind(wxEVT_BUTTON,
-                         &PrioritiesPanel::OnButtonMoveDownClick,
-                       this);
+  button_move_down->SetBitmap(wxBitmap(keyboard_arrow_down));
+  button_move_down->Bind(wxEVT_BUTTON, &PrioritiesPanel::OnButtonMoveDownClick,
+                         this);
   sizer_controls->Add(button_move_down, 0, wxEXPAND, 0);
   sizer_controls_h->Add(sizer_controls, 0, wxALIGN_CENTER, 0);
   sizer->Add(sizer_controls_h, 0, wxALIGN_CENTER, 0);
@@ -357,11 +337,11 @@ void PrioritiesPanel::DoLayout() {
   sizer->AddGrowableCol(1);
 
   // Unsorted
-  wxBoxSizer *sizer_unsorted = new wxBoxSizer(wxVERTICAL);
-  wxBoxSizer *sizer_unsorted_lists = new wxBoxSizer(wxHORIZONTAL);
+  wxBoxSizer* sizer_unsorted = new wxBoxSizer(wxVERTICAL);
+  wxBoxSizer* sizer_unsorted_lists = new wxBoxSizer(wxHORIZONTAL);
 
-  wxStaticText *label_unsorted = new wxStaticText(this, wxID_ANY,
-                                                _("Priorities to select from"));
+  wxStaticText* label_unsorted =
+      new wxStaticText(this, wxID_ANY, _("Priorities to select from"));
   sizer_unsorted->Add(label_unsorted, 0, wxALIGN_CENTER, 0);
   sizer_unsorted_lists->Add(list_unsorted_1_, 1, wxEXPAND, 0);
   sizer_unsorted_lists->Add(list_unsorted_2_, 1, wxEXPAND, 0);

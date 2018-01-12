@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
 #include <memory>
@@ -17,13 +17,9 @@
  */
 class DataPanel : public wxPanel {
  public:
-  DataPanel(wxWindow* parent,
-            wxWindowID id,
-            std::string panel_name,
-            std::string panel_title,
-            const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize,
-            int64_t style = 0);
+  DataPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
+            std::string panel_title, const wxPoint& pos = wxDefaultPosition,
+            const wxSize& size = wxDefaultSize, int64_t style = 0);
 
   /**
    * Generate the GUI elements from a TOML config

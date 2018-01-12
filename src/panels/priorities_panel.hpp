@@ -3,11 +3,11 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
-#include <wx/listbox.h>
 #include <wx/gdicmn.h>
+#include <wx/listbox.h>
 
 #include <memory>
 #include <string>
@@ -16,13 +16,10 @@
 
 class PrioritiesPanel : public DataPanel {
  public:
-  PrioritiesPanel(wxWindow *parent,
-                  wxWindowID id,
-                  std::string panel_name,
+  PrioritiesPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
                   std::string panel_title,
-                  const wxPoint &pos = wxDefaultPosition,
-                  const wxSize &size = wxDefaultSize,
-                  int64_t style = 0);
+                  const wxPoint& pos = wxDefaultPosition,
+                  const wxSize& size = wxDefaultSize, int64_t style = 0);
   ~PrioritiesPanel();
 
   /**
@@ -57,19 +54,19 @@ class PrioritiesPanel : public DataPanel {
    * Ad hoc method to calculate the height of a listbox item.
    * Used for setting the best size.
    */
-  void GetItemHeight(wxListBox *list);
+  void GetItemHeight(wxListBox* list);
 
   /**
    * Set the height of the ListBox according to the result obtained from
    * GetItemHeight.
    */
-  void SetBestListHeight(wxListBox *list);
+  void SetBestListHeight(wxListBox* list);
 
-  void OnUnsortedListBoxSelectionChange(wxCommandEvent &event);  // NOLINT
-  void OnButtonAddClick(wxCommandEvent &event);  // NOLINT
-  void OnButtonRemoveClick(wxCommandEvent &event);  // NOLINT
-  void OnButtonMoveUpClick(wxCommandEvent &event);  // NOLINT
-  void OnButtonMoveDownClick(wxCommandEvent &event);  // NOLINT
+  void OnUnsortedListBoxSelectionChange(wxCommandEvent& event);  // NOLINT
+  void OnButtonAddClick(wxCommandEvent& event);                  // NOLINT
+  void OnButtonRemoveClick(wxCommandEvent& event);               // NOLINT
+  void OnButtonMoveUpClick(wxCommandEvent& event);               // NOLINT
+  void OnButtonMoveDownClick(wxCommandEvent& event);             // NOLINT
 
   /**
    * Find the given string in the unsorted lists and move it
@@ -92,12 +89,12 @@ class PrioritiesPanel : public DataPanel {
   /**
    * Remove the item ad the given index from the ListBox
    */
-  void RemoveItemFromListBox(wxListBox *list_box, int index);
+  void RemoveItemFromListBox(wxListBox* list_box, int index);
 
-  wxListBox *list_unsorted_1_ = NULL;
-  wxListBox *list_unsorted_2_ = NULL;
-  wxListBox *list_sorted_ = NULL;
-  wxListBox *unsorted_lists_[2];
+  wxListBox* list_unsorted_1_ = NULL;
+  wxListBox* list_unsorted_2_ = NULL;
+  wxListBox* list_sorted_ = NULL;
+  wxListBox* unsorted_lists_[2];
   int item_height_ = -1;
 };
 

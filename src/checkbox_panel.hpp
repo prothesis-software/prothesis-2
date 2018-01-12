@@ -12,13 +12,10 @@
 
 class CheckBoxPanel : public DataPanel {
  public:
-  CheckBoxPanel(wxWindow* parent,
-            wxWindowID id,
-            std::string panel_name,
-            std::string panel_title,
-            const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize,
-            int64_t style = 0);
+  CheckBoxPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
+                std::string panel_title, const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize, int64_t style = 0);
+
   ~CheckBoxPanel();
 
   /**
@@ -48,7 +45,7 @@ class CheckBoxPanel : public DataPanel {
  private:
   void DoLayout();
   void SetCheckboxStateByLabel(std::string label, bool checked);
-  void OnCheckBoxListSelectionChange(wxCommandEvent &event);  // NOLINT
+  void OnCheckBoxListSelectionChange(wxCommandEvent& event);  // NOLINT
 
   /**
    * Create a new checkbox (unchecked) and add it to the panel
@@ -56,10 +53,10 @@ class CheckBoxPanel : public DataPanel {
   void AddCheckBox(std::string label);
 
   std::vector<wxCheckBox> checkboxes_;
-  wxCheckListBox *list_box_a_;
-  wxCheckListBox *list_box_b_;
-  wxCheckListBox *list_box_c_;
-  wxCheckListBox *boxes_[3];
+  wxCheckListBox* list_box_a_;
+  wxCheckListBox* list_box_b_;
+  wxCheckListBox* list_box_c_;
+  wxCheckListBox* boxes_[3];
 };
 
 #endif  // CHECKBOX_PANEL_HPP_
