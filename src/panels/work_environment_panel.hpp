@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
 #include <memory>
@@ -11,15 +11,12 @@
 
 #include "src/data_panel.hpp"
 
-class WorkEnvironmentPanel: public DataPanel {
+class WorkEnvironmentPanel : public DataPanel {
  public:
-  WorkEnvironmentPanel(wxWindow *parent,
-                       wxWindowID id,
-                       std::string panel_name,
+  WorkEnvironmentPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
                        std::string panel_title,
-                       const wxPoint &pos = wxDefaultPosition,
-                       const wxSize &size = wxDefaultSize,
-                       int64_t style = 0);
+                       const wxPoint& pos = wxDefaultPosition,
+                       const wxSize& size = wxDefaultSize, int64_t style = 0);
   ~WorkEnvironmentPanel();
 
   /**
@@ -45,7 +42,7 @@ class WorkEnvironmentPanel: public DataPanel {
   void DoLayout();
   void FitText();
   std::shared_ptr<cpptoml::table> work_table_ = NULL;
-  wxStaticText *label_mbti_ = NULL;
-  wxTextCtrl *text_description_ = NULL;
+  wxStaticText* label_mbti_ = NULL;
+  wxTextCtrl* text_description_ = NULL;
 };
 #endif  // PANELS_WORK_ENVIRONMENT_PANEL_HPP_

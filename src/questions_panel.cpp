@@ -3,14 +3,11 @@
 #include <string>
 #include <vector>
 
-QuestionsPanel::QuestionsPanel(wxWindow *parent,
-                           wxWindowID id,
-                           std::string panel_name,
-                           std::string panel_title,
-                           const wxPoint &pos,
-                           const wxSize &size,
-                           int64_t style)
-  : PagedPanel(parent, id, panel_name, panel_title, pos, size, style) {
+QuestionsPanel::QuestionsPanel(wxWindow* parent, wxWindowID id,
+                               std::string panel_name, std::string panel_title,
+                               const wxPoint& pos, const wxSize& size,
+                               int64_t style)
+    : PagedPanel(parent, id, panel_name, panel_title, pos, size, style) {
   wxLogDebug(_("Creating QuestionsPanel: ") + _(GetPanelName()));
   // void
 }
@@ -20,19 +17,16 @@ QuestionsPanel::~QuestionsPanel() {
              _(this->GetPanelName()));
 }
 
-wxPanel *QuestionsPanel::CreateInternalPanel(std::string question) {
-  wxPanel *panel = new wxPanel();
+wxPanel* QuestionsPanel::CreateInternalPanel(std::string question) {
+  wxPanel* panel = new wxPanel();
   panel->SetBackgroundStyle(wxBG_STYLE_SYSTEM);
-  panel->Create(this, wxID_ANY, wxDefaultPosition,
-                wxDefaultSize);
+  panel->Create(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
-  wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 10, 0);
-  wxStaticText *question_text = new wxStaticText(panel, wxID_ANY, _(question));
-  wxTextCtrl *text_ctrl_answer = new wxTextCtrl(panel, wxID_ANY,
-                                                wxEmptyString,
-                                                wxDefaultPosition,
-                                                wxDefaultSize,
-                                                wxTE_MULTILINE);
+  wxFlexGridSizer* sizer = new wxFlexGridSizer(2, 3, 10, 0);
+  wxStaticText* question_text = new wxStaticText(panel, wxID_ANY, _(question));
+  wxTextCtrl* text_ctrl_answer =
+      new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxDefaultPosition,
+                     wxDefaultSize, wxTE_MULTILINE);
   // WARN:STATIC
   text_ctrl_answer->SetMinSize(wxSize(ANSWER_WIDTH, ANSWER_HEIGHT));
   question_text->Wrap(QUESTION_WRAP_WIDTH);
@@ -61,19 +55,19 @@ bool QuestionsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   // create a panel
   // add the panel to the panel vector
   std::shared_ptr<cpptoml::table> panel_table =
-    state->get_table(this->GetPanelName());
+      state->get_table(this->GetPanelName());
 
   if (panel_table) {
     // We can get the array named questions since we already
     // extracted the panel table.
     // ie the '[[panel_name.questions]]' becomes '[[questions]]'
     std::shared_ptr<cpptoml::table_array> questions =
-      panel_table->get_table_array("question");
+        panel_table->get_table_array("question");
     if (questions) {
       for (const std::shared_ptr<cpptoml::table>& table : *questions) {
         // Get the question text from the table we extracted
         cpptoml::option<std::string> question_text =
-          table->get_as<std::string>("question");
+            table->get_as<std::string>("question");
         if (question_text) {
           wxPanel* internal_panel = CreateInternalPanel(*question_text);
           AddPage(internal_panel);
@@ -96,7 +90,7 @@ bool QuestionsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
 }
 
 bool QuestionsPanel::SetAnswer(std::string question, std::string answer) {
-  wxTextCtrl *answer_text_ctrl = GetAnswerCtrlByQuestion(question);
+  wxTextCtrl* answer_text_ctrl = GetAnswerCtrlByQuestion(question);
 
   if (answer_text_ctrl != NULL) {
     answer_text_ctrl->SetValue(answer);
@@ -121,11 +115,11 @@ wxTextCtrl* QuestionsPanel::GetAnswerCtrlByQuestion(std::string question) {
 
 bool QuestionsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   std::shared_ptr<cpptoml::table> panel_table =
-    state->get_table(GetPanelName());
+      state->get_table(GetPanelName());
 
   if (panel_table != NULL && !panel_table->empty()) {
     std::shared_ptr<cpptoml::table_array> question_array =
-      panel_table->get_table_array("question");
+        panel_table->get_table_array("question");
 
     for (const auto& question_table : *question_array) {
       auto question = question_table->get_as<std::string>("question");
@@ -151,12 +145,11 @@ std::shared_ptr<cpptoml::table> QuestionsPanel::GetUserState() {
   std::shared_ptr<cpptoml::table> panel_data = cpptoml::make_table();
 
   std::shared_ptr<cpptoml::table_array> question_array =
-    cpptoml::make_table_array();
+      cpptoml::make_table_array();
 
   for (size_t i = 0; i < text_ctrl_answers_.size(); i++) {
     // Create a question answer pair
-    std::shared_ptr<cpptoml::table> question_table =
-    cpptoml::make_table();
+    std::shared_ptr<cpptoml::table> question_table = cpptoml::make_table();
     question_table->insert("answer",
                            text_ctrl_answers_.at(i)->GetValue().ToStdString());
     question_table->insert("question",

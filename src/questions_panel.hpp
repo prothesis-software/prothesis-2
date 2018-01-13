@@ -3,11 +3,11 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
-#include <string>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "paged_panel.hpp"
@@ -18,13 +18,10 @@
 
 class QuestionsPanel : public PagedPanel {
  public:
-  QuestionsPanel(wxWindow* parent,
-                 wxWindowID id,
-                 std::string panel_name,
+  QuestionsPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
                  std::string panel_title,
                  const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 int64_t style = 0);
+                 const wxSize& size = wxDefaultSize, int64_t style = 0);
   ~QuestionsPanel();
 
   /**
@@ -58,7 +55,7 @@ class QuestionsPanel : public PagedPanel {
    * The question label and answer text components will be added
    * to label_questions_ and text_ctrl_answers_
    */
-  wxPanel *CreateInternalPanel(std::string question);
+  wxPanel* CreateInternalPanel(std::string question);
 
   wxTextCtrl* GetAnswerCtrlByQuestion(std::string question);
 
@@ -70,8 +67,8 @@ class QuestionsPanel : public PagedPanel {
   /**
    * Index i in both vectors correspond to a question-answer pair
    */
-  std::vector<wxStaticText *> label_questions_;
-  std::vector<wxTextCtrl *> text_ctrl_answers_;
+  std::vector<wxStaticText*> label_questions_;
+  std::vector<wxTextCtrl*> text_ctrl_answers_;
 };
 
 #endif  // QUESTIONS_PANEL_HPP_

@@ -2,12 +2,10 @@
 
 #include <string>
 
-NavigationDrawer::NavigationDrawer(wxWindow* parent,
-                                   wxWindowID id,
-                                   const wxPoint& pos,
-                                   const wxSize& size,
+NavigationDrawer::NavigationDrawer(wxWindow* parent, wxWindowID id,
+                                   const wxPoint& pos, const wxSize& size,
                                    int64_t style)
-  : wxPanel(parent, id, pos, size, style) {
+    : wxPanel(parent, id, pos, size, style) {
   sizer_ = new wxGridSizer(0, 1, 0, 0);
   SetProperties();
   DoLayout();
@@ -17,8 +15,8 @@ void NavigationDrawer::SetProperties() {
   // void
 }
 
-void NavigationDrawer::OnItemClick(wxCommandEvent &event) {
-  NavigationItem *item = static_cast<NavigationItem*>(event.GetEventObject());
+void NavigationDrawer::OnItemClick(wxCommandEvent& event) {
+  NavigationItem* item = static_cast<NavigationItem*>(event.GetEventObject());
   // MainFrame *main_frame = static_cast<MainFrame*>(wxTheApp->GetTopWindow());
 
   // \note triggers for clicking on nav buttons
@@ -36,8 +34,8 @@ void NavigationDrawer::OnItemClick(wxCommandEvent &event) {
 
 void NavigationDrawer::AddItem(std::string label, DataManager::PanelId target,
                                DataPanel* target_panel) {
-  NavigationItem *btn = new NavigationItem(this, wxID_ANY, _(label), target,
-                                           target_panel);
+  NavigationItem* btn =
+      new NavigationItem(this, wxID_ANY, _(label), target, target_panel);
   sizer_->Add(btn, 1, wxEXPAND, 0);
   btn->Bind(wxEVT_BUTTON, &NavigationDrawer::OnItemClick, this);
 }

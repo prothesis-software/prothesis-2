@@ -3,17 +3,16 @@
 #include <string>
 #include <vector>
 
-CheckBoxPanel::CheckBoxPanel(wxWindow *parent, wxWindowID id,
+CheckBoxPanel::CheckBoxPanel(wxWindow* parent, wxWindowID id,
                              std::string panel_name, std::string panel_title,
-                             const wxPoint &pos, const wxSize &size,
+                             const wxPoint& pos, const wxSize& size,
                              int64_t style)
     : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   DoLayout();
 }
 
 CheckBoxPanel::~CheckBoxPanel() {
-  wxLogDebug(_("CheckBoxPanel::~CheckBoxPanel(): ") +
-             _(this->GetPanelName()));
+  wxLogDebug(_("CheckBoxPanel::~CheckBoxPanel(): ") + _(this->GetPanelName()));
 }
 
 bool CheckBoxPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
@@ -30,16 +29,14 @@ bool CheckBoxPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
     std::shared_ptr<cpptoml::table_array> questions =
         panel_table->get_table_array("question");
     if (questions) {
-      for (const std::shared_ptr<cpptoml::table> &table : *questions) {
+      for (const std::shared_ptr<cpptoml::table>& table : *questions) {
         // Get the question text from the table we extracted
         cpptoml::option<std::string> question_text =
             table->get_as<std::string>("question");
 
         if (question_text) {
-          wxLogDebug(_(this->GetPanelName()) +
-                     _(": Adding checkbox '") +
-                     _(*question_text) +
-                     _("'"));
+          wxLogDebug(_(this->GetPanelName()) + _(": Adding checkbox '") +
+                     _(*question_text) + _("'"));
           AddCheckBox(*question_text);
         } else {
           wxLogError(_("A question table was found for panel ") +
@@ -66,7 +63,7 @@ bool CheckBoxPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
     std::shared_ptr<cpptoml::table_array> question_array =
         panel_table->get_table_array("question");
 
-    for (const auto &question_table : *question_array) {
+    for (const auto& question_table : *question_array) {
       auto question = question_table->get_as<std::string>("question");
       auto answer = question_table->get_as<std::string>("answer");
 
@@ -97,7 +94,7 @@ std::shared_ptr<cpptoml::table> CheckBoxPanel::GetUserState() {
       cpptoml::make_table_array();
 
   for (size_t i = 0; i < 3; i++) {
-    wxCheckListBox *box = boxes_[i];
+    wxCheckListBox* box = boxes_[i];
     for (size_t i = 0; i < box->GetCount(); i++) {
       // Create a question answer pair
       std::shared_ptr<cpptoml::table> question_table = cpptoml::make_table();
@@ -115,9 +112,9 @@ std::shared_ptr<cpptoml::table> CheckBoxPanel::GetUserState() {
   return panel_data;
 }
 
-void CheckBoxPanel::OnCheckBoxListSelectionChange(wxCommandEvent &event) {
-  wxCheckListBox *list_box =
-    static_cast<wxCheckListBox*>(event.GetEventObject());
+void CheckBoxPanel::OnCheckBoxListSelectionChange(wxCommandEvent& event) {
+  wxCheckListBox* list_box =
+      static_cast<wxCheckListBox*>(event.GetEventObject());
 
   for (size_t i = 0; i < 3; i++) {
     if (boxes_[i] != list_box) {
@@ -127,7 +124,7 @@ void CheckBoxPanel::OnCheckBoxListSelectionChange(wxCommandEvent &event) {
 }
 
 void CheckBoxPanel::DoLayout() {
-  wxGridSizer *sizer = new wxGridSizer(0, 3, 0, 0);
+  wxGridSizer* sizer = new wxGridSizer(0, 3, 0, 0);
   this->list_box_a_ = new wxCheckListBox(this, wxID_ANY);
   this->list_box_b_ = new wxCheckListBox(this, wxID_ANY);
   this->list_box_c_ = new wxCheckListBox(this, wxID_ANY);
@@ -159,7 +156,7 @@ void CheckBoxPanel::SetCheckboxStateByLabel(std::string label, bool checked) {
 }
 
 void CheckBoxPanel::AddCheckBox(std::string label) {
-  wxCheckListBox *box = this->list_box_a_;
+  wxCheckListBox* box = this->list_box_a_;
   if (box->GetCount() >= MAX_ITEMS) {
     box = this->list_box_b_;
     if (box->GetCount() >= MAX_ITEMS) {

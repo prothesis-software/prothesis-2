@@ -3,32 +3,30 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
-#include <wx/treectrl.h>
-#include <wx/statline.h>
 #include <wx/notebook.h>
+#include <wx/statline.h>
+#include <wx/treectrl.h>
 
 #include <string>
 #include <vector>
 
-#include "data_panel.hpp"
 #include "data_manager.hpp"
+#include "data_panel.hpp"
 
-class MainFrame: public wxFrame {
+class MainFrame : public wxFrame {
  public:
-  MainFrame(wxWindow *parent,
-            wxWindowID id,
-            const wxString &title,
-            const wxPoint &pos = wxDefaultPosition,
-            const wxSize &size = wxDefaultSize,
+  MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
+            const wxPoint& pos = wxDefaultPosition,
+            const wxSize& size = wxDefaultSize,
             int64_t style = wxDEFAULT_FRAME_STYLE,
             const wxString name = wxFrameNameStr);
   ~MainFrame();
 
   bool DisplayNextPanel();
   static void OnKill(int sig);
-  DataManager *data_manager_;
+  DataManager* data_manager_;
 
   /**
    * Returns the minimun size that will fit every page
@@ -37,13 +35,13 @@ class MainFrame: public wxFrame {
 
  private:
   void DoLayout();
-  void OnClose(wxCloseEvent &e); // NOLINT
+  void OnClose(wxCloseEvent& e);                           // NOLINT
   void OnNotebookSelectionChange(wxBookCtrlEvent& event);  // NOLINT
-  wxNotebook *notebook_ = NULL;
-  wxNotebook *notebook_assessments_ = NULL;
-  wxFlexGridSizer *sizer_main_frame_ = NULL;
-  wxFlexGridSizer *sizer_content_ = NULL;
-  wxPanel *panel_main_ = NULL;
+  wxNotebook* notebook_ = NULL;
+  wxNotebook* notebook_assessments_ = NULL;
+  wxFlexGridSizer* sizer_main_frame_ = NULL;
+  wxFlexGridSizer* sizer_content_ = NULL;
+  wxPanel* panel_main_ = NULL;
   bool exit_requested_ = false;
   std::vector<std::vector<DataPanel*>> index_layout_;
 };

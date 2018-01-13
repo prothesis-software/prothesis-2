@@ -3,25 +3,19 @@
 #include <memory>
 #include <string>
 
-WorkEnvironmentPanel::WorkEnvironmentPanel(wxWindow *parent,
-                             wxWindowID id,
-                             std::string panel_name,
-                             std::string panel_title,
-                             const wxPoint &pos,
-                             const wxSize &size,
-                             int64_t style)
-  : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
-  label_mbti_ = new wxStaticText(this, wxID_ANY,
-                                 _("Please select MBTI in ") +
-                                 _("'External' assessment"),
-                                 wxDefaultPosition,
-                                 wxDefaultSize,
-                                 wxST_ELLIPSIZE_END |
-                                 wxALIGN_CENTRE_HORIZONTAL);
-  text_description_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString,
-                                                wxDefaultPosition,
-                                                wxDefaultSize,
-                                                wxTE_MULTILINE | wxTE_READONLY);
+WorkEnvironmentPanel::WorkEnvironmentPanel(wxWindow* parent, wxWindowID id,
+                                           std::string panel_name,
+                                           std::string panel_title,
+                                           const wxPoint& pos,
+                                           const wxSize& size, int64_t style)
+    : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
+  label_mbti_ = new wxStaticText(
+      this, wxID_ANY, _("Please select MBTI in ") + _("'External' assessment"),
+      wxDefaultPosition, wxDefaultSize,
+      wxST_ELLIPSIZE_END | wxALIGN_CENTRE_HORIZONTAL);
+  text_description_ =
+      new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
+                     wxDefaultSize, wxTE_MULTILINE | wxTE_READONLY);
   DoLayout();
 }
 
@@ -82,7 +76,7 @@ std::shared_ptr<cpptoml::table> WorkEnvironmentPanel::GetUserState() {
 
     if (mbti_array) {
       std::string mbti = "";
-      for (const auto &mbti_element : *mbti_array) {
+      for (const auto& mbti_element : *mbti_array) {
         mbti.append(mbti_element);
       }
 
@@ -100,7 +94,7 @@ std::shared_ptr<cpptoml::table> WorkEnvironmentPanel::GetUserState() {
       auto mbti_type_array = work_table_->get_table_array("type");
 
       if (mbti_type_array) {
-        for (const auto &type_table : *mbti_type_array) {
+        for (const auto& type_table : *mbti_type_array) {
           auto mbti_string = type_table->get_as<std::string>("mbti");
 
           if (mbti_string) {
@@ -108,7 +102,7 @@ std::shared_ptr<cpptoml::table> WorkEnvironmentPanel::GetUserState() {
               std::string lines = "";
               auto lines_array = type_table->get_array_of<std::string>("list");
               if (lines_array) {
-                for (const auto &line : *lines_array) {
+                for (const auto& line : *lines_array) {
                   lines += "- ";
                   lines += line;
                   lines.append("\n");
@@ -145,7 +139,7 @@ bool WorkEnvironmentPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
 }
 
 void WorkEnvironmentPanel::DoLayout() {
-  wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+  wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
   wxFont font = GetFont();
   font.SetPointSize(17);
   label_mbti_->SetFont(font);
