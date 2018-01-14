@@ -11,6 +11,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "src/data_panel.hpp"
 
@@ -41,6 +42,11 @@ class PrioritiesPanel : public DataPanel {
    *   The same as GetUserState()
    */
   bool SetUserState(std::shared_ptr<cpptoml::table> state) override;
+
+  /**
+   * Return the priorities in order
+   */
+  std::vector<std::string> GetPriorities();
 
  private:
   void DoLayout();

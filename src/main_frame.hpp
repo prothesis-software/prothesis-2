@@ -34,15 +34,20 @@ class MainFrame : public wxFrame {
   wxSize GetOverallMinSize();
 
  private:
+  void OnSizeChange(wxSizeEvent& event);  // NOLINT
   void DoLayout();
   void OnClose(wxCloseEvent& e);                           // NOLINT
   void OnNotebookSelectionChange(wxBookCtrlEvent& event);  // NOLINT
   wxNotebook* notebook_ = NULL;
   wxNotebook* notebook_assessments_ = NULL;
   wxFlexGridSizer* sizer_main_frame_ = NULL;
-  wxFlexGridSizer* sizer_content_ = NULL;
   wxPanel* panel_main_ = NULL;
   bool exit_requested_ = false;
+
+  /**
+   * [0][i] - Top notebook
+   * [1][i] - Assessment notebook
+   */
   std::vector<std::vector<DataPanel*>> index_layout_;
 };
 

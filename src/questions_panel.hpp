@@ -48,6 +48,11 @@ class QuestionsPanel : public PagedPanel {
    */
   bool SetUserState(std::shared_ptr<cpptoml::table> state) override;
 
+  /**
+   * Returns the string used in the analysis panel
+   */
+  std::string GetAnalysisAnswer();
+
  private:
   /**
    * Create a panel to be pased to PagedPanel::SetPanels(...)

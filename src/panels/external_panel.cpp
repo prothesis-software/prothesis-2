@@ -214,6 +214,47 @@ void ExternalPanel::AddMbtiTuple(std::vector<wxArrayString>* source_vector,
   source_vector->push_back(tuple);
 }
 
+std::string ExternalPanel::GetMbti() {
+  std::string mbti_string = "";
+
+  // mbti
+  std::string mbti[4];
+  for (size_t i = 0; i < 4; i++) {
+    const int selection = choice_boxes_mbti_[i]->GetSelection();
+    if (selection != wxNOT_FOUND) {
+      const std::string value =
+          choice_boxes_mbti_[i]->GetString(selection).ToStdString();
+
+      mbti[i] = value;
+    } else {
+      mbti[i] = "";
+    }
+    mbti_string += mbti[i];
+  }
+
+  return mbti_string;
+}
+
+std::vector<std::string> ExternalPanel::GetLifeKeys() {
+  std::vector<std::string> result;
+
+  // life keys
+  for (size_t i = 0; i < CHOICE_BOX_KEYS_COUNT; i++) {
+    if (choice_boxes_keys_[i]) {
+      if (choice_boxes_keys_[i]->GetSelection() != wxNOT_FOUND) {
+        const int selection = choice_boxes_keys_[i]->GetSelection();
+
+        const std::string key =
+            choice_boxes_keys_[i]->GetString(selection).ToStdString();
+
+        result.push_back(key);
+      }
+    }
+  }
+
+  return result;
+}
+
 void ExternalPanel::DoLayout() {
   wxGridSizer* sizer = new wxGridSizer(1, 2, 0, 0);
   wxBoxSizer* sizer_mbti_keys = new wxBoxSizer(wxVERTICAL);

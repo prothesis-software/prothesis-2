@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 PrioritiesPanel::PrioritiesPanel(wxWindow* parent, wxWindowID id,
                                  std::string panel_name,
@@ -61,6 +62,17 @@ void PrioritiesPanel::GetItemHeight(wxListBox* list) {
 
   // +1 To correct for errors
   item_height_ = delta + 1;
+}
+
+std::vector<std::string> PrioritiesPanel::GetPriorities() {
+  std::vector<std::string> result;
+
+  size_t count = list_sorted_->GetCount();
+  for (size_t i = 0; i < count; i++) {
+    result.push_back(list_sorted_->GetString(i).ToStdString());
+  }
+
+  return result;
 }
 
 void PrioritiesPanel::SetBestListHeight(wxListBox* list) {

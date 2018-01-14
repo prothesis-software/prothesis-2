@@ -34,3 +34,12 @@ std::vector<std::string> Utilities::SplitString(std::string str,
 
   return tokens;
 }
+
+bool Utilities::VectorContains(std::vector<std::string> vec, std::string str) {
+  for (size_t i = 0; i < vec.size(); i++) {
+    if (vec.at(i).compare(str) == 0) {
+      return true;
+    }
+  }
+  return false;
+}

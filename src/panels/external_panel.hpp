@@ -57,6 +57,9 @@ class ExternalPanel : public DataPanel {
    */
   bool SetUserState(std::shared_ptr<cpptoml::table> state) override;
 
+  std::vector<std::string> GetLifeKeys();
+  std::string GetMbti();
+
  private:
   void DoLayout();
   void AddMbtiTuple(std::vector<wxArrayString>* source_vector, std::string str1,
