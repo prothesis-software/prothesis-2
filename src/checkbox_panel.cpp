@@ -112,6 +112,21 @@ std::shared_ptr<cpptoml::table> CheckBoxPanel::GetUserState() {
   return panel_data;
 }
 
+std::vector<std::string> CheckBoxPanel::GetCheckedItems() {
+  std::vector<std::string> result;
+
+  for (size_t i = 0; i < 3; i++) {
+    wxCheckListBox* box = boxes_[i];
+    for (size_t j = 0; j < box->GetCount(); j++) {
+      if (box->IsChecked(j)) {
+        result.push_back(box->GetString(j).ToStdString());
+      }
+    }
+  }
+
+  return result;
+}
+
 void CheckBoxPanel::OnCheckBoxListSelectionChange(wxCommandEvent& event) {
   wxCheckListBox* list_box =
       static_cast<wxCheckListBox*>(event.GetEventObject());

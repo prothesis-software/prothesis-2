@@ -40,6 +40,8 @@
         question = "What interests or hobbies have you had in the past few years that intrigue you and might hold the potential for a life passion?"
     [[passion.question]]
         question = "What would be hard for you to give up?"
+    [[passion.question]]
+        question = "Now summarise the central themes from your previous answers."
 
 #########################################3
 # PEOPLE ID
@@ -56,6 +58,8 @@
         question = "With which character in a book or movie did you relate well and why?"
     [[people_id.question]]
         question = "Which super hero was you favourite when you were small? What can that say about you?"
+    [[people_id.question]]
+        question = "Now summarise the central themes from your previous answers."
 
 #########################################
 # DREAMS
@@ -92,6 +96,8 @@
         question = "Are there any people in your life preventing you from pursuing your passion? Who are they and how are they holding you back?"
     [[dreams.question]]
         question = "What is something (or several things) you'd really like to achieve before you die?"
+    [[dreams.question]]
+        question = "Now summarise the central themes from your previous answers."
 
 #########################################
 # VALUES
@@ -108,6 +114,8 @@
         question = "What values will you never compromise?"
     [[values.question]]
         question = "Which jobs would encompass your core values?"
+    [[values.question]]
+        question = "Now summarise the central themes from your previous answers."
 
 #########################################
 # SPOKEN WORDS

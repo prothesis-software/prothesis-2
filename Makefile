@@ -60,7 +60,7 @@ get-deps:
 
 apply_gui_config:
 	mkdir -p build
-	cp gui.toml build/
+	cp -f gui.toml build/
 
 lint:
 	@echo "Remember to set the WX_INSTALL_PATH_LINUX and WX_INSTALL_PATH_WINDOWS"

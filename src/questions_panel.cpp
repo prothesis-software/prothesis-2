@@ -50,6 +50,12 @@ wxPanel* QuestionsPanel::CreateInternalPanel(std::string question) {
   return panel;
 }
 
+std::string QuestionsPanel::GetAnalysisAnswer() {
+  wxTextCtrl* text_summary =
+      text_ctrl_answers_.at(text_ctrl_answers_.size() - 1);
+  return text_summary->GetValue().ToStdString();
+}
+
 bool QuestionsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   // Parse each quesion string
   // create a panel

@@ -15,7 +15,6 @@ class CheckBoxPanel : public DataPanel {
   CheckBoxPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
                 std::string panel_title, const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize, int64_t style = 0);
-
   ~CheckBoxPanel();
 
   /**
@@ -36,6 +35,8 @@ class CheckBoxPanel : public DataPanel {
    *    checked = "true"
    */
   std::shared_ptr<cpptoml::table> GetUserState() override;
+
+  std::vector<std::string> GetCheckedItems();
 
   /**
    * TOML Specification is the same as for GetUserState()

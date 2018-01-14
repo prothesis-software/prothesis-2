@@ -89,6 +89,12 @@ void DataManager::DeclarePanels() {
                              std::string("people_orientation"),
                              std::string("People Orientation")),
            PanelId::kPeopleOrientationPanel);
+  // THEME ANALYSIS
+  AddPanel(new ThemeAnalysisPanel(main_frame_, wxID_ANY,
+                                  std::string("theme_analysis"),
+                                  std::string("Theme Analysis"),
+                                  wxDefaultPosition, wxDefaultSize, 0),
+           PanelId::kThemeAnalysisPanel);
 }
 
 // TODO(egeldenhuys): Check for invalid characters causing empty appearing

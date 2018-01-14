@@ -23,6 +23,7 @@
 #include "panels/details_panel.hpp"
 #include "panels/external_panel.hpp"
 #include "panels/priorities_panel.hpp"
+#include "panels/theme_analysis_panel.hpp"
 #include "panels/work_environment_panel.hpp"
 
 /**
@@ -58,7 +59,8 @@ class DataManager {
     kPrioritiesPanel = 9,
     kRolesPanel = 10,
     kPeopleOrientationPanel = 11,
-    kPanelCount = 12
+    kThemeAnalysisPanel = 12,
+    kPanelCount = 13
   };
 
   /**

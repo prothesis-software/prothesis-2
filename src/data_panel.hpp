@@ -15,7 +15,7 @@
 /**
  * Base class for all custom panels that store user data
  */
-class DataPanel : public wxPanel {
+class DataPanel : public wxScrolled<wxPanel> {
  public:
   DataPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
             std::string panel_title, const wxPoint& pos = wxDefaultPosition,
@@ -57,6 +57,11 @@ class DataPanel : public wxPanel {
    * Returns false if at end or not supported
    */
   virtual bool Next();
+
+  /**
+   * Called when the tab is activated in MainFrame
+   */
+  virtual void OnTabActivate();
 
  protected:
   std::string panel_name_;
