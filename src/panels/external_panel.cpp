@@ -114,6 +114,10 @@ std::shared_ptr<cpptoml::table> ExternalPanel::GetUserState() {
     }
   }
 
+  // career test
+  auto career_table = panel_career_->GetUserState();
+  panel_table->insert(panel_career_->GetPanelName(), career_table);
+
   if (keys_found > 0) {
     life_keys_table->insert("type", life_keys_table_array);
     panel_table->insert("life_keys", life_keys_table);
@@ -196,6 +200,8 @@ bool ExternalPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
       wxLogDebug(_("mbti array not found for external panel"));
     }
 
+    panel_career_->SetUserState(panel_table);
+
   } else {
     wxLogDebug(_("No GUI table exists for panel ") + _(this->GetPanelName()));
     wxLogDebug(_("ExternalPanel::SetUserState() END"));
@@ -261,13 +267,13 @@ void ExternalPanel::DoLayout() {
   wxBoxSizer* sizer_mbti = new wxBoxSizer(wxVERTICAL);
   wxBoxSizer* sizer_mbti_combo_boxes = new wxBoxSizer(wxHORIZONTAL);
   wxBoxSizer* sizer_career = new wxBoxSizer(wxVERTICAL);
-  wxPanel* panel_career = new wxPanel(this, wxID_ANY);
-  panel_career->SetBackgroundColour(wxColour(255, 0, 0));
-  panel_career->SetMinSize(wxSize(200, 300));
-  sizer_career->Add(panel_career, 0, wxEXPAND, 0);
+
+  panel_career_ =
+      new CareerTestPanel(this, wxID_ANY, "career_test", "Career Test");
+  sizer_career->Add(panel_career_, 0, wxEXPAND | wxALL, 5);
 
   wxStaticText* label_mbti = new wxStaticText(this, wxID_ANY, _("MBTI"));
-  sizer_mbti->Add(label_mbti, 0, wxALIGN_BOTTOM, 0);
+  sizer_mbti->Add(label_mbti, 0, wxALIGN_BOTTOM | wxALL, 5);
 
   std::vector<wxArrayString> mbti_tuples;
   AddMbtiTuple(&mbti_tuples, "I", "E");
@@ -288,10 +294,10 @@ void ExternalPanel::DoLayout() {
   sizer_keys_->Add(label_keys, 0, wxALIGN_BOTTOM, 0);
 
   sizer_mbti_keys->Add(sizer_mbti, 0, wxBOTTOM, 20);
-  sizer_mbti_keys->Add(sizer_keys_, 0, 0, 0);
+  sizer_mbti_keys->Add(sizer_keys_, 0, wxALL, 0);
 
-  sizer->Add(sizer_mbti_keys, 0, 0, 0);
-  sizer->Add(sizer_career, 0, 0, 0);
+  sizer->Add(sizer_mbti_keys, 0, wxALL, 5);
+  sizer->Add(sizer_career, 0, wxALL, 5);
 
   Layout();
   this->SetSizer(sizer);
