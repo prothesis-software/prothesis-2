@@ -226,7 +226,7 @@
 
     [[external.life_keys.type]]
     key = "Artistic"
-    title = "The Artistic Type: \"Let’s create!\""
+    title = "The Artistic Type: \"Let's create!\""
     characteristics = [
       "They are the original type",
       "They like to do things differently",
@@ -253,7 +253,7 @@
 
     [[external.life_keys.type]]
     key = "Conventional"
-    title = "The Conventional Type: \"Let’s be dependable!\""
+    title = "The Conventional Type: \"Let's be dependable!\""
     characteristics = [
       "They are the practical type",
       "They like to do things in a pragmatic and methodical fashion",
@@ -279,13 +279,13 @@
 
     [[external.life_keys.type]]
     key = "Realistic"
-    title = "The Realistic Type: \"Let’s roll up our sleeves and get the job done!\""
+    title = "The Realistic Type: \"Let's roll up our sleeves and get the job done!\""
     characteristics = [
       "They are the outdoor type",
       "They tend to be athletic and loves to participate in sport",
       "They like to do things with their hands",
       "They are highly efficient with mechanical activities",
-      "They may appear to be ‘loners’",
+      "They may appear to be ‘loners'",
       "They like small groups of people"
     ]
     work_environments = [
@@ -299,21 +299,21 @@
       "Operating (heavy) equipment",
       "Driving or piloting",
       "Building mechanical/structural devices",
-      "Sport or activities where they can use their ‘ball sense’",
+      "Sport or activities where they can use their ‘ball sense'",
       "Organising supplies or implements",
       "Taking physical risks"
     ]
 
     [[external.life_keys.type]]
     key = "Investigative"
-    title = "The Investigative Type: \"Let’s figure this out!\""
+    title = "The Investigative Type: \"Let's figure this out!\""
     characteristics = [
       "They are the curious type",
       "They tend to be rational and analytical",
       "They like intellectual pursuits",
       "They like it if things make logically sense",
       "They are introspective by nature",
-      "They may appear to be ‘loners’",
+      "They may appear to be ‘loners'",
       "They like small groups of people"
     ]
     work_environments = [
@@ -334,7 +334,7 @@
 
     [[external.life_keys.type]]
     key = "Social"
-    title = "The Social Type: \"Let’s work together!\""
+    title = "The Social Type: \"Let's work together!\""
     characteristics = [
       "They are the helpful type",
       "They tend to be cooperative",
@@ -355,14 +355,14 @@
       "Listening and facilitating",
       "Understanding or counseling others",
       "Serving others",
-      "Evaluating people’s characters",
+      "Evaluating people's characters",
       "Showing empathy and tact",
       "Working with others"
     ]
 
     [[external.life_keys.type]]
     key = "Enterprising"
-    title = "The Enterprising Type: \"Let’s get going!\""
+    title = "The Enterprising Type: \"Let's get going!\""
     characteristics = [
       "They are the persuasive type",
       "They tend to be self confident",
@@ -854,7 +854,7 @@
 
   [[roles.question]]
   question = "Marketer"
-  tooltip = "You know how to persuade people to believe in anything that you’re selling: products, ideas etc."
+  tooltip = "You know how to persuade people to believe in anything that you're selling: products, ideas etc."
 
   [[roles.question]]
   question = "Mentor"
@@ -922,13 +922,13 @@
   options =["interested in this area, you would probably enjo","Taking photos for a magazine or newspaper","Drawing and designing buildings","Decorating the interior of houses","Creating works of art","Designing clothes"]
   [[career_orientation.question]]
   title = "Performing Arts"
-  options =["Learning to play a musical instrument","Acting in a play or film","Dancing and singing in a musical","Directing a TV series or film","Selecting and playing popular CD’s at a radio station"]
+  options =["Learning to play a musical instrument","Acting in a play or film","Dancing and singing in a musical","Directing a TV series or film","Selecting and playing popular CD's at a radio station"]
   [[career_orientation.question]]
   title = "Marketing & Direct Sales"
   options =["Selling goods from door to door","Purchasing and selling anything","Making purchases on behalf of a shop or business","Studying the needs of consumers","Introducing consumers to new products"]
   [[career_orientation.question]]
   title = "Management & Planning"
-  options =["Supervising the activities of people","Influencing others to accept your point of view","Planning other people’s work","Managing a big project or task","Acting as the leader of a group of people"]
+  options =["Supervising the activities of people","Influencing others to accept your point of view","Planning other people's work","Managing a big project or task","Acting as the leader of a group of people"]
   [[career_orientation.question]]
   title = "Clerical & Secretarial"
   options =["Doing routine tasks","Typing business letters and reports","Filing documents","Receiving and sending off documents and parcels","Arranging appointment"]
