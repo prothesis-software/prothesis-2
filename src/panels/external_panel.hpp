@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 
+#include "src/career_test_panel.hpp"
 #include "src/data_panel.hpp"
 
 #define CHOICE_BOX_KEYS_COUNT 3
@@ -64,5 +65,6 @@ class ExternalPanel : public DataPanel {
   wxBoxSizer* sizer_keys_ = NULL;
   wxChoice* choice_boxes_keys_[CHOICE_BOX_KEYS_COUNT];
   wxChoice* choice_boxes_mbti_[4];
+  CareerTestPanel* panel_career_ = NULL;
 };
 #endif  // PANELS_EXTERNAL_PANEL_HPP_
