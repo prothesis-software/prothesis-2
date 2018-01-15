@@ -289,6 +289,7 @@ void PrioritiesPanel::OnButtonMoveDownClick(wxCommandEvent& event) {
 
 void PrioritiesPanel::DoLayout() {
   wxFlexGridSizer* sizer = new wxFlexGridSizer(1, 3, 0, 0);
+  wxBoxSizer* sizer_content = new wxBoxSizer(wxHORIZONTAL);
 
   // Sorted
   wxBoxSizer* sizer_sorted = new wxBoxSizer(wxVERTICAL);
@@ -297,8 +298,6 @@ void PrioritiesPanel::DoLayout() {
   sizer_sorted->Add(label_sorted, 0, wxALIGN_CENTER, 0);
   sizer_sorted->Add(list_sorted_, 0, 0, 0);
   GetItemHeight(list_sorted_);
-
-  sizer->Add(sizer_sorted, 0, 0, 0);
 
   // Controls
   wxBoxSizer* sizer_controls_h = new wxBoxSizer(wxHORIZONTAL);
@@ -342,11 +341,6 @@ void PrioritiesPanel::DoLayout() {
                          this);
   sizer_controls->Add(button_move_down, 0, wxEXPAND, 0);
   sizer_controls_h->Add(sizer_controls, 0, wxALIGN_CENTER, 0);
-  sizer->Add(sizer_controls_h, 0, wxALIGN_CENTER, 0);
-
-  // Required to center the controls sizer
-  sizer->AddGrowableRow(0);
-  sizer->AddGrowableCol(1);
 
   // Unsorted
   wxBoxSizer* sizer_unsorted = new wxBoxSizer(wxVERTICAL);
@@ -359,7 +353,18 @@ void PrioritiesPanel::DoLayout() {
   sizer_unsorted_lists->Add(list_unsorted_2_, 1, wxEXPAND, 0);
   sizer_unsorted->Add(sizer_unsorted_lists, 0, 0, 0);
 
-  sizer->Add(sizer_unsorted, 0, 0, 0);
+  sizer_content->Add(sizer_sorted, 0, 0, 0);
+  sizer_content->Add(sizer_controls_h, 0, wxALIGN_CENTER | wxALL, 10);
+  sizer_content->Add(sizer_unsorted, 0, 0, 0);
+
+  sizer->Add(0, 0, 0, 0);
+  sizer->Add(sizer_content, 0, 0, 0);
+  sizer->Add(0, 0, 0, 0);
+
+  // Required to center the controls sizer
+  sizer->AddGrowableCol(0);
+  sizer->AddGrowableCol(2);
+
   this->SetSizer(sizer);
   Layout();
 }
