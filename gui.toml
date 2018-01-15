@@ -915,9 +915,65 @@
   [career_orientation]
 
   [[career_orientation.question]]
-  title = "Clerical"
-  options = ["pie", "fruit", "veggies"]
-
+  title = "Language & Communication"
+  options = ["Writing for a newspaper", "Doing translations", "Reading news reports on the radio or TV", "Writing stories or poetry", "Writing advertisements and scripts for TV, film and radio commercials"]
   [[career_orientation.question]]
-  title = "Healthcare"
-  options = ["1111", "2222", "3333"]
+  title = "Applied/Visual Arts"
+  options =["interested in this area, you would probably enjo","Taking photos for a magazine or newspaper","Drawing and designing buildings","Decorating the interior of houses","Creating works of art","Designing clothes"]
+  [[career_orientation.question]]
+  title = "Performing Arts"
+  options =["Learning to play a musical instrument","Acting in a play or film","Dancing and singing in a musical","Directing a TV series or film","Selecting and playing popular CD’s at a radio station"]
+  [[career_orientation.question]]
+  title = "Marketing & Direct Sales"
+  options =["Selling goods from door to door","Purchasing and selling anything","Making purchases on behalf of a shop or business","Studying the needs of consumers","Introducing consumers to new products"]
+  [[career_orientation.question]]
+  title = "Management & Planning"
+  options =["Supervising the activities of people","Influencing others to accept your point of view","Planning other people’s work","Managing a big project or task","Acting as the leader of a group of people"]
+  [[career_orientation.question]]
+  title = "Clerical & Secretarial"
+  options =["Doing routine tasks","Typing business letters and reports","Filing documents","Receiving and sending off documents and parcels","Arranging appointment"]
+  [[career_orientation.question]]
+  title = "Numerical & Financial Transactions"
+  options =["Working with figures most of the time","Keeping careful record of financial transactions","Checking the financial statements of a company","Drawing up the budget of a business","Keeping record of the costs of a shop"]
+  [[career_orientation.question]]
+  title = "Nature (Plants & Animals)"
+  options =["Working on a farm with crops or cattle","Preparing a vegetable garden","Looking after animals","Working in a nursery","Trying to conserve the environment"]
+  [[career_orientation.question]]
+  title = "Building & Construction"
+  options =["Planning and overseeing building projects","Preparing estimates of the costs involved in constructing a building","Tiling floors of buildings and houses","Building and repairing houses","Construction of big buildings and roads"]
+  [[career_orientation.question]]
+  title = "Manufacturing, Repairing and Servicing Machines"
+  options =["Fixing the engine of a motor car","Installing and repairing things that work with electricity","Mending broken things","Doing woodwork or other handwork","Using technical tools"]
+  [[career_orientation.question]]
+  title = "Engineering & Related Technologies"
+  options =["Designing mechanical equipment","Manufacturing and maintaining electrical/electronic equipment","Designing and manufacturing systems and components in the telecommunication area","Monitoring and operating instruments (e.g. electronic, mechanical etc.) and systems","Manufacturing and installing technical instruments"]
+  [[career_orientation.question]]
+  title = "Information Technology/Computer Science"
+  options =["Writing computer programs","Developing data bases","Developing systems to solve problems with the help of computers","Designing and installing computer equipment","Design and implement computer systems"]
+  [[career_orientation.question]]
+  title = "Natural Science & Mathematics"
+  options =["Conducting experiments in a science laboratory","Studying plants or animals","Using knowledge of maths and statistics in your work","Studying physical or chemistry science matters","Using a microscope"]
+  [[career_orientation.question]]
+  title = "Health Science & Technology"
+  options =["Treating people with ailments or injuries","Mixing and preparing medicine","Studying the causes of diseases","Treating animals with ailments"]
+  [[career_orientation.question]]
+  title = "Social & Economic Sciences"
+  options =["Studying the behavior of humans","Analysing and describing economic issues","Reading history books","Studying the culture and life style of human societies","Conducting public opinion surveys and interpreting the results"]
+  [[career_orientation.question]]
+  title = "Law"
+  options =["Presenting cases in court","Speaking in public","Studying legislation documents","Identifying facts from irrelevant detail"]
+  [[career_orientation.question]]
+  title = "Education & Social Services"
+  options =["Helping people with their problems","Looking after children","Doing voluntary work in poverty stricken communities","Attending to the spiritual needs of people"]
+  [[career_orientation.question]]
+  title = "Nursing & Caring"
+  options =["Caring for the sick","Giving first aid to people","Working as a nurse in a hospital","Assisting physically disabled people to function independently","Attending to the needs of babies or small children"]
+  [[career_orientation.question]]
+  title = "Sport"
+  options =["Training people to play sport","Demonstrating exercises to help people keep fit","Organizing and coordinating sports events","Officiating at a sport event (rugby, soccer, tennis, etc.)","Taking part in competitive sports events to become a professional"]
+  [[career_orientation.question]]
+  title = "Law Enforcement & Protection Services"
+  options =["Protecting the country","Maintaining law and order","Ensuring that people obey the traffic rules","Working as a guard at a prison","Protecting buildings against fire"]
+  [[career_orientation.question]]
+  title = "Personal Services"
+  options =["Looking after the needs and comfort of passengers in an airplane","Rendering catering services","Offering and maintaining cleaning services for big companies","Transporting people by bus or car","Running a guest house"]
