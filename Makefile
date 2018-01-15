@@ -3,7 +3,7 @@
 ######
 #	DEBUG=[0|1]
 
-PROTHESIS_VERSION=2.0.0-dev.1
+PROTHESIS_VERSION=2.0.0-dev.2
 
 CXXFLAGS=-std=c++11 -I. -Werror -Wall -pedantic -Wno-write-strings
 
@@ -48,10 +48,7 @@ WX_CONFIG_FLAGS_LINK_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode
 clang-format:
 	-clang-format -i --style=file src/* src/panels/*
 
-deploy: all package-linux package-windows
-	@echo "Done"
-
-all: linux windows
+package: package-linux package-windows
 	@echo "Done"
 
 get-deps:
@@ -85,7 +82,7 @@ linux: lint apply_gui_config ${OBJECT_FILES_LINUX}
 
 package-linux: build/prothesis-2 gui.toml
 	mkdir -p /tmp/${PACKAGE_LINUX_NAME}
-	cp build/prothesis-2 gui.toml /tmp/${PACKAGE_LINUX_NAME}
+	cp build/prothesis-2 gui.toml CHANGELOG.md LICENSE.md /tmp/${PACKAGE_LINUX_NAME}
 	cd build && tar -czvf ${PACKAGE_LINUX_NAME}.tar.gz  -C /tmp ${PACKAGE_LINUX_NAME}
 	rm -fr /tmp/${PACKAGE_LINUX_NAME}
 
@@ -111,6 +108,6 @@ windows: lint apply_gui_config ${SOURCE_FILES} build/resources.o ${OBJECT_FILES_
 
 package-windows: build/prothesis-2.exe gui.toml
 	mkdir -p /tmp/${PACKAGE_WINDOWS_NAME}
-	cp build/prothesis-2.exe gui.toml /tmp/${PACKAGE_WINDOWS_NAME}
+	cp build/prothesis-2.exe gui.toml CHANGELOG.md LICENSE.md /tmp/${PACKAGE_WINDOWS_NAME}
 	cd build && bsdtar -acf ${PACKAGE_WINDOWS_NAME}.zip -C /tmp ${PACKAGE_WINDOWS_NAME}
 	rm -fr /tmp/${PACKAGE_WINDOWS_NAME}
