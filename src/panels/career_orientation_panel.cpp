@@ -133,7 +133,11 @@ std::shared_ptr<cpptoml::table> CareerOrientationPanel::GetUserState() {
       cpptoml::make_table_array();
 
   // C; Insert each question/answer pair into questions_array
-
+  for (size_t i = 0; i < titles.size(); i++) {
+    std::shared_ptr<cpptoml::table> table = cpptoml::make_table();
+    table->insert("title", titles[i]);
+    questions_array->push_back(table);
+  }
   // D; Insert table_array back into panel_data
   panel_data->insert("question", questions_array);
   return panel_data;
