@@ -98,10 +98,9 @@ bool CareerOrientationPanel::SetUserState(
   if (panel_table != NULL && !panel_table->empty()) {
     std::shared_ptr<cpptoml::table_array> question_array =
         panel_table->get_table_array("question");
-
     for (const auto &question_table : *question_array) {
-      auto question = question_table->get_as<std::string>("question");
-      auto options = panel_table->get_array_of<std::string>("options");
+      auto question = question_table->get_as<std::string>("title");
+      auto options = question_table->get_array_of<std::string>("options");
       if (options) {
         if (question) {
           SetAnswer(*question, *options);
@@ -119,7 +118,18 @@ bool CareerOrientationPanel::SetUserState(
 
 bool CareerOrientationPanel::SetAnswer(std::string question,
                                        std::vector<std::string> options) {
-  for (std::string x : options) std::cout << x << std::endl;
+  size_t i = 0;
+  for (std::string title : titles) {
+    if (title == question) {
+      for (std::string option : options)
+        for (size_t j = 0; j < checkboxes[i]->GetCount(); j++) {
+          if (option == checkboxes[i]->GetString(j).ToStdString())
+            checkboxes[i]->Check(j);
+        }
+    }
+
+    i++;
+  }
   return true;
 }
 
@@ -136,6 +146,14 @@ std::shared_ptr<cpptoml::table> CareerOrientationPanel::GetUserState() {
   for (size_t i = 0; i < titles.size(); i++) {
     std::shared_ptr<cpptoml::table> table = cpptoml::make_table();
     table->insert("title", titles[i]);
+    // C2; Insert all the options.
+    wxCheckListBox *box = checkboxes[i];
+    auto options_array = cpptoml::make_array();
+    for (size_t j = 0; j < box->GetCount(); j++) {
+      if (box->IsChecked(j))
+        options_array->push_back(box->GetString(j).ToStdString());
+    }
+    table->insert("options", options_array);
     questions_array->push_back(table);
   }
   // D; Insert table_array back into panel_data
