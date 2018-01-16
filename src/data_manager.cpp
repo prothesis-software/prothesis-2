@@ -95,6 +95,11 @@ void DataManager::DeclarePanels() {
                                   std::string("Theme Analysis"),
                                   wxDefaultPosition, wxDefaultSize, 0),
            PanelId::kThemeAnalysisPanel);
+  // CAREER ORIENTATION
+  AddPanel(new CareerOrientationPanel(assessments_window_, wxID_ANY,
+                                      std::string("career_orientation"),
+                                      std::string("Career Orientation")),
+           PanelId::kCareerOrientationPanel);
 }
 
 // TODO(egeldenhuys): Check for invalid characters causing empty appearing

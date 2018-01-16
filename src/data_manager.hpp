@@ -20,11 +20,12 @@
 #include "checkbox_panel.hpp"
 #include "questions_panel.hpp"
 
+#include "panels/career_orientation_panel.hpp"
 #include "panels/details_panel.hpp"
 #include "panels/external_panel.hpp"
 #include "panels/priorities_panel.hpp"
-#include "panels/theme_analysis_panel.hpp"
 #include "panels/work_environment_panel.hpp"
+#include "panels/theme_analysis_panel.hpp"
 
 /**
  * The Data Manager class is responsible for storing reference
@@ -59,8 +60,9 @@ class DataManager {
     kPrioritiesPanel = 9,
     kRolesPanel = 10,
     kPeopleOrientationPanel = 11,
-    kThemeAnalysisPanel = 12,
-    kPanelCount = 13
+    kCareerOrientationPanel = 12,
+    kThemeAnalysisPanel = 13,
+    kPanelCount = 14
   };
 
   /**

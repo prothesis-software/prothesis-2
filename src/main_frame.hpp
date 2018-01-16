@@ -41,6 +41,7 @@ class MainFrame : public wxFrame {
   wxNotebook* notebook_ = NULL;
   wxNotebook* notebook_assessments_ = NULL;
   wxFlexGridSizer* sizer_main_frame_ = NULL;
+  wxFlexGridSizer* sizer_content_ = NULL;
   wxPanel* panel_main_ = NULL;
   bool exit_requested_ = false;
 
