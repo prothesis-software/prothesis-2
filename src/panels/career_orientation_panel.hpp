@@ -35,5 +35,6 @@ class CareerOrientationPanel : public PagedPanel {
 
  private:
   std::vector<wxCheckListBox *> checkboxes;
+  std::vector<std::string> titles;
 };
 #endif  // PANELS_CAREER_ORIENTATION_PANEL_HPP_

@@ -20,6 +20,8 @@ CareerOrientationPanel::CareerOrientationPanel(wxWindow *parent, wxWindowID id,
 wxPanel *CareerOrientationPanel::CreateInternalPanel(
     std::string question, std::vector<std::string> options) {
   wxPanel *panel = new wxPanel();
+  this->titles.push_back(question);
+
   panel->SetBackgroundStyle(wxBG_STYLE_SYSTEM);
   panel->Create(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
@@ -123,20 +125,17 @@ bool CareerOrientationPanel::SetAnswer(std::string question,
 
 std::shared_ptr<cpptoml::table> CareerOrientationPanel::GetUserState() {
   wxLogDebug("CareerOrientationPanel::GetUserState()");
+  // A; Create a table for the panel.
   std::shared_ptr<cpptoml::table> panel_data = cpptoml::make_table();
 
-  std::shared_ptr<cpptoml::table_array> question_array =
+  // B; Create a table array containing questions & answer pairs.
+  std::shared_ptr<cpptoml::table_array> questions_array =
       cpptoml::make_table_array();
 
-  for (size_t i = 0; i < 10; i++) {
-    // Create a question answer pair
-    std::shared_ptr<cpptoml::table> question_table = cpptoml::make_table();
-    question_table->insert("answer", "oke");
-    question_table->insert("question", "oke");
-    question_array->push_back(question_table);
-  }
+  // C; Insert each question/answer pair into questions_array
 
-  panel_data->insert("question", question_array);
+  // D; Insert table_array back into panel_data
+  panel_data->insert("question", questions_array);
   return panel_data;
 }
 
