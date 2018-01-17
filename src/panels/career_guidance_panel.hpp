@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 
+#include "src/components/life_keys_info_panel.hpp"
 #include "src/data_panel.hpp"
 #include "src/mbti_panel.hpp"
 #include "src/panels/external_panel.hpp"
@@ -35,6 +36,13 @@ class CareerGuidancePanel : public DataPanel {
 
  private:
   void DoLayout();
+
+  /**
+   * Load the life key data from the GUI state
+   */
+  void GetLifeKeyData(std::shared_ptr<cpptoml::table> gui_state);
+
   MbtiPanel* panel_mbti_ = NULL;
+  LifeKeysInfoPanel* panel_life_keys_ = NULL;
 };
 #endif  // PANELS_CAREER_GUIDANCE_PANEL_HPP_

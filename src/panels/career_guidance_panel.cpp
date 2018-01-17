@@ -21,9 +21,12 @@ void CareerGuidancePanel::OnTabActivate() {
   ExternalPanel* external_panel =
       static_cast<ExternalPanel*>(GetPanelByName("external"));
   panel_mbti_->SetMbti(external_panel->GetMbti());
+
+  panel_life_keys_->SetLifeKeys(external_panel->GetLifeKeys());
 }
 
 bool CareerGuidancePanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
+  panel_life_keys_->SetLifeKeyData(state);
   return false;
 }
 
@@ -39,8 +42,11 @@ void CareerGuidancePanel::DoLayout() {
   wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
   panel_mbti_ = new MbtiPanel(this, wxID_ANY);
+  panel_life_keys_ = new LifeKeysInfoPanel(this, wxID_ANY);
 
   sizer->Add(panel_mbti_, 0, 0, 0);
+  sizer->Add(panel_life_keys_, 0, 0, 0);
+
   this->SetSizer(sizer);
   Layout();
 }
