@@ -26,6 +26,7 @@
 #include "panels/priorities_panel.hpp"
 #include "panels/work_environment_panel.hpp"
 #include "panels/theme_analysis_panel.hpp"
+#include "panels/career_guidance_panel.hpp"
 
 /**
  * The Data Manager class is responsible for storing reference
@@ -62,7 +63,8 @@ class DataManager {
     kPeopleOrientationPanel = 11,
     kCareerOrientationPanel = 12,
     kThemeAnalysisPanel = 13,
-    kPanelCount = 14
+    kCareerGuidancePanel = 14,
+    kPanelCount = 15
   };
 
   /**
