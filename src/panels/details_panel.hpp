@@ -33,6 +33,7 @@ class DetailsPanel : public DataPanel {
  protected:
   wxTextCtrl* text_ctrl_name_;
   wxTextCtrl* text_ctrl_surname_;
+  wxTextCtrl* text_email_address_ = NULL;
   wxSpinCtrl* spin_ctrl_age_;
   wxDatePickerCtrl* datepicker_ctrl_;
 };
