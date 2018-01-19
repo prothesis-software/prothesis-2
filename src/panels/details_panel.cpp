@@ -9,6 +9,7 @@ DetailsPanel::DetailsPanel(wxWindow* parent, wxWindowID id,
                            int64_t style)
     : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   wxLogDebug("DetailsPanel::DetailsPanel() START");
+  text_email_address_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   text_ctrl_name_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   text_ctrl_surname_ = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
   spin_ctrl_age_ = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
@@ -22,54 +23,13 @@ DetailsPanel::DetailsPanel(wxWindow* parent, wxWindowID id,
   wxLogDebug("DetailsPanel::DetailsPanel() END");
 }
 
+DetailsPanel::~DetailsPanel() { wxLogDebug("DetailsPanel::~DetailsPanel()"); }
+
 void DetailsPanel::SetProperties() {
   text_ctrl_name_->SetMinSize(wxSize(150, -1));
   text_ctrl_surname_->SetMinSize(wxSize(200, -1));
 }
 
-void DetailsPanel::DoLayout() {
-  wxLogDebug("DetailsPanel::DoLayout() START");
-  const int kPanelBorderSize = 10;
-
-  wxFlexGridSizer* details_grid_sizer = new wxFlexGridSizer(6, 4, 7, 25);
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-  wxStaticText* label_name = new wxStaticText(this, wxID_ANY, _("Name"));
-  details_grid_sizer->Add(label_name, 0, wxTOP | wxLEFT, kPanelBorderSize);
-  wxStaticText* label_surname = new wxStaticText(this, wxID_ANY, _("Surname"));
-  details_grid_sizer->Add(label_surname, 0, wxTOP | wxRIGHT, kPanelBorderSize);
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-  details_grid_sizer->Add(text_ctrl_name_, 0, wxLEFT, kPanelBorderSize);
-  details_grid_sizer->Add(text_ctrl_surname_, 0, wxRIGHT, kPanelBorderSize);
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-
-  wxStaticText* label_age = new wxStaticText(this, wxID_ANY, _("Age"));
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-  details_grid_sizer->Add(label_age, 0, wxLEFT, kPanelBorderSize);
-
-  wxStaticText* label_date = new wxStaticText(this, wxID_ANY, _("Date"));
-  details_grid_sizer->Add(label_date, 0, wxRIGHT, kPanelBorderSize);
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-  details_grid_sizer->Add(spin_ctrl_age_, 0, wxLEFT, kPanelBorderSize);
-  details_grid_sizer->Add(datepicker_ctrl_, 0, wxRIGHT, kPanelBorderSize);
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-  details_grid_sizer->Add(0, 0, 0, 0, 0);
-  details_grid_sizer->Add(0, 0, 0, 0);
-  details_grid_sizer->Add(0, 0, 0, 0);  // Center float
-
-  details_grid_sizer->AddGrowableCol(0);
-  details_grid_sizer->AddGrowableCol(3);
-  details_grid_sizer->AddGrowableRow(5);
-  this->SetSizer(details_grid_sizer);
-  Layout();
-  details_grid_sizer->Fit(this);
-  wxLogDebug("DetailsPanel::DoLayout() END");
-}
 
 bool DetailsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   wxLogDebug(wxT("DetailsPanel does not use a GUI config."));
@@ -87,6 +47,7 @@ std::shared_ptr<cpptoml::table> DetailsPanel::GetUserState() {
   panel_data->insert("age", spin_ctrl_age_->GetValue());
   panel_data->insert(
       "date", datepicker_ctrl_->GetValue().FormatISODate().ToStdString());
+  panel_data->insert("email", text_email_address_->GetValue().ToStdString());
   return panel_data;
 }
 
@@ -119,6 +80,11 @@ bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
       spin_ctrl_age_->SetValue(*age);
     }
 
+    auto email = details_table->get_as<std::string>("email");
+    if (email) {
+      text_email_address_->SetValue(*email);
+    }
+
     return true;
   } else {
     wxLogDebug("No table exists for DetailsPanel");
@@ -126,4 +92,74 @@ bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   }
 }
 
-DetailsPanel::~DetailsPanel() { wxLogDebug("DetailsPanel::~DetailsPanel()"); }
+
+
+void DetailsPanel::DoLayout() {
+  wxLogDebug("DetailsPanel::DoLayout() START");
+
+  const size_t kRowBorder = 10;
+
+  wxFlexGridSizer* details_grid_sizer = new wxFlexGridSizer(1, 3, 6, 26);
+
+  wxStaticText* label_name =
+      new wxStaticText(this, wxID_ANY, _("Name"), wxDefaultPosition,
+                       wxDefaultSize, wxALIGN_BOTTOM);
+  wxStaticText* label_surname =
+      new wxStaticText(this, wxID_ANY, _("Surname"), wxDefaultPosition,
+                       wxDefaultSize, wxALIGN_BOTTOM);
+  wxStaticText* label_age = new wxStaticText(this, wxID_ANY, _("Age"));
+  wxStaticText* label_date = new wxStaticText(this, wxID_ANY, _("Date"));
+  wxStaticText* label_email = new wxStaticText(this, wxID_ANY, "Email");
+
+  wxBoxSizer* sizer_content = new wxBoxSizer(wxVERTICAL);
+
+  wxBoxSizer* sizer_body = new wxBoxSizer(wxHORIZONTAL);
+
+  wxBoxSizer* sizer_col_left = new wxBoxSizer(wxVERTICAL);
+
+  wxBoxSizer* sizer_name = new wxBoxSizer(wxVERTICAL);
+  sizer_name->Add(label_name, 0, 0, 0);
+  sizer_name->Add(text_ctrl_name_, 0, 0, 0);
+
+  wxBoxSizer* sizer_age = new wxBoxSizer(wxVERTICAL);
+  sizer_age->Add(label_age);
+  sizer_age->Add(spin_ctrl_age_, 0, wxEXPAND);
+
+  sizer_col_left->Add(sizer_name, 0, wxALL, kRowBorder);
+  sizer_col_left->Add(sizer_age, 0, wxALL | wxEXPAND, kRowBorder);
+
+  wxBoxSizer* sizer_col_right = new wxBoxSizer(wxVERTICAL);
+
+  wxBoxSizer* sizer_surname = new wxBoxSizer(wxVERTICAL);
+  sizer_surname->Add(label_surname);
+  sizer_surname->Add(text_ctrl_surname_);
+
+  wxBoxSizer* sizer_date = new wxBoxSizer(wxVERTICAL);
+  sizer_date->Add(label_date);
+  sizer_date->Add(datepicker_ctrl_, 0, wxEXPAND | wxALIGN_RIGHT);
+
+  sizer_col_right->Add(sizer_surname, 0, wxALL, kRowBorder);
+  sizer_col_right->Add(sizer_date, 0, wxEXPAND | wxALL, kRowBorder);
+
+  sizer_body->Add(sizer_col_left);
+  sizer_body->Add(sizer_col_right);
+
+  wxBoxSizer* sizer_email = new wxBoxSizer(wxVERTICAL);
+  sizer_email->Add(label_email);
+  sizer_email->Add(text_email_address_, 1, wxEXPAND);
+
+  sizer_content->Add(sizer_body);
+  sizer_content->Add(sizer_email, 1, wxEXPAND | wxALL, kRowBorder);
+
+  details_grid_sizer->Add(0, 0, 0, 0);
+  details_grid_sizer->Add(sizer_content, 0, wxEXPAND, 0);
+  details_grid_sizer->Add(0, 0, 0, 0);
+
+  details_grid_sizer->AddGrowableCol(0);
+  details_grid_sizer->AddGrowableCol(2);
+
+  this->SetSizer(details_grid_sizer);
+  Layout();
+  details_grid_sizer->Fit(this);
+  wxLogDebug("DetailsPanel::DoLayout() END");
+}
