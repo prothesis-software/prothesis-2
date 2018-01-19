@@ -24,8 +24,8 @@
 #include "panels/details_panel.hpp"
 #include "panels/external_panel.hpp"
 #include "panels/priorities_panel.hpp"
-#include "panels/work_environment_panel.hpp"
 #include "panels/theme_analysis_panel.hpp"
+#include "panels/work_environment_panel.hpp"
 
 /**
  * The Data Manager class is responsible for storing reference

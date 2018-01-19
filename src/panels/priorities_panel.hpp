@@ -15,6 +15,8 @@
 
 #include "src/data_panel.hpp"
 
+#define MAX_SELECTED_ITEMS 7
+
 class PrioritiesPanel : public DataPanel {
  public:
   PrioritiesPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
@@ -76,7 +78,8 @@ class PrioritiesPanel : public DataPanel {
 
   /**
    * Find the given string in the unsorted lists and move it
-   * to the sorted list at the end
+   * to the sorted list at the end.
+   * Used during SetUserState()
    */
   bool MoveItemToSorted(std::string item);
 
@@ -88,7 +91,7 @@ class PrioritiesPanel : public DataPanel {
 
   /**
    * Move the selected item from a unsorted list to the sorted list
-   * and select it
+   * and select it. Used with the control buttons.
    */
   bool AddSelectedItemToSorted();
 
@@ -101,7 +104,11 @@ class PrioritiesPanel : public DataPanel {
   wxListBox* list_unsorted_2_ = NULL;
   wxListBox* list_sorted_ = NULL;
   wxListBox* unsorted_lists_[2];
+  wxStaticText* label_limit_ = NULL;
+  wxButton* button_add_sorted_ = NULL;
   int item_height_ = -1;
+
+  int selected_item_count_ = 0;
 };
 
 #endif  // PANELS_PRIORITIES_PANEL_HPP_

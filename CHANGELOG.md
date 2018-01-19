@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Career orientation panel (#76)
 - Added email address field to Details panel (#111)
+- Limit checkboxes and priorities to 7 (#120)
 
 ## [2.0.0-dev.2] - 2017-01-15
 ### Added

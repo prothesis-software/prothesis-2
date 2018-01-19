@@ -1,6 +1,7 @@
 #ifndef CHECKBOX_PANEL_HPP_
 #define CHECKBOX_PANEL_HPP_
 #define MAX_ITEMS 10
+#define MAX_CHECKED_ITEMS 7
 
 #include <wx/checkbox.h>
 
@@ -47,6 +48,9 @@ class CheckBoxPanel : public DataPanel {
   void DoLayout();
   void SetCheckboxStateByLabel(std::string label, bool checked);
   void OnCheckBoxListSelectionChange(wxCommandEvent& event);  // NOLINT
+  void OnCheckBoxChange(wxCommandEvent& event);               // NOLINT
+  int checked_item_count_ = 0;
+  wxStaticText* label_limit_ = NULL;
 
   /**
    * Create a new checkbox (unchecked) and add it to the panel

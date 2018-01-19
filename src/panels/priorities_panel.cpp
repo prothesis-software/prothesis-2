@@ -23,6 +23,9 @@ PrioritiesPanel::PrioritiesPanel(wxWindow* parent, wxWindowID id,
 
   list_sorted_ = new wxListBox(this, wxID_ANY, wxDefaultPosition,
                                wxSize(-1, -1), 0, NULL, wxLB_SINGLE);
+  label_limit_ = new wxStaticText(this, wxID_ANY, "HERE");
+  label_limit_->SetForegroundColour(wxColour(255, 0, 0));
+
   DoLayout();
 }
 
@@ -95,6 +98,20 @@ void PrioritiesPanel::AddUnsortedPriority(std::string priority) {
   best_list->InsertItems(1, new wxString(priority), best_list->GetCount());
 }
 
+void PrioritiesPanel::OnButtonMoveUpClick(wxCommandEvent& event) {
+  ChangeOrder(list_sorted_->GetSelection(), -1);
+}
+
+void PrioritiesPanel::OnButtonMoveDownClick(wxCommandEvent& event) {
+  ChangeOrder(list_sorted_->GetSelection(), 1);
+}
+
+void PrioritiesPanel::OnButtonAddClick(wxCommandEvent& event) {
+  if (AddSelectedItemToSorted()) {
+    list_sorted_->SetSelection(list_sorted_->GetCount() - 1);
+  }
+}
+
 void PrioritiesPanel::OnButtonRemoveClick(wxCommandEvent& event) {
   int index = list_sorted_->GetSelection();
 
@@ -102,6 +119,18 @@ void PrioritiesPanel::OnButtonRemoveClick(wxCommandEvent& event) {
     wxString item = list_sorted_->GetString(index);
     RemoveItemFromListBox(list_sorted_, index);
     AddUnsortedPriority(item.ToStdString());
+
+    label_limit_->SetLabel("");
+
+    if (selected_item_count_ > 0) {
+      selected_item_count_--;
+    }
+
+    if (selected_item_count_ < MAX_SELECTED_ITEMS) {
+      button_add_sorted_->Enable();
+    }
+
+    Layout();
   }
 }
 
@@ -200,6 +229,12 @@ bool PrioritiesPanel::MoveItemToSorted(std::string item) {
         list_sorted_->InsertItems(1, new wxString(item),
                                   list_sorted_->GetCount());
         RemoveItemFromListBox(unsorted_lists_[i], j);
+        selected_item_count_++;
+
+        if (selected_item_count_ >= 7) {
+          label_limit_->SetLabel("Limit of 7 has been reached");
+          button_add_sorted_->Disable();
+        }
         return true;
       }
     }
@@ -209,31 +244,39 @@ bool PrioritiesPanel::MoveItemToSorted(std::string item) {
 }
 
 bool PrioritiesPanel::AddSelectedItemToSorted() {
-  wxListBox* list_box = NULL;
-  int index = wxNOT_FOUND;
+  wxLogDebug("MOVE");
+  if (selected_item_count_ < MAX_SELECTED_ITEMS) {
+    wxListBox* list_box = NULL;
+    int index = wxNOT_FOUND;
 
-  if (list_unsorted_1_->GetSelection() != wxNOT_FOUND) {
-    list_box = list_unsorted_1_;
-  } else if (list_unsorted_2_->GetSelection() != wxNOT_FOUND) {
-    list_box = list_unsorted_2_;
-  }
+    if (list_unsorted_1_->GetSelection() != wxNOT_FOUND) {
+      list_box = list_unsorted_1_;
+    } else if (list_unsorted_2_->GetSelection() != wxNOT_FOUND) {
+      list_box = list_unsorted_2_;
+    }
 
-  if (list_box != NULL) {
-    index = list_box->GetSelection();
-    if (index != wxNOT_FOUND) {
-      wxString str = list_box->GetString(list_box->GetSelection());
-      list_sorted_->InsertItems(1, new wxString(str), list_sorted_->GetCount());
-      RemoveItemFromListBox(list_box, index);
-      return true;
+    if (list_box != NULL) {
+      index = list_box->GetSelection();
+      if (index != wxNOT_FOUND) {
+        wxString str = list_box->GetString(list_box->GetSelection());
+        list_sorted_->InsertItems(1, new wxString(str),
+                                  list_sorted_->GetCount());
+        RemoveItemFromListBox(list_box, index);
+
+        selected_item_count_++;
+
+        if (selected_item_count_ >= 7) {
+          label_limit_->SetLabel("Limit of 7 has been reached");
+          button_add_sorted_->Disable();
+        }
+
+        Layout();
+        return true;
+      }
     }
   }
-  return false;
-}
 
-void PrioritiesPanel::OnButtonAddClick(wxCommandEvent& event) {
-  if (AddSelectedItemToSorted()) {
-    list_sorted_->SetSelection(list_sorted_->GetCount() - 1);
-  }
+  return false;
 }
 
 void PrioritiesPanel::ChangeOrder(int index, int shift) {
@@ -279,16 +322,13 @@ void PrioritiesPanel::OnUnsortedListBoxSelectionChange(wxCommandEvent& event) {
   }
 }
 
-void PrioritiesPanel::OnButtonMoveUpClick(wxCommandEvent& event) {
-  ChangeOrder(list_sorted_->GetSelection(), -1);
-}
-
-void PrioritiesPanel::OnButtonMoveDownClick(wxCommandEvent& event) {
-  ChangeOrder(list_sorted_->GetSelection(), 1);
-}
-
 void PrioritiesPanel::DoLayout() {
-  wxFlexGridSizer* sizer = new wxFlexGridSizer(1, 3, 0, 0);
+  wxFlexGridSizer* sizer = new wxFlexGridSizer(2, 3, 0, 0);
+
+  sizer->Add(0, 0, 0, 0);
+  sizer->Add(label_limit_, 0, wxALIGN_CENTER, 0);
+  sizer->Add(0, 0, 0, 0);
+
   wxBoxSizer* sizer_content = new wxBoxSizer(wxHORIZONTAL);
 
   // Sorted
@@ -302,15 +342,15 @@ void PrioritiesPanel::DoLayout() {
   // Controls
   wxBoxSizer* sizer_controls_h = new wxBoxSizer(wxHORIZONTAL);
   wxBoxSizer* sizer_controls = new wxBoxSizer(wxVERTICAL);
-  wxButton* button_add_sorted =
+  button_add_sorted_ =
       new wxButton(this, wxID_ANY, _("Add to sorted"), wxDefaultPosition,
                    wxDefaultSize, wxBU_LEFT);
   // Errors when not included here
 #include "images/keyboard_arrow_left.xpm"
-  button_add_sorted->SetBitmap(wxBitmap(keyboard_arrow_left));
+  button_add_sorted_->SetBitmap(wxBitmap(keyboard_arrow_left));
 
-  button_add_sorted->Bind(wxEVT_BUTTON, &PrioritiesPanel::OnButtonAddClick,
-                          this);
+  button_add_sorted_->Bind(wxEVT_BUTTON, &PrioritiesPanel::OnButtonAddClick,
+                           this);
   wxButton* button_remove_sorted =
       new wxButton(this, wxID_ANY, _("Remove from sorted"), wxDefaultPosition,
                    wxDefaultSize, wxBU_LEFT);
@@ -318,7 +358,7 @@ void PrioritiesPanel::DoLayout() {
   button_remove_sorted->SetBitmap(wxBitmap(keyboard_arrow_right));
   button_remove_sorted->Bind(wxEVT_BUTTON,
                              &PrioritiesPanel::OnButtonRemoveClick, this);
-  sizer_controls->Add(button_add_sorted, 0, wxEXPAND, 0);
+  sizer_controls->Add(button_add_sorted_, 0, wxEXPAND, 0);
   sizer_controls->Add(button_remove_sorted, 0, wxEXPAND, 0);
   sizer_controls->AddSpacer(10);
 
