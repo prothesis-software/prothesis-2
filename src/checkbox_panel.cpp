@@ -8,7 +8,12 @@ CheckBoxPanel::CheckBoxPanel(wxWindow* parent, wxWindowID id,
                              const wxPoint& pos, const wxSize& size,
                              int64_t style)
     : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
+  label_limit_ = new wxStaticText(this, wxID_ANY, "");
+  label_limit_->SetForegroundColour(wxColour(255, 0, 0));
+  // label_limit_->Hide();
+
   DoLayout();
+  this->Bind(wxEVT_CHECKLISTBOX, &CheckBoxPanel::OnCheckBoxChange, this);
 }
 
 CheckBoxPanel::~CheckBoxPanel() {
@@ -138,23 +143,28 @@ void CheckBoxPanel::OnCheckBoxListSelectionChange(wxCommandEvent& event) {
   }
 }
 
-void CheckBoxPanel::DoLayout() {
-  wxGridSizer* sizer = new wxGridSizer(0, 3, 0, 0);
-  this->list_box_a_ = new wxCheckListBox(this, wxID_ANY);
-  this->list_box_b_ = new wxCheckListBox(this, wxID_ANY);
-  this->list_box_c_ = new wxCheckListBox(this, wxID_ANY);
+void CheckBoxPanel::OnCheckBoxChange(wxCommandEvent& event) {
+  int index = event.GetInt();
+  wxCheckListBox* check_list_box =
+      static_cast<wxCheckListBox*>(event.GetEventObject());
+  bool checked = check_list_box->IsChecked(index);
 
-  boxes_[0] = list_box_a_;
-  boxes_[1] = list_box_b_;
-  boxes_[2] = list_box_c_;
+  if (checked_item_count_ >= MAX_CHECKED_ITEMS && checked == true) {
+    check_list_box->Check(index, false);
+  } else {
+    if (checked) {
+      checked_item_count_++;
+    } else {
+      checked_item_count_--;
+    }
 
-  for (size_t i = 0; i < 3; i++) {
-    sizer->Add(boxes_[i], 1, wxEXPAND | wxALIGN_LEFT, 0, 0);
-    boxes_[i]->Bind(wxEVT_LISTBOX,
-                    &CheckBoxPanel::OnCheckBoxListSelectionChange, this);
+    if (checked_item_count_ >= MAX_CHECKED_ITEMS) {
+      label_limit_->SetLabel("Limit of 7 has been reached");
+    } else {
+      label_limit_->SetLabel("");
+    }
   }
 
-  this->SetSizer(sizer);
   Layout();
 }
 
@@ -163,11 +173,17 @@ void CheckBoxPanel::SetCheckboxStateByLabel(std::string label, bool checked) {
     int pos = boxes_[i]->FindString(label);
     if (pos != -1) {
       boxes_[i]->Check(pos, checked);
+      if (checked) {
+        checked_item_count_++;
+        if (checked_item_count_ >= MAX_CHECKED_ITEMS) {
+          label_limit_->SetLabel("Limit of 7 has been reached");
+        } else {
+          label_limit_->SetLabel("");
+        }
+      }
       return;
     }
   }
-  // What is looooveeeee! Baby don't huuurt meee
-  // love is loops and arrays
 }
 
 void CheckBoxPanel::AddCheckBox(std::string label) {
@@ -180,4 +196,29 @@ void CheckBoxPanel::AddCheckBox(std::string label) {
   }
 
   box->InsertItems(1, new wxString(label), 0);
+}
+
+void CheckBoxPanel::DoLayout() {
+  wxBoxSizer* sizer_root = new wxBoxSizer(wxVERTICAL);
+
+  wxGridSizer* sizer = new wxGridSizer(0, 3, 0, 0);
+  this->list_box_a_ = new wxCheckListBox(this, wxID_ANY);
+  this->list_box_b_ = new wxCheckListBox(this, wxID_ANY);
+  this->list_box_c_ = new wxCheckListBox(this, wxID_ANY);
+
+  boxes_[0] = list_box_a_;
+  boxes_[1] = list_box_b_;
+  boxes_[2] = list_box_c_;
+
+  for (size_t i = 0; i < 3; i++) {
+    sizer->Add(boxes_[i], 1, wxEXPAND | wxALIGN_LEFT, 0);
+    boxes_[i]->Bind(wxEVT_LISTBOX,
+                    &CheckBoxPanel::OnCheckBoxListSelectionChange, this);
+  }
+
+  sizer_root->Add(label_limit_, 0, wxALIGN_CENTER | wxALL, 6);
+  sizer_root->Add(sizer, 0, wxALIGN_CENTER);
+
+  this->SetSizer(sizer_root);
+  Layout();
 }
