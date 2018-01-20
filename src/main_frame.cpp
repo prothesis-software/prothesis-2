@@ -29,6 +29,12 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
 
   data_manager_ = new DataManager(notebook_, notebook_assessments_);
 
+  wxMenu* menu_help = new wxMenu();
+  menu_help->Append(wxID_ABOUT, "About");
+  menu_help->Bind(wxEVT_MENU, &MainFrame::OnMenuClick, this);
+  wxMenuBar* menu_bar = new wxMenuBar();
+  menu_bar->Append(menu_help, "Help");
+  this->SetMenuBar(menu_bar);
   DoLayout();
   Fit();
 
@@ -44,6 +50,17 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
   SetSize(minSize);
 
   this->Bind(wxEVT_SIZE, &MainFrame::OnSizeChange, this);
+}
+
+void MainFrame::OnMenuClick(wxCommandEvent& event) {
+  wxWindowID id = event.GetId();
+
+  if (id == wxID_ABOUT) {
+    AboutFrame* about =
+        new AboutFrame(this, wxID_ANY, "About", wxDefaultPosition,
+                       wxDefaultSize, wxCLOSE_BOX | wxCAPTION);
+    about->Show();
+  }
 }
 
 void MainFrame::OnClose(wxCloseEvent& e) {
