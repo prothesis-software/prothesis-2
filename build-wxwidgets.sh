@@ -112,7 +112,7 @@ elif [ "$TARGET" == "mac" ]; then
         mkdir -p $BUILD_DIR
         cd $BUILD_DIR
         ../configure --prefix=$MAC_INSTALL_DIR \
-                     --enable-unicode \
+                     --enable-unicode
         make -j $(sysctl -n hw.ncpu)
         make install
     else
