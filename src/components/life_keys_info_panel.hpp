@@ -23,6 +23,17 @@ class LifeKeysInfoPanel : public wxPanel {
    * Recreate the internal layout based on the given keys
    */
   void SetLifeKeys(std::vector<std::string> life_keys);
+
+  /**
+   * TOML SPEC:
+   * [external.life_keys]
+   *   [[external.life_keys.type]]
+   *     key = ""
+   *     title = ""
+   *     characteristics = [""]
+   *     work_environments = [""]
+   *     things_they_love_to_do = [""]
+   */
   void SetLifeKeyData(std::shared_ptr<cpptoml::table>(gui_state));
 
   struct LifeKey {
