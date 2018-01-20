@@ -30,7 +30,6 @@ void DetailsPanel::SetProperties() {
   text_ctrl_surname_->SetMinSize(wxSize(200, -1));
 }
 
-
 bool DetailsPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   wxLogDebug(wxT("DetailsPanel does not use a GUI config."));
   return false;
@@ -91,8 +90,6 @@ bool DetailsPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
     return false;
   }
 }
-
-
 
 void DetailsPanel::DoLayout() {
   wxLogDebug("DetailsPanel::DoLayout() START");

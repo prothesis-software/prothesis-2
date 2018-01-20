@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 
+#include "about_frame.hpp"
 #include "data_manager.hpp"
 #include "data_panel.hpp"
 
@@ -34,10 +35,11 @@ class MainFrame : public wxFrame {
   wxSize GetOverallMinSize();
 
  private:
-  void OnSizeChange(wxSizeEvent& event);  // NOLINT
   void DoLayout();
+  void OnSizeChange(wxSizeEvent& event);                   // NOLINT
   void OnClose(wxCloseEvent& e);                           // NOLINT
   void OnNotebookSelectionChange(wxBookCtrlEvent& event);  // NOLINT
+  void OnMenuClick(wxCommandEvent& event);                 // NOLINT
   wxNotebook* notebook_ = NULL;
   wxNotebook* notebook_assessments_ = NULL;
   wxFlexGridSizer* sizer_main_frame_ = NULL;
