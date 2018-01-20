@@ -53,10 +53,13 @@ fi
 # '-linux' or '-windows' is later appended depending on target
 SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
 LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/gtk2u
+MAC_INSTALL_DIR=$ROOT_DIR/wxWidgets/mac
 WINDOWS_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static
 WINDOWS_CROSS_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static-cross
 
 cd $ROOT_DIR
+
+# TODO(egeldenhuys): Bash functions
 
 if [ "$TARGET" == "linux" ]; then
     # Check if cache exists
@@ -84,7 +87,36 @@ if [ "$TARGET" == "linux" ]; then
         make -j $(nproc)
         make install
     else
-        echo "wxWidgets has already been build for Windows"
+        echo "wxWidgets has already been build for Linux"
+    fi
+elif [ "$TARGET" == "mac" ]; then
+    # Check if cache exists
+    if ! [ -d $MAC_INSTALL_DIR ]; then
+        SOURCE_DIR=$SOURCE_DIR-linux
+        BUILD_DIR=build-mac
+
+        # Download and extract source
+        if [ ! -f wxWidgets-3.0.3.tar.bz2 ]; then
+            wget -o wxWidgets-3.0.3.tar.bz2 https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3.tar.bz2
+        fi
+        echo "Extracting wxWidgets-3.0.3.tar.bz2"
+        mkdir -p $SOURCE_DIR
+        tar -xf wxWidgets-3.0.3.tar.bz2 --strip 1 -C $SOURCE_DIR
+
+        # Patch extra ;
+        patch --forward --force $SOURCE_DIR/include/wx/filefn.h $TRAVIS_BUILD_DIR/wxwidgets.patch
+
+        cd $SOURCE_DIR
+
+        # Build and Install
+        mkdir -p $BUILD_DIR
+        cd $BUILD_DIR
+        ../configure --prefix=$MAC_INSTALL_DIR \
+                     --enable-unicode \
+        make -j $(sysctl -n hw.ncpu)
+        make install
+    else
+        echo "wxWidgets has already been build for Mac"
     fi
 elif [ "$TARGET" == "windows" ]; then
     # Check if cache exists
