@@ -150,7 +150,16 @@ void DetailsPanel::DoLayout() {
 
   details_grid_sizer->Add(0, 0, 0, 0);
   details_grid_sizer->Add(sizer_content, 0, wxEXPAND, 0);
-  details_grid_sizer->Add(0, 0, 0, 0);
+
+  wxNotebook* kek = new wxNotebook(this, wxID_ANY);
+  // details_grid_sizer->Add(0, 0, 0, 0);
+
+  wxPanel* lol = new wxPanel(kek, wxID_ANY);
+
+  lol->SetBackgroundColour(wxColour(255, 0, 0));
+  lol->SetMinSize(wxSize(100, 100));
+  kek->InsertPage(0, lol, "LOL");
+  details_grid_sizer->Add(kek);
 
   details_grid_sizer->AddGrowableCol(0);
   details_grid_sizer->AddGrowableCol(2);

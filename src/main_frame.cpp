@@ -10,24 +10,32 @@ void MainFrame::OnKill(int sig) {
   wxExit();
 }
 
-MainFrame::MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
-                     const wxPoint& pos, const wxSize& size, int64_t style,
-                     const wxString name)
-    : wxFrame(parent, id, title, pos, size, style, name) {
+MainFrame::MainFrame(const wxString& title) : wxFrame(NULL, wxID_ANY, title) {
+  std::cout << "In mainFrame()" << std::endl;
   std::signal(SIGINT, OnKill);
+  std::cout << "In mainFrame() 1" << std::endl;
+
   panel_main_ = new wxPanel(this, wxID_ANY);
+  // panel_main_->SetBackgroundColour(wxColour(255, 0, 0));
+  std::cout << "In mainFrame() 2" << std::endl;
 
   sizer_main_frame_ = new wxFlexGridSizer(1, 1, 0, 0);
+  std::cout << "In mainFrame() 3" << std::endl;
   notebook_ = new wxNotebook(panel_main_, wxID_ANY, wxDefaultPosition,
                              wxDefaultSize, wxNB_TOP);
+  std::cout << "In mainFrame() 4" << std::endl;
   notebook_->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED,
                   &MainFrame::OnNotebookSelectionChange, this);
-  notebook_assessments_ = new wxNotebook(notebook_, wxID_ANY, wxDefaultPosition,
-                                         wxDefaultSize, wxNB_TOP);
-  notebook_assessments_->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED,
-                              &MainFrame::OnNotebookSelectionChange, this);
+  std::cout << "In mainFrame() 5" << std::endl;
 
-  data_manager_ = new DataManager(notebook_, notebook_assessments_);
+  std::cout << "In mainFrame() 6" << std::endl;
+  // notebook_assessments_->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED,
+  //                             &MainFrame::OnNotebookSelectionChange, this);
+  std::cout << "In mainFrame() 7" << std::endl;
+
+  data_manager_ = new DataManager(notebook_, notebook_);
+
+  std::cout << "In mainFrame() 8" << std::endl;
 
   wxMenu* menu_help = new wxMenu();
   menu_help->Append(wxID_ABOUT, "About");
@@ -38,8 +46,8 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
   DoLayout();
   Fit();
 
-  wxSize minSize = GetOverallMinSize();
-
+  // wxSize minSize = GetOverallMinSize();
+  wxSize minSize = wxSize(300, 300);
   // To fix scroll bars on theme analysis panel
   minSize.IncBy(10, 10);
 
@@ -50,6 +58,7 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
   SetSize(minSize);
 
   this->Bind(wxEVT_SIZE, &MainFrame::OnSizeChange, this);
+  Refresh();
 }
 
 void MainFrame::OnMenuClick(wxCommandEvent& event) {
@@ -72,94 +81,98 @@ void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
   // Only do stuff if there are still objects to work with
   wxLogDebug("MainFrame::OnNotebookSelectionChange() START");
 
-  if (!exit_requested_ && index_layout_.size() == 2) {
-    int top_index = notebook_->GetSelection();
-    int bottom_index = notebook_assessments_->GetSelection();
+  // if (!exit_requested_ && index_layout_.size() == 2) {
+  //   int top_index = notebook_->GetSelection();
+  //   int bottom_index = notebook_assessments_->GetSelection();
 
-    if (top_index == wxNOT_FOUND || bottom_index == wxNOT_FOUND) {
-      wxLogDebug("top or bottom index == wxNOT_FOUND");
-    }
+  //   wxLogDebug(_("top index = " + std::to_string(top_index)));
+  //   wxLogDebug(_("bottom index = " + std::to_string(bottom_index)));
+  //   if (top_index == wxNOT_FOUND || bottom_index == wxNOT_FOUND) {
+  //     wxLogDebug("top or bottom index == wxNOT_FOUND");
+  //   }
 
-    if (size_t(top_index) >= index_layout_.at(0).size()) {
-      wxLogDebug("top >= 0.size");
-    }
+  //   if (size_t(top_index) >= index_layout_.at(0).size()) {
+  //     wxLogDebug("top >= 0.size");
+  //   }
 
-    if (size_t(bottom_index) >= index_layout_.at(1).size()) {
-      wxLogDebug("bottom >= 1.size");
-    }
+  //   if (size_t(bottom_index) >= index_layout_.at(1).size()) {
+  //     wxLogDebug("bottom >= 1.size");
+  //   }
 
-    DataPanel* panel = NULL;
+  //   DataPanel* panel = NULL;
 
-    if (top_index == 1) {
-      panel = index_layout_.at(1).at(bottom_index);
+  //   if (top_index == 1) {
+  //     panel = index_layout_.at(1).at(bottom_index);
 
-      DataManager::PanelId id =
-          data_manager_->GetIdFromName(panel->GetPanelName());
+  //     DataManager::PanelId id =
+  //         data_manager_->GetIdFromName(panel->GetPanelName());
 
-      if (id == DataManager::PanelId::kWorkEnvironmentPanel) {
-        panel->GetUserState();
-      }
-    } else {
-      panel = index_layout_.at(0).at(top_index);
-    }
+  //     if (id == DataManager::PanelId::kWorkEnvironmentPanel) {
+  //       panel->GetUserState();
+  //     }
+  //   } else {
+  //     panel = index_layout_.at(0).at(top_index);
+  //   }
 
-    if (panel) {
-      panel->OnTabActivate();
-    }
-  }
+  //   if (panel) {
+  //     panel->OnTabActivate();
+  //   }
+  // }
 
+  // Refresh();
+  // Update();
   wxLogDebug("MainFrame::OnNotebookSelectionChange() END");
 }
 
 bool MainFrame::DisplayNextPanel() {
-  int top_index = notebook_->GetSelection();
-  int top_count = notebook_->GetPageCount();
+  // int top_index = notebook_->GetSelection();
+  // int top_count = notebook_->GetPageCount();
 
-  int bottom_index = notebook_assessments_->GetSelection();
-  int bottom_count = notebook_assessments_->GetPageCount();
+  // // int bottom_index = notebook_assessments_->GetSelection();
+  // // int bottom_count = notebook_assessments_->GetPageCount();
 
-  if (top_index == 1) {
-    if (bottom_index < bottom_count - 1) {
-      notebook_assessments_->AdvanceSelection();
-      return true;
-    }
-  }
+  // if (top_index == 1) {
+  //   if (bottom_index < bottom_count - 1) {
+  //     notebook_assessments_->AdvanceSelection();
+  //     return true;
+  //   }
+  // }
 
-  if (top_index < top_count - 1) {
-    notebook_->AdvanceSelection();
-    return true;
-  } else {
-    return false;
-  }
+  // if (top_index < top_count - 1) {
+  //   notebook_->AdvanceSelection();
+  //   return true;
+  // } else {
+  //   return false;
+  // }
 
   return false;
 }
 
 wxSize MainFrame::GetOverallMinSize() {
-  Freeze();
+  // Freeze();
   wxLogDebug("Getting best size...");
-  wxSize minSize = GetSize();
+  // wxSize minSize = GetSize();
 
-  while (DisplayNextPanel() != false) {
-    Fit();
-    wxSize tmpSize = GetSize();
-    wxLogDebug(_(std::to_string(tmpSize.x)) + _(", ") +
-               _(std::to_string(tmpSize.y)));
+  // while (DisplayNextPanel() != false) {
+  //   Fit();
+  //   wxSize tmpSize = GetSize();
+  //   wxLogDebug(_(std::to_string(tmpSize.x)) + _(", ") +
+  //              _(std::to_string(tmpSize.y)));
 
-    if (tmpSize.x > minSize.x) {
-      minSize.x = tmpSize.x;
-    }
+  //   if (tmpSize.x > minSize.x) {
+  //     minSize.x = tmpSize.x;
+  //   }
 
-    if (tmpSize.y > minSize.y) {
-      minSize.y = tmpSize.y;
-    }
-  }
+  //   if (tmpSize.y > minSize.y) {
+  //     minSize.y = tmpSize.y;
+  //   }
+  // }
 
-  notebook_->SetSelection(0);
-  notebook_assessments_->SetSelection(0);
+  // notebook_->SetSelection(0);
+  // // notebook_assessments_->SetSelection(0);
 
-  Thaw();
-  return minSize;
+  // // Thaw();
+  return wxSize(100, 100);
 }
 
 void MainFrame::OnSizeChange(wxSizeEvent& event) {
@@ -175,40 +188,47 @@ void MainFrame::DoLayout() {
 
   // sizer_content_
   for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
-    if (top_layout.size() != 1) {
-      DataPanel* panel = data_manager_->GetPanelByIndex(i);
-      wxNotebook* panel_parent = static_cast<wxNotebook*>(panel->GetParent());
-      panel_parent->AddPage(panel,
-                            data_manager_->GetPanelByIndex(i)->GetPanelTitle());
+    DataPanel* panel = data_manager_->GetPanelByIndex(i);
+    notebook_->AddPage(panel,
+                          data_manager_->GetPanelByIndex(i)->GetPanelTitle());
+    //
+    // if (top_layout.size() != 1) {
+    //   DataPanel* panel = data_manager_->GetPanelByIndex(i);
+    //   wxNotebook* panel_parent =
+    //   static_cast<wxNotebook*>(panel->GetParent());
+    //   panel_parent->AddPage(panel,
+    //                         data_manager_->GetPanelByIndex(i)->GetPanelTitle());
 
-      if (panel_parent == notebook_) {
-        top_layout.push_back(panel);
-      } else {
-        bottom_layout.push_back(panel);
-      }
-    } else {
-      // Insert psuedo panel
-      notebook_->InsertPage(1, notebook_assessments_, "Assessments");
-      top_layout.push_back(NULL);
-      // Need to adjust i
-      i--;
-    }
+    //   if (panel_parent == notebook_) {
+    //     top_layout.push_back(panel);
+    //   } else {
+    //     bottom_layout.push_back(panel);
+    //     wxLogDebug("Adding panel to bottom layout tabs");
+    //     wxLogDebug(_(panel->GetPanelName()));
+    //   }
+    // } else {
+    //   // Insert psuedo panel
+    //   notebook_->InsertPage(1, notebook_assessments_, "Assessments");
+    //   top_layout.push_back(NULL);
+    //   // Need to adjust i
+    //   i--;
+    // }
   }
 
-  index_layout_.push_back(top_layout);
-  index_layout_.push_back(bottom_layout);
-  // sizer_main_frame_->Add(notebook_, 1, wxEXPAND | wxALL, 10);
+    // index_layout_.push_back(top_layout);
+    // index_layout_.push_back(bottom_layout);
+    // sizer_main_frame_->Add(notebook_, 1, wxEXPAND | wxALL, 10);
 
-  // sizer_content_->Add(notebook_, 1, wxEXPAND, 0);
-  // sizer_content_->Add(0, 0, 0, 0);
+    // sizer_content_->Add(notebook_, 1, wxEXPAND, 0);
+    // sizer_content_->Add(0, 0, 0, 0);
 
 #ifdef PROTHESIS_VERSION
-  // wxStaticText *version = new wxStaticText(panel_main_,
-  //                                          wxID_ANY,
-  //                                          _(PROTHESIS_VERSION));
-  // sizer_content_->Add(version, 0, wxALIGN_LEFT | wxALIGN_BOTTOM, 0);
+    // wxStaticText *version = new wxStaticText(panel_main_,
+    //                                          wxID_ANY,
+    //                                          _(PROTHESIS_VERSION));
+    // sizer_content_->Add(version, 0, wxALIGN_LEFT | wxALIGN_BOTTOM, 0);
 #else
-  // sizer_content_->Add(0, 0, 0, 0);
+    // sizer_content_->Add(0, 0, 0, 0);
 #endif
 
   // sizer_content_->Add(0, 0, 0, 0);

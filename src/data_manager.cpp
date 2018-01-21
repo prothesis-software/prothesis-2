@@ -6,12 +6,17 @@
 #include <vector>
 
 DataManager::DataManager(wxWindow* main_frame, wxWindow* assessments_window) {
+  wxLogDebug("TEST");
+  std::cout << "DataManager::DataManager() START" << std::endl;
   main_frame_ = main_frame;
   assessments_window_ = assessments_window;
 
-  std::string base_path = GetBasePath();
-  wxLogDebug(_(std::string("base_path = ") + base_path));
+  std::cout << "DataManager::DataManager() 1" << std::endl;
 
+  std::string base_path = GetBasePath();
+  std::cout << "DataManager::DataManager() 2" << std::endl;
+  wxLogDebug(_(std::string("base_path = ") + base_path));
+  std::cout << "DataManager::DataManager() 3" << std::endl;
   user_config_path_ = base_path + user_config_path_;
   wxLogDebug(_(std::string("user_config_path_ = ") + user_config_path_));
 
@@ -24,6 +29,7 @@ DataManager::DataManager(wxWindow* main_frame, wxWindow* assessments_window) {
 
   DeclarePanels();
   Load();
+  wxLogDebug("DataManager::DataManager() END");
 }
 
 void DataManager::AddPanel(DataPanel* panel, PanelId id) {
@@ -209,14 +215,18 @@ void DataManager::SaveUserConfig() {
 
 // TODO(egeldenhuys): MacOS
 std::string DataManager::GetBasePath() {
+  wxLogDebug("DataManager::GetBasePath() START");
 // I might be mistaken but seeing as macOs is considered
 // to be a nix* os this should trigger when compiling on
 // macos.
-#ifdef __unix__
+#if defined(__unix__) || defined(TARGET_OS_MAC)
+  wxLogDebug("DataManager::GetBasePath() __unix__");
   // Find the relative path using argv[0]
   // TODO(egeldenhuys): Absolute path
+  wxLogDebug("DataManager::GetBasePath() 1");
   std::vector<std::string> tokens =
       Utilities::SplitString(std::string(wxTheApp->argv[0]), '/');
+  wxLogDebug("DataManager::GetBasePath() 2");
   std::string base_path = "";
   for (size_t i = 0; i < tokens.size() - 1; i++) {
     base_path.append(tokens.at(i));
@@ -242,6 +252,7 @@ std::string DataManager::GetBasePath() {
   return base_path;
 #endif
 
+  wxLogDebug("Unknown Operating system! Cannot find basepath");
   throw std::logic_error("UNKNOWN OPERATING SYSTEM");
 }
 

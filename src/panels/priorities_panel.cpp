@@ -59,6 +59,7 @@ void PrioritiesPanel::GetItemHeight(wxListBox* list) {
 
   if (delta <= 0) {
     wxLogWarning("Could not calculate the height of a wxListBox item!");
+    delta = 14;
   }
 
   list->Clear();

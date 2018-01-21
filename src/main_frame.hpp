@@ -18,11 +18,7 @@
 
 class MainFrame : public wxFrame {
  public:
-  MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
-            const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize,
-            int64_t style = wxDEFAULT_FRAME_STYLE,
-            const wxString name = wxFrameNameStr);
+  MainFrame(const wxString& title);
   ~MainFrame();
 
   bool DisplayNextPanel();
@@ -41,7 +37,6 @@ class MainFrame : public wxFrame {
   void OnNotebookSelectionChange(wxBookCtrlEvent& event);  // NOLINT
   void OnMenuClick(wxCommandEvent& event);                 // NOLINT
   wxNotebook* notebook_ = NULL;
-  wxNotebook* notebook_assessments_ = NULL;
   wxFlexGridSizer* sizer_main_frame_ = NULL;
   wxPanel* panel_main_ = NULL;
   bool exit_requested_ = false;

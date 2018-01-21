@@ -14,10 +14,10 @@ bool ProthesisApp::OnInit() {
   wxString title = "Prothesis";
 #endif
 
-std::cout << "HELLO" << std::endl;
+  std::cout << "HELLO" << std::endl;
 
-  MainFrame* main_frame =
-      new MainFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(-1, -1));
+  MainFrame* main_frame = new MainFrame("Prothesis 2 MAC");
+  std::cout << "HELLO 2" << std::endl;
   SetTopWindow(main_frame);
   main_frame->Show();
   return true;
