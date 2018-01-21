@@ -112,7 +112,16 @@ elif [ "$TARGET" == "mac" ]; then
         mkdir -p $BUILD_DIR
         cd $BUILD_DIR
         ../configure --prefix=$MAC_INSTALL_DIR \
-                     --enable-unicode
+                     --enable-unicode \
+--with-osx_cocoa \
+--with-macosx-version-min=10.7 \
+CXXFLAGS="-std=c++11 -stdlib=libc++" \
+--disable-shared \
+--enable-debug \
+CXX="clang++" \
+OBJCXXFLAGS="-std=c++11 -stdlib=libc++" \
+LDFLAGS="-stdlib=libc++"
+
         make -j $(sysctl -n hw.ncpu)
         make install
     else
