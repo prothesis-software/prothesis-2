@@ -189,8 +189,12 @@ void MainFrame::DoLayout() {
   // sizer_content_
   for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
     DataPanel* panel = data_manager_->GetPanelByIndex(i);
-    notebook_->AddPage(panel,
-                          data_manager_->GetPanelByIndex(i)->GetPanelTitle());
+
+    if (notebook_->InsertPage(
+            0, panel, data_manager_->GetPanelByIndex(i)->GetPanelTitle()) ==
+        false) {
+      wxLogWarning("Could not add page!");
+    }
     //
     // if (top_layout.size() != 1) {
     //   DataPanel* panel = data_manager_->GetPanelByIndex(i);
@@ -213,6 +217,7 @@ void MainFrame::DoLayout() {
     //   // Need to adjust i
     //   i--;
     // }
+    Refresh();
   }
 
     // index_layout_.push_back(top_layout);

@@ -48,8 +48,8 @@ class DataManager {
    */
   enum PanelId {
     kDefaultPanel = -1,
-    kDetailsPanel = 0,
-    kPassionPanel = 1,
+    kDetailsPanel = 1,
+    kPassionPanel = 0,
     kPeopleIdPanel = 2,
     kDreamsPanel = 3,
     kValuesPanel = 4,
