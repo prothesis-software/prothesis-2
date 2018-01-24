@@ -147,22 +147,22 @@ void MbtiInfoPanel::DoLayout() {
   wxStaticLine* line2 = new wxStaticLine(this);
   wxStaticLine* line3 = new wxStaticLine(this);
 
-  wxStaticText* mbti1 = new wxStaticText(this, wxID_ANY, "I");
-  wxStaticText* mbti2 = new wxStaticText(this, wxID_ANY, "S");
-  wxStaticText* mbti3 = new wxStaticText(this, wxID_ANY, "T");
-  wxStaticText* mbti4 = new wxStaticText(this, wxID_ANY, "J");
+  wxStaticText* mbti1 = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  wxStaticText* mbti2 = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  wxStaticText* mbti3 = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  wxStaticText* mbti4 = new wxStaticText(this, wxID_ANY, wxEmptyString);
 
-  wxStaticText* desc1 = new wxStaticText(this, wxID_ANY, "Good, caring, elola");
-  wxStaticText* desc2 = new wxStaticText(this, wxID_ANY, "Fast, Smart, Skiw");
-  wxStaticText* desc3 = new wxStaticText(this, wxID_ANY, "Skiddy Python nuc");
-  wxStaticText* desc4 = new wxStaticText(this, wxID_ANY, "D U know da wey");
+  wxStaticText* desc1 = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  wxStaticText* desc2 = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  wxStaticText* desc3 = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  wxStaticText* desc4 = new wxStaticText(this, wxID_ANY, wxEmptyString);
 
   wxStaticText* ext_desc1 =
-      new wxStaticText(this, wxID_ANY, "jksdkfjh sjs s d d d ds ");
+      new wxStaticText(this, wxID_ANY, wxEmptyString);
   wxStaticText* ext_desc2 =
-      new wxStaticText(this, wxID_ANY, "gh4ghth 23ersed reg");
+      new wxStaticText(this, wxID_ANY, wxEmptyString);
   wxStaticText* ext_desc3 = new wxStaticText(
-      this, wxID_ANY, "jjk  5y y ytyrtytry rhfg e ty 4 khk  jfh dg rghfh");
+      this, wxID_ANY, wxEmptyString);
 
   const int kFlags = wxALL | wxALIGN_CENTER;
   const int kBorder = 6;
