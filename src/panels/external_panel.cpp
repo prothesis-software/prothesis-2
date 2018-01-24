@@ -274,7 +274,9 @@ void ExternalPanel::OnMbtiChange(wxCommandEvent& event) {
 }
 
 void ExternalPanel::DoLayout() {
-  wxGridSizer* sizer = new wxGridSizer(1, 2, 0, 0);
+  wxFlexGridSizer* sizer = new wxFlexGridSizer(1, 3, 0, 0);
+  wxFlexGridSizer* sizer_content = new wxFlexGridSizer(2, 2, 30, 30);
+
   wxBoxSizer* sizer_mbti_keys = new wxBoxSizer(wxVERTICAL);
   wxStaticBoxSizer* sizer_mbti = new wxStaticBoxSizer(wxVERTICAL, this, "MBTI");
   wxBoxSizer* sizer_mbti_combo_boxes = new wxBoxSizer(wxHORIZONTAL);
@@ -310,8 +312,15 @@ void ExternalPanel::DoLayout() {
   sizer_mbti_keys->Add(sizer_mbti, 0, wxBOTTOM, 20);
   sizer_mbti_keys->Add(sizer_keys_, 0, wxALL, 0);
 
-  sizer->Add(sizer_mbti_keys, 0, wxALL, 5);
-  sizer->Add(sizer_career, 0, wxALL, 5);
+  sizer_content->Add(sizer_mbti_keys, 0, wxALL, 5);
+  sizer_content->Add(sizer_career, 0, wxALL, 5);
+
+  sizer->Add(0, 0, 0, 0);
+  sizer->Add(sizer_content, 0, 0, 0);
+  sizer->Add(0, 0, 0, 0);
+
+  sizer->AddGrowableCol(0);
+  sizer->AddGrowableCol(1);
 
   Layout();
   this->SetSizer(sizer);
