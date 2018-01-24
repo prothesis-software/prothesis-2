@@ -209,9 +209,9 @@ void MbtiInfoPanel::DoLayout() {
   descriptions_2_[1] = ext_desc2;
   descriptions_2_[2] = ext_desc3;
 
-  sizer->Add(ext_desc1, wxGBPosition(1, 2), wxGBSpan(1, 1), 0, 0);
-  sizer->Add(ext_desc2, wxGBPosition(3, 2), wxGBSpan(2, 1), wxALIGN_CENTER, 0);
-  sizer->Add(ext_desc3, wxGBPosition(6, 2), wxGBSpan(1, 1), 0, 0);
+  sizer->Add(ext_desc1, wxGBPosition(1, 2), wxGBSpan(1, 1), wxLEFT, 20);
+  sizer->Add(ext_desc2, wxGBPosition(3, 2), wxGBSpan(2, 1), wxLEFT, 20);
+  sizer->Add(ext_desc3, wxGBPosition(6, 2), wxGBSpan(1, 1), wxLEFT, 20);
 
   this->SetSizer(sizer);
   sizer->Fit(this);
