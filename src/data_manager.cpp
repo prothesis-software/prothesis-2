@@ -62,6 +62,10 @@ void DataManager::DeclarePanels() {
                               std::string("spoken_words"),
                               std::string("Spoken Words")),
            PanelId::kSpokenWordsPanel);
+  // ROLES
+  AddPanel(new CheckBoxPanel(assessments_window_, wxID_ANY,
+                             std::string("roles"), std::string("Roles")),
+           PanelId::kRolesPanel);
   // SKILLS
   AddPanel(new CheckBoxPanel(assessments_window_, wxID_ANY,
                              std::string("skills"), std::string("Skills")),
@@ -80,10 +84,6 @@ void DataManager::DeclarePanels() {
                                     std::string("work_environment"),
                                     std::string("Work Environment")),
            PanelId::kWorkEnvironmentPanel);
-  // ROLES
-  AddPanel(new CheckBoxPanel(assessments_window_, wxID_ANY,
-                             std::string("roles"), std::string("Roles")),
-           PanelId::kRolesPanel);
   // PEOPLE ORIENTATION
   AddPanel(new CheckBoxPanel(assessments_window_, wxID_ANY,
                              std::string("people_orientation"),
