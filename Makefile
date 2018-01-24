@@ -46,7 +46,7 @@ WX_CONFIG_FLAGS_LINK_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode
 ############
 
 clang-format:
-	-clang-format -i --style=file src/* src/panels/*
+	-clang-format -i --style=file src/*.?pp src/panels/*.?pp
 
 package: package-linux package-windows
 	@echo "Done"
