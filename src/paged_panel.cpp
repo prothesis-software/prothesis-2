@@ -22,13 +22,15 @@ void PagedPanel::AddPage(wxPanel* panel) {
   panels_.push_back(panel);
   panel->Reparent(simple_book_);
   // TODO(egeldenuys): lolwat? can't remember the purpose.
-  simple_book_->AddPage(panel, "");
+  simple_book_->AddPage(
+      panel, std::to_string(panels_.size()));  // Convert the panel number to a
+                                               // string and push this here.
+  // shouldn't have any effect on linux
 }
 
 // TODO(egeldenhuys): Rename to GenerateLinks
 void PagedPanel::Init() {
   wxLogDebug("PagedPanel::Init() START");
-
   if (panels_.size() == 0) {
     wxLogDebug("Nothing to display");
     return;
