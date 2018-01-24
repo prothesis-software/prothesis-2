@@ -73,6 +73,16 @@ class PagedPanel : public DataPanel {
   size_t active_panel_index_ = 0;
   wxPanel* active_panel_ = NULL;
   wxPanel* panel_page_numbers_ = NULL;
-  wxSimplebook* simple_book_ = NULL;
+  /* Implementation:
+   *
+   * On linux + windows we want to use the buttons => eg the wxSimplebook
+   * On mac we want to use the wxNoteBook
+   */
+
+#ifdef __APPLE__
+  wxNotebook* simple_book_;
+#else
+  wxSimplebook* simple_book_;
+#endif
 };
 #endif  // PAGED_PANEL_HPP_

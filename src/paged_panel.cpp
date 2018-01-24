@@ -11,14 +11,18 @@ PagedPanel::PagedPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
     : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   panel_page_numbers_ = new wxPanel(this, wxID_ANY);
   sizer_paged_panel_ = new wxFlexGridSizer(4, 3, 0, 0);
+#ifdef __APPLE__
+  simple_book_ = new wxNotebook(this, wxID_ANY);
+#else
   simple_book_ = new wxSimplebook(this, wxID_ANY);
+#endif
 }
 
 void PagedPanel::AddPage(wxPanel* panel) {
   panels_.push_back(panel);
   panel->Reparent(simple_book_);
   // TODO(egeldenuys): lolwat? can't remember the purpose.
-  simple_book_->AddPage(panel, "LOLWAT");
+  simple_book_->AddPage(panel, "");
 }
 
 // TODO(egeldenhuys): Rename to GenerateLinks
