@@ -4,11 +4,60 @@ LifeKeysInfoPanel::LifeKeysInfoPanel(wxWindow* parent, wxWindowID id,
                                      const wxPoint& pos, const wxSize& size,
                                      int64_t style)
     : wxPanel(parent, id, pos, size, style) {
+  wxLogDebug("LifeKeysInfoPanel::LifeKeysInfoPanel() START");
+  for (size_t i = 0; i < 3; i++) {
+    choice_boxes_keys_[i] = NULL;
+  }
+
   DoLayout();
+  wxLogDebug("LifeKeysInfoPanel::LifeKeysInfoPanel() END");
 }
 
 void LifeKeysInfoPanel::SetLifeKeyData(
     std::shared_ptr<cpptoml::table> gui_state) {
+  // Keys
+  auto panel_table = gui_state->get_table("external");
+
+  // Get root table from state
+  if (panel_table) {
+    // Get life keys table
+    auto life_keys_table = panel_table->get_table("life_keys");
+
+    if (life_keys_table) {
+      // Get type table array
+      auto life_key_types = life_keys_table->get_table_array("type");
+
+      if (life_key_types) {
+        // Iterate over the types and collect the keys
+        life_keys_keys_ = new wxArrayString();
+
+        for (const auto& life_key_type : *life_key_types) {
+          auto key = life_key_type->get_as<std::string>("key");
+
+          if (key) {
+            // Add the key to the key vector
+            life_keys_keys_->Add(wxString(*key));
+          } else {
+            wxLogDebug(_("'key' was not found for ") +
+                       _("table external.life_keys.type ") +
+                       _("for panel external"));
+          }  // key
+        }    // key iteration loop
+
+      } else {
+        wxLogDebug(_("Table array external.life_keys.type was not found") +
+                   _("for panel LifeKeysInfoPanel"));
+      }  // life_key_types
+    } else {
+      wxLogDebug(
+          _("Table external.life_keys was not found for panel external"));
+    }  // life_keys_table
+
+  } else {
+    wxLogDebug(_("No GUI table exists for panel external"));
+  }  // panel_table
+
+  // Info
   auto external_panel_table = gui_state->get_table("external");
   if (external_panel_table) {
     auto life_keys_table = external_panel_table->get_table("life_keys");
@@ -42,6 +91,9 @@ void LifeKeysInfoPanel::SetLifeKeyData(
       }
     }
   }
+
+  CreateChoiceBoxes(sizer_->GetStaticBox(), sizer_choice_boxes_,
+                    life_keys_keys_);
 }
 
 struct LifeKeysInfoPanel::LifeKey LifeKeysInfoPanel::GetLifeKeyDataByKey(
@@ -56,6 +108,44 @@ struct LifeKeysInfoPanel::LifeKey LifeKeysInfoPanel::GetLifeKeyDataByKey(
   error.key = "Error";
 
   return error;
+}
+
+std::vector<std::string> LifeKeysInfoPanel::GetLifeKeys() {
+  std::vector<std::string> result;
+
+  // life keys
+  for (size_t i = 0; i < 3; i++) {
+    if (choice_boxes_keys_[i]) {
+      if (choice_boxes_keys_[i]->GetSelection() != wxNOT_FOUND) {
+        const int selection = choice_boxes_keys_[i]->GetSelection();
+
+        const std::string key =
+            choice_boxes_keys_[i]->GetString(selection).ToStdString();
+
+        result.push_back(key);
+      }
+    }
+  }
+
+  return result;
+}
+
+void LifeKeysInfoPanel::OnLifeKeyChange(wxCommandEvent& event) {
+  SetLifeKeys(GetLifeKeys());
+}
+
+void LifeKeysInfoPanel::CreateChoiceBoxes(wxWindow* parent,
+                                          wxSizer* injection_sizer,
+                                          wxArrayString* keys) {
+  // Create choice boxes
+  for (size_t i = 0; i < 3; i++) {
+    choice_boxes_keys_[i] = new wxChoice(parent, wxID_ANY, wxDefaultPosition,
+                                         wxSize(-1, -1), *keys);
+    choice_boxes_keys_[i]->Bind(wxEVT_CHOICE,
+                                &LifeKeysInfoPanel::OnLifeKeyChange, this);
+    injection_sizer->Add(choice_boxes_keys_[i], 0, 0, 0);
+    injection_sizer->AddSpacer(5);
+  }
 }
 
 void LifeKeysInfoPanel::CreateLifeKeysPanel() {
@@ -73,6 +163,18 @@ void LifeKeysInfoPanel::CreateLifeKeysPanel() {
 
 void LifeKeysInfoPanel::SetLifeKeys(std::vector<std::string> life_keys) {
   active_life_keys_ = life_keys;
+
+  // Set choice box selections
+  for (size_t i = 0; i < 3 && i < life_keys.size(); i++) {
+    const int selection = choice_boxes_keys_[i]->FindString(life_keys[i]);
+
+    if (selection != wxNOT_FOUND) {
+      choice_boxes_keys_[i]->SetSelection(selection);
+    } else {
+      wxLogWarning(_("The life key ") + _(life_keys[i]) +
+                   _(" was not found as an option in the GUI config"));
+    }
+  }
 
   CreateLifeKeysPanel();
 
@@ -110,10 +212,15 @@ void LifeKeysInfoPanel::SetLifeKeys(std::vector<std::string> life_keys) {
 }
 
 void LifeKeysInfoPanel::DoLayout() {
+  wxLogDebug("LifeKeysInfoPanel::DoLayout() START");
   sizer_ = new wxStaticBoxSizer(wxVERTICAL, this, "Life Keys");
+
+  sizer_choice_boxes_ = new wxBoxSizer(wxHORIZONTAL);
+  sizer_->Add(sizer_choice_boxes_, 0, 0, 0);
 
   CreateLifeKeysPanel();
 
   this->SetSizer(sizer_);
   Layout();
+  wxLogDebug("LifeKeysInfoPanel::DoLayout() END");
 }

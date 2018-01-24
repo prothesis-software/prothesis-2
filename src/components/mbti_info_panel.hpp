@@ -65,6 +65,7 @@ class MbtiInfoPanel : public wxPanel {
   wxStaticText* labels_mbti_[4];
   wxStaticText* descriptions_1_[4];
   wxStaticText* descriptions_2_[3];
+  wxGridBagSizer* sizer_ = NULL;
 };
 
 #endif  // COMPONENTS_MBTI_INFO_HPP_

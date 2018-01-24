@@ -10,6 +10,7 @@ MbtiInfoPanel::MbtiInfoPanel(wxWindow* parent, wxWindowID id,
                              int64_t style)
     : wxPanel(parent, id, pos, size, style) {
   DoLayout();
+  this->SetBackgroundColour(wxColour(20, 0, 0));
 }
 
 void MbtiInfoPanel::SetMbti(std::string mbti) {
@@ -39,6 +40,7 @@ void MbtiInfoPanel::SetMbti(std::string mbti) {
   }
 
   this->Layout();
+  this->Fit();
 }
 
 void MbtiInfoPanel::SetMbtiInfoData(std::shared_ptr<cpptoml::table> gui_state) {
@@ -141,7 +143,7 @@ struct MbtiInfoPanel::MbtiInfo MbtiInfoPanel::GetMbtiInfo(std::string mbti) {
 }
 
 void MbtiInfoPanel::DoLayout() {
-  wxGridBagSizer* sizer = new wxGridBagSizer(0, 0);
+  sizer_ = new wxGridBagSizer(0, 0);
 
   wxStaticLine* line1 = new wxStaticLine(this);
   wxStaticLine* line2 = new wxStaticLine(this);
@@ -157,36 +159,33 @@ void MbtiInfoPanel::DoLayout() {
   wxStaticText* desc3 = new wxStaticText(this, wxID_ANY, wxEmptyString);
   wxStaticText* desc4 = new wxStaticText(this, wxID_ANY, wxEmptyString);
 
-  wxStaticText* ext_desc1 =
-      new wxStaticText(this, wxID_ANY, wxEmptyString);
-  wxStaticText* ext_desc2 =
-      new wxStaticText(this, wxID_ANY, wxEmptyString);
-  wxStaticText* ext_desc3 = new wxStaticText(
-      this, wxID_ANY, wxEmptyString);
+  wxStaticText* ext_desc1 = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  wxStaticText* ext_desc2 = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  wxStaticText* ext_desc3 = new wxStaticText(this, wxID_ANY, wxEmptyString);
 
   const int kFlags = wxALL | wxALIGN_CENTER;
   const int kBorder = 6;
 
-  sizer->Add(line1, wxGBPosition(0, 0), wxGBSpan(1, 3), wxEXPAND, 0);
-  sizer->Add(line2, wxGBPosition(2, 0), wxGBSpan(1, 3), wxEXPAND, 0);
-  sizer->Add(line3, wxGBPosition(5, 0), wxGBSpan(1, 3), wxEXPAND, 0);
+  sizer_->Add(line1, wxGBPosition(0, 0), wxGBSpan(1, 3), wxEXPAND, 0);
+  sizer_->Add(line2, wxGBPosition(2, 0), wxGBSpan(1, 3), wxEXPAND, 0);
+  sizer_->Add(line3, wxGBPosition(5, 0), wxGBSpan(1, 3), wxEXPAND, 0);
 
-  sizer->Add(mbti1, wxGBPosition(1, 0), wxGBSpan(1, 1), kFlags, kBorder);
-  sizer->Add(mbti2, wxGBPosition(3, 0), wxGBSpan(1, 1), kFlags, kBorder);
-  sizer->Add(mbti3, wxGBPosition(4, 0), wxGBSpan(1, 1), kFlags, kBorder);
-  sizer->Add(mbti4, wxGBPosition(6, 0), wxGBSpan(1, 1), kFlags, kBorder);
+  sizer_->Add(mbti1, wxGBPosition(1, 0), wxGBSpan(1, 1), kFlags, kBorder);
+  sizer_->Add(mbti2, wxGBPosition(3, 0), wxGBSpan(1, 1), kFlags, kBorder);
+  sizer_->Add(mbti3, wxGBPosition(4, 0), wxGBSpan(1, 1), kFlags, kBorder);
+  sizer_->Add(mbti4, wxGBPosition(6, 0), wxGBSpan(1, 1), kFlags, kBorder);
 
   const int kDescFlags = wxALL | wxALIGN_LEFT;
   const int kDescBorder = 6;
 
-  sizer->Add(desc1, wxGBPosition(1, 1), wxGBSpan(1, 1), kDescFlags,
-             kDescBorder);
-  sizer->Add(desc2, wxGBPosition(3, 1), wxGBSpan(1, 1), kDescFlags,
-             kDescBorder);
-  sizer->Add(desc3, wxGBPosition(4, 1), wxGBSpan(1, 1), kDescFlags,
-             kDescBorder);
-  sizer->Add(desc4, wxGBPosition(6, 1), wxGBSpan(1, 1), kDescFlags,
-             kDescBorder);
+  sizer_->Add(desc1, wxGBPosition(1, 1), wxGBSpan(1, 1), kDescFlags,
+              kDescBorder);
+  sizer_->Add(desc2, wxGBPosition(3, 1), wxGBSpan(1, 1), kDescFlags,
+              kDescBorder);
+  sizer_->Add(desc3, wxGBPosition(4, 1), wxGBSpan(1, 1), kDescFlags,
+              kDescBorder);
+  sizer_->Add(desc4, wxGBPosition(6, 1), wxGBSpan(1, 1), kDescFlags,
+              kDescBorder);
 
   labels_mbti_[0] = mbti1;
   labels_mbti_[1] = mbti2;
@@ -209,12 +208,11 @@ void MbtiInfoPanel::DoLayout() {
   descriptions_2_[1] = ext_desc2;
   descriptions_2_[2] = ext_desc3;
 
-  sizer->Add(ext_desc1, wxGBPosition(1, 2), wxGBSpan(1, 1), wxLEFT, 20);
-  sizer->Add(ext_desc2, wxGBPosition(3, 2), wxGBSpan(2, 1), wxLEFT, 20);
-  sizer->Add(ext_desc3, wxGBPosition(6, 2), wxGBSpan(1, 1), wxLEFT, 20);
+  sizer_->Add(ext_desc1, wxGBPosition(1, 2), wxGBSpan(1, 1), wxLEFT, 20);
+  sizer_->Add(ext_desc2, wxGBPosition(3, 2), wxGBSpan(2, 1), wxLEFT, 20);
+  sizer_->Add(ext_desc3, wxGBPosition(6, 2), wxGBSpan(1, 1), wxLEFT, 20);
 
-  this->SetSizer(sizer);
-  sizer->Fit(this);
+  this->SetSizer(sizer_);
 
   Layout();
 }

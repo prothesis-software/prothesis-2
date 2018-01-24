@@ -17,7 +17,7 @@ class LifeKeysInfoPanel : public wxPanel {
   LifeKeysInfoPanel(wxWindow* parent, wxWindowID id,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize, int64_t style = 0);
-  ~LifeKeysInfoPanel(){};
+  ~LifeKeysInfoPanel() { delete life_keys_keys_; };
 
   /**
    * Recreate the internal layout based on the given keys
@@ -36,6 +36,9 @@ class LifeKeysInfoPanel : public wxPanel {
    */
   void SetLifeKeyData(std::shared_ptr<cpptoml::table>(gui_state));
 
+  void OnLifeKeyChange(wxCommandEvent& event);  // NOLINT
+  std::vector<std::string> GetLifeKeys();
+
   struct LifeKey {
     std::string key;
     std::string title;
@@ -45,10 +48,15 @@ class LifeKeysInfoPanel : public wxPanel {
  private:
   void DoLayout();
   void CreateLifeKeysPanel();
+  void CreateChoiceBoxes(wxWindow* parent, wxSizer* injection_sizer,
+                                wxArrayString* keys);
   struct LifeKey GetLifeKeyDataByKey(std::string key);
   std::vector<std::string> active_life_keys_;
   std::vector<struct LifeKey> life_keys_;
+  wxArrayString* life_keys_keys_ = NULL;
+  wxChoice* choice_boxes_keys_[3];
   wxPanel* panel_life_keys_ = NULL;
+  wxBoxSizer* sizer_choice_boxes_ = NULL;
   wxBoxSizer* sizer_life_keys_ = NULL;
   wxStaticBoxSizer* sizer_ = NULL;
 };
