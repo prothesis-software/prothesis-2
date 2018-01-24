@@ -14,6 +14,7 @@
 #include <string>
 
 #include "src/data_panel.hpp"
+#include "src/components/mbti_info_panel.hpp"
 
 class DetailsPanel : public DataPanel {
  public:

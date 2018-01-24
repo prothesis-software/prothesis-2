@@ -23,6 +23,8 @@ ExternalPanel::~ExternalPanel() {
 }
 
 bool ExternalPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
+  mbti_info_panel_->SetMbtiInfoData(state);
+
   auto panel_table = state->get_table(this->GetPanelName());
 
   // Get root table from state
@@ -203,10 +205,12 @@ bool ExternalPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
     panel_career_->SetUserState(panel_table);
 
   } else {
-    wxLogDebug(_("No GUI table exists for panel ") + _(this->GetPanelName()));
+    wxLogDebug(_("No User table exists for panel ") + _(this->GetPanelName()));
     wxLogDebug(_("ExternalPanel::SetUserState() END"));
     return false;
   }  // panel_table
+
+  mbti_info_panel_->SetMbti(GetMbti());
 
   wxLogDebug(_("ExternalPanel::SetUserState() END"));
   return true;
@@ -261,19 +265,24 @@ std::vector<std::string> ExternalPanel::GetLifeKeys() {
   return result;
 }
 
+void ExternalPanel::OnMbtiChange(wxCommandEvent& event) {
+  std::string mbti = GetMbti();
+
+  if (mbti.length() == 4) {
+    mbti_info_panel_->SetMbti(mbti);
+  }
+}
+
 void ExternalPanel::DoLayout() {
   wxGridSizer* sizer = new wxGridSizer(1, 2, 0, 0);
   wxBoxSizer* sizer_mbti_keys = new wxBoxSizer(wxVERTICAL);
-  wxBoxSizer* sizer_mbti = new wxBoxSizer(wxVERTICAL);
+  wxStaticBoxSizer* sizer_mbti = new wxStaticBoxSizer(wxVERTICAL, this, "MBTI");
   wxBoxSizer* sizer_mbti_combo_boxes = new wxBoxSizer(wxHORIZONTAL);
   wxBoxSizer* sizer_career = new wxBoxSizer(wxVERTICAL);
 
   panel_career_ =
       new CareerTestPanel(this, wxID_ANY, "career_test", "Career Test");
   sizer_career->Add(panel_career_, 0, wxEXPAND | wxALL, 5);
-
-  wxStaticText* label_mbti = new wxStaticText(this, wxID_ANY, _("MBTI"));
-  sizer_mbti->Add(label_mbti, 0, wxALIGN_BOTTOM | wxALL, 5);
 
   std::vector<wxArrayString> mbti_tuples;
   AddMbtiTuple(&mbti_tuples, "I", "E");
@@ -282,13 +291,18 @@ void ExternalPanel::DoLayout() {
   AddMbtiTuple(&mbti_tuples, "J", "P");
 
   for (size_t i = 0; i < 4; i++) {
-    choice_boxes_mbti_[i] = new wxChoice(this, wxID_ANY, wxDefaultPosition,
-                                         wxSize(60, -1), mbti_tuples[i]);
+    choice_boxes_mbti_[i] =
+        new wxChoice(sizer_mbti->GetStaticBox(), wxID_ANY, wxDefaultPosition,
+                     wxSize(60, -1), mbti_tuples[i]);
     sizer_mbti_combo_boxes->Add(choice_boxes_mbti_[i], 0, 0, 0);
     sizer_mbti_combo_boxes->AddSpacer(5);
+    choice_boxes_mbti_[i]->Bind(wxEVT_CHOICE, &ExternalPanel::OnMbtiChange,
+                                this);
   }
 
-  sizer_mbti->Add(sizer_mbti_combo_boxes, 0, 0, 0);
+  mbti_info_panel_ = new MbtiInfoPanel(sizer_mbti->GetStaticBox(), wxID_ANY);
+  sizer_mbti->Add(sizer_mbti_combo_boxes, 0, wxALL, 6);
+  sizer_mbti->Add(mbti_info_panel_, 0, wxALL, 6);
 
   wxStaticText* label_keys = new wxStaticText(this, wxID_ANY, _("Life Keys"));
   sizer_keys_->Add(label_keys, 0, wxALIGN_BOTTOM, 0);

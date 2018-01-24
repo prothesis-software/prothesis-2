@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "src/career_test_panel.hpp"
+#include "src/components/mbti_info_panel.hpp"
 #include "src/data_panel.hpp"
 
 #define CHOICE_BOX_KEYS_COUNT 3
@@ -62,6 +63,7 @@ class ExternalPanel : public DataPanel {
   std::string GetMbti();
 
  private:
+  void OnMbtiChange(wxCommandEvent& event);  // NOLINT
   void DoLayout();
   void AddMbtiTuple(std::vector<wxArrayString>* source_vector, std::string str1,
                     std::string str2);
@@ -69,5 +71,6 @@ class ExternalPanel : public DataPanel {
   wxChoice* choice_boxes_keys_[CHOICE_BOX_KEYS_COUNT];
   wxChoice* choice_boxes_mbti_[4];
   CareerTestPanel* panel_career_ = NULL;
+  MbtiInfoPanel* mbti_info_panel_ = NULL;
 };
 #endif  // PANELS_EXTERNAL_PANEL_HPP_

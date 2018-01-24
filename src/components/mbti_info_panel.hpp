@@ -6,7 +6,18 @@
 #include <wx/wx.h>
 #endif
 
+#include <wx/gbsizer.h>
+#include <wx/statline.h>
+
+#include <sstream>
+#include <string>
+#include <memory>
+#include <vector>
+
 #include "include/cpptoml.h"
+
+#define DESC_1_WRAP_PX 300
+#define DESC_2_WRAP_PX 300
 
 class MbtiInfoPanel : public wxPanel {
  public:
@@ -14,6 +25,19 @@ class MbtiInfoPanel : public wxPanel {
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize, int64_t style = 0);
   ~MbtiInfoPanel(){};
+
+  struct MbtiInfo {
+    std::vector<std::string> descriptions_1;
+    std::vector<std::string> descriptions_2;
+  };
+
+  struct MbtiEntry {
+    std::string key;
+    std::string desc1;
+    std::string desc2;
+  };
+
+  struct MbtiInfo GetMbtiInfo(std::string mbti);
 
   /**
    * Example: SetMbti("ISTJ");
@@ -32,6 +56,15 @@ class MbtiInfoPanel : public wxPanel {
    * description_2 is optional.
    */
   void SetMbtiInfoData(std::shared_ptr<cpptoml::table>(gui_state));
+  struct MbtiInfoPanel::MbtiEntry GetMbtiEntry(std::string key);
+
+ private:
+  void DoLayout();
+  std::string mbti_;
+  std::vector<struct MbtiEntry> mbti_entries_;
+  wxStaticText* labels_mbti_[4];
+  wxStaticText* descriptions_1_[4];
+  wxStaticText* descriptions_2_[3];
 };
 
 #endif  // COMPONENTS_MBTI_INFO_HPP_
