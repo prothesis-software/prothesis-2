@@ -90,10 +90,9 @@ void DataManager::DeclarePanels() {
                              std::string("People Orientation")),
            PanelId::kPeopleOrientationPanel);
   // THEME ANALYSIS
-  AddPanel(new ThemeAnalysisPanel(main_frame_, wxID_ANY,
-                                  std::string("theme_analysis"),
-                                  std::string("Theme Analysis"),
-                                  wxDefaultPosition, wxDefaultSize, 0),
+  AddPanel(new ThemeAnalysisPanel(
+               main_frame_, wxID_ANY, std::string("theme_analysis"),
+               std::string("Analysis"), wxDefaultPosition, wxDefaultSize, 0),
            PanelId::kThemeAnalysisPanel);
   // CAREER ORIENTATION
   AddPanel(new CareerOrientationPanel(assessments_window_, wxID_ANY,
