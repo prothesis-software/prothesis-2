@@ -7,10 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Display life key information on External Panel (closes #137)
+- Display MBTI Info on External panel and Themes panel (closes #136)
+- Scroll bars for panels that are larger than the MainFrame
 - Career orientation panel (#76)
 - Added email address field to Details panel (#111)
 - Limit checkboxes and priorities to 7 (#120)
 - Menu bar with About dialog (#121)
+
+### Changed
+- Change "Theme Analysis" to "Analysis" #141
+- Place Roles tab before Skills tab #135
+- Float external panel
 
 ## [2.0.0-dev.2] - 2017-01-15
 ### Added

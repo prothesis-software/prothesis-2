@@ -1,195 +1,266 @@
-###################################
-# SPECIFICATION
-###############
-# - The top level key is the id string of the responsible panel
-# - https://toolkit.site/format.html
-# --------------------------------
+# Formatter:
+#   https://toolkit.site/format.html
 
 ####################################
 # PASSION
 ###########
 
 [passion]
-    [[passion.question]]
-        question = "What are your 3 favourite topics to discuss? What could you talk about for hours on end?"
-    [[passion.question]]
-        question = "What things in life really make you feel free?"
-    [[passion.question]]
-        question = "Let 5 people who love and know you best tell you that you would be amazing at doing for a living."
-    [[passion.question]]
-        question = "What naturally flows for you without you even having to try?"
-    [[passion.question]]
-        question = "If you were to wake up tomorrow feeling truly free and happily excited about your day ahead, what  would you be off to do?"
-    [[passion.question]]
-        question = "You are totally 'in your element' and time seems to have disappeared. What are you doing?"
-    [[passion.question]]
-        question = "It is your birthday and somebody buys you an annual magazine subscription. Which type would you love it to be?"
-    [[passion.question]]
-        question = "What areas of life are you naturally drawn to?"
-    [[passion.question]]
-        question = "What do people ask you for information/advice about? Which areas are you deemed to be a little fountain of knowledge?"
-    [[passion.question]]
-        question = "If you were to pioneer a cause around the world, and it was guaranteed to be a success, what would it be?"
-    [[passion.question]]
-        question = "What do you love to do when you have free time and what is it that gives you that real buzz of excitement?"
-    [[passion.question]]
-        question = "What topics interest you and what would you really love to know lots more about?"
-    [[passion.question]]
-        question = "You love helping people with these 3 different things. What are they?"
-    [[passion.question]]
-        question = "What interests or hobbies have you had in the past few years that intrigue you and might hold the potential for a life passion?"
-    [[passion.question]]
-        question = "What would be hard for you to give up?"
-    [[passion.question]]
-        question = "Now summarise the central themes from your previous answers."
+
+  [[passion.question]]
+  question = "What are your 3 favourite topics to discuss? What could you talk about for hours on end?"
+
+  [[passion.question]]
+  question = "What things in life really make you feel free?"
+
+  [[passion.question]]
+  question = "Let 5 people who love and know you best tell you that you would be amazing at doing for a living."
+
+  [[passion.question]]
+  question = "What naturally flows for you without you even having to try?"
+
+  [[passion.question]]
+  question = "If you were to wake up tomorrow feeling truly free and happily excited about your day ahead, what  would you be off to do?"
+
+  [[passion.question]]
+  question = "You are totally 'in your element' and time seems to have disappeared. What are you doing?"
+
+  [[passion.question]]
+  question = "It is your birthday and somebody buys you an annual magazine subscription. Which type would you love it to be?"
+
+  [[passion.question]]
+  question = "What areas of life are you naturally drawn to?"
+
+  [[passion.question]]
+  question = "What do people ask you for information/advice about? Which areas are you deemed to be a little fountain of knowledge?"
+
+  [[passion.question]]
+  question = "If you were to pioneer a cause around the world, and it was guaranteed to be a success, what would it be?"
+
+  [[passion.question]]
+  question = "What do you love to do when you have free time and what is it that gives you that real buzz of excitement?"
+
+  [[passion.question]]
+  question = "What topics interest you and what would you really love to know lots more about?"
+
+  [[passion.question]]
+  question = "You love helping people with these 3 different things. What are they?"
+
+  [[passion.question]]
+  question = "What interests or hobbies have you had in the past few years that intrigue you and might hold the potential for a life passion?"
+
+  [[passion.question]]
+  question = "What would be hard for you to give up?"
+
+  [[passion.question]]
+  question = "Now summarise the central themes from your previous answers."
 
 #########################################3
 # PEOPLE ID
 ################
 
 [people_id]
-    [[people_id.question]]
-        question = "5 people that inspire you most in the world stand before you. Who are they and what is it about them that sparks something within you?"
-    [[people_id.question]]
-        question = "Who is someone in your life or in history whose life and work inspires and excites you? Why?"
-    [[people_id.question]]
-        question = "Who influenced your life most and why?"
-    [[people_id.question]]
-        question = "With which character in a book or movie did you relate well and why?"
-    [[people_id.question]]
-        question = "Which super hero was you favourite when you were small? What can that say about you?"
-    [[people_id.question]]
-        question = "Now summarise the central themes from your previous answers."
+
+  [[people_id.question]]
+  question = "5 people that inspire you most in the world stand before you. Who are they and what is it about them that sparks something within you?"
+
+  [[people_id.question]]
+  question = "Who is someone in your life or in history whose life and work inspires and excites you? Why?"
+
+  [[people_id.question]]
+  question = "Who influenced your life most and why?"
+
+  [[people_id.question]]
+  question = "With which character in a book or movie did you relate well and why?"
+
+  [[people_id.question]]
+  question = "Which super hero was you favourite when you were small? What can that say about you?"
+
+  [[people_id.question]]
+  question = "Now summarise the central themes from your previous answers."
 
 #########################################
 # DREAMS
 ##############
 
 [dreams]
-    [[dreams.question]]
-        question = "When you were a child, what did you always dream of doing when you got older? What do they symbolise?"
-    [[dreams.question]]
-        question = "What are some childhood dreams or interests you were never able to fully explore but still find intriguing?"
-    [[dreams.question]]
-        question = "What difference do you want to make in the world? What legacy would you like to leave behind?"
-    [[dreams.question]]
-        question = "You inherit R100 million, how would it change your life? What would you do with your days?"
-    [[dreams.question]]
-        question = "When you are dead and gone, what would you like people to say about the way you lived your life?"
-    [[dreams.question]]
-        question = "What careers do you have wild dreams of having?"
-    [[dreams.question]]
-        question = "If someone were to pay all of your living costs and expenses for 2 years, what work would you pursue in that time?"
-    [[dreams.question]]
-        question = "If you were to change 3 things in the world for the greater good, what would they be?"
-    [[dreams.question]]
-        question = "What is it that you would regret not doing with your life, if you were to die tomorrow?"
-    [[dreams.question]]
-        question = "What piece of knowledge do you feel as though you would love to share with the world?"
-    [[dreams.question]]
-        question = "The person that loves you most in the whole world asks you what you need to be doing with your life in order to be really happy. How do you respond?"
-    [[dreams.question]]
-        question = "If you had 5 years left to live, what would you do?"
-    [[dreams.question]]
-        question = "How have your fears and limiting beliefs held you back from finding or pursuing your passion in the past?"
-    [[dreams.question]]
-        question = "Are there any people in your life preventing you from pursuing your passion? Who are they and how are they holding you back?"
-    [[dreams.question]]
-        question = "What is something (or several things) you'd really like to achieve before you die?"
-    [[dreams.question]]
-        question = "Now summarise the central themes from your previous answers."
+
+  [[dreams.question]]
+  question = "When you were a child, what did you always dream of doing when you got older? What do they symbolise?"
+
+  [[dreams.question]]
+  question = "What are some childhood dreams or interests you were never able to fully explore but still find intriguing?"
+
+  [[dreams.question]]
+  question = "What difference do you want to make in the world? What legacy would you like to leave behind?"
+
+  [[dreams.question]]
+  question = "You inherit R100 million, how would it change your life? What would you do with your days?"
+
+  [[dreams.question]]
+  question = "When you are dead and gone, what would you like people to say about the way you lived your life?"
+
+  [[dreams.question]]
+  question = "What careers do you have wild dreams of having?"
+
+  [[dreams.question]]
+  question = "If someone were to pay all of your living costs and expenses for 2 years, what work would you pursue in that time?"
+
+  [[dreams.question]]
+  question = "If you were to change 3 things in the world for the greater good, what would they be?"
+
+  [[dreams.question]]
+  question = "What is it that you would regret not doing with your life, if you were to die tomorrow?"
+
+  [[dreams.question]]
+  question = "What piece of knowledge do you feel as though you would love to share with the world?"
+
+  [[dreams.question]]
+  question = "The person that loves you most in the whole world asks you what you need to be doing with your life in order to be really happy. How do you respond?"
+
+  [[dreams.question]]
+  question = "If you had 5 years left to live, what would you do?"
+
+  [[dreams.question]]
+  question = "How have your fears and limiting beliefs held you back from finding or pursuing your passion in the past?"
+
+  [[dreams.question]]
+  question = "Are there any people in your life preventing you from pursuing your passion? Who are they and how are they holding you back?"
+
+  [[dreams.question]]
+  question = "What is something (or several things) you'd really like to achieve before you die?"
+
+  [[dreams.question]]
+  question = "Now summarise the central themes from your previous answers."
 
 #########################################
 # VALUES
 ##########################
 
 [values]
-    [[values.question]]
-        question = "What are your top  most deeply held core values?"
-    [[values.question]]
-        question = "How does your life currently support or reflect those values?"
-    [[values.question]]
-        question = "Which of your top values are you ignoring or not giving enough attention?"
-    [[values.question]]
-        question = "What values will you never compromise?"
-    [[values.question]]
-        question = "Which jobs would encompass your core values?"
-    [[values.question]]
-        question = "Now summarise the central themes from your previous answers."
+
+  [[values.question]]
+  question = "What are your top  most deeply held core values?"
+
+  [[values.question]]
+  question = "How does your life currently support or reflect those values?"
+
+  [[values.question]]
+  question = "Which of your top values are you ignoring or not giving enough attention?"
+
+  [[values.question]]
+  question = "What values will you never compromise?"
+
+  [[values.question]]
+  question = "Which jobs would encompass your core values?"
+
+  [[values.question]]
+  question = "Now summarise the central themes from your previous answers."
 
 #########################################
 # SPOKEN WORDS
 #######################
 
 [spoken_words]
-    [[spoken_words.question]]
-        question = "Things people say about you has a big impact on your life and often reveal a lot more than you think...\nFill these commonly spoken words below"
-    [[spoken_words.question]]
-        question = "Now summarise the central themes from your answer and type them below"
+
+  [[spoken_words.question]]
+  question = "Things people say about you has a big impact on your life and often reveal a lot more than you think...\nFill these commonly spoken words below"
+
+  [[spoken_words.question]]
+  question = "Now summarise the central themes from your answer and type them below"
 
 ####################################
 # SKILLS
 ###########
 
 [skills]
-    [[skills.question]]
-        question = "Administration"
-    [[skills.question]]
-        question = "Analyse"
-    [[skills.question]]
-        question = "Artistic"
-    [[skills.question]]
-        question = "Communicate"
-    [[skills.question]]
-        question = "Computers"
-    [[skills.question]]
-        question = "Control"
-    [[skills.question]]
-        question = "Counseling"
-    [[skills.question]]
-        question = "Creative"
-    [[skills.question]]
-        question = "Devision Making"
-    [[skills.question]]
-        question = "Empathy"
-    [[skills.question]]
-        question = "Entertaining"
-    [[skills.question]]
-        question = "Handwork"
-    [[skills.question]]
-        question = "Marketing"
-    [[skills.question]]
-        question = "Negotiate"
-    [[skills.question]]
-        question = "Numeracy"
-    [[skills.question]]
-        question = "Objectivity"
-    [[skills.question]]
-        question = "Organise"
-    [[skills.question]]
-        question = "Planning"
-    [[skills.question]]
-        question = "Playing Musical Instruments"
-    [[skills.question]]
-        question = "Practical"
-    [[skills.question]]
-        question = "Public Speaking"
-    [[skills.question]]
-        question = "Receptive for people"
-    [[skills.question]]
-        question = "Sharing"
-    [[skills.question]]
-        question = "Sport"
-    [[skills.question]]
-        question = "Strategic Planning"
-    [[skills.question]]
-        question = "Study"
-    [[skills.question]]
-        question = "Taking the lead"
-    [[skills.question]]
-        question = "Teaching"
-    [[skills.question]]
-        question = "Writing"
+
+  [[skills.question]]
+  question = "Administration"
+
+  [[skills.question]]
+  question = "Analyse"
+
+  [[skills.question]]
+  question = "Artistic"
+
+  [[skills.question]]
+  question = "Communicate"
+
+  [[skills.question]]
+  question = "Computers"
+
+  [[skills.question]]
+  question = "Control"
+
+  [[skills.question]]
+  question = "Counseling"
+
+  [[skills.question]]
+  question = "Creative"
+
+  [[skills.question]]
+  question = "Devision Making"
+
+  [[skills.question]]
+  question = "Empathy"
+
+  [[skills.question]]
+  question = "Entertaining"
+
+  [[skills.question]]
+  question = "Handwork"
+
+  [[skills.question]]
+  question = "Marketing"
+
+  [[skills.question]]
+  question = "Negotiate"
+
+  [[skills.question]]
+  question = "Numeracy"
+
+  [[skills.question]]
+  question = "Objectivity"
+
+  [[skills.question]]
+  question = "Organise"
+
+  [[skills.question]]
+  question = "Planning"
+
+  [[skills.question]]
+  question = "Playing Musical Instruments"
+
+  [[skills.question]]
+  question = "Practical"
+
+  [[skills.question]]
+  question = "Public Speaking"
+
+  [[skills.question]]
+  question = "Receptive for people"
+
+  [[skills.question]]
+  question = "Sharing"
+
+  [[skills.question]]
+  question = "Sport"
+
+  [[skills.question]]
+  question = "Strategic Planning"
+
+  [[skills.question]]
+  question = "Study"
+
+  [[skills.question]]
+  question = "Taking the lead"
+
+  [[skills.question]]
+  question = "Teaching"
+
+  [[skills.question]]
+  question = "Writing"
 
 ####################
 # PRIORITIES
@@ -917,71 +988,279 @@
   tooltip = "You like get do the things done. You like working hard to achieve your goals."
 
   ###############
-  # CAREER GUIDANCE
+  # CAREER ORIENTATION
   ######
 
   [career_orientation]
 
   [[career_orientation.question]]
   title = "Language & Communication"
-  options = ["Writing for a newspaper", "Doing translations", "Reading news reports on the radio or TV", "Writing stories or poetry", "Writing advertisements and scripts for TV, film and radio commercials"]
+  options = [
+    "Writing for a newspaper",
+    "Doing translations",
+    "Reading news reports on the radio or TV",
+    "Writing stories or poetry",
+    "Writing advertisements and scripts for TV, film and radio commercials"
+  ]
+
   [[career_orientation.question]]
   title = "Applied/Visual Arts"
-  options =["interested in this area, you would probably enjo","Taking photos for a magazine or newspaper","Drawing and designing buildings","Decorating the interior of houses","Creating works of art","Designing clothes"]
+  options = [
+    "interested in this area, you would probably enjo",
+    "Taking photos for a magazine or newspaper",
+    "Drawing and designing buildings",
+    "Decorating the interior of houses",
+    "Creating works of art",
+    "Designing clothes"
+  ]
+
   [[career_orientation.question]]
   title = "Performing Arts"
-  options =["Learning to play a musical instrument","Acting in a play or film","Dancing and singing in a musical","Directing a TV series or film","Selecting and playing popular CD's at a radio station"]
+  options = [
+    "Learning to play a musical instrument",
+    "Acting in a play or film",
+    "Dancing and singing in a musical",
+    "Directing a TV series or film",
+    "Selecting and playing popular CD's at a radio station"
+  ]
+
   [[career_orientation.question]]
   title = "Marketing & Direct Sales"
-  options =["Selling goods from door to door","Purchasing and selling anything","Making purchases on behalf of a shop or business","Studying the needs of consumers","Introducing consumers to new products"]
+  options = [
+    "Selling goods from door to door",
+    "Purchasing and selling anything",
+    "Making purchases on behalf of a shop or business",
+    "Studying the needs of consumers",
+    "Introducing consumers to new products"
+  ]
+
   [[career_orientation.question]]
   title = "Management & Planning"
-  options =["Supervising the activities of people","Influencing others to accept your point of view","Planning other people's work","Managing a big project or task","Acting as the leader of a group of people"]
+  options = [
+    "Supervising the activities of people",
+    "Influencing others to accept your point of view",
+    "Planning other people's work",
+    "Managing a big project or task",
+    "Acting as the leader of a group of people"
+  ]
+
   [[career_orientation.question]]
   title = "Clerical & Secretarial"
-  options =["Doing routine tasks","Typing business letters and reports","Filing documents","Receiving and sending off documents and parcels","Arranging appointment"]
+  options = [
+    "Doing routine tasks",
+    "Typing business letters and reports",
+    "Filing documents",
+    "Receiving and sending off documents and parcels",
+    "Arranging appointment"
+  ]
+
   [[career_orientation.question]]
   title = "Numerical & Financial Transactions"
-  options =["Working with figures most of the time","Keeping careful record of financial transactions","Checking the financial statements of a company","Drawing up the budget of a business","Keeping record of the costs of a shop"]
+  options = [
+    "Working with figures most of the time",
+    "Keeping careful record of financial transactions",
+    "Checking the financial statements of a company",
+    "Drawing up the budget of a business",
+    "Keeping record of the costs of a shop"
+  ]
+
   [[career_orientation.question]]
   title = "Nature (Plants & Animals)"
-  options =["Working on a farm with crops or cattle","Preparing a vegetable garden","Looking after animals","Working in a nursery","Trying to conserve the environment"]
+  options = [
+    "Working on a farm with crops or cattle",
+    "Preparing a vegetable garden",
+    "Looking after animals",
+    "Working in a nursery",
+    "Trying to conserve the environment"
+  ]
+
   [[career_orientation.question]]
   title = "Building & Construction"
-  options =["Planning and overseeing building projects","Preparing estimates of the costs involved in constructing a building","Tiling floors of buildings and houses","Building and repairing houses","Construction of big buildings and roads"]
+  options = [
+    "Planning and overseeing building projects",
+    "Preparing estimates of the costs involved in constructing a building",
+    "Tiling floors of buildings and houses",
+    "Building and repairing houses",
+    "Construction of big buildings and roads"
+  ]
+
   [[career_orientation.question]]
   title = "Manufacturing, Repairing and Servicing Machines"
-  options =["Fixing the engine of a motor car","Installing and repairing things that work with electricity","Mending broken things","Doing woodwork or other handwork","Using technical tools"]
+  options = [
+    "Fixing the engine of a motor car",
+    "Installing and repairing things that work with electricity",
+    "Mending broken things",
+    "Doing woodwork or other handwork",
+    "Using technical tools"
+  ]
+
   [[career_orientation.question]]
   title = "Engineering & Related Technologies"
-  options =["Designing mechanical equipment","Manufacturing and maintaining electrical/electronic equipment","Designing and manufacturing systems and components in the telecommunication area","Monitoring and operating instruments (e.g. electronic, mechanical etc.) and systems","Manufacturing and installing technical instruments"]
+  options = [
+    "Designing mechanical equipment",
+    "Manufacturing and maintaining electrical/electronic equipment",
+    "Designing and manufacturing systems and components in the telecommunication area",
+    "Monitoring and operating instruments (e.g. electronic, mechanical etc.) and systems",
+    "Manufacturing and installing technical instruments"
+  ]
+
   [[career_orientation.question]]
   title = "Information Technology/Computer Science"
-  options =["Writing computer programs","Developing data bases","Developing systems to solve problems with the help of computers","Designing and installing computer equipment","Design and implement computer systems"]
+  options = [
+    "Writing computer programs",
+    "Developing data bases",
+    "Developing systems to solve problems with the help of computers",
+    "Designing and installing computer equipment",
+    "Design and implement computer systems"
+  ]
+
   [[career_orientation.question]]
   title = "Natural Science & Mathematics"
-  options =["Conducting experiments in a science laboratory","Studying plants or animals","Using knowledge of maths and statistics in your work","Studying physical or chemistry science matters","Using a microscope"]
+  options = [
+    "Conducting experiments in a science laboratory",
+    "Studying plants or animals",
+    "Using knowledge of maths and statistics in your work",
+    "Studying physical or chemistry science matters",
+    "Using a microscope"
+  ]
+
   [[career_orientation.question]]
   title = "Health Science & Technology"
-  options =["Treating people with ailments or injuries","Mixing and preparing medicine","Studying the causes of diseases","Treating animals with ailments"]
+  options = [
+    "Treating people with ailments or injuries",
+    "Mixing and preparing medicine",
+    "Studying the causes of diseases",
+    "Treating animals with ailments"
+  ]
+
   [[career_orientation.question]]
   title = "Social & Economic Sciences"
-  options =["Studying the behavior of humans","Analysing and describing economic issues","Reading history books","Studying the culture and life style of human societies","Conducting public opinion surveys and interpreting the results"]
+  options = [
+    "Studying the behavior of humans",
+    "Analysing and describing economic issues",
+    "Reading history books",
+    "Studying the culture and life style of human societies",
+    "Conducting public opinion surveys and interpreting the results"
+  ]
+
   [[career_orientation.question]]
   title = "Law"
-  options =["Presenting cases in court","Speaking in public","Studying legislation documents","Identifying facts from irrelevant detail"]
+  options = [
+    "Presenting cases in court",
+    "Speaking in public",
+    "Studying legislation documents",
+    "Identifying facts from irrelevant detail"
+  ]
+
   [[career_orientation.question]]
   title = "Education & Social Services"
-  options =["Helping people with their problems","Looking after children","Doing voluntary work in poverty stricken communities","Attending to the spiritual needs of people"]
+  options = [
+    "Helping people with their problems",
+    "Looking after children",
+    "Doing voluntary work in poverty stricken communities",
+    "Attending to the spiritual needs of people"
+  ]
+
   [[career_orientation.question]]
   title = "Nursing & Caring"
-  options =["Caring for the sick","Giving first aid to people","Working as a nurse in a hospital","Assisting physically disabled people to function independently","Attending to the needs of babies or small children"]
+  options = [
+    "Caring for the sick",
+    "Giving first aid to people",
+    "Working as a nurse in a hospital",
+    "Assisting physically disabled people to function independently",
+    "Attending to the needs of babies or small children"
+  ]
+
   [[career_orientation.question]]
   title = "Sport"
-  options =["Training people to play sport","Demonstrating exercises to help people keep fit","Organizing and coordinating sports events","Officiating at a sport event (rugby, soccer, tennis, etc.)","Taking part in competitive sports events to become a professional"]
+  options = [
+    "Training people to play sport",
+    "Demonstrating exercises to help people keep fit",
+    "Organizing and coordinating sports events",
+    "Officiating at a sport event (rugby, soccer, tennis, etc.)",
+    "Taking part in competitive sports events to become a professional"
+  ]
+
   [[career_orientation.question]]
   title = "Law Enforcement & Protection Services"
-  options =["Protecting the country","Maintaining law and order","Ensuring that people obey the traffic rules","Working as a guard at a prison","Protecting buildings against fire"]
+  options = [
+    "Protecting the country",
+    "Maintaining law and order",
+    "Ensuring that people obey the traffic rules",
+    "Working as a guard at a prison",
+    "Protecting buildings against fire"
+  ]
+
   [[career_orientation.question]]
   title = "Personal Services"
-  options =["Looking after the needs and comfort of passengers in an airplane","Rendering catering services","Offering and maintaining cleaning services for big companies","Transporting people by bus or car","Running a guest house"]
+  options = [
+    "Looking after the needs and comfort of passengers in an airplane",
+    "Rendering catering services",
+    "Offering and maintaining cleaning services for big companies",
+    "Transporting people by bus or car",
+    "Running a guest house"
+  ]
+#######################
+# MBTI INFO
+#############
+[mbti_info]
+
+  [[mbti_info.type]]
+  key = "E"
+  description_1 = "Outward focus, communication, energy"
+  description_2 = "Direct involvement and implementation"
+
+  [[mbti_info.type]]
+  key = "I"
+  description_1 = "Thinkers, concepts, writing, alone time"
+  description_2 = "Direct or indirect involvement and implementation with enough time alone"
+
+  [[mbti_info.type]]
+  key = "N"
+  description_1 = "Innovative, holistic, see new possibilities"
+  description_2 = ""
+
+  [[mbti_info.type]]
+  key = "S"
+  description_1 = "Practical and detail orientated"
+  description_2 = ""
+
+  [[mbti_info.type]]
+  key = "F"
+  description_1 = "eople oriented, sympathetic, personal"
+  description_2 = ""
+
+  [[mbti_info.type]]
+  key = "T"
+  description_1 = "Objective, analytical, logical"
+  description_2 = ""
+
+  [[mbti_info.type]]
+  key = "P"
+  description_1 = "Flexible, spontaneous, philosophical"
+  description_2 = "Spontaneous and flexible environment"
+
+  [[mbti_info.type]]
+  key = "J"
+  description_1 = "Order, control, structure"
+  description_2 = "Organized, structured and conclusive environment"
+
+  [[mbti_info.type]]
+  key = "NF"
+  description_1 = ""
+  description_2 = "You will be innovative in the development of people on a more personal basis"
+
+  [[mbti_info.type]]
+  key = "NT"
+  description_1 = ""
+  description_2 = "You will be innovative in some of the following: development of systems, patents, organizations, management or people on a less personal level"
+
+  [[mbti_info.type]]
+  key = "SF"
+  description_1 = ""
+  description_2 = "You will want to help people by working hands on and in a practical manner with them"
+
+  [[mbti_info.type]]
+  key = "ST"
+  description_1 = ""
+  description_2 = "You will want to manage or bring practical solutions to systems, organizations, management or people on a less personal level"

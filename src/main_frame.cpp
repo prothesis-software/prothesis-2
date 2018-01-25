@@ -38,16 +38,21 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
   DoLayout();
   Fit();
 
-  wxSize minSize = GetOverallMinSize();
+  wxSize min_size = GetOverallMinSize();
 
   // To fix scroll bars on theme analysis panel
-  minSize.IncBy(10, 10);
+  min_size.IncBy(10, 10);
 
   // We want to be able to make smaller than the giant
   // analysis panel, so this is temporarily disabled
   // SetMinSize(minSize);
 
-  SetSize(minSize);
+  SetSize(min_size);
+
+  // Add scrol bars
+  for (size_t i = 0; i < DataManager::kPanelCount; i++) {
+    data_manager_->panels_[i]->SetScrollRate(10, 10);
+  }
 
   this->Bind(wxEVT_SIZE, &MainFrame::OnSizeChange, this);
 }
@@ -105,6 +110,8 @@ void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
 
     if (panel) {
       panel->OnTabActivate();
+      active_panel_name_ = panel->GetPanelName();
+      wxLogDebug(_(active_panel_name_));
     }
   }
 
@@ -135,10 +142,12 @@ bool MainFrame::DisplayNextPanel() {
   return false;
 }
 
+// NOTE: Modified to only return size with Analysis tab
 wxSize MainFrame::GetOverallMinSize() {
   Freeze();
   wxLogDebug(_("Getting best size..."));
   wxSize minSize = GetSize();
+  wxSize theme_size = GetSize();
 
   wxLogDebug(_(std::to_string(minSize.x)) + _(", ") +
              _(std::to_string(minSize.y)));
@@ -156,6 +165,10 @@ wxSize MainFrame::GetOverallMinSize() {
     if (tmpSize.y > minSize.y) {
       minSize.y = tmpSize.y;
     }
+
+    if (active_panel_name_.compare("theme_analysis") == 0) {
+      theme_size = GetSize();
+    }
   }
 
   wxLogDebug(_("Best size = ") + _(std::to_string(minSize.x)) + _(", ") +
@@ -165,12 +178,21 @@ wxSize MainFrame::GetOverallMinSize() {
   notebook_assessments_->SetSelection(0);
 
   Thaw();
-  return minSize;
+  return theme_size;
+}
+
+void MainFrame::TriggerRefresh() {
+  wxSize s = this->GetSize();
+  wxLogDebug(_(std::to_string(s.GetX()) + ", " + std::to_string(s.GetY())));
+  panel_main_->SetSize(GetClientSize());
+  this->FitInside();
 }
 
 void MainFrame::OnSizeChange(wxSizeEvent& event) {
   wxLogDebug("Resize MainFrame");
 
+  wxSize s = this->GetSize();
+  wxLogDebug(_(std::to_string(s.GetX()) + ", " + std::to_string(s.GetY())));
   panel_main_->SetSize(GetClientSize());
   this->FitInside();
 }

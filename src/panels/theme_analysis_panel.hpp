@@ -13,6 +13,7 @@
 #include "src/checkbox_panel.hpp"
 #include "src/coloured_button.hpp"
 #include "src/coloured_button_container.hpp"
+#include "src/components/mbti_info_panel.hpp"
 #include "src/data_panel.hpp"
 #include "src/panels/external_panel.hpp"
 #include "src/panels/priorities_panel.hpp"
@@ -63,7 +64,6 @@ class ThemeAnalysisPanel : public DataPanel {
   void UnbindButtons(ColouredButtonContainer* container);
   wxStaticBoxSizer* CreateColourSelection();
   wxBoxSizer* CreateThemePanels();
-  wxPanel* CreateMbtiPanel();
   wxPanel* CreateQuestionDisplay(std::string source_panel_name,
                                  std::string panel_title);
   /**
@@ -107,6 +107,7 @@ class ThemeAnalysisPanel : public DataPanel {
   int active_colour_index_ = 0;
   wxPanel* panel_colour_preview_ = NULL;
   wxStaticText* label_mbti_ = NULL;
+  MbtiInfoPanel* panel_mbti_info_ = NULL;
 };
 
 #endif  // PANELS_THEME_ANALYSIS_PANEL_HPP_

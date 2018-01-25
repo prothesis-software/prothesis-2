@@ -80,7 +80,8 @@ if [ "$TARGET" == "linux" ]; then
         cd $BUILD_DIR
         ../configure --prefix=$LINUX_INSTALL_DIR \
                      --enable-unicode \
-                     --with-gtk=2
+                     --with-gtk=2 \
+                     CXXFLAGS="--std=c++11"
         make -j $(nproc)
         make install
     else

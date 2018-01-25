@@ -13,6 +13,7 @@
 #include <memory>
 #include <string>
 
+#include "src/components/mbti_info_panel.hpp"
 #include "src/data_panel.hpp"
 
 class DetailsPanel : public DataPanel {
