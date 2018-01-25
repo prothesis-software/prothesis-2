@@ -216,7 +216,7 @@ void LifeKeysInfoPanel::DoLayout() {
   sizer_ = new wxStaticBoxSizer(wxVERTICAL, this, "Life Keys");
 
   sizer_choice_boxes_ = new wxBoxSizer(wxHORIZONTAL);
-  sizer_->Add(sizer_choice_boxes_, 0, 0, 0);
+  sizer_->Add(sizer_choice_boxes_, 0, wxALL, 6);
 
   CreateLifeKeysPanel();
 

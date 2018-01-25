@@ -9,9 +9,9 @@
 #include <wx/gbsizer.h>
 #include <wx/statline.h>
 
+#include <memory>
 #include <sstream>
 #include <string>
-#include <memory>
 #include <vector>
 
 #include "include/cpptoml.h"
@@ -57,8 +57,12 @@ class MbtiInfoPanel : public wxPanel {
    */
   void SetMbtiInfoData(std::shared_ptr<cpptoml::table>(gui_state));
   struct MbtiInfoPanel::MbtiEntry GetMbtiEntry(std::string key);
+  std::vector<std::string> GetMbtiAsVector();
+  std::string GetMbti();
+  void SetMbti(std::vector<std::string> mbti);
 
  private:
+  void OnMbtiChange(wxCommandEvent& event);  // NOLINT
   void DoLayout();
   std::string mbti_;
   std::vector<struct MbtiEntry> mbti_entries_;
@@ -66,6 +70,10 @@ class MbtiInfoPanel : public wxPanel {
   wxStaticText* descriptions_1_[4];
   wxStaticText* descriptions_2_[3];
   wxGridBagSizer* sizer_ = NULL;
+  wxChoice* choice_boxes_mbti_[4];
+  wxStaticBoxSizer* sizer_root_ = NULL;
+  void AddMbtiTuple(std::vector<wxArrayString>* source_vector, std::string str1,
+                    std::string str2);
 };
 
 #endif  // COMPONENTS_MBTI_INFO_HPP_
