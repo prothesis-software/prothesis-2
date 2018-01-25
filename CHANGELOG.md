@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Add recommendation text box to Analysis panel ()#147)
+- Add recommendation text box to Analysis panel (#147)
 - Display life key information on External Panel (#137)
 - Display MBTI Info on External panel and Themes panel (#136)
 - Scroll bars for panels that are larger than the MainFrame
