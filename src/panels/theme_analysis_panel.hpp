@@ -20,6 +20,9 @@
 #include "src/questions_panel.hpp"
 #include "src/theme_panel.hpp"
 
+#define TEXT_CTRL_WIDTH 400
+#define TEXT_CTRL_HEIGHT 100
+
 /**
  * 1. Receives GUI state from data manager
  * 2. Constructs gui from own key
@@ -108,6 +111,7 @@ class ThemeAnalysisPanel : public DataPanel {
   wxPanel* panel_colour_preview_ = NULL;
   wxStaticText* label_mbti_ = NULL;
   MbtiInfoPanel* panel_mbti_info_ = NULL;
+  wxTextCtrl* text_recommendation_ = NULL;
 };
 
 #endif  // PANELS_THEME_ANALYSIS_PANEL_HPP_
