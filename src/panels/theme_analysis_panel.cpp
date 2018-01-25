@@ -64,6 +64,9 @@ std::shared_ptr<cpptoml::table> ThemeAnalysisPanel::GetUserState() {
                         theme_panels_.at(i)->GetUserState());
   }
 
+  panel_table->insert("recommendation",
+                      text_recommendation_->GetValue().ToStdString());
+
   return panel_table;
 }
 
@@ -77,6 +80,11 @@ bool ThemeAnalysisPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
 
     for (size_t i = 0; i < theme_panels_.size(); i++) {
       theme_panels_.at(i)->SetUserState(panel_table);
+    }
+
+    auto rec = panel_table->get_as<std::string>("recommendation");
+    if (rec) {
+      text_recommendation_->SetValue(*rec);
     }
   }
 
@@ -183,10 +191,10 @@ wxPanel* ThemeAnalysisPanel::CreateQuestionDisplay(
   wxTextCtrl* text_ctrl = new wxTextCtrl(
       sizer->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition,
       wxDefaultSize, wxTE_MULTILINE | wxTE_READONLY);
-  text_ctrl->SetMinSize(wxSize(400, 100));
+  text_ctrl->SetMinSize(wxSize(TEXT_CTRL_WIDTH, TEXT_CTRL_HEIGHT));
   QuestionsPanel* source_panel =
       static_cast<QuestionsPanel*>(GetPanelByName(source_panel_name));
-  sizer->Add(text_ctrl, 0, 0, 0);
+  sizer->Add(text_ctrl, 0, wxALL, 6);
   panel->SetSizer(sizer);
 
   QuestionDisplay tuple;
@@ -360,6 +368,16 @@ void ThemeAnalysisPanel::DoLayout() {
   sizer_left->Add(sizer_mbti_colour, 0, flags, border);
   sizer_left->Add(sizer_boxes, 0, flags, border);
 
+  wxStaticBoxSizer* sizer_recommentation =
+      new wxStaticBoxSizer(wxVERTICAL, this, "Recommendation");
+
+  text_recommendation_ =
+      new wxTextCtrl(sizer_recommentation->GetStaticBox(), wxID_ANY,
+                     wxEmptyString, wxDefaultPosition,
+                     wxSize(TEXT_CTRL_WIDTH, TEXT_CTRL_HEIGHT), wxTE_MULTILINE);
+  sizer_recommentation->Add(text_recommendation_, 0, wxALL, 6);
+
+  sizer_left->Add(sizer_recommentation, 0, 0, 0);
   // sizer_middle
   sizer_middle->Add(panel_people_id, 0, flags, border);
   sizer_middle->Add(panel_dreams, 0, flags, border);
