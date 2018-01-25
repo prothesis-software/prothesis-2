@@ -89,6 +89,8 @@ class DataManager {
 
   DataManager::PanelId GetIdFromName(std::string name);
 
+  DataPanel* panels_[PanelId::kPanelCount];
+
  private:
   /**
    * Reads the user and gui config and initializes each panel
@@ -107,7 +109,6 @@ class DataManager {
    */
   void AddPanel(DataPanel* panel, PanelId id);
 
-  DataPanel* panels_[PanelId::kPanelCount];
   DataManager::PanelId ids_[PanelId::kPanelCount];
 
   wxWindow* main_frame_ = NULL;

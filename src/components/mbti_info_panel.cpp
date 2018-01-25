@@ -242,6 +242,7 @@ void MbtiInfoPanel::OnMbtiChange(wxCommandEvent& event) {
   }
 
   sizer_root_->Fit(this);
+  this->GetParent()->Layout();
 }
 
 void MbtiInfoPanel::AddMbtiTuple(std::vector<wxArrayString>* source_vector,

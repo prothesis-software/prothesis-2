@@ -49,6 +49,11 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
 
   SetSize(minSize);
 
+  // Add scrol bars?
+  for (size_t i = 0; i < DataManager::kPanelCount; i++) {
+    data_manager_->panels_[i]->SetScrollRate(10, 10);
+  }
+
   this->Bind(wxEVT_SIZE, &MainFrame::OnSizeChange, this);
 }
 
