@@ -146,21 +146,22 @@ void ExternalPanel::DoLayout() {
   wxFlexGridSizer* sizer_content = new wxFlexGridSizer(2, 2, 30, 30);
 
   wxBoxSizer* sizer_left_col = new wxBoxSizer(wxVERTICAL);
-  wxBoxSizer* sizer_career = new wxBoxSizer(wxVERTICAL);
+  wxBoxSizer* sizer_right_col = new wxBoxSizer(wxVERTICAL);
 
   panel_life_keys_info_ = new LifeKeysInfoPanel(this, wxID_ANY);
 
   panel_career_ =
       new CareerTestPanel(this, wxID_ANY, "career_test", "Career Test");
-  sizer_career->Add(panel_career_, 0, wxEXPAND | wxALL, 5);
 
   mbti_info_panel_ = new MbtiInfoPanel(this, wxID_ANY);
 
-  sizer_left_col->Add(mbti_info_panel_, 0, wxBOTTOM, 20);
-  sizer_left_col->Add(panel_life_keys_info_, 0, wxALL, 0);
+  sizer_left_col->Add(mbti_info_panel_, 0, wxBOTTOM, 12);
+  sizer_left_col->Add(panel_career_, 0, wxALL | wxALIGN_CENTER, 0);
 
-  sizer_content->Add(sizer_left_col, 0, wxALL, 5);
-  sizer_content->Add(sizer_career, 0, wxALL, 5);
+  sizer_right_col->Add(panel_life_keys_info_, 0, wxALL, 0);
+
+  sizer_content->Add(sizer_left_col, 0, wxALL, 6);
+  sizer_content->Add(sizer_right_col, 0, wxALL, 6);
 
   sizer->Add(0, 0, 0, 0);
   sizer->Add(sizer_content, 0, 0, 0);

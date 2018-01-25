@@ -12,6 +12,7 @@ DataPanel::DataPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
   panel_title_ = panel_title;
 
   DataPanel::panels_.push_back(this);
+  this->Bind(wxEVT_SIZE, &DataPanel::OnSizeChange, this);
 }
 
 std::string DataPanel::GetPanelName() { return panel_name_; }
@@ -22,6 +23,11 @@ bool DataPanel::Next() { return false; }
 
 void DataPanel::OnTabActivate() {
   wxLogDebug(_("OnTabActivate not implemented for ") + _(this->GetPanelName()));
+}
+
+void DataPanel::OnSizeChange(wxSizeEvent& event) {
+  wxLogDebug("Changed panel size event");
+  // this->SetScrollRate(10, 10);
 }
 
 DataPanel* DataPanel::GetPanelByName(std::string panel_name) {

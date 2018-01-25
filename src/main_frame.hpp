@@ -34,6 +34,8 @@ class MainFrame : public wxFrame {
    */
   wxSize GetOverallMinSize();
 
+  void TriggerRefresh();
+
  private:
   void DoLayout();
   void OnSizeChange(wxSizeEvent& event);                   // NOLINT
@@ -46,6 +48,7 @@ class MainFrame : public wxFrame {
   wxFlexGridSizer* sizer_content_ = NULL;
   wxPanel* panel_main_ = NULL;
   bool exit_requested_ = false;
+  std::string active_panel_name_ = "";
 
   /**
    * [0][i] - Top notebook

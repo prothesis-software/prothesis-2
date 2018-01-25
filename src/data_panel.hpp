@@ -66,6 +66,7 @@ class DataPanel : public wxScrolled<wxPanel> {
  protected:
   std::string panel_name_;
   std::string panel_title_;
+  void OnSizeChange(wxSizeEvent& event);  // NOLINT
 };
 
 #endif  // DATA_PANEL_HPP_
