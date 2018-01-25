@@ -60,6 +60,7 @@ class MbtiInfoPanel : public wxPanel {
   std::vector<std::string> GetMbtiAsVector();
   std::string GetMbti();
   void SetMbti(std::vector<std::string> mbti);
+  void HideMbtiSelection();
 
  private:
   void OnMbtiChange(wxCommandEvent& event);  // NOLINT
@@ -74,6 +75,7 @@ class MbtiInfoPanel : public wxPanel {
   wxStaticBoxSizer* sizer_root_ = NULL;
   void AddMbtiTuple(std::vector<wxArrayString>* source_vector, std::string str1,
                     std::string str2);
+  wxBoxSizer* sizer_mbti_combo_boxes_ = NULL;
 };
 
 #endif  // COMPONENTS_MBTI_INFO_HPP_

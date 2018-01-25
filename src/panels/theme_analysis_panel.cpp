@@ -46,7 +46,8 @@ void ThemeAnalysisPanel::OnSizeChange(wxSizeEvent& event) {
 }
 
 bool ThemeAnalysisPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
-  return false;
+  panel_mbti_info_->SetMbtiInfoData(state);
+  return true;
 }
 
 std::shared_ptr<cpptoml::table> ThemeAnalysisPanel::GetUserState() {
@@ -159,12 +160,7 @@ void ThemeAnalysisPanel::OnTabActivate() {
   BindButtons(priorities_);
 
   std::string mbti = external_panel->GetMbti();
-
-  if (mbti.length() == 0) {
-    mbti = "        ";
-  }
-
-  label_mbti_->SetLabel(mbti);
+  panel_mbti_info_->SetMbti(mbti);
 
   Layout();
   this->FitInside();
@@ -303,26 +299,6 @@ wxBoxSizer* ThemeAnalysisPanel::CreateThemePanels() {
   return sizer_themes;
 }
 
-wxPanel* ThemeAnalysisPanel::CreateMbtiPanel() {
-  wxPanel* panel = new wxPanel(this, wxID_ANY);
-  panel->SetMinSize(wxSize(50, -1));
-  wxStaticBoxSizer* sizer = new wxStaticBoxSizer(wxHORIZONTAL, panel, "MBTI");
-
-  ExternalPanel* external_panel =
-      static_cast<ExternalPanel*>(GetPanelByName("external"));
-  std::string mbti = external_panel->GetMbti();
-
-  if (mbti.length() != 4) {
-    mbti = "        ";
-  }
-
-  label_mbti_ = new wxStaticText(sizer->GetStaticBox(), wxID_ANY, mbti);
-  sizer->Add(label_mbti_, 0, wxALIGN_CENTER | wxALL, 5);
-  panel->SetSizer(sizer);
-
-  return panel;
-}
-
 void ThemeAnalysisPanel::DoLayout() {
   wxFlexGridSizer* sizer_main = new wxFlexGridSizer(1, 5, 0, 0);
   wxBoxSizer* sizer_left = new wxBoxSizer(wxVERTICAL);
@@ -357,13 +333,14 @@ void ThemeAnalysisPanel::DoLayout() {
   wxBoxSizer* sizer_themes = CreateThemePanels();
 
   wxStaticBoxSizer* sizer_colours = CreateColourSelection();
-  wxPanel* panel_mbti = CreateMbtiPanel();
+  panel_mbti_info_ = new MbtiInfoPanel(this, wxID_ANY);
+  panel_mbti_info_->HideMbtiSelection();
 
   const int flags = wxALL;
   const int border = 5;
 
   // sizer_mbti_colour
-  sizer_mbti_colour->Add(panel_mbti, 0, flags, border);
+  sizer_mbti_colour->Add(panel_mbti_info_, 0, flags, border);
   sizer_mbti_colour->Add(sizer_colours, 0, flags, border);
 
   // sizer_boxes_left

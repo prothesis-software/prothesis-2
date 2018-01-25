@@ -173,7 +173,7 @@ struct MbtiInfoPanel::MbtiInfo MbtiInfoPanel::GetMbtiInfo(std::string mbti) {
   for (size_t k = 0; k < mbti_entries_.size(); k++) {
     if (mbti_entries_.at(k).key.compare(long_key) == 0) {
       mbti_info.descriptions_2.push_back(mbti_entries_.at(k).desc2);
-      found = false;
+      found = true;
       break;
     }
   }
@@ -234,6 +234,16 @@ std::string MbtiInfoPanel::GetMbti() {
   return mbti_string;
 }
 
+void MbtiInfoPanel::HideMbtiSelection() {
+  sizer_root_->Hide(sizer_mbti_combo_boxes_, true);
+
+  for (size_t i = 0; i < 4; i++) {
+    choice_boxes_mbti_[i]->Hide();
+  }
+
+  this->Layout();
+}
+
 void MbtiInfoPanel::OnMbtiChange(wxCommandEvent& event) {
   std::string mbti = GetMbti();
 
@@ -258,7 +268,7 @@ void MbtiInfoPanel::DoLayout() {
   sizer_root_ = new wxStaticBoxSizer(wxVERTICAL, this, "MBTI");
   wxWindow* parent_sizer = sizer_root_->GetStaticBox();
 
-  wxBoxSizer* sizer_mbti_combo_boxes = new wxBoxSizer(wxHORIZONTAL);
+  sizer_mbti_combo_boxes_ = new wxBoxSizer(wxHORIZONTAL);
 
   std::vector<wxArrayString> mbti_tuples;
 
@@ -271,13 +281,13 @@ void MbtiInfoPanel::DoLayout() {
     choice_boxes_mbti_[i] =
         new wxChoice(parent_sizer, wxID_ANY, wxDefaultPosition, wxSize(60, -1),
                      mbti_tuples[i]);
-    sizer_mbti_combo_boxes->Add(choice_boxes_mbti_[i], 0, 0, 0);
-    sizer_mbti_combo_boxes->AddSpacer(5);
+    sizer_mbti_combo_boxes_->Add(choice_boxes_mbti_[i], 0, 0, 0);
+    sizer_mbti_combo_boxes_->AddSpacer(5);
     choice_boxes_mbti_[i]->Bind(wxEVT_CHOICE, &MbtiInfoPanel::OnMbtiChange,
                                 this);
   }
 
-  sizer_root_->Add(sizer_mbti_combo_boxes, 0, wxALL, 6);
+  sizer_root_->Add(sizer_mbti_combo_boxes_, 0, wxALL, 6);
 
   wxStaticLine* line1 = new wxStaticLine(parent_sizer);
   wxStaticLine* line2 = new wxStaticLine(parent_sizer);
@@ -303,25 +313,25 @@ void MbtiInfoPanel::DoLayout() {
   const int kFlags = wxALL | wxALIGN_CENTER;
   const int kBorder = 6;
 
-  sizer_->Add(line1, wxGBPosition(1, 0), wxGBSpan(1, 3), wxEXPAND, 0);
-  sizer_->Add(line2, wxGBPosition(3, 0), wxGBSpan(1, 3), wxEXPAND, 0);
-  sizer_->Add(line3, wxGBPosition(6, 0), wxGBSpan(1, 3), wxEXPAND, 0);
+  sizer_->Add(line1, wxGBPosition(0, 0), wxGBSpan(1, 3), wxEXPAND, 0);
+  sizer_->Add(line2, wxGBPosition(2, 0), wxGBSpan(1, 3), wxEXPAND, 0);
+  sizer_->Add(line3, wxGBPosition(5, 0), wxGBSpan(1, 3), wxEXPAND, 0);
 
-  sizer_->Add(mbti1, wxGBPosition(2, 0), wxGBSpan(1, 1), kFlags, kBorder);
-  sizer_->Add(mbti2, wxGBPosition(4, 0), wxGBSpan(1, 1), kFlags, kBorder);
-  sizer_->Add(mbti3, wxGBPosition(5, 0), wxGBSpan(1, 1), kFlags, kBorder);
-  sizer_->Add(mbti4, wxGBPosition(7, 0), wxGBSpan(1, 1), kFlags, kBorder);
+  sizer_->Add(mbti1, wxGBPosition(1, 0), wxGBSpan(1, 1), kFlags, kBorder);
+  sizer_->Add(mbti2, wxGBPosition(3, 0), wxGBSpan(1, 1), kFlags, kBorder);
+  sizer_->Add(mbti3, wxGBPosition(4, 0), wxGBSpan(1, 1), kFlags, kBorder);
+  sizer_->Add(mbti4, wxGBPosition(6, 0), wxGBSpan(1, 1), kFlags, kBorder);
 
   const int kDescFlags = wxALL | wxALIGN_LEFT;
   const int kDescBorder = 6;
 
-  sizer_->Add(desc1, wxGBPosition(2, 1), wxGBSpan(1, 1), kDescFlags,
+  sizer_->Add(desc1, wxGBPosition(1, 1), wxGBSpan(1, 1), kDescFlags,
               kDescBorder);
-  sizer_->Add(desc2, wxGBPosition(4, 1), wxGBSpan(1, 1), kDescFlags,
+  sizer_->Add(desc2, wxGBPosition(3, 1), wxGBSpan(1, 1), kDescFlags,
               kDescBorder);
-  sizer_->Add(desc3, wxGBPosition(5, 1), wxGBSpan(1, 1), kDescFlags,
+  sizer_->Add(desc3, wxGBPosition(4, 1), wxGBSpan(1, 1), kDescFlags,
               kDescBorder);
-  sizer_->Add(desc4, wxGBPosition(7, 1), wxGBSpan(1, 1), kDescFlags,
+  sizer_->Add(desc4, wxGBPosition(6, 1), wxGBSpan(1, 1), kDescFlags,
               kDescBorder);
 
   labels_mbti_[0] = mbti1;
@@ -345,9 +355,9 @@ void MbtiInfoPanel::DoLayout() {
   descriptions_2_[1] = ext_desc2;
   descriptions_2_[2] = ext_desc3;
 
-  sizer_->Add(ext_desc1, wxGBPosition(2, 2), wxGBSpan(1, 1), wxLEFT, 20);
-  sizer_->Add(ext_desc2, wxGBPosition(4, 2), wxGBSpan(2, 1), wxLEFT, 20);
-  sizer_->Add(ext_desc3, wxGBPosition(7, 2), wxGBSpan(1, 1), wxLEFT, 20);
+  sizer_->Add(ext_desc1, wxGBPosition(1, 2), wxGBSpan(1, 1), wxLEFT, 20);
+  sizer_->Add(ext_desc2, wxGBPosition(3, 2), wxGBSpan(2, 1), wxLEFT, 20);
+  sizer_->Add(ext_desc3, wxGBPosition(6, 2), wxGBSpan(1, 1), wxLEFT, 20);
 
   sizer_root_->Add(sizer_, 0, wxALL, 6);
   this->SetSizer(sizer_root_);
