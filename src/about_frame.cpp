@@ -64,7 +64,6 @@ void AboutFrame::DoLayout() {
                "https://github.com/Quantum-Sicarius");
 
   sizer_row_1->Add(sizer_links, 0, wxALL, 6);
-
   wxBoxSizer* sizer_third_party = new wxBoxSizer(wxVERTICAL);
   wxStaticText* label_third_party =
       new wxStaticText(panel, wxID_ANY, "Third-party projects used:");

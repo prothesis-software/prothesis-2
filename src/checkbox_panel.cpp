@@ -38,11 +38,19 @@ bool CheckBoxPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
         // Get the question text from the table we extracted
         cpptoml::option<std::string> question_text =
             table->get_as<std::string>("question");
-
+        cpptoml::option<std::string> tooltip =
+            table->get_as<std::string>("tooltip");
         if (question_text) {
           wxLogDebug(_(this->GetPanelName()) + _(": Adding checkbox '") +
                      _(*question_text) + _("'"));
-          AddCheckBox(*question_text);
+          std::string str_tooltip = "";
+          if (tooltip) str_tooltip = *tooltip;
+
+          std::cout << "Adding " + *question_text + " with tooltip " +
+                           str_tooltip
+                    << "!" << std::endl;
+
+          AddCheckBox(*question_text, str_tooltip);
         } else {
           wxLogError(_("A question table was found for panel ") +
                      _(this->GetPanelName()) +
@@ -85,7 +93,6 @@ bool CheckBoxPanel::SetUserState(std::shared_ptr<cpptoml::table> state) {
   } else {
     wxLogDebug(_("No User table exists for Question Panel:") +
                _(GetPanelName()));
-    return false;
   }
 
   return true;
@@ -186,7 +193,7 @@ void CheckBoxPanel::SetCheckboxStateByLabel(std::string label, bool checked) {
   }
 }
 
-void CheckBoxPanel::AddCheckBox(std::string label) {
+void CheckBoxPanel::AddCheckBox(std::string label, std::string tooltip) {
   wxCheckListBox* box = this->list_box_a_;
   if (box->GetCount() >= MAX_ITEMS) {
     box = this->list_box_b_;
@@ -196,6 +203,7 @@ void CheckBoxPanel::AddCheckBox(std::string label) {
   }
 
   box->InsertItems(1, new wxString(label), 0);
+  // derp wanted to add tooltip here.
 }
 
 void CheckBoxPanel::DoLayout() {

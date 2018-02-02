@@ -55,7 +55,7 @@ class CheckBoxPanel : public DataPanel {
   /**
    * Create a new checkbox (unchecked) and add it to the panel
    */
-  void AddCheckBox(std::string label);
+  void AddCheckBox(std::string label, std::string tooltip);
 
   std::vector<wxCheckBox> checkboxes_;
   wxCheckListBox* list_box_a_;

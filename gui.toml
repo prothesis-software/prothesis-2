@@ -134,62 +134,94 @@
 [skills]
     [[skills.question]]
         question = "Administration"
+        tooltip = "...managing a (big) task, usually involves paperwork and sorting things out."
     [[skills.question]]
         question = "Analyse"
+        tooltip = "...examining methodically by separating into parts and studying their interrelations."
     [[skills.question]]
         question = "Artistic"
+	tooltip = "...showing imagination and skill in the arts. You are sensitive to arts or appreciate art."
     [[skills.question]]
         question = "Communicate"
+	tooltip = "...carrying the message across effectively. Explaining anything with ease."
     [[skills.question]]
         question = "Computers"
+	tooltip = "You find it easy to learn how to use new computer programs and are not afraid of trying out new technology."
     [[skills.question]]
         question = "Control"
+	tooltip = "...taking control of any situation. In other words, you easily manage any situation."
     [[skills.question]]
         question = "Counseling"
+	tooltip = "...giving and taking advice. You like to offer advice or guidance."
     [[skills.question]]
         question = "Creative"
+	tooltip = "...being imaginative. You have the ability or power to create.  You are characterized by originality and expressiveness."
     [[skills.question]]
         question = "Devision Making"
+	tooltip = "...making decisions easily and stick to it."
     [[skills.question]]
         question = "Empathy"
+	tooltip = "...identifying with and understanding another person's situation, feelings and motives."
     [[skills.question]]
         question = "Entertaining"
+	tooltip = "...To hold the attention of with something amusing or diverting."
     [[skills.question]]
         question = "Handwork"
+	tooltip = "...doing things with your hands, building things, creating, being creative."
     [[skills.question]]
         question = "Marketing"
+	tooltip =  "...portraying ideas in such a matter to others so that they are persuaded to \ufffdbuy what you are selling\ufffd. You are good at convincing people"
     [[skills.question]]
         question = "Negotiate"
+	tooltip = "...conferring with others in order to come to terms or reach an agreement."
     [[skills.question]]
         question = "Numeracy"
+	tooltip = "...expressing yourself effectively in quantitative terms. You also like working with numbers, and maths."
     [[skills.question]]
         question = "Objectivity"
+	tooltip = "...seeing a situation from an external the point of view even if you are not an outsider, you wont let your emotions or beliefs influence your perception of a situation."
     [[skills.question]]
         question = "Organise"
+	tooltip = "...putting things together into an orderly, functional, structured whole."
     [[skills.question]]
         question = "Planning"
+	tooltip = "...formulating a scheme or program for the accomplishment a goal.  You like to have something as a specific aim or purpose."
     [[skills.question]]
         question = "Playing Musical Instruments"
+	tooltip = "You have the ability to use a musical instrument to its full potential, have the talent of making music. \t"
     [[skills.question]]
         question = "Practical"
+	tooltip = "...doing things in a practical, executable manner. You like finding the easiest, cheapest and most effective way of doing things."
     [[skills.question]]
         question = "Public Speaking"
+	tooltip = "...speaking in front of people, you like entertaining, motivating, teaching and inspiring any group of people."
+    [[skills.question]]
+	question = "Reading"
+	tooltip = "...collecting information by reading, you like to read about things that interest you. You love to spend time in the library or on the Internet doing research or reading up on something."
     [[skills.question]]
         question = "Receptive for people"
+	tooltip = "understanding other people's needs. You are sensitive to their emotions and they feel welcome in your company."
     [[skills.question]]
         question = "Sharing"
+	tooltip = "You like to make your resources available to other people to use to their advantage."
     [[skills.question]]
         question = "Sport"
+	tooltip = "...mostly physical activities you take on. You probably have a good ball sense and love to be active."
     [[skills.question]]
         question = "Strategic Planning"
+	tooltip = "...preparing for something specific focusing on the bigger picture taking into account the small things that needs to be done to achieve the bigger picture."
     [[skills.question]]
         question = "Study"
+	tooltip = "You like to learn about something and usually remember it very well. \t"
     [[skills.question]]
         question = "Taking the lead"
+	tooltip = "...taking hold of a situation and people find it natural to follow your lead."
     [[skills.question]]
         question = "Teaching"
+	tooltip = "To provide knowledge; instruct in.\t\t"
     [[skills.question]]
         question = "Writing"
+	tooltip = "...expressing yourself in writing. You'd rather write than speak."
 
 ####################
 # PRIORITIES
