@@ -155,6 +155,14 @@ void DetailsPanel::DoLayout() {
   details_grid_sizer->AddGrowableCol(0);
   details_grid_sizer->AddGrowableCol(2);
 
+  wxBitmap bmp;
+  // TODO(Armand): Change this so it loads from the app root.
+  wxStaticBitmap* image;
+  image = new wxStaticBitmap(this, wxID_ANY,
+                             wxBitmap("test.jpg", wxBITMAP_TYPE_JPEG),
+                             wxPoint(0, 0), wxSize(50, 50));
+
+  sizer_body->Add(image);
   this->SetSizer(details_grid_sizer);
   Layout();
   details_grid_sizer->Fit(this);
