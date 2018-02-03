@@ -47,6 +47,7 @@ void ThemeAnalysisPanel::OnSizeChange(wxSizeEvent& event) {
 
 bool ThemeAnalysisPanel::SetGuiState(std::shared_ptr<cpptoml::table> state) {
   panel_mbti_info_->SetMbtiInfoData(state);
+  panel_life_keys_->SetGuiState(state);
   return true;
 }
 
@@ -149,6 +150,7 @@ void ThemeAnalysisPanel::OnTabActivate() {
   wxLogDebug("Refreshing theme panel");
   RefreshCheckBoxDisplays();
   RefreshQuestionDisplays();
+  panel_life_keys_->RefreshLifeKeyTags();
 
   ExternalPanel* external_panel =
       static_cast<ExternalPanel*>(GetPanelByName("external"));
@@ -330,7 +332,8 @@ void ThemeAnalysisPanel::DoLayout() {
   wxPanel* panel_values = CreateQuestionDisplay("values", "Values");
   wxPanel* panel_spoken_words =
       CreateQuestionDisplay("spoken_words", "Spoken Words");
-  life_keys_ = new ColouredButtonContainer(
+
+  panel_life_keys_ = new LifeKeyContainer(
       this, wxID_ANY, "theme_analysis_life_keys", "Life Keys");
 
   priorities_ = new ColouredButtonContainer(
@@ -357,7 +360,7 @@ void ThemeAnalysisPanel::DoLayout() {
 
   // sizer_boxes_right
   sizer_boxes_right->Add(skills, 0, flags, border);
-  sizer_boxes_right->Add(life_keys_, 0, flags, border);
+  sizer_boxes_right->Add(panel_life_keys_, 0, flags, border);
   sizer_boxes_right->Add(people_orientation, 0, flags, border);
 
   // sizer_boxes

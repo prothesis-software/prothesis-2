@@ -1264,3 +1264,29 @@
   key = "ST"
   description_1 = ""
   description_2 = "You will want to manage or bring practical solutions to systems, organizations, management or people on a less personal level"
+
+######################
+# THEME ANALYSIS
+################
+
+  [theme_analysis]
+
+    [[theme_analysis.life_key_tag]]
+    key = "Social"
+    tag = "People Orientated"
+
+    [[theme_analysis.life_key_tag]]
+    key = "Artistic"
+    tag = "Creative expression"
+
+    [[theme_analysis.life_key_tag]]
+    key = "Conventional"
+    tag = "Administrative and organisational"
+
+    [[theme_analysis.life_key_tag]]
+    key = "Enterprising"
+    tag = "Business & Entrepreneurial"
+
+    [[theme_analysis.life_key_tag]]
+    key = "Realistic"
+    tag = "Practical and handiwork"

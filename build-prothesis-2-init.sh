@@ -17,7 +17,7 @@ fi
 
 if ! [ -z ${WX_INSTALL_PATH_WINDOWS_CROSS+x} ]; then
     echo "WX_INSTALL_PATH_WINDOWS_CROSS has been set, building prothesis-2 for windows-cross"
-    make windows CXX=i686-w64-mingw32-g++ WINDRES=i686-w64-mingw32-windres -j $(nproc)
+    make windows CXX=x86_64-w64-mingw32-g++ WINDRES=x86_64-w64-mingw32-windres -j $(nproc)
 fi
 
 if ! [ -z ${WX_INSTALL_PATH_WINDOWS+x} ]; then

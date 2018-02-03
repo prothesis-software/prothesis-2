@@ -9,7 +9,6 @@ ColouredButtonContainer::ColouredButtonContainer(
     std::string panel_title, const wxPoint& pos, const wxSize& size,
     int64_t style)
     : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
-  sizer_ = new wxStaticBoxSizer(wxVERTICAL, this, this->GetPanelTitle());
   DoLayout();
 }
 
@@ -89,7 +88,7 @@ bool ColouredButtonContainer::RemoveItem(ColouredButton* item,
         items_.at(j + 1) = tmp;
       }
       items_.pop_back();
-      sizer_->Remove(i);
+      sizer_buttons_->Remove(i);
 
       if (delete_item) {
         wxLogDebug(_("Deleted item ") + _(item->GetButtonLabel()));
@@ -110,7 +109,7 @@ bool ColouredButtonContainer::RemoveItem(ColouredButton* item,
 void ColouredButtonContainer::AddItem(ColouredButton* item) {
   wxLogDebug(_("Adding existing item: ") + _(item->GetButtonLabel()));
 
-  sizer_->Add(item, 1, wxEXPAND, wxALL, 0);
+  sizer_buttons_->Add(item, 1, wxEXPAND, wxALL, 0);
   items_.push_back(item);
 }
 
@@ -125,8 +124,8 @@ ColouredButton* ColouredButtonContainer::AddItem(std::string label,
 ColouredButton* ColouredButtonContainer::AddItem(std::string item) {
   wxLogDebug(_("Adding new item: ") + _(item));
   ColouredButton* btn =
-      new ColouredButton(sizer_->GetStaticBox(), wxID_ANY, item);
-  sizer_->Add(btn, 1, wxEXPAND | wxALL, 0);
+      new ColouredButton(sizer_root_->GetStaticBox(), wxID_ANY, item);
+  sizer_buttons_->Add(btn, 1, wxEXPAND | wxALL, 0);
   items_.push_back(btn);
 
   return btn;
@@ -270,4 +269,11 @@ void ColouredButtonContainer::UpdateItems(std::vector<std::string> items) {
   }
 }
 
-void ColouredButtonContainer::DoLayout() { this->SetSizer(sizer_); }
+void ColouredButtonContainer::DoLayout() {
+  sizer_root_ = new wxStaticBoxSizer(wxHORIZONTAL, this, this->GetPanelTitle());
+  sizer_buttons_ = new wxBoxSizer(wxVERTICAL);
+
+  sizer_root_->Add(sizer_buttons_, 0, 0, 0);
+
+  this->SetSizer(sizer_root_);
+}

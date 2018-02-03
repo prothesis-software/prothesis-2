@@ -78,6 +78,10 @@ class ColouredButtonContainer : public DataPanel {
    */
   std::vector<ColouredButton*> GetColouredButtons();
 
+ protected:
+  wxBoxSizer* sizer_buttons_ = NULL;
+  wxStaticBoxSizer* sizer_root_ = NULL;
+
  private:
   void PrintVector(std::vector<ColouredButton*> items);
   void PrintVector(std::vector<std::string> items);
@@ -90,9 +94,8 @@ class ColouredButtonContainer : public DataPanel {
                      std::vector<ColouredButton*> existing_items,
                      std::vector<ColouredButton*>* only_in_existing,
                      std::vector<ColouredButton*>* in_new_and_existing);
-  void DoLayout();
   std::vector<ColouredButton*> items_;
-  wxStaticBoxSizer* sizer_ = NULL;
+  void DoLayout();
 };
 
 #endif  // COLOURED_BUTTON_CONTAINER_HPP_

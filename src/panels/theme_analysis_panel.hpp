@@ -13,6 +13,7 @@
 #include "src/checkbox_panel.hpp"
 #include "src/coloured_button.hpp"
 #include "src/coloured_button_container.hpp"
+#include "src/components/life_key_container.hpp"
 #include "src/components/mbti_info_panel.hpp"
 #include "src/data_panel.hpp"
 #include "src/panels/external_panel.hpp"
@@ -112,6 +113,7 @@ class ThemeAnalysisPanel : public DataPanel {
   wxStaticText* label_mbti_ = NULL;
   MbtiInfoPanel* panel_mbti_info_ = NULL;
   wxTextCtrl* text_recommendation_ = NULL;
+  LifeKeyContainer* panel_life_keys_ = NULL;
 };
 
 #endif  // PANELS_THEME_ANALYSIS_PANEL_HPP_
