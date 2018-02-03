@@ -9,10 +9,12 @@ IMPLEMENT_APP(ProthesisApp)
 // Entry point for our program
 bool ProthesisApp::OnInit() {
 #ifdef PROTHESIS_VERSION
-  wxString title = _("Prothesis ") + std::string(PROTHESIS_VERSION);
+  wxString title = "Prothesis " + std::string(PROTHESIS_VERSION);
 #else
-  wxString title = _("Prothesis");
+  wxString title = "Prothesis";
 #endif
+
+std::cout << "HELLO" << std::endl;
 
   MainFrame* main_frame =
       new MainFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(-1, -1));

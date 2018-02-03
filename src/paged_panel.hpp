@@ -71,7 +71,6 @@ class PagedPanel : public DataPanel {
   wxFlexGridSizer* sizer_paged_panel_ = NULL;
 
   size_t active_panel_index_ = 0;
-  wxPanel* active_panel_ = NULL;
   wxPanel* panel_page_numbers_ = NULL;
   wxSimplebook* simple_book_ = NULL;
 };

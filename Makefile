@@ -16,7 +16,7 @@ endif
 CXXFLAGS+=-DPROTHESIS_VERSION=\"${PROTHESIS_VERSION}\"
 
 WINDRES=windres
-SOURCE_FILES=$(shell find -name '*.cpp' | sed 's/\.\///g')
+SOURCE_FILES=$(shell find . -name '*.cpp' | sed 's/\.\///g')
 OBJECT_FILES_LINUX=${SOURCE_FILES:src/%.cpp=build/linux/%.o}
 RESOURCE_FILE=src/resources.rc
 
@@ -35,8 +35,8 @@ PACKAGE_WINDOWS_NAME=prothesis-windows-32bit-${PROTHESIS_VERSION}
 #					// Used only for triggering the wxWidgets build
 WX_INSTALL_PATH_WINDOWS=${WX_INSTALL_PATH_WINDOWS_CROSS}
 
-WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=yes --toolkit=gtk2 --cxxflags`
-WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=yes --toolkit=gtk2 --libs`
+WX_CONFIG_FLAGS_COMPILE_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=no --cxxflags`
+WX_CONFIG_FLAGS_LINK_LINUX=`${WX_INSTALL_PATH_LINUX}/bin/wx-config --unicode=no --libs`
 
 WX_CONFIG_FLAGS_COMPILE_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode=yes --cxxflags`
 WX_CONFIG_FLAGS_LINK_WINDOWS=`${WX_INSTALL_PATH_WINDOWS}/bin/wx-config --unicode=yes --libs`
@@ -52,7 +52,7 @@ package: package-linux package-windows
 	@echo "Done"
 
 get-deps:
-	./get-cpplint.sh
+	#./get-cpplint.sh
 	./get-cpptoml.sh
 
 apply_gui_config:
@@ -61,7 +61,7 @@ apply_gui_config:
 
 lint:
 	@echo "Remember to set the WX_INSTALL_PATH_LINUX and WX_INSTALL_PATH_WINDOWS"
-	./lint.sh
+	# ./lint.sh
 
 clean:
 	rm -fr build/

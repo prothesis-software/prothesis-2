@@ -70,7 +70,7 @@ void MainFrame::OnClose(wxCloseEvent& e) {
 
 void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
   // Only do stuff if there are still objects to work with
-  wxLogDebug(_("MainFrame::OnNotebookSelectionChange() START"));
+  wxLogDebug("MainFrame::OnNotebookSelectionChange() START");
 
   if (!exit_requested_ && index_layout_.size() == 2) {
     int top_index = notebook_->GetSelection();
@@ -108,7 +108,7 @@ void MainFrame::OnNotebookSelectionChange(wxBookCtrlEvent& event) {
     }
   }
 
-  wxLogDebug(_("MainFrame::OnNotebookSelectionChange() END"));
+  wxLogDebug("MainFrame::OnNotebookSelectionChange() END");
 }
 
 bool MainFrame::DisplayNextPanel() {
@@ -137,11 +137,8 @@ bool MainFrame::DisplayNextPanel() {
 
 wxSize MainFrame::GetOverallMinSize() {
   Freeze();
-  wxLogDebug(_("Getting best size..."));
+  wxLogDebug("Getting best size...");
   wxSize minSize = GetSize();
-
-  wxLogDebug(_(std::to_string(minSize.x)) + _(", ") +
-             _(std::to_string(minSize.y)));
 
   while (DisplayNextPanel() != false) {
     Fit();
@@ -157,9 +154,6 @@ wxSize MainFrame::GetOverallMinSize() {
       minSize.y = tmpSize.y;
     }
   }
-
-  wxLogDebug(_("Best size = ") + _(std::to_string(minSize.x)) + _(", ") +
-             _(std::to_string(minSize.y)));
 
   notebook_->SetSelection(0);
   notebook_assessments_->SetSelection(0);
@@ -182,10 +176,6 @@ void MainFrame::DoLayout() {
   // sizer_content_
   for (size_t i = 0; i < DataManager::PanelId::kPanelCount; i++) {
     if (top_layout.size() != 1) {
-      wxLogDebug(_("Adding panel ") +
-                 _(data_manager_->GetPanelByIndex(i)->GetPanelTitle()) +
-                 _(" to notebook"));
-
       DataPanel* panel = data_manager_->GetPanelByIndex(i);
       wxNotebook* panel_parent = static_cast<wxNotebook*>(panel->GetParent());
       panel_parent->AddPage(panel,
