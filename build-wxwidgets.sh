@@ -53,7 +53,7 @@ fi
 # '-linux' or '-windows' is later appended depending on target
 SOURCE_DIR=$ROOT_DIR/wxWidgets-3.0.3-source
 LINUX_INSTALL_DIR=$ROOT_DIR/wxWidgets/gtk2u
-MAC_INSTALL_DIR=$ROOT_DIR/wxWidgets/mac
+MAC_INSTALL_DIR=$ROOT_DIR/wxWidgets/mac-cocoa-u
 WINDOWS_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static
 WINDOWS_CROSS_INSTALL_DIR=$ROOT_DIR/wxWidgets/mswu-static-cross
 
@@ -93,7 +93,7 @@ elif [ "$TARGET" == "mac" ]; then
     # Check if cache exists
     if ! [ -d $MAC_INSTALL_DIR ]; then
         SOURCE_DIR=$SOURCE_DIR-linux
-        BUILD_DIR=build-mac
+        BUILD_DIR=build-mac-cocoa-u
 
         # Download and extract source
         if [ ! -f wxWidgets-3.0.3.tar.bz2 ]; then
