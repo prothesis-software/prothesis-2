@@ -11,6 +11,7 @@ PagedPanel::PagedPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
     : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   panel_page_numbers_ = new wxPanel(this, wxID_ANY);
   sizer_paged_panel_ = new wxFlexGridSizer(4, 3, 0, 0);
+// i
 #ifdef __APPLE__
   simple_book_ = new wxNotebook(this, wxID_ANY);
 #else
@@ -35,6 +36,8 @@ void PagedPanel::Init() {
     wxLogDebug("Nothing to display");
     return;
   }
+
+    // n
 #ifndef __APPLE___
   for (size_t i = 0; i < panels_.size(); i++) {
     wxButton* page_item =
@@ -73,8 +76,9 @@ void PagedPanel::DisplayPage(size_t index) {
 
   simple_book_->SetSelection(index);
   active_panel_index_ = index;
-// TODO(armand): Error here
+// n
 #ifndef __APPLE__
+  std::cout << "This shouldn't run" << std::endl;
   for (size_t i = 0; i < page_items_.size(); i++) {
     if (i != index) {
       wxColour default_colour =
@@ -111,6 +115,7 @@ void PagedPanel::DoLayout() {
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
 
   // Add hyperlinks
+// n
 #ifndef __APPLE___
   for (size_t i = 0; i < page_items_.size(); i++) {
     sizer_page_numbers->Add(page_items_.at(i), 0, 0, 0);
