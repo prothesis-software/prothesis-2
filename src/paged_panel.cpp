@@ -35,7 +35,7 @@ void PagedPanel::Init() {
     wxLogDebug("Nothing to display");
     return;
   }
-#ifdef __unix___
+#ifndef __APPLE___
   for (size_t i = 0; i < panels_.size(); i++) {
     wxButton* page_item =
         new wxButton(panel_page_numbers_, wxID_ANY, _(std::to_string(i + 1)),
@@ -74,7 +74,7 @@ void PagedPanel::DisplayPage(size_t index) {
   simple_book_->SetSelection(index);
   active_panel_index_ = index;
 // TODO(armand): Error here
-#ifdef __unix_
+#ifndef __APPLE__
   for (size_t i = 0; i < page_items_.size(); i++) {
     if (i != index) {
       wxColour default_colour =
@@ -111,7 +111,7 @@ void PagedPanel::DoLayout() {
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
 
   // Add hyperlinks
-#ifdef __unix__
+#ifndef __APPLE___
   for (size_t i = 0; i < page_items_.size(); i++) {
     sizer_page_numbers->Add(page_items_.at(i), 0, 0, 0);
     // page_items_.at(i)->SetMinSize(wxSize(35, -1));
