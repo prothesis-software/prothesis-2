@@ -11,25 +11,33 @@ PagedPanel::PagedPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
     : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   panel_page_numbers_ = new wxPanel(this, wxID_ANY);
   sizer_paged_panel_ = new wxFlexGridSizer(4, 3, 0, 0);
+// i
+#ifdef __APPLE__
+  simple_book_ = new wxNotebook(this, wxID_ANY);
+#else
   simple_book_ = new wxSimplebook(this, wxID_ANY);
+#endif
 }
 
 void PagedPanel::AddPage(wxPanel* panel) {
   panels_.push_back(panel);
   panel->Reparent(simple_book_);
   // TODO(egeldenuys): lolwat? can't remember the purpose.
-  simple_book_->AddPage(panel, "LOLWAT");
+  simple_book_->AddPage(
+      panel, std::to_string(panels_.size()));  // Convert the panel number to a
+                                               // string and push this here.
+  // shouldn't have any effect on linux
 }
 
 // TODO(egeldenhuys): Rename to GenerateLinks
 void PagedPanel::Init() {
   wxLogDebug("PagedPanel::Init() START");
-
   if (panels_.size() == 0) {
     wxLogDebug("Nothing to display");
     return;
   }
 
+#ifndef __APPLE__
   for (size_t i = 0; i < panels_.size(); i++) {
     wxButton* page_item =
         new wxButton(panel_page_numbers_, wxID_ANY, _(std::to_string(i + 1)),
@@ -37,7 +45,7 @@ void PagedPanel::Init() {
     page_item->Bind(wxEVT_BUTTON, &PagedPanel::OnPageClick, this);
     page_items_.push_back(page_item);
   }
-
+#endif
   DoLayout();
   DisplayPage(0);
   wxLogDebug("PagedPanel::Init() END");
@@ -67,7 +75,9 @@ void PagedPanel::DisplayPage(size_t index) {
 
   simple_book_->SetSelection(index);
   active_panel_index_ = index;
-
+// n
+#ifndef __APPLE__
+  std::cout << "This shouldn't run" << std::endl;
   for (size_t i = 0; i < page_items_.size(); i++) {
     if (i != index) {
       wxColour default_colour =
@@ -77,6 +87,7 @@ void PagedPanel::DisplayPage(size_t index) {
   }
 
   page_items_.at(index)->SetForegroundColour(wxColour(255, 0, 0));
+#endif
   Layout();
   wxLogDebug("PagedPanel::DisplayPanel() END");
 }
@@ -103,10 +114,13 @@ void PagedPanel::DoLayout() {
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
 
   // Add hyperlinks
+// n
+#ifndef __APPLE___
   for (size_t i = 0; i < page_items_.size(); i++) {
     sizer_page_numbers->Add(page_items_.at(i), 0, 0, 0);
     // page_items_.at(i)->SetMinSize(wxSize(35, -1));
   }
+#endif
 
   // Spacing col
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
