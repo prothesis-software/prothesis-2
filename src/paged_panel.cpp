@@ -37,8 +37,7 @@ void PagedPanel::Init() {
     return;
   }
 
-    // n
-#ifndef __APPLE___
+#ifndef __APPLE__
   for (size_t i = 0; i < panels_.size(); i++) {
     wxButton* page_item =
         new wxButton(panel_page_numbers_, wxID_ANY, _(std::to_string(i + 1)),
