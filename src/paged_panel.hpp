@@ -79,7 +79,7 @@ class PagedPanel : public DataPanel {
    * On mac we want to use the wxNoteBook
    */
 
-#ifdef __APPLE___
+#ifdef __APPLE__
   wxNotebook* simple_book_;
 #else
   wxSimplebook* simple_book_;

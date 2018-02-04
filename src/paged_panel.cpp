@@ -11,7 +11,7 @@ PagedPanel::PagedPanel(wxWindow* parent, wxWindowID id, std::string panel_name,
     : DataPanel(parent, id, panel_name, panel_title, pos, size, style) {
   panel_page_numbers_ = new wxPanel(this, wxID_ANY);
   sizer_paged_panel_ = new wxFlexGridSizer(4, 3, 0, 0);
-#ifdef __APPLE___
+#ifdef __APPLE__
   simple_book_ = new wxNotebook(this, wxID_ANY);
 #else
   simple_book_ = new wxSimplebook(this, wxID_ANY);
@@ -35,8 +35,7 @@ void PagedPanel::Init() {
     wxLogDebug("Nothing to display");
     return;
   }
-
-#ifdef __unix__
+#ifdef __unix___
   for (size_t i = 0; i < panels_.size(); i++) {
     wxButton* page_item =
         new wxButton(panel_page_numbers_, wxID_ANY, _(std::to_string(i + 1)),
@@ -45,7 +44,6 @@ void PagedPanel::Init() {
     page_items_.push_back(page_item);
   }
 #endif
-
   DoLayout();
   DisplayPage(0);
   wxLogDebug("PagedPanel::Init() END");
@@ -75,8 +73,8 @@ void PagedPanel::DisplayPage(size_t index) {
 
   simple_book_->SetSelection(index);
   active_panel_index_ = index;
-
-#ifdef __unix__
+// TODO(armand): Error here
+#ifdef __unix_
   for (size_t i = 0; i < page_items_.size(); i++) {
     if (i != index) {
       wxColour default_colour =
@@ -113,12 +111,12 @@ void PagedPanel::DoLayout() {
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
 
   // Add hyperlinks
-  // #ifdef __unix__
+#ifdef __unix__
   for (size_t i = 0; i < page_items_.size(); i++) {
     sizer_page_numbers->Add(page_items_.at(i), 0, 0, 0);
     // page_items_.at(i)->SetMinSize(wxSize(35, -1));
   }
-  // #endif
+#endif
 
   // Spacing col
   sizer_page_numbers->Add(0, 0, 0, 0, 0);
