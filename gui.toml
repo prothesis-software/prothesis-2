@@ -1,0 +1,1266 @@
+# Formatter:
+#   https://toolkit.site/format.html
+
+####################################
+# PASSION
+###########
+
+[passion]
+
+  [[passion.question]]
+  question = "What are your 3 favourite topics to discuss? What could you talk about for hours on end?"
+
+  [[passion.question]]
+  question = "What things in life really make you feel free?"
+
+  [[passion.question]]
+  question = "Let 5 people who love and know you best tell you that you would be amazing at doing for a living."
+
+  [[passion.question]]
+  question = "What naturally flows for you without you even having to try?"
+
+  [[passion.question]]
+  question = "If you were to wake up tomorrow feeling truly free and happily excited about your day ahead, what  would you be off to do?"
+
+  [[passion.question]]
+  question = "You are totally 'in your element' and time seems to have disappeared. What are you doing?"
+
+  [[passion.question]]
+  question = "It is your birthday and somebody buys you an annual magazine subscription. Which type would you love it to be?"
+
+  [[passion.question]]
+  question = "What areas of life are you naturally drawn to?"
+
+  [[passion.question]]
+  question = "What do people ask you for information/advice about? Which areas are you deemed to be a little fountain of knowledge?"
+
+  [[passion.question]]
+  question = "If you were to pioneer a cause around the world, and it was guaranteed to be a success, what would it be?"
+
+  [[passion.question]]
+  question = "What do you love to do when you have free time and what is it that gives you that real buzz of excitement?"
+
+  [[passion.question]]
+  question = "What topics interest you and what would you really love to know lots more about?"
+
+  [[passion.question]]
+  question = "You love helping people with these 3 different things. What are they?"
+
+  [[passion.question]]
+  question = "What interests or hobbies have you had in the past few years that intrigue you and might hold the potential for a life passion?"
+
+  [[passion.question]]
+  question = "What would be hard for you to give up?"
+
+  [[passion.question]]
+  question = "Now summarise the central themes from your previous answers."
+
+#########################################3
+# PEOPLE ID
+################
+
+[people_id]
+
+  [[people_id.question]]
+  question = "5 people that inspire you most in the world stand before you. Who are they and what is it about them that sparks something within you?"
+
+  [[people_id.question]]
+  question = "Who is someone in your life or in history whose life and work inspires and excites you? Why?"
+
+  [[people_id.question]]
+  question = "Who influenced your life most and why?"
+
+  [[people_id.question]]
+  question = "With which character in a book or movie did you relate well and why?"
+
+  [[people_id.question]]
+  question = "Which super hero was you favourite when you were small? What can that say about you?"
+
+  [[people_id.question]]
+  question = "Now summarise the central themes from your previous answers."
+
+#########################################
+# DREAMS
+##############
+
+[dreams]
+
+  [[dreams.question]]
+  question = "When you were a child, what did you always dream of doing when you got older? What do they symbolise?"
+
+  [[dreams.question]]
+  question = "What are some childhood dreams or interests you were never able to fully explore but still find intriguing?"
+
+  [[dreams.question]]
+  question = "What difference do you want to make in the world? What legacy would you like to leave behind?"
+
+  [[dreams.question]]
+  question = "You inherit R100 million, how would it change your life? What would you do with your days?"
+
+  [[dreams.question]]
+  question = "When you are dead and gone, what would you like people to say about the way you lived your life?"
+
+  [[dreams.question]]
+  question = "What careers do you have wild dreams of having?"
+
+  [[dreams.question]]
+  question = "If someone were to pay all of your living costs and expenses for 2 years, what work would you pursue in that time?"
+
+  [[dreams.question]]
+  question = "If you were to change 3 things in the world for the greater good, what would they be?"
+
+  [[dreams.question]]
+  question = "What is it that you would regret not doing with your life, if you were to die tomorrow?"
+
+  [[dreams.question]]
+  question = "What piece of knowledge do you feel as though you would love to share with the world?"
+
+  [[dreams.question]]
+  question = "The person that loves you most in the whole world asks you what you need to be doing with your life in order to be really happy. How do you respond?"
+
+  [[dreams.question]]
+  question = "If you had 5 years left to live, what would you do?"
+
+  [[dreams.question]]
+  question = "How have your fears and limiting beliefs held you back from finding or pursuing your passion in the past?"
+
+  [[dreams.question]]
+  question = "Are there any people in your life preventing you from pursuing your passion? Who are they and how are they holding you back?"
+
+  [[dreams.question]]
+  question = "What is something (or several things) you'd really like to achieve before you die?"
+
+  [[dreams.question]]
+  question = "Now summarise the central themes from your previous answers."
+
+#########################################
+# VALUES
+##########################
+
+[values]
+
+  [[values.question]]
+  question = "What are your top  most deeply held core values?"
+
+  [[values.question]]
+  question = "How does your life currently support or reflect those values?"
+
+  [[values.question]]
+  question = "Which of your top values are you ignoring or not giving enough attention?"
+
+  [[values.question]]
+  question = "What values will you never compromise?"
+
+  [[values.question]]
+  question = "Which jobs would encompass your core values?"
+
+  [[values.question]]
+  question = "Now summarise the central themes from your previous answers."
+
+#########################################
+# SPOKEN WORDS
+#######################
+
+[spoken_words]
+
+  [[spoken_words.question]]
+  question = "Things people say about you has a big impact on your life and often reveal a lot more than you think...\nFill these commonly spoken words below"
+
+  [[spoken_words.question]]
+  question = "Now summarise the central themes from your answer and type them below"
+
+####################################
+# SKILLS
+###########
+
+[skills]
+
+  [[skills.question]]
+  question = "Administration"
+
+  [[skills.question]]
+  question = "Analyse"
+
+  [[skills.question]]
+  question = "Artistic"
+
+  [[skills.question]]
+  question = "Communicate"
+
+  [[skills.question]]
+  question = "Computers"
+
+  [[skills.question]]
+  question = "Control"
+
+  [[skills.question]]
+  question = "Counseling"
+
+  [[skills.question]]
+  question = "Creative"
+
+  [[skills.question]]
+  question = "Devision Making"
+
+  [[skills.question]]
+  question = "Empathy"
+
+  [[skills.question]]
+  question = "Entertaining"
+
+  [[skills.question]]
+  question = "Handwork"
+
+  [[skills.question]]
+  question = "Marketing"
+
+  [[skills.question]]
+  question = "Negotiate"
+
+  [[skills.question]]
+  question = "Numeracy"
+
+  [[skills.question]]
+  question = "Objectivity"
+
+  [[skills.question]]
+  question = "Organise"
+
+  [[skills.question]]
+  question = "Planning"
+
+  [[skills.question]]
+  question = "Playing Musical Instruments"
+
+  [[skills.question]]
+  question = "Practical"
+
+  [[skills.question]]
+  question = "Public Speaking"
+
+  [[skills.question]]
+  question = "Receptive for people"
+
+  [[skills.question]]
+  question = "Sharing"
+
+  [[skills.question]]
+  question = "Sport"
+
+  [[skills.question]]
+  question = "Strategic Planning"
+
+  [[skills.question]]
+  question = "Study"
+
+  [[skills.question]]
+  question = "Taking the lead"
+
+  [[skills.question]]
+  question = "Teaching"
+
+  [[skills.question]]
+  question = "Writing"
+
+####################
+# PRIORITIES
+############
+
+[priorities]
+  options = [
+      "Self actualization",
+      "Money",
+      "Creative work",
+      "Work security",
+      "Post school training",
+      "Working with people",
+      "Family life",
+      "Leading",
+      "Recognition and status",
+      "Adventure",
+      "Travelling",
+      "Holiday",
+      "Achievement",
+      "Taking responsibility",
+      "Contribution to society",
+      "Helping others",
+      "Relationship with God",
+      "Inventing new things",
+      "Expression through arts",
+      "Participating in sports",
+      "Ownership of assets",
+      "Hobbies",
+      "Recreation",
+      "Friendship",
+      "Working with my hands"
+  ]
+
+#####################################
+# External Panel
+################
+
+[external]
+
+  [external.life_keys]
+
+    [[external.life_keys.type]]
+    key = "Artistic"
+    title = "The Artistic Type: \"Let's create!\""
+    characteristics = [
+      "They are the original type",
+      "They like to do things differently",
+      "They do not conform to others easily",
+      "They are free-spirited",
+      "They are creative and therefore love to do things innovatively",
+      "They are artistic",
+      "They are musical"
+    ]
+    work_environments = [
+      "They seek careers where less structure is needed",
+      "They want to give expression to their creative side",
+      "Suitable work environments might include law firms, museums, libraries, galleries, interior design consultancies or advertising agencies"
+    ]
+    things_they_love_to_do = [
+      "Acting",
+      "Writing or reporting",
+      "Express themselves through music",
+      "Creative problem solving",
+      "Creative expression through colour",
+      "Sculpting / photography / graphic arts / painting / interior decorating",
+      "They are good at using and may have an interest in languages"
+    ]
+
+    [[external.life_keys.type]]
+    key = "Conventional"
+    title = "The Conventional Type: \"Let's be dependable!\""
+    characteristics = [
+      "They are the practical type",
+      "They like to do things in a pragmatic and methodical fashion",
+      "They are highly efficient in what they do",
+      "They like it when things happen in an orderly fashion",
+      "They like structure",
+      "They show great attention to detail"
+    ]
+    work_environments = [
+      "They seek careers where structure, schedules and routine is demanded",
+      "They want to handle data and give attention to detail",
+      "Suitable work environments might include accounting, office management, data processing, working with money or numbers"
+    ]
+    things_they_love_to_do = [
+      "Organising",
+      "Appraising or evaluating",
+      "Attending to detail",
+      "Managing time & setting priorities",
+      "Calculating & expressing their mathematical skills",
+      "Systematising",
+      "Taking responsibility "
+    ]
+
+    [[external.life_keys.type]]
+    key = "Realistic"
+    title = "The Realistic Type: \"Let's roll up our sleeves and get the job done!\""
+    characteristics = [
+      "They are the outdoor type",
+      "They tend to be athletic and loves to participate in sport",
+      "They like to do things with their hands",
+      "They are highly efficient with mechanical activities",
+      "They may appear to be ‘loners'",
+      "They like small groups of people"
+    ]
+    work_environments = [
+      "They seek careers where they can be hands-on",
+      "They want to handle things or objects rather than people or ideas",
+      "They seek out careers which allow them to use their motor skills",
+      "Suitable work environments might include agriculture, engineering, construction, maintenance or any job where they can use tools"
+    ]
+    things_they_love_to_do = [
+      "Mechanical things",
+      "Operating (heavy) equipment",
+      "Driving or piloting",
+      "Building mechanical/structural devices",
+      "Sport or activities where they can use their ‘ball sense'",
+      "Organising supplies or implements",
+      "Taking physical risks"
+    ]
+
+    [[external.life_keys.type]]
+    key = "Investigative"
+    title = "The Investigative Type: \"Let's figure this out!\""
+    characteristics = [
+      "They are the curious type",
+      "They tend to be rational and analytical",
+      "They like intellectual pursuits",
+      "They like it if things make logically sense",
+      "They are introspective by nature",
+      "They may appear to be ‘loners'",
+      "They like small groups of people"
+    ]
+    work_environments = [
+      "They seek careers where they can do research or gather information",
+      "They want to work with ideas rather than with people",
+      "They seek out careers where they can expand their knowledge",
+      "Suitable work environments might include sciences, higher education, theoretical areas of business, strategic planning"
+    ]
+    things_they_love_to_do = [
+      "Inventing",
+      "Researching",
+      "Conceptualising & theorising",
+      "Working independently",
+      "Solving complex problems",
+      "Working with computers",
+      "Compiling information"
+    ]
+
+    [[external.life_keys.type]]
+    key = "Social"
+    title = "The Social Type: \"Let's work together!\""
+    characteristics = [
+      "They are the helpful type",
+      "They tend to be cooperative",
+      "They like to make peace and build bridges",
+      "They are very understanding",
+      "They are people oriented",
+      "They may appear to be extroverted",
+      "They like different groups of people"
+    ]
+    work_environments = [
+      "They seek careers where they can serve others",
+      "They want to work with people rather than with ideas or things",
+      "They seek out careers where they can solve problems through synergy",
+      "Suitable work environments might include schools, churches, social services, health organisations, the people side of business"
+    ]
+    things_they_love_to_do = [
+      "Teaching",
+      "Listening and facilitating",
+      "Understanding or counseling others",
+      "Serving others",
+      "Evaluating people's characters",
+      "Showing empathy and tact",
+      "Working with others"
+    ]
+
+    [[external.life_keys.type]]
+    key = "Enterprising"
+    title = "The Enterprising Type: \"Let's get going!\""
+    characteristics = [
+      "They are the persuasive type",
+      "They tend to be self confident",
+      "They like to express themselves verbally",
+      "They like to take risks",
+      "They often gravitate towards leadership",
+      "They may appear to be extroverted",
+      "They enjoy to interact with people"
+    ]
+    work_environments = [
+      "They seek careers where they can promote, market and sell",
+      "They want to be in leadership positions",
+      "They seek out careers where they can make money",
+      "Suitable work environments might include sales, marketing, government positions, brokerage (real estate, travel), fundraising"
+    ]
+    things_they_love_to_do = [
+      "Public speaking",
+      "Selling",
+      "Persuading",
+      "Negotiating",
+      "To be in leadership",
+      "Management",
+      "Taking constructive action",
+      "Adventurous activities"
+    ]
+
+#######################
+# WORK ENVIRONMENT
+#######
+[work_environment]
+
+  [[work_environment.type]]
+  mbti = "ISTJ"
+  list = [
+    "Value tradition, security, and peaceful living",
+    "Will work long and hard to fulfill duties",
+    "Can be depended on to follow through on tasks",
+    "Loyal and faithful",
+    "Stable, practical and down-to-earth",
+    "Family-minded",
+    "Dislike doing things which don't make sense to them",
+    "Dislike abstract theory, unless they see the practical application",
+    "Natural leaders",
+    "Prefer to work alone, but work well in teams when necessary",
+    "Extremely observant, they take in facts via their senses and store them internally",
+    "Vast, rich inner store of facts which they rely on to understand problems which they encounter in their lives",
+    "Profound respect for facts and concrete information",
+    "Make decisions objectively, applying logic and rational thinking",
+    "Dislike change, unless they are shown it's benefit in a concrete way",
+    "Have strong opinions about the way things should be done",
+    "Appreciate structured, orderly environments",
+    "Have very high standards for their own behavior and the behavior of otehrs",
+    "Not naturally in-tune with other people's feelings",
+    "Able to accomplish almost anything if they put their minds to it",
+    "Community minded \"good citizens\""
+  ]
+
+  [[work_environment.type]]
+  mbti = "ESTJ"
+  list = [
+    "Natural leaders - they like to be in charge",
+    "Value security and tradition",
+    "Loyal",
+    "Hard-working and dependable",
+    "Athletic and wholesome",
+    "Have a clear set of standards and beliefs which they live by",
+    "No patience with incompetence or inefficiency",
+    "Excellent organizational abilities",
+    "Enjoy creating order and structure",
+    "Very thorough",
+    "Will follow projects through to completion",
+    "Straight-forward and honest",
+    "Driven to fulfill their duties"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ISFJ"
+  list = [
+    "Large, rich inner store of information which they gather about people",
+    "Highly observant and aware of people's feelings and reactions",
+    "Excellent memory for details which are important to them",
+    "Very in-tune with their surroundings - excellent sense of space and function",
+    "Can be depended on to follow things through to completion",
+    "Will work long and hard to see that jobs get done",
+    "Stable, practical, down-to-earth - they dislike working with theory and abstract thought",
+    "Dislike doing things which don't make sense to them",
+    "Value security, tradition, and peaceful living",
+    "Service-oriented: focused on what people need and want",
+    "Kind and considerate",
+    "Likely to put others' needs above their own",
+    "Learn best with hands-on training",
+    "Enjoy creating structure and order",
+    "Take their responsibilities seriously",
+    "Extremely uncomfortable with conflict and confrontation"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ESFJ"
+  list = [
+    "Organized",
+    "Loyal",
+    "Can be depended on to follow things through to completion",
+    "Enjoy creating order, structure and schedules",
+    "Enjoy interacting with people",
+    "Warm-hearted and sympathetic",
+    "Tend to put others' needs above their own",
+    "Very good at giving practical care",
+    "Very cooperative, good team members",
+    "Practical and down-to-earth",
+    "Value peaceful living and security",
+    "Enjoy variety, but work well with routine tasks",
+    "Need approval from others",
+    "Receive satisfaction from giving to others",
+    "Live in the here and now - dislike theorizing about the future"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ISTP"
+  list = [
+    "Interested in how and why things work",
+    "Do not function well in regimented, structured environments; they will either feel stifled or become intensely bored",
+    "Constantly gather facts about their environment and store them away",
+    "Have an excellent ability to apply logic and reason to their immense store of facts to solve problems or discover how things work",
+    "Learn best \"hands-on\"",
+    "Usually able to master theory and abstract thinking, but don't particularly like dealing with it unless they see a practical application",
+    "Action-oriented \"doers\"",
+    "Focused on living in the present, rather than the future",
+    "Love variety and new experiences",
+    "Highly practical and realistic",
+    "Excellent \"trouble-shooters\", able to quickly find solutions to a wide variety of practical problems",
+    "Results-oriented; they like to see immediate results for their efforts",
+    "Usually laid-back and easy-going with people",
+    "Risk-takers who thrive on action",
+    "Independent and determined - usually dislike committing themselves",
+    "Usually quite self-confident"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ESTP"
+  list = [
+    "Action-oriented",
+    "Live in the present moment",
+    "Dislike abstract theory without practical application",
+    "Like to see immediate results for their efforts",
+    "Fast-paced and energetic",
+    "Flexible and adaptable",
+    "Resourceful",
+    "Seldom work from a plan - make things up as they go",
+    "Fun to be around",
+    "Highly observant",
+    "Excellent memory for details",
+    "Excellent people skills",
+    "Good-natured",
+    "Excellent ability to see an immediate problem and quickly devise a solution",
+    "Attracted to adventure and risk",
+    "May be flashy or showy",
+    "Like initiating things - not necessarily following them through to completion"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ESFP"
+  list = [
+    "Live in the present moment",
+    "Are stimulated and excited by new experiences",
+    "Practical and realistic",
+    "Warmly interested in people",
+    "Know how to have a good time, and how to make things fun for others",
+    "Independent and resourceful",
+    "Spontaneous - seldom plan ahead",
+    "Hate structure and routine",
+    "Dislike theory and long written explanations",
+    "Feel special bond with children and animals",
+    "Strongly developed aesthetic appreciation for things",
+    "Great people skills"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ISFP"
+  list = [
+    "Keen awareness of their environment",
+    "Live in the present moment",
+    "Enjoy a slower pace - they like to take time to savor the present moment",
+    "Dislike dealing with theory or abstract thought, unless they see a practical application",
+    "Faithful and loyal to people and ideas which are important to them",
+    "Individualistic, having no desire to lead or follow",
+    "Take things seriously, although they frequently appear not to",
+    "Special bond with children and animals",
+    "Quiet and reserved, except with people they know extremely well",
+    "Trusting, sensitive, and kind",
+    "Service-oriented; they're driven to help others",
+    "Extremely well-developed appreciation for aesthetic beauty",
+    "Likely to be original and unconventional",
+    "Learn best with hands-on training",
+    "Hate being confined to strict schedules and regimens",
+    "Need space and freedom to do things their own way",
+    "Dislike mundane, routine tasks, but will perform them if necessary"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ENTJ"
+  list = [
+    "Driven to turn theories into plans",
+    "Highly value knowledge",
+    "Future-oriented",
+    "Natural leaders",
+    "Impatient with inefficiency and incompetence",
+    "Want things structured and orderly",
+    "Excellent verbal communication skills",
+    "Dislike routine, detail-oriented tasks",
+    "Self-confident",
+    "Decisive"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ENTP"
+  list = [
+    "Project-oriented",
+    "Enjoy generating ideas and theories",
+    "Creative and ingenius",
+    "Bright and capable",
+    "Flexible and Diverse",
+    "Excellent communication skills",
+    "Enjoy debating issues with other people",
+    "Excellent people skills",
+    "Natural leaders, but do not like to control people",
+    "Resist being controlled by people",
+    "Lively and energetic; able to motivate others",
+    "Highly value knowledge and competence",
+    "Logical, rational thinkers",
+    "Able to grasp difficult concepts and theories",
+    "Enjoy solving difficult problems",
+    "Dislike confining schedules and environments",
+    "Dislike routine, detailed tasks"
+  ]
+
+  [[work_environment.type]]
+  mbti = "INTP"
+  list = [
+    "Love theory and abstract ideas",
+    "Truth Seekers - they want to understand things by analyzing underlying principles and structures",
+    "Value knowledge and competence above all else",
+    "Have very high standards for performance, which they apply to themselves",
+    "Independent and original, possibly eccentric",
+    "Work best alone, and value autonomy",
+    "Have no desire to lead or follow",
+    "Dislike mundane detail",
+    "Not particularly interested in the practical application of their work",
+    "Creative and insightful",
+    "Future-oriented",
+    "Usually brilliant and ingenious",
+    "Trust their own insights and opinions above others",
+    "Live primarily inside their own minds, and may appear to be detached and uninvolved with other people"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ENFJ"
+  list = [
+    "Genuinely and warmly interested in people",
+    "Value people's feelings",
+    "Value structure and organization",
+    "Value harmony, and good at creating it",
+    "Exceptionally good people skills",
+    "Dislike impersonal logic and analysis",
+    "Strong organizational capabilities",
+    "Loyal and honest",
+    "Creative and imaginative",
+    "Enjoy variety and new challenges",
+    "Get personal satisfaction from helping others",
+    "Extremely sensitive to criticism and discord",
+    "Need approval from others to feel good about themselves"
+  ]
+
+  [[work_environment.type]]
+  mbti = "INFJ"
+  list = [
+    "Intuitively understand people and situations",
+    "Idealistic",
+    "Highly principled",
+    "Complex and deep",
+    "Natural leaders",
+    "Sensitive and compassionate towards people",
+    "Service-oriented",
+    "Future-oriented",
+    "Value deep, authentic relationships",
+    "Reserved about expressing their true selves",
+    "Dislike dealing with details unless they enhance or promote their vision",
+    "Constantly seeking meaning and purpose in everything",
+    "Creative and visionary",
+    "Intense and tightly-wound",
+    "Can work logically and rationally - use their intuition to understand the goal and work backwards towards it"
+  ]
+
+  [[work_environment.type]]
+  mbti = "ENFP"
+  list = [
+    "Project-oriented",
+    "Bright and capable",
+    "Warmly, genuinely interested in people; great people skills",
+    "Extremely intuitive and perceptive about people",
+    "Able to relate to people on their own level",
+    "Service-oriented; likely to put the needs of others above their own",
+    "Future-oriented",
+    "Dislike performing routine tasks",
+    "Need approval and appreciation from others",
+    "Cooperative and friendly",
+    "Creative and energetic",
+    "Well-developed verbal and written communication skills",
+    "Natural leaders, but do not like to control people",
+    "Resist being controlled by others",
+    "Can work logically and rationally - use their intuition to understand the goal and work backwards towards it",
+    "Usually able to grasp difficult concepts and theories"
+  ]
+
+  [[work_environment.type]]
+  mbti = "INFP"
+  list = [
+    "Strong value systems",
+    "Warmly interested in people",
+    "Service-oriented, usually putting the needs of others above their own",
+    "Loyal and devoted to people and causes",
+    "Future-oriented",
+    "Growth-oriented; always want to be growing in a positive direction",
+    "Creative and inspirational",
+    "Flexible and laid-back, unless a ruling principle is violated",
+    "Sensitive and complex",
+    "Dislike dealing with details and routine work",
+    "Original and individualistic - \"out of the mainstream\"",
+    "Excellent written communication skills",
+    "Prefer to work alone, and may have problems working on teams",
+    "Value deep and authentic relationships",
+    "Want to be seen and appreciated for who they are"
+  ]
+
+###################
+# PEOPLE ORIENTATION
+######
+
+[people_orientation]
+
+  [[people_orientation.question]]
+  question = "Babies"
+  tooltip = "You like to interact with babies between the newborn stage and the age of 2."
+
+  [[people_orientation.question]]
+  question = "Toddlers"
+  tooltip = "You like to interact with children between the ages of 2 and 5."
+
+  [[people_orientation.question]]
+  question = "Primary school children"
+  tooltip = "You like to interact with children between the ages of 6 and 13."
+
+  [[people_orientation.question]]
+  question = "High school children"
+  tooltip = "You like to interact with children between the ages of 13 and 19."
+
+  [[people_orientation.question]]
+  question = "Students"
+  tooltip = "You like to interact young adults that are between the ages of 19 and 24."
+
+  [[people_orientation.question]]
+  question = "Teenagers"
+  tooltip = "You like to interact with children between the ages of 13 and 19."
+
+  [[people_orientation.question]]
+  question = "People in need"
+  tooltip = "You like to interact with people who have some or other need."
+
+  [[people_orientation.question]]
+  question = "Working people"
+  tooltip = "You like to interact with people who are currently in a career."
+
+  [[people_orientation.question]]
+  question = "Married people"
+  tooltip = "You like to interact with people who are currently married."
+
+  [[people_orientation.question]]
+  question = "Older people"
+  tooltip = "You like to interact with senior citizens."
+
+  [[people_orientation.question]]
+  question = "The handicapped"
+  tooltip = "You like to interact with people who are physically and/or mentally handicapped."
+
+  [[people_orientation.question]]
+  question = "Addicted people"
+  tooltip = "You like to interact with people who are addicted to a substance."
+
+  [[people_orientation.question]]
+  question = "The homeless"
+  tooltip = "You like to interact with people who have no refuge."
+
+  [[people_orientation.question]]
+  question = "Men"
+  tooltip = "You like to interact with males."
+
+  [[people_orientation.question]]
+  question = "Women"
+  tooltip = "You like to interact with females."
+
+  [[people_orientation.question]]
+  question = "To be on my own"
+  tooltip = "You do not like to interact with people in general."
+
+###############
+# ROLES
+######
+
+[roles]
+
+  [[roles.question]]
+  question = "Analyzer"
+  tooltip = "You are good at resolving anything complex and like to pull it apart to make it simple. Concentrate on the detail."
+
+  [[roles.question]]
+  question = "Artist"
+  tooltip = "You are good at expressing yourself in one of the art forms, fine arts, literature, music, performing arts, etc"
+
+  [[roles.question]]
+  question = "Clarifier"
+  tooltip = "Someone who has an easy explanation for things. Wants everyone to understand."
+
+  [[roles.question]]
+  question = "Collector"
+  tooltip = "Someone who loves to collect things, information, memories, etc."
+
+  [[roles.question]]
+  question = "Competitor"
+  tooltip = "Someone who is positively stimulated by competition. Thrives on challenges."
+
+  [[roles.question]]
+  question = "Creator of order"
+  tooltip = "You like to invent systems to establish order out of chaos or disorder."
+
+  [[roles.question]]
+  question = "Decision maker"
+  tooltip = "You are a person with great assertiveness, you are willing to make decisions and bear the consequences. <br />If you make a decision you easily stick to it."
+
+  [[roles.question]]
+  question = "Diplomat"
+  tooltip = "You have a special skill to handle a situation in such a way that no one is offended, you are tactful."
+
+  [[roles.question]]
+  question = "Encourager"
+  tooltip = "You find it easy to support your friends in any difficult situation adding positive energy to complete the task."
+
+  [[roles.question]]
+  question = "Entrepreneur"
+  tooltip = "You see the business potential in any situation."
+
+  [[roles.question]]
+  question = "Facilitator"
+  tooltip = "You create a situation or environment where things can happen, you make progress easier. Launch pad."
+
+  [[roles.question]]
+  question = "Follower/Supporter"
+  tooltip = "You are an enthusiast. Backer, ally, loyal"
+
+  [[roles.question]]
+  question = "Friend"
+  tooltip = "You are extremely loyal, trustworthy and committed."
+
+  [[roles.question]]
+  question = "Giver"
+  tooltip = "You are fond of sharing your resources (money, time, etc)"
+
+  [[roles.question]]
+  question = "Harmoniser"
+  tooltip = "You like to see that things and people are working or blending together. You are a mediator who brings one thing into harmonious agreement with another."
+
+  [[roles.question]]
+  question = "Influencer/Inspire"
+  tooltip = "You have an inner drive to challenge people. You easily affect other people by what you say."
+
+  [[roles.question]]
+  question = "Inventor"
+  tooltip = "You like to think about new ideas, you are innovative."
+
+  [[roles.question]]
+  question = "Investigator"
+  tooltip = "You always want to know the truth behind every situation."
+
+  [[roles.question]]
+  question = "Leader"
+  tooltip = "People find it easy to follow your lead."
+
+  [[roles.question]]
+  question = "Listener"
+  tooltip = "You find it easy to be focused on what people say when they talk to you. Soundboard."
+
+  [[roles.question]]
+  question = "Marketer"
+  tooltip = "You know how to persuade people to believe in anything that you're selling: products, ideas etc."
+
+  [[roles.question]]
+  question = "Mentor"
+  tooltip = "You like coaching people in one on one relationships. You are considered a wise and trusted counsellor or teacher."
+
+  [[roles.question]]
+  question = "Negotiator"
+  tooltip = "You like to bargain, like to find a common ground. You are good at arranging or settling a matter by discussion and mutual agreement."
+
+  [[roles.question]]
+  question = "Organizer"
+  tooltip = "You are good at bringing together all the components."
+
+  [[roles.question]]
+  question = "Peacemaker"
+  tooltip = "You like to see that conflict situations are resolved."
+
+  [[roles.question]]
+  question = "Pioneer"
+  tooltip = "You are not afraid to start something new. You plant the seed."
+
+  [[roles.question]]
+  question = "Protector"
+  tooltip = "You tend fight for the underdog. You are considered a guardian, place of safety or a defender."
+
+  [[roles.question]]
+  question = "Reality Tester"
+  tooltip = "You always think about the practical workability of a task. Ask daring but necessary questions."
+
+  [[roles.question]]
+  question = "Standard Setter"
+  tooltip = "You will always challenge a group to excellence."
+
+  [[roles.question]]
+  question = "Student"
+  tooltip = "Lifelong self learner, you enjoy to learn new things, read up."
+
+  [[roles.question]]
+  question = "Teacher"
+  tooltip = "You have the ability to explain something."
+
+  [[roles.question]]
+  question = "Team Builder"
+  tooltip = "You bring a team together to accomplish a goal and motivate them."
+
+  [[roles.question]]
+  question = "Trend setter"
+  tooltip = "You like to start something new (like a pioneer) but people tend to follow you."
+
+  [[roles.question]]
+  question = "Worker"
+  tooltip = "You like get do the things done. You like working hard to achieve your goals."
+
+  ###############
+  # CAREER ORIENTATION
+  ######
+
+  [career_orientation]
+
+  [[career_orientation.question]]
+  title = "Language & Communication"
+  options = [
+    "Writing for a newspaper",
+    "Doing translations",
+    "Reading news reports on the radio or TV",
+    "Writing stories or poetry",
+    "Writing advertisements and scripts for TV, film and radio commercials"
+  ]
+
+  [[career_orientation.question]]
+  title = "Applied/Visual Arts"
+  options = [
+    "interested in this area, you would probably enjo",
+    "Taking photos for a magazine or newspaper",
+    "Drawing and designing buildings",
+    "Decorating the interior of houses",
+    "Creating works of art",
+    "Designing clothes"
+  ]
+
+  [[career_orientation.question]]
+  title = "Performing Arts"
+  options = [
+    "Learning to play a musical instrument",
+    "Acting in a play or film",
+    "Dancing and singing in a musical",
+    "Directing a TV series or film",
+    "Selecting and playing popular CD's at a radio station"
+  ]
+
+  [[career_orientation.question]]
+  title = "Marketing & Direct Sales"
+  options = [
+    "Selling goods from door to door",
+    "Purchasing and selling anything",
+    "Making purchases on behalf of a shop or business",
+    "Studying the needs of consumers",
+    "Introducing consumers to new products"
+  ]
+
+  [[career_orientation.question]]
+  title = "Management & Planning"
+  options = [
+    "Supervising the activities of people",
+    "Influencing others to accept your point of view",
+    "Planning other people's work",
+    "Managing a big project or task",
+    "Acting as the leader of a group of people"
+  ]
+
+  [[career_orientation.question]]
+  title = "Clerical & Secretarial"
+  options = [
+    "Doing routine tasks",
+    "Typing business letters and reports",
+    "Filing documents",
+    "Receiving and sending off documents and parcels",
+    "Arranging appointment"
+  ]
+
+  [[career_orientation.question]]
+  title = "Numerical & Financial Transactions"
+  options = [
+    "Working with figures most of the time",
+    "Keeping careful record of financial transactions",
+    "Checking the financial statements of a company",
+    "Drawing up the budget of a business",
+    "Keeping record of the costs of a shop"
+  ]
+
+  [[career_orientation.question]]
+  title = "Nature (Plants & Animals)"
+  options = [
+    "Working on a farm with crops or cattle",
+    "Preparing a vegetable garden",
+    "Looking after animals",
+    "Working in a nursery",
+    "Trying to conserve the environment"
+  ]
+
+  [[career_orientation.question]]
+  title = "Building & Construction"
+  options = [
+    "Planning and overseeing building projects",
+    "Preparing estimates of the costs involved in constructing a building",
+    "Tiling floors of buildings and houses",
+    "Building and repairing houses",
+    "Construction of big buildings and roads"
+  ]
+
+  [[career_orientation.question]]
+  title = "Manufacturing, Repairing and Servicing Machines"
+  options = [
+    "Fixing the engine of a motor car",
+    "Installing and repairing things that work with electricity",
+    "Mending broken things",
+    "Doing woodwork or other handwork",
+    "Using technical tools"
+  ]
+
+  [[career_orientation.question]]
+  title = "Engineering & Related Technologies"
+  options = [
+    "Designing mechanical equipment",
+    "Manufacturing and maintaining electrical/electronic equipment",
+    "Designing and manufacturing systems and components in the telecommunication area",
+    "Monitoring and operating instruments (e.g. electronic, mechanical etc.) and systems",
+    "Manufacturing and installing technical instruments"
+  ]
+
+  [[career_orientation.question]]
+  title = "Information Technology/Computer Science"
+  options = [
+    "Writing computer programs",
+    "Developing data bases",
+    "Developing systems to solve problems with the help of computers",
+    "Designing and installing computer equipment",
+    "Design and implement computer systems"
+  ]
+
+  [[career_orientation.question]]
+  title = "Natural Science & Mathematics"
+  options = [
+    "Conducting experiments in a science laboratory",
+    "Studying plants or animals",
+    "Using knowledge of maths and statistics in your work",
+    "Studying physical or chemistry science matters",
+    "Using a microscope"
+  ]
+
+  [[career_orientation.question]]
+  title = "Health Science & Technology"
+  options = [
+    "Treating people with ailments or injuries",
+    "Mixing and preparing medicine",
+    "Studying the causes of diseases",
+    "Treating animals with ailments"
+  ]
+
+  [[career_orientation.question]]
+  title = "Social & Economic Sciences"
+  options = [
+    "Studying the behavior of humans",
+    "Analysing and describing economic issues",
+    "Reading history books",
+    "Studying the culture and life style of human societies",
+    "Conducting public opinion surveys and interpreting the results"
+  ]
+
+  [[career_orientation.question]]
+  title = "Law"
+  options = [
+    "Presenting cases in court",
+    "Speaking in public",
+    "Studying legislation documents",
+    "Identifying facts from irrelevant detail"
+  ]
+
+  [[career_orientation.question]]
+  title = "Education & Social Services"
+  options = [
+    "Helping people with their problems",
+    "Looking after children",
+    "Doing voluntary work in poverty stricken communities",
+    "Attending to the spiritual needs of people"
+  ]
+
+  [[career_orientation.question]]
+  title = "Nursing & Caring"
+  options = [
+    "Caring for the sick",
+    "Giving first aid to people",
+    "Working as a nurse in a hospital",
+    "Assisting physically disabled people to function independently",
+    "Attending to the needs of babies or small children"
+  ]
+
+  [[career_orientation.question]]
+  title = "Sport"
+  options = [
+    "Training people to play sport",
+    "Demonstrating exercises to help people keep fit",
+    "Organizing and coordinating sports events",
+    "Officiating at a sport event (rugby, soccer, tennis, etc.)",
+    "Taking part in competitive sports events to become a professional"
+  ]
+
+  [[career_orientation.question]]
+  title = "Law Enforcement & Protection Services"
+  options = [
+    "Protecting the country",
+    "Maintaining law and order",
+    "Ensuring that people obey the traffic rules",
+    "Working as a guard at a prison",
+    "Protecting buildings against fire"
+  ]
+
+  [[career_orientation.question]]
+  title = "Personal Services"
+  options = [
+    "Looking after the needs and comfort of passengers in an airplane",
+    "Rendering catering services",
+    "Offering and maintaining cleaning services for big companies",
+    "Transporting people by bus or car",
+    "Running a guest house"
+  ]
+#######################
+# MBTI INFO
+#############
+[mbti_info]
+
+  [[mbti_info.type]]
+  key = "E"
+  description_1 = "Outward focus, communication, energy"
+  description_2 = "Direct involvement and implementation"
+
+  [[mbti_info.type]]
+  key = "I"
+  description_1 = "Thinkers, concepts, writing, alone time"
+  description_2 = "Direct or indirect involvement and implementation with enough time alone"
+
+  [[mbti_info.type]]
+  key = "N"
+  description_1 = "Innovative, holistic, see new possibilities"
+  description_2 = ""
+
+  [[mbti_info.type]]
+  key = "S"
+  description_1 = "Practical and detail orientated"
+  description_2 = ""
+
+  [[mbti_info.type]]
+  key = "F"
+  description_1 = "eople oriented, sympathetic, personal"
+  description_2 = ""
+
+  [[mbti_info.type]]
+  key = "T"
+  description_1 = "Objective, analytical, logical"
+  description_2 = ""
+
+  [[mbti_info.type]]
+  key = "P"
+  description_1 = "Flexible, spontaneous, philosophical"
+  description_2 = "Spontaneous and flexible environment"
+
+  [[mbti_info.type]]
+  key = "J"
+  description_1 = "Order, control, structure"
+  description_2 = "Organized, structured and conclusive environment"
+
+  [[mbti_info.type]]
+  key = "NF"
+  description_1 = ""
+  description_2 = "You will be innovative in the development of people on a more personal basis"
+
+  [[mbti_info.type]]
+  key = "NT"
+  description_1 = ""
+  description_2 = "You will be innovative in some of the following: development of systems, patents, organizations, management or people on a less personal level"
+
+  [[mbti_info.type]]
+  key = "SF"
+  description_1 = ""
+  description_2 = "You will want to help people by working hands on and in a practical manner with them"
+
+  [[mbti_info.type]]
+  key = "ST"
+  description_1 = ""
+  description_2 = "You will want to manage or bring practical solutions to systems, organizations, management or people on a less personal level"

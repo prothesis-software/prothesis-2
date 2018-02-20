@@ -1,0 +1,15 @@
+dist: trusty
+sudo: required
+cache:
+  directories:
+  - "$HOME/wxWidgets"
+language: cpp
+env:
+  - WX_INSTALL_PATH_LINUX=$HOME/wxWidgets/gtk2u
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y gtk2.0
+  - ./build-wxwidgets-init.sh
+  - make get-deps
+script:
+  - ./build-prothesis-2-init.sh
