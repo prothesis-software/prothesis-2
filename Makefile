@@ -3,7 +3,7 @@
 ######
 #	DEBUG=[0|1]
 
-PROTHESIS_VERSION=2.0.0-dev.2
+PROTHESIS_VERSION=2.0.0-dev.3
 
 CXXFLAGS=-std=c++11 -I. -Werror -Wall -pedantic -Wno-write-strings
 
